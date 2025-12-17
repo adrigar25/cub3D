@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:40:42 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/17 18:50:29 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/17 22:35:37 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,12 @@ int	init_data_structs(t_game *game)
 	return (0);
 }
 
-t_game	*init_game(char *file)
+static void	get_data(t_game *game_data, int fd)
 {
-	int		i;
 	char	*line;
-	int		fd;
-	t_game	*game_data;
+	int		i;
 
 	i = 0;
-	game_data = malloc(sizeof(t_game));
-	if (!game_data)
-		return (NULL);
-	if (init_data_structs(game_data) != 0)
-		return (free(game_data), NULL);
-	fd = open(file, O_RDONLY);
 	while (i < 8)
 	{
 		line = get_next_line(fd);
@@ -84,7 +76,26 @@ t_game	*init_game(char *file)
 		i++;
 	}
 	if (read_map(&game_data->map, fd) == -1)
-		return (free_map(game_data->map), free(game_data), NULL);
+	{
+		free_map(game_data->map);
+		free(game_data);
+		close(fd);
+		return ;
+	}
+}
+
+t_game	*init_game(char *file)
+{
+	int		fd;
+	t_game	*game_data;
+
+	game_data = malloc(sizeof(t_game));
+	if (!game_data)
+		return (NULL);
+	if (init_data_structs(game_data) != 0)
+		return (free(game_data), NULL);
+	fd = open(file, O_RDONLY);
+	get_data(game_data, fd);
 	close(fd);
 	printf("North Texture: %s\n", game_data->texture_north);
 	printf("South Texture: %s\n", game_data->texture_south);
@@ -97,7 +108,7 @@ t_game	*init_game(char *file)
 	printf("Map Data:\n");
 	for (int j = 0; game_data->map && game_data->map[j] != NULL; j++)
 	{
-		printf("%s", game_data->map[j]);
+		printf("%s\n", game_data->map[j]);
 	}
 	printf("\nMap loaded successfully.\n");
 	return (game_data);

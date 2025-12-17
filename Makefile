@@ -6,7 +6,7 @@
 #    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2025/12/17 17:40:35 by agarcia          ###   ########.fr        #
+#    Updated: 2025/12/18 00:19:35 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,10 @@ CFLAGS		:= -Wall -Wextra -Werror
 SRC_DIR		:= src
 SRCS		:= 	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/error.c \
- 				$(SRC_DIR)/map_utils.c \
  				$(SRC_DIR)/init.c \
+ 				$(SRC_DIR)/map_utils/map_parser.c \
+ 				$(SRC_DIR)/map_utils/map_validation.c \
+ 				$(SRC_DIR)/map_utils/map_memory.c \
 				
 OBJS_DIR	:= objs
 OBJS		:= $(SRCS:$(SRC_DIR)/%.cpp=$(OBJS_DIR)/%.o)
