@@ -3,54 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 15:16:16 by agarcia           #+#    #+#             */
-/*   Updated: 2025/04/23 17:58:33 by agarcia          ###   ########.fr       */
+/*   Created: 2025/07/09 14:15:59 by adriescr          #+#    #+#             */
+/*   Updated: 2025/11/24 15:38:38 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** FUNCION: ft_substr
-** -----------------
-** Crea una subcadena de la cadena s, comenzando en el índice start y
-** con una longitud de len caracteres.
-**
-** PARAMETROS:
-** - char const *s: La cadena de entrada.
-** - unsigned int start: El índice de inicio de la subcadena.
-** - size_t len: La longitud de la subcadena.
-**
-** RETORNO:
-** - Un puntero a la nueva subcadena.
-** - NULL si la reserva de memoria falla o si s es NULL.
-**
-*/
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+/**
+ * ENGLISH: Extracts a substring from a string.
+ *
+ * SPANISH: Extrae una subcadena de una cadena.
+ *
+ * @param str       The original string. /
+ *                La cadena original.
+ * @param start   The starting index of the substring. /
+ *                El índice de inicio de la subcadena.
+ * @param len     The length of the substring. /
+ *                La longitud de la subcadena.
+ *
+ * @returns A pointer to the new substring, or NULL on failure. /
+ *          Un puntero a la nueva subcadena, o NULL en caso de error.
+ */
+char	*ft_substr(char *str, unsigned int start, size_t len)
 {
-	char	*substr;
+	char	*sub;
 	size_t	i;
-	size_t	s_len;
 
-	if (!s)
-		return (NULL);
-	s_len = ft_strlen(s);
-	if (start >= s_len)
+	if (!str || start >= ft_strlen(str))
 		return (ft_strdup(""));
-	if (len > s_len - start)
-		len = s_len - start;
-	substr = (char *)malloc(sizeof(char) * (len + 1));
-	if (!substr)
+	sub = malloc(len + 1);
+	if (!sub)
 		return (NULL);
 	i = 0;
-	while (i < len && s[start + i] != '\0')
+	while (i < len && str[start + i])
 	{
-		substr[i] = s[start + i];
+		sub[i] = str[start + i];
 		i++;
 	}
-	substr[i] = '\0';
-	return (substr);
+	sub[i] = '\0';
+	return (sub);
 }

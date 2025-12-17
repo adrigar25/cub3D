@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_close_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/09 13:39:52 by adriescr          #+#    #+#             */
-/*   Updated: 2025/11/24 15:36:36 by adriescr         ###   ########.fr       */
+/*   Created: 2025/09/03 14:25:57 by adriescr          #+#    #+#             */
+/*   Updated: 2025/09/22 12:48:29 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 /**
- * ENGLISH: Calculates the length of a string.
+ * ENGLISH: Closes a file descriptor.
  *
- * SPANISH: Calcula la longitud de una cadena.
+ * SPANISH: Cierra un descriptor de archivo.
  *
- * @param str   The string to measure. /
- *            La cadena a medir.
+ * @param fd   The file descriptor to close. /
+ *             El descriptor de archivo a cerrar.
  *
- * @returns The length of the string. /
- *          La longitud de la cadena.
+ * @returns 0 on success, or -1 on failure. /
+ *          0 en caso de éxito, o -1 en caso de error.
  */
-size_t	ft_strlen(const char *str)
+int	ft_close_file(int fd)
 {
-	size_t	len;
-
-	len = 0;
-	while (str[len] != '\0')
-		len++;
-	return (len);
+	if (close(fd) < 0)
+		return (-1);
+	return (0);
 }

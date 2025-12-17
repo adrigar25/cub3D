@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:11:03 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/17 18:22:51 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/17 22:38:20 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libs/gnl/get_next_line.h"
 #include "cub3d.h"
-#include <fcntl.h>
 
 void	free_map(char **map)
 {
@@ -37,13 +35,13 @@ int	read_map(char ***map, int fd)
 
 	i = 0;
 	*map = NULL;
-	line = get_next_line(fd);
+	line = ft_get_next_line(fd);
 	while (line)
 	{
 		temp = ft_realloc(*map, sizeof(char *) * (i + 2));
 		*map = temp;
 		(*map)[i] = line;
-		line = get_next_line(fd);
+		line = ft_get_next_line(fd);
 		i++;
 	}
 	if (*map)

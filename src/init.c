@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:40:42 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/17 18:50:29 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/17 22:38:29 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libs/gnl/get_next_line.h"
 #include "cub3d.h"
 
 static void	parse_rgb(char *line, int *color)

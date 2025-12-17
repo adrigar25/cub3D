@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_rand.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/09 13:39:52 by adriescr          #+#    #+#             */
-/*   Updated: 2025/11/24 15:36:36 by adriescr         ###   ########.fr       */
+/*   Created: 2025/07/09 14:35:21 by adriescr          #+#    #+#             */
+/*   Updated: 2025/09/22 12:53:46 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /**
- * ENGLISH: Calculates the length of a string.
+ * ENGLISH: Generates a pseudo-random number.
  *
- * SPANISH: Calcula la longitud de una cadena.
+ * SPANISH: Genera un número pseudoaleatorio.
  *
- * @param str   The string to measure. /
- *            La cadena a medir.
+ * @param seed   A pointer to the seed value. /
+ *               Un puntero al valor de la semilla.
  *
- * @returns The length of the string. /
- *          La longitud de la cadena.
+ * @returns The next pseudo-random number. /
+ *          El siguiente número pseudoaleatorio.
  */
-size_t	ft_strlen(const char *str)
+unsigned int	ft_simple_rand(unsigned int *seed)
 {
-	size_t	len;
-
-	len = 0;
-	while (str[len] != '\0')
-		len++;
-	return (len);
+	*seed = (*seed * 1103515245 + 12345) & 0x7fffffff;
+	return (*seed);
 }

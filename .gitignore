@@ -1,0 +1,9 @@
+.DS_Store
+*.o
+*.a
+*.so
+*.dSYM
+*.exe
+*.out
+*.app
+*.log

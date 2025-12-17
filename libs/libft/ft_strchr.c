@@ -3,37 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 11:03:35 by agarcia           #+#    #+#             */
-/*   Updated: 2025/04/23 17:54:11 by agarcia          ###   ########.fr       */
+/*   Created: 2025/07/09 14:17:18 by adriescr          #+#    #+#             */
+/*   Updated: 2025/11/24 15:26:44 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** FUNCION: ft_strchr
-** -----------------
-** Busca la primera aparición del carácter c en la cadena s.
-**
-** PARAMETROS:
-** - const char *s: La cadena en la que se busca el carácter.
-** - int c: El carácter a buscar.
-**
-** RETORNO:
-** - Un puntero a la primera aparición del carácter c en la cadena s.
-** - NULL si el carácter no se encuentra.
-**
-*/
+#include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+/**
+ * ENGLISH: Locates the first occurrence of a character in a string.
+ *
+ * SPANISH: Localiza la primera ocurrencia de un carácter en una cadena.
+ *
+ * @param str   The string to search. /
+ *            La cadena a buscar.
+ * @param c   The character to find. /
+ *            El carácter a encontrar.
+ *
+ * @returns A pointer to the first occurrence of the character, or NULL
+ * 			if not found. / Un puntero a la primera ocurrencia del carácter,
+ * 			o NULL si no se encuentra.
+ */
+char	*ft_strchr(const char *str, int c)
 {
-	while (*s != '\0')
+	while (*str)
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
+		if (*str == (char)c)
+			return ((char *)str);
+		str++;
 	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return (0);
+	return (NULL);
 }

@@ -3,45 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 15:26:48 by agarcia           #+#    #+#             */
-/*   Updated: 2025/04/23 17:55:18 by agarcia          ###   ########.fr       */
+/*   Created: 2025/09/04 18:56:05 by adriescr          #+#    #+#             */
+/*   Updated: 2025/11/24 17:17:46 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** FUNCION: ft_strjoin
-** -----------------
-** Une dos cadenas s1 y s2 en una nueva cadena.
-**
-** PARAMETROS:
-** - char const *s1: La primera cadena.
-** - char const *s2: La segunda cadena.
-**
-** RETORNO:
-** - Un puntero a la nueva cadena resultante.
-** - NULL si la reserva de memoria falla.
-**
-*/
-
-char	*ft_strjoin(char const *s1, char const *s2)
+/**
+ * ENGLISH: Helper function to copy a string into a destination buffer.
+ * 		It advances the position index accordingly.
+ *
+ * SPANISH: Función auxiliar para copiar una cadena en un búfer de destino.
+ * 		Avanza el índice de posición en consecuencia.
+ *
+ * @param dst   The destination buffer. /
+ *              El búfer de destino.
+ * @param src   The source string. /
+ *              La cadena fuente.
+ * @param pos   Pointer to the current position index in the destination buffer.
+ *              / Puntero al índice de posición actual en el búfer de destino.
+ */
+static void	copy_and_advance(char *dst, const char *src, size_t *pos)
 {
+	size_t	i;
+
+	if (!src)
+		return ;
+	i = 0;
+	while (src[i])
+		dst[(*pos)++] = src[i++];
+}
+
+/**
+ * ENGLISH: Joins two strings into a new string.
+ *
+ * SPANISH: Une dos cadenas en una nueva cadena.
+ *
+ * @param str1  The first string. /
+ *				La primera cadena.
+ * @param str2  The second string. /
+ *				La segunda cadena.
+ *
+ * @returns A pointer to the newly allocated joined string, or NULL on failure.
+ *          / Un puntero a la nueva cadena unida asignada dinámicamente,
+ *          o NULL en caso de error.
+ */
+char	*ft_strjoin(char *str1, char *str2)
+{
+	char	*new_str;
+	size_t	i;
 	size_t	len1;
 	size_t	len2;
-	char	*str;
 
-	if (!s1 || !s2)
+	if (!str2)
+		return (str1);
+	len1 = ft_strlen(str1);
+	len2 = ft_strlen(str2);
+	new_str = malloc(len1 + len2 + 1);
+	if (!new_str)
 		return (NULL);
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	str = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
-	if (!str)
-		return (NULL);
-	ft_memcpy(str, s1, len1);
-	ft_memcpy(str + len1, s2, len2);
-	str[len1 + len2] = '\0';
-	return (str);
+	i = 0;
+	copy_and_advance(new_str, str1, &i);
+	copy_and_advance(new_str, str2, &i);
+	new_str[i] = '\0';
+	return (new_str);
 }

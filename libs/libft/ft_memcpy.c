@@ -3,42 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 12:11:27 by agarcia           #+#    #+#             */
-/*   Updated: 2025/04/23 17:49:50 by agarcia          ###   ########.fr       */
+/*   Created: 2025/07/08 21:47:57 by adriescr          #+#    #+#             */
+/*   Updated: 2025/09/22 12:53:35 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** FUNCION: ft_memcpy
-** -----------------
-** Copia n bytes de la memoria apuntada por src a la memoria apuntada por
-** dest. No se garantiza la seguridad de la memoria, por lo que se debe
-** asegurar que las áreas de memoria no se superponen.
-**
-** PARAMETROS:
-** - void *dest: Puntero a la memoria de destino.
-** - const void *src: Puntero a la memoria de origen.
-** - size_t n: Número de bytes a copiar.
-**
-** RETORNO:
-** - Un puntero a la memoria de destino (dest).
-**
-*/
-
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+/**
+ * ENGLISH: Copies memory from one location to another.
+ *
+ * SPANISH: Copia memoria de una ubicación a otra.
+ *
+ * @param dst   The destination memory location. /
+ *              La ubicación de memoria de destino.
+ *
+ * @param src   The source memory location. /
+ *              La ubicación de memoria de origen.
+ *
+ * @param n    The number of bytes to copy. /
+ *             El número de bytes a copiar.
+ *
+ * @returns A pointer to the destination memory location. /
+ *          Un puntero a la ubicación de memoria de destino.
+ */
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
+	size_t				i;
 	unsigned char		*d;
 	const unsigned char	*s;
 
-	if (dest == src || n == 0)
-		return (dest);
-	d = (unsigned char *)dest;
+	if (!dst && !src)
+		return (NULL);
+	d = (unsigned char *)dst;
 	s = (const unsigned char *)src;
-	while (n--)
-		*d++ = *s++;
-	return (dest);
+	i = 0;
+	while (i < n)
+	{
+		d[i] = s[i];
+		i++;
+	}
+	return (dst);
 }
