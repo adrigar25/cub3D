@@ -1,33 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.c                                        :+:      :+:    :+:   */
+/*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/17 16:11:03 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/17 18:22:51 by agarcia          ###   ########.fr       */
+/*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
+/*   Updated: 2025/12/18 00:19:35 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libs/gnl/get_next_line.h"
-#include "cub3d.h"
-#include <fcntl.h>
-
-void	free_map(char **map)
-{
-	int	i;
-
-	if (!map)
-		return ;
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-}
+#include "../../libs/gnl/get_next_line.h"
+#include "../cub3d.h"
 
 int	read_map(char ***map, int fd)
 {
@@ -40,38 +24,21 @@ int	read_map(char ***map, int fd)
 	line = get_next_line(fd);
 	while (line)
 	{
-		temp = ft_realloc(*map, sizeof(char *) * (i + 2));
+		temp = ft_realloc(*map, sizeof(char *) * i, sizeof(char *) * (i + 2));
+		if (!temp)
+			return (free_map(*map), handle_error("Memory allocation failed"));
 		*map = temp;
-		(*map)[i] = line;
+		(*map)[i] = ft_strtrim(line, "\n");
+		if (!(*map)[i])
+			return (free(line), free_map(*map),
+				handle_error("ft_strtrim failed"));
+		free(line);
 		line = get_next_line(fd);
 		i++;
 	}
 	if (*map)
 		(*map)[i] = NULL;
-	close(fd);
 	if (i > 256)
 		return (free_map(*map), handle_error("Map too large"));
-	return (0);
-}
-
-int	check_map(char **map)
-{
-	int	i;
-	int	j;
-
-	if (!map)
-		return (handle_error("Map is NULL"));
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (ft_strchr(" 01NSEW\n", map[i][j]) == NULL)
-				return (handle_error("Invalid character in map"));
-			j++;
-		}
-		i++;
-	}
 	return (0);
 }
