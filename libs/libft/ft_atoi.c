@@ -3,49 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 14:44:45 by agarcia           #+#    #+#             */
-/*   Updated: 2025/04/23 17:36:08 by agarcia          ###   ########.fr       */
+/*   Created: 2025/07/08 20:09:15 by adriescr          #+#    #+#             */
+/*   Updated: 2025/11/24 17:04:32 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** FUNCIÓN: ft_atoi
-** -----------------
-** Convierte una cadena de caracteres en un número entero.
-**
-** PARÁMETROS:
-** - const char *nptr: La cadena de caracteres a convertir.
-**
-** RETORNO:
-** - El número entero resultante de la conversión.
-**
-** DESCRIPCIÓN:
-** - La función ignora los espacios en blanco al principio de la cadena.
-** - Si encuentra un signo '+' o '-', lo considera para determinar el signo
-**   del número.
-** - Convierte los dígitos de la cadena en un número entero.
-** - La conversión se detiene al encontrar un carácter no numérico.
-** - La función no maneja errores de conversión ni verifica el rango del
-**   número resultante.
-**
-*/
+#include "libft.h"
 
-int	ft_atoi(const char *nptr)
+/**
+ * ENGLISH: Converts a string to an integer.
+ * 			It handles optional leading whitespace, an optional '+' or '-' sign,
+ * 			and numeric digits. The conversion stops at the first non-digit
+ * 			character.
+ * SPANISH: Convierte una cadena a un entero.
+ * 			Procesa espacios en blanco iniciales opcionales, un signo '+' o '-'
+ * 			opcional, y dígitos numéricos. La conversión se detiene en el primer
+ * 			caracter que no sea un dígito.
+ *
+ * @param str The string to convert. / La cadena a convertir.
+ *
+ * @return The converted integer value. / El valor entero convertido.
+ */
+int	ft_atoi(const char *str)
 {
 	int	result;
+	int	sign;
+	int	i;
 
 	result = 0;
-	while (*nptr == ' ' || *nptr == '\t' || *nptr == '\n' || *nptr == '\v'
-		|| *nptr == '\f' || *nptr == '\r')
-		nptr++;
-	if (*nptr == '+')
-		nptr++;
-	while (*nptr >= '0' && *nptr <= '9' && *nptr != '\0')
+	sign = 1;
+	i = 0;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		result = result * 10 + (*nptr - '0');
-		nptr++;
+		if (str[i] == '-')
+			sign = -1;
+		i++;
 	}
-	return (result);
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = result * 10 + (str[i] - '0');
+		i++;
+	}
+	return (result * sign);
 }

@@ -6,11 +6,10 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:40:42 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/17 22:35:37 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/18 00:48:55 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libs/gnl/get_next_line.h"
 #include "cub3d.h"
 
 static void	parse_rgb(char *line, int *color)

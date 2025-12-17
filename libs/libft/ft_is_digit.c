@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_is_digit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/09 13:39:52 by adriescr          #+#    #+#             */
-/*   Updated: 2025/11/24 15:36:36 by adriescr         ###   ########.fr       */
+/*   Created: 2025/07/08 19:50:10 by adriescr          #+#    #+#             */
+/*   Updated: 2025/11/24 15:25:15 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /**
- * ENGLISH: Calculates the length of a string.
+ * ENGLISH: Checks if a character is a digit.
  *
- * SPANISH: Calcula la longitud de una cadena.
+ * SPANISH: Verifica si un carácter es un dígito.
  *
- * @param str   The string to measure. /
- *            La cadena a medir.
+ * @param c   The character to check. /
+ *            El carácter a verificar.
  *
- * @returns The length of the string. /
- *          La longitud de la cadena.
+ * @returns 1 if the character is a digit, 0 otherwise. /
+ *          1 si el carácter es un dígito, 0 en caso contrario.
  */
-size_t	ft_strlen(const char *str)
+int	ft_is_digit(unsigned char c)
 {
-	size_t	len;
-
-	len = 0;
-	while (str[len] != '\0')
-		len++;
-	return (len);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

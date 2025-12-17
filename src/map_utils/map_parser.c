@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/18 00:19:35 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/18 00:49:04 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	read_map(char ***map, int fd)
 
 	i = 0;
 	*map = NULL;
-	line = get_next_line(fd);
+	line = ft_get_next_line(fd);
 	while (line)
 	{
 		temp = ft_realloc(*map, sizeof(char *) * i, sizeof(char *) * (i + 2));
