@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:50:52 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/18 17:33:54 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/18 17:49:56 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,31 +69,6 @@ typedef struct s_img
 	int			endian;
 }				t_img;
 
-typedef struct s_game
-{
-	char		**map;
-	void		*mlx_ptr;
-	void		*win_ptr;
-	t_img		img;
-	t_texture	textures;
-	t_player	player;
-	t_raycast	raycast;
-}				t_game;
-
-typedef struct s_texture
-{
-	void		*no_ptr;
-	void		*so_ptr;
-	void		*we_ptr;
-	void		*ea_ptr;
-	char		*no_txtr_path;
-	char		*so_txtr_path;
-	char		*we_txtr_path;
-	char		*ea_txtr_path;
-	int			*color_floor;
-	int			*color_ceiling;
-}				t_texture;
-
 typedef struct s_player
 {
 	double		pos_x;
@@ -103,6 +78,15 @@ typedef struct s_player
 	double		plane_x;
 	double		plane_y;
 }				t_player;
+typedef struct s_texture
+{
+	void		*no_ptr;
+	void		*so_ptr;
+	void		*we_ptr;
+	void		*ea_ptr;
+	int			*color_floor;
+	int			*color_ceiling;
+}				t_texture;
 
 typedef struct s_raycast
 {
@@ -132,6 +116,16 @@ typedef struct s_raycast
 	int			draw_start;
 	int			draw_end;
 }				t_raycast;
+typedef struct s_game
+{
+	char		**map;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_img		img;
+	t_texture	textures;
+	t_player	player;
+	t_raycast	raycast;
+}				t_game;
 
 // Map utilities
 int				read_map(char ***map, int fd);
