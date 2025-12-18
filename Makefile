@@ -6,7 +6,7 @@
 #    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2025/12/18 00:48:23 by agarcia          ###   ########.fr        #
+#    Updated: 2025/12/18 01:11:45 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ CFLAGS		:= -Wall -Wextra -Werror
 SRC_DIR		:= src
 SRCS		:= 	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/error.c \
- 				$(SRC_DIR)/init.c \
+ 				$(SRC_DIR)/init_data.c \
+ 				$(SRC_DIR)/init_mlx.c \
  				$(SRC_DIR)/map_utils/map_parser.c \
  				$(SRC_DIR)/map_utils/map_validation.c \
  				$(SRC_DIR)/map_utils/map_memory.c \
@@ -30,6 +31,9 @@ OBJS		:= $(SRCS:$(SRC_DIR)/%.cpp=$(OBJS_DIR)/%.o)
 LIBS_DIR	:= ./libs
 LIBFT_DIR	:= $(LIBS_DIR)/libft
 LIBFT_LIB	:= $(LIBFT_DIR)/libft.a
+MLX_DIR		:= $(LIBS_DIR)/mlx
+MLX_LIB		:= $(MLX_DIR)/libmlx.a
+MLX_FLAGS	:= -framework OpenGL -framework AppKit
 # ---------------------------------- #
 
 all: $(NAME)
@@ -46,10 +50,14 @@ $(GNL_LIB):
 $(LIBFT_LIB):
 	@if [ -d "$(LIBFT_DIR)" ]; then $(MAKE) -C $(LIBFT_DIR); else echo "Warning: $(LIBFT_DIR) not found, skipping libft build"; fi
 
-$(NAME): $(GNL_LIB) $(LIBFT_LIB) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(GNL_LIB) $(LIBFT_LIB) -o $(NAME)
+$(MLX_LIB):
+	@if [ -d "$(MLX_DIR)" ]; then $(MAKE) -C $(MLX_DIR); else echo "Warning: $(MLX_DIR) not found, skipping mlx build"; fi
+
+$(NAME): $(GNL_LIB) $(LIBFT_LIB) $(MLX_LIB) $(OBJS)
+	$(CC) $(CFLAGS) $(SRCS) $(LIBFT_LIB) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME)
 
 clean:
+	@if [ -d "$(MLX_DIR)" ]; then $(MAKE) -C $(MLX_DIR) clean; else echo "Warning: $(MLX_DIR) not found, skipping mlx clean"; fi
 	rm -rf $(OBJS_DIR)
 	@if [ -d "$(GNL_DIR)" ]; then $(MAKE) -C $(GNL_DIR) clean; else echo "Warning: $(GNL_DIR) not found, skipping gnl clean"; fi
 	@if [ -d "$(LIBFT_DIR)" ]; then $(MAKE) -C $(LIBFT_DIR) clean; else echo "Warning: $(LIBFT_DIR) not found, skipping libft clean"; fi

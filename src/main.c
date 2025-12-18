@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:41:35 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/17 22:28:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/18 01:12:48 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ int	cub3d(char *file)
 	if (!game_data)
 		return (handle_error("Game initialization failed"));
 	if (check_map(game_data->map) == -1)
-	{
-		free_game(game_data);
-		return (handle_error("Map validation failed"));
-	}
+		return (free_game(game_data), -1);
+	if (init_mlx(game_data) == -1)
+		return (free_game(game_data), -1);
+	// start_game_loop(game_data);
+	free_game(game_data);
 	return (0);
 }
 
