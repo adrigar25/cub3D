@@ -6,7 +6,7 @@
 #    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2025/12/18 18:31:36 by agarcia          ###   ########.fr        #
+#    Updated: 2025/12/18 18:49:47 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS_UTILS	:=	${UTILS_DIR}/game/clear_game.c \
 				$(UTILS_DIR)/data/read_data.c \
 				$(UTILS_DIR)/mlx/init_mlx.c \
 				$(UTILS_DIR)/mlx/image_buffer.c \
+				$(UTILS_DIR)/color/color_utils.c \
 				$(UTILS_DIR)/player/player_utils.c \
 				$(UTILS_DIR)/raycast/dda.c \
 				$(UTILS_DIR)/raycast/draw_column.c \
