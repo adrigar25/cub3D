@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2025/12/18 15:45:18 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/18 16:05:56 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ static void	get_data(t_game *game_data, int fd)
 		line = ft_get_next_line(fd);
 		if (!line)
 			break ;
-		if (i == 0)
+		if (ft_strncmp(line, "NO ", 3) == 0)
 			game_data->texture_north = ft_substr(line, 3, ft_strlen(line) - 4);
-		else if (i == 1)
+		else if (ft_strncmp(line, "SO ", 3) == 0)
 			game_data->texture_south = ft_substr(line, 3, ft_strlen(line) - 4);
-		else if (i == 2)
+		else if (ft_strncmp(line, "WE ", 3) == 0)
 			game_data->texture_west = ft_substr(line, 3, ft_strlen(line) - 4);
-		else if (i == 3)
+		else if (ft_strncmp(line, "EA ", 3) == 0)
 			game_data->texture_east = ft_substr(line, 3, ft_strlen(line) - 4);
-		else if (i == 5)
+		else if (ft_strncmp(line, "F ", 2) == 0)
 			parse_rgb(line, game_data->color_floor);
-		else if (i == 6)
+		else if (ft_strncmp(line, "C ", 2) == 0)
 			parse_rgb(line, game_data->color_ceiling);
 		free(line);
 		i++;
