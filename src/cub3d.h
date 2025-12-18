@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:50:52 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/18 18:01:39 by adriescr         ###   ########.fr       */
+/*   Updated: 2025/12/18 18:31:35 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include "../libs/libft/libft.h"
 # include "../libs/mlx/mlx.h"
 # include <fcntl.h>
+# include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <math.h>
 
 /* ************************************************************************** */
 /*                               COLOR CONSOLE                                */
@@ -132,6 +132,9 @@ typedef struct s_game
 int				read_map(char ***map, int fd);
 void			free_map(char **map);
 int				check_map(char **map);
+
+// Player utilities
+int				get_player_position(t_game *game);
 
 // Initialization
 void			read_data(t_game **game_data, char *file);
