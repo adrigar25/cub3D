@@ -6,7 +6,7 @@
 /*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 01:03:21 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/18 16:04:46 by adriescr         ###   ########.fr       */
+/*   Updated: 2025/12/18 17:24:20 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ int	init_mlx(t_game *game)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 		free(game->mlx_ptr);
 		return (-1);
+	}
+	if (!init_image_buffer(game))
+	{
+		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+		free(game->mlx_ptr);
+		return (ft_error("init_mlx", (char *[]){"Failed to create image buffer",
+				NULL}));
 	}
 	return (0);
 }
