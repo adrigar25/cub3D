@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
+#    By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2025/12/18 01:11:45 by agarcia          ###   ########.fr        #
+#    Updated: 2025/12/18 15:23:19 by adriescr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,14 +16,26 @@ CC			:= cc
 CFLAGS		:= -Wall -Wextra -Werror
 
 SRC_DIR		:= src
+DATA_DIR	:= $(SRC_DIR)/data
+UTILS_DIR	:= $(SRC_DIR)/utils
+
+SRCS_DATA	:= 	$(DATA_DIR)/init_data.c \
+				${DATA_DIR}/read_data.c
+
+SRCS_UTILS	:=	${UTILS_DIR}/clear_game.c \
+				${UTILS_DIR}/parse_rgb.c \
+				${UTILS_DIR}/print/ft_error.c \
+				${UTILS_DIR}/print/ft_putstr_fd_color.c \
+				${UTILS_DIR}/print/ft_putcolor.c \
+				$(UTILS_DIR)/map/map_parser.c \
+ 				$(UTILS_DIR)/map/map_validation.c \
+ 				$(UTILS_DIR)/map/map_memory.c \
+
 SRCS		:= 	$(SRC_DIR)/main.c \
-				$(SRC_DIR)/error.c \
- 				$(SRC_DIR)/init_data.c \
  				$(SRC_DIR)/init_mlx.c \
- 				$(SRC_DIR)/map_utils/map_parser.c \
- 				$(SRC_DIR)/map_utils/map_validation.c \
- 				$(SRC_DIR)/map_utils/map_memory.c \
-				
+				$(SRCS_DATA) \
+				$(SRCS_UTILS) \
+
 OBJS_DIR	:= objs
 OBJS		:= $(SRCS:$(SRC_DIR)/%.cpp=$(OBJS_DIR)/%.o)
 

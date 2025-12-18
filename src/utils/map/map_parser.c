@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/18 00:51:36 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/18 15:18:29 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libs/libft/libft.h"
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 int	read_map(char ***map, int fd)
 {
@@ -26,12 +25,14 @@ int	read_map(char ***map, int fd)
 	{
 		temp = ft_realloc(*map, sizeof(char *) * i, sizeof(char *) * (i + 2));
 		if (!temp)
-			return (free_map(*map), handle_error("Memory allocation failed"));
+			return (free_map(*map), ft_error("read_map",
+				(char *[]){"Memory allocation failed", NULL}));
 		*map = temp;
 		(*map)[i] = ft_strtrim(line, '\n');
 		if (!(*map)[i])
 			return (free(line), free_map(*map),
-				handle_error("ft_strtrim failed"));
+				ft_error("read_map",
+					(char *[]){"Memory allocation failed", NULL}));
 		free(line);
 		line = ft_get_next_line(fd);
 		i++;
@@ -39,6 +40,7 @@ int	read_map(char ***map, int fd)
 	if (*map)
 		(*map)[i] = NULL;
 	if (i > 256)
-		return (free_map(*map), handle_error("Map too large"));
+		return (free_map(*map), ft_error("read_map",
+			(char *[]){"Map too large", NULL}));
 	return (0);
 }

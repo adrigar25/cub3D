@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:50:52 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/18 01:08:59 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/18 15:18:34 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,19 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+/* ************************************************************************** */
+/*                               COLOR CONSOLE                                */
+/* ************************************************************************** */
+# define RED "\033[0;31m"
+# define GREEN "\033[0;32m"
+# define YELLOW "\033[0;33m"
+# define ORANGE "\033[38;5;208m"
+# define BLUE "\033[0;34m"
+# define MAGENTA "\033[0;35m"
+# define CYAN "\033[0;36m"
+# define WHITE "\033[0;37m"
+# define RESET "\033[0m"
 
 # ifndef WINDOW_WIDTH
 #  define WINDOW_WIDTH 800
@@ -45,19 +58,25 @@ typedef struct s_game
 	char	**map;
 }			t_game;
 
-int			handle_error(const char *message);
-
 // Map utilities
 int			read_map(char ***map, int fd);
 void		free_map(char **map);
 int			check_map(char **map);
 
 // Initialization
-t_game		*init_game(char *file);
+t_game		*read_data(char *file);
 int			init_data_structs(t_game *game);
 
 // MLX Initialization
 int			init_mlx(t_game *game);
 int			init_textures(t_game *game);
+
+// Utils
+void		parse_rgb(char *line, int *color);
+void		clear_game(t_game *game);
+// Print
+long		ft_error(const char *function, char **str);
+long		ft_putcolor(int fd, int color);
+long		ft_putstr_fd_color(const char *str, int fd, int color);
 
 #endif // CUB3D_H

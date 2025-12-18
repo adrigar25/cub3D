@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/18 00:59:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/18 15:25:17 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 static int	is_valid_neighbor(char **map, int x, int y, int dx, int dy)
 {
@@ -116,9 +116,11 @@ int	check_map(char **map)
 	int	j;
 
 	if (!map)
-		return (handle_error("Map is NULL"));
+		return (ft_error("check_map",
+			(char *[]){"Map is NULL", NULL}));
 	if (check_empty(map) == -1)
-		return (handle_error("Map has empty lines"));
+		return (ft_error("check_map",
+			(char *[]){"Map has empty lines", NULL}));
 	i = 0;
 	while (map[i])
 	{
@@ -126,9 +128,11 @@ int	check_map(char **map)
 		while (map[i][j])
 		{
 			if (ft_strchr(" 01NSEW\n", map[i][j]) == NULL)
-				return (handle_error("Invalid character in map"));
+					return (ft_error("check_map",
+						(char *[]){"Invalid character in map", NULL}));
 			if (check_walls(map, i, j) == -1)
-				return (handle_error("Map not closed"));
+				return (ft_error("check_map",
+					(char *[]){"Map not closed", NULL}));
 			j++;
 		}
 		i++;

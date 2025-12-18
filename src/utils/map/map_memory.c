@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   map_memory.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/17 15:43:49 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/17 16:08:40 by agarcia          ###   ########.fr       */
+/*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
+/*   Updated: 2025/12/18 15:23:41 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../cub3d.h"
 
-int handle_error(const char *message)
+void	free_map(char **map)
 {
-    if (message)
-        fprintf(stderr, "Error: %s\n", message);
-    else
-        perror("Error");
-    return -1;
+	int	i;
+
+	if (!map)
+		return ;
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
 }

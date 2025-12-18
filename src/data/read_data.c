@@ -1,52 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   read_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/17 17:40:42 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/18 00:51:46 by agarcia          ###   ########.fr       */
+/*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
+/*   Updated: 2025/12/18 15:05:38 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-
-static void	parse_rgb(char *line, int *color)
-{
-	char	*first_comma;
-	char	*second_comma;
-
-	first_comma = ft_strchr(line, ',');
-	second_comma = ft_strchr(first_comma + 1, ',');
-	color[0] = ft_atoi(line + 2);
-	color[1] = ft_atoi(first_comma + 1);
-	color[2] = ft_atoi(second_comma + 1);
-}
-
-int	init_data_structs(t_game *game)
-{
-	game->color_floor = malloc(3 * sizeof(int));
-	game->color_ceiling = malloc(3 * sizeof(int));
-	if (!game->color_floor || !game->color_ceiling)
-	{
-		free(game->color_floor);
-		free(game->color_ceiling);
-		return (-1);
-	}
-	game->texture_north = NULL;
-	game->texture_south = NULL;
-	game->texture_west = NULL;
-	game->texture_east = NULL;
-	game->color_floor[0] = -1;
-	game->color_floor[1] = -1;
-	game->color_floor[2] = -1;
-	game->color_ceiling[0] = -1;
-	game->color_ceiling[1] = -1;
-	game->color_ceiling[2] = -1;
-	game->map = NULL;
-	return (0);
-}
+#include "../cub3d.h"
 
 static void	get_data(t_game *game_data, int fd)
 {
@@ -83,7 +47,7 @@ static void	get_data(t_game *game_data, int fd)
 	}
 }
 
-t_game	*init_game(char *file)
+t_game	*read_data(char *file)
 {
 	int		fd;
 	t_game	*game_data;

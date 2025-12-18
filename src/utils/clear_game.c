@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_memory.c                                       :+:      :+:    :+:   */
+/*   clear_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/18 00:19:35 by agarcia          ###   ########.fr       */
+/*   Created: 2025/12/18 15:07:37 by adriescr          #+#    #+#             */
+/*   Updated: 2025/12/18 15:07:47 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	free_map(char **map)
+void	clear_game(t_game *game)
 {
-	int	i;
-
-	if (!map)
+	if (!game)
 		return ;
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
+	free(game->texture_north);
+	free(game->texture_south);
+	free(game->texture_west);
+	free(game->texture_east);
+	free(game->color_floor);
+	free(game->color_ceiling);
+	free_map(game->map);
+	free(game);
 }
