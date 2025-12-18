@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2025/12/18 17:44:16 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/18 18:06:08 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ static int	get_data(t_game *game_data, int fd)
 	{
 		lastLine = (line[ft_strlen(line) - 1] == '\n');
 		if (ft_strncmp(line, "NO ", 3) == 0)
-			game_data->textures->no_txtr = mlx_png_file_to_image(ft_substr(line,
+			game_data->textures->no_txtr = mlx_xpm_file_to_image(ft_substr(line,
 						3, ft_strlen(line) - 3 - lastLine));
 		else if (ft_strncmp(line, "SO ", 3) == 0)
-			game_data->textures->so_txtr = mlx_png_file_to_image(ft_substr(line,
+			game_data->textures->so_txtr = mlx_xpm_file_to_image(ft_substr(line,
 						3, ft_strlen(line) - 3 - lastLine));
 		else if (ft_strncmp(line, "WE ", 3) == 0)
-			game_data->textures->we_txtr = mlx_png_file_to_image(ft_substr(line,
+			game_data->textures->we_txtr = mlx_xpm_file_to_image(ft_substr(line,
 						3, ft_strlen(line) - 3 - lastLine));
 		else if (ft_strncmp(line, "EA ", 3) == 0)
-			game_data->textures->ea_txtr = mlx_png_file_to_image(ft_substr(line,
+			game_data->textures->ea_txtr = mlx_xpm_file_to_image(ft_substr(line,
 						3, ft_strlen(line) - 3 - lastLine));
 		else if (ft_strncmp(line, "F ", 2) == 0)
 			parse_rgb(line, game_data->textures->color_floor);
