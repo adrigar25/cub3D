@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+         #
+#    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2025/12/18 15:23:19 by adriescr         ###   ########.fr        #
+#    Updated: 2025/12/18 15:46:42 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,8 @@ SRC_DIR		:= src
 DATA_DIR	:= $(SRC_DIR)/data
 UTILS_DIR	:= $(SRC_DIR)/utils
 
-SRCS_DATA	:= 	$(DATA_DIR)/init_data.c \
-				${DATA_DIR}/read_data.c
 
-SRCS_UTILS	:=	${UTILS_DIR}/clear_game.c \
+SRCS_UTILS	:=	${UTILS_DIR}/game/clear_game.c \
 				${UTILS_DIR}/parse_rgb.c \
 				${UTILS_DIR}/print/ft_error.c \
 				${UTILS_DIR}/print/ft_putstr_fd_color.c \
@@ -30,10 +28,12 @@ SRCS_UTILS	:=	${UTILS_DIR}/clear_game.c \
 				$(UTILS_DIR)/map/map_parser.c \
  				$(UTILS_DIR)/map/map_validation.c \
  				$(UTILS_DIR)/map/map_memory.c \
+				$(UTILS_DIR)/data/init_data.c \
+				$(UTILS_DIR)/data/read_data.c \
+				$(UTILS_DIR)/mlx/init_mlx.c \
+
 
 SRCS		:= 	$(SRC_DIR)/main.c \
- 				$(SRC_DIR)/init_mlx.c \
-				$(SRCS_DATA) \
 				$(SRCS_UTILS) \
 
 OBJS_DIR	:= objs

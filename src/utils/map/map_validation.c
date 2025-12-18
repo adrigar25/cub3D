@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/18 15:25:17 by adriescr         ###   ########.fr       */
+/*   Updated: 2025/12/18 15:43:14 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,9 @@ int	check_map(char **map)
 	int	j;
 
 	if (!map)
-		return (ft_error("check_map",
-			(char *[]){"Map is NULL", NULL}));
+		return (ft_error("check_map", (char *[]){"Map is NULL", NULL}));
 	if (check_empty(map) == -1)
-		return (ft_error("check_map",
-			(char *[]){"Map has empty lines", NULL}));
+		return (ft_error("check_map", (char *[]){"Map has empty lines", NULL}));
 	i = 0;
 	while (map[i])
 	{
@@ -128,11 +126,11 @@ int	check_map(char **map)
 		while (map[i][j])
 		{
 			if (ft_strchr(" 01NSEW\n", map[i][j]) == NULL)
-					return (ft_error("check_map",
+				return (ft_error("check_map",
 						(char *[]){"Invalid character in map", NULL}));
 			if (check_walls(map, i, j) == -1)
-				return (ft_error("check_map",
-					(char *[]){"Map not closed", NULL}));
+				return (ft_error("check_map", (char *[]){"Map not closed",
+						NULL}));
 			j++;
 		}
 		i++;
