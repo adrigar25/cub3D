@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
+#    By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2025/12/18 18:49:47 by agarcia          ###   ########.fr        #
+#    Updated: 2025/12/18 19:06:50 by adriescr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ UTILS_DIR	:= $(SRC_DIR)/utils
 
 SRCS_UTILS	:=	${UTILS_DIR}/game/clear_game.c \
 				${UTILS_DIR}/game/game_loop.c \
+				${UTILS_DIR}/game/player_movement.c \
 				${UTILS_DIR}/parse_rgb.c \
 				${UTILS_DIR}/print/ft_error.c \
 				${UTILS_DIR}/print/ft_putstr_fd_color.c \
