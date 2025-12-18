@@ -19,6 +19,8 @@ static int	is_valid_neighbor(char **map, int x, int y, int dx, int dy)
 
 	new_x = x + dx;
 	new_y = y + dy;
+	if (new_x < 0)
+		return (0);
 	if (!map[new_x])
 		return (0);
 	if (new_y < 0)
@@ -86,8 +88,9 @@ static int	check_empty_columns(char **map, int max_len)
 		all_spaces = 1;
 		while (map[++i])
 		{
-			if (j < (int)ft_strlen(map[i]) && ft_strchr(" \t",
-					map[i][j]) == NULL)
+			if (j >= (int)ft_strlen(map[i]))
+				continue ;
+			if (ft_strchr(" \t", map[i][j]) == NULL)
 			{
 				all_spaces = 0;
 				break ;

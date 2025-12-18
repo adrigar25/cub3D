@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2025/12/18 16:05:56 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/18 17:10:14 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,31 @@
 static void	get_data(t_game *game_data, int fd)
 {
 	char	*line;
-	int		i;
+	int		lastLine;
 
-	i = 0;
-	while (i < 8)
+	lastLine = 0;
+	line = ft_get_next_line(fd);
+	while (line)
 	{
-		line = ft_get_next_line(fd);
-		if (!line)
-			break ;
+		lastLine = (line[ft_strlen(line) - 1] == '\n');
 		if (ft_strncmp(line, "NO ", 3) == 0)
-			game_data->texture_north = ft_substr(line, 3, ft_strlen(line) - 4);
+			game_data->texture_north = ft_substr(line, 3, ft_strlen(line) - 3
+					- lastLine);
 		else if (ft_strncmp(line, "SO ", 3) == 0)
-			game_data->texture_south = ft_substr(line, 3, ft_strlen(line) - 4);
+			game_data->texture_south = ft_substr(line, 3, ft_strlen(line) - 3
+					- lastLine);
 		else if (ft_strncmp(line, "WE ", 3) == 0)
-			game_data->texture_west = ft_substr(line, 3, ft_strlen(line) - 4);
+			game_data->texture_west = ft_substr(line, 3, ft_strlen(line) - 3
+					- lastLine);
 		else if (ft_strncmp(line, "EA ", 3) == 0)
-			game_data->texture_east = ft_substr(line, 3, ft_strlen(line) - 4);
+			game_data->texture_east = ft_substr(line, 3, ft_strlen(line) - 3
+					- lastLine);
 		else if (ft_strncmp(line, "F ", 2) == 0)
 			parse_rgb(line, game_data->color_floor);
 		else if (ft_strncmp(line, "C ", 2) == 0)
 			parse_rgb(line, game_data->color_ceiling);
 		free(line);
-		i++;
-	}
-	if (read_map(&game_data->map, fd) == -1)
-	{
-		free_map(game_data->map);
-		free(game_data);
-		close(fd);
-		return ;
+		line = ft_get_next_line(fd);
 	}
 }
 
@@ -68,6 +64,9 @@ t_game	*read_data(char *file)
 		game_data->color_floor[1], game_data->color_floor[2]);
 	printf("Ceiling Color: R=%d, G=%d, B=%d\n", game_data->color_ceiling[0],
 		game_data->color_ceiling[1], game_data->color_ceiling[2]);
+	fd = open(file, O_RDONLY);
+	read_map(&game_data->map, fd);
+	close(fd);
 	printf("Map Data:\n");
 	for (int j = 0; game_data->map && game_data->map[j] != NULL; j++)
 	{
