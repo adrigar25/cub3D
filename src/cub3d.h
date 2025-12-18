@@ -6,7 +6,7 @@
 /*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:50:52 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/18 15:18:34 by adriescr         ###   ########.fr       */
+/*   Updated: 2025/12/18 16:18:46 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,45 @@
 
 typedef struct s_game
 {
-	void	*no_ptr;
-	void	*so_ptr;
-	void	*we_ptr;
-	void	*ea_ptr;
+	char	**map;
 	void	*mlx_ptr;
 	void	*win_ptr;
-	char	*texture_north;
-	char	*texture_south;
-	char	*texture_west;
-	char	*texture_east;
-	int		*color_floor;
-	int		*color_ceiling;
-	char	**map;
+	t_texture textures;
+	t_player player;
 }			t_game;
+
+typedef struct s_texture
+{
+		void	*no_ptr;
+		void	*so_ptr;
+		void	*we_ptr;
+		void	*ea_ptr;
+		char	*texture_north;
+		char	*texture_south;
+		char	*texture_west;
+		char	*texture_east;
+		int		*color_floor;
+		int		*color_ceiling;
+}			t_texture;
+
+typedef struct s_player
+{
+	float	pos_x;
+	float	pos_y;
+	float	dir_x;
+	float	dir_y;
+	float	plane_x;
+	float	plane_y;
+}			t_player;
+
+typedef struct s_raycast
+{
+	float	camera_x;
+	float	ray_dir_x;
+	float	ray_dir_y;
+	int		map_x;
+	int		map_y;
+}			t_raycast;
 
 // Map utilities
 int			read_map(char ***map, int fd);
