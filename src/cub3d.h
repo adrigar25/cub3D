@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:50:52 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/18 17:49:56 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/18 18:01:39 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <math.h>
 
 /* ************************************************************************** */
 /*                               COLOR CONSOLE                                */
@@ -133,7 +134,7 @@ void			free_map(char **map);
 int				check_map(char **map);
 
 // Initialization
-t_game			*read_data(char *file);
+void			read_data(t_game **game_data, char *file);
 int				init_data_structs(t_game *game);
 
 // MLX Initialization

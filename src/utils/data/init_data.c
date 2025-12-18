@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:40:42 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/18 15:44:47 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/18 17:55:37 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 int	init_data_structs(t_game *game)
 {
-	game->color_floor = malloc(3 * sizeof(int));
-	game->color_ceiling = malloc(3 * sizeof(int));
-	if (!game->color_floor || !game->color_ceiling)
+	game->textures.color_floor = malloc(3 * sizeof(int));
+	game->textures.color_ceiling = malloc(3 * sizeof(int));
+	if (!game->textures.color_floor || !game->textures.color_ceiling)
 	{
-		free(game->color_floor);
-		free(game->color_ceiling);
+		free(game->textures.color_floor);
+		free(game->textures.color_ceiling);
 		return (-1);
 	}
-	game->texture_north = NULL;
-	game->texture_south = NULL;
-	game->texture_west = NULL;
-	game->texture_east = NULL;
-	game->color_floor[0] = -1;
-	game->color_floor[1] = -1;
-	game->color_floor[2] = -1;
-	game->color_ceiling[0] = -1;
-	game->color_ceiling[1] = -1;
-	game->color_ceiling[2] = -1;
+	game->textures.no_ptr = NULL;
+	game->textures.so_ptr = NULL;
+	game->textures.we_ptr = NULL;
+	game->textures.ea_ptr = NULL;
+	game->textures.color_floor[0] = -1;
+	game->textures.color_floor[1] = -1;
+	game->textures.color_floor[2] = -1;
+	game->textures.color_ceiling[0] = -1;
+	game->textures.color_ceiling[1] = -1;
+	game->textures.color_ceiling[2] = -1;
 	game->map = NULL;
 	return (0);
 }

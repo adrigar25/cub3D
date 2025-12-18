@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2025/12/18 18:06:08 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/18 18:06:35 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int	get_data(t_game *game_data, int fd)
 {
+	int		w;
+	int		h;
 	char	*line;
 	int		lastLine;
 
@@ -35,16 +37,17 @@ static int	get_data(t_game *game_data, int fd)
 			game_data->textures->ea_txtr = mlx_xpm_file_to_image(ft_substr(line,
 						3, ft_strlen(line) - 3 - lastLine));
 		else if (ft_strncmp(line, "F ", 2) == 0)
-			parse_rgb(line, game_data->textures->color_floor);
+			parse_rgb(line, game_data->textures.color_floor);
 		else if (ft_strncmp(line, "C ", 2) == 0)
-			parse_rgb(line, game_data->textures->color_ceiling);
+			parse_rgb(line, game_data->textures.color_ceiling);
 		free(line);
 		line = ft_get_next_line(fd);
-		if (!game->textures->no_ptr || !game->textures->so_ptr
-			|| !game->textures->we_ptr || !game->textures->ea_ptr)
+		if (!game_data->textures.no_ptr || !game_data->textures.so_ptr
+			|| !game_data->textures.we_ptr || !game_data->textures.ea_ptr)
 			return (ft_error("init_textures",
 					(char *[]){"Failed to create textures", NULL}));
 	}
+	return (0);
 }
 
 void	read_data(t_game **game_data, char *file)
@@ -52,7 +55,7 @@ void	read_data(t_game **game_data, char *file)
 	int	fd;
 
 	if (init_data_structs(*game_data) != 0)
-		return (free(*game_data), NULL);
+		return ((void)free(*game_data));
 	fd = open(file, O_RDONLY);
 	get_data(*game_data, fd);
 	close(fd);
@@ -65,5 +68,4 @@ void	read_data(t_game **game_data, char *file)
 		printf("%s\n", (*game_data)->map[j]);
 	}
 	printf("\nMap loaded successfully.\n");
-	return (game_data);
 }
