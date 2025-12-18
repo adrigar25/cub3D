@@ -6,14 +6,14 @@
 #    By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2025/12/18 17:29:42 by adriescr         ###   ########.fr        #
+#    Updated: 2025/12/18 17:53:43 by adriescr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= cub3D
 
 CC			:= cc
-CFLAGS		:= -Wall -Wextra -Werror
+CFLAGS		:=
 
 SRC_DIR		:= src
 DATA_DIR	:= $(SRC_DIR)/data
