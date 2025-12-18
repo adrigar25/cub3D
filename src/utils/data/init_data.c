@@ -6,7 +6,7 @@
 /*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:40:42 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/18 17:55:37 by adriescr         ###   ########.fr       */
+/*   Updated: 2025/12/18 18:50:04 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ int	init_data_structs(t_game *game)
 		free(game->textures.color_ceiling);
 		return (-1);
 	}
-	game->textures.no_ptr = NULL;
-	game->textures.so_ptr = NULL;
-	game->textures.we_ptr = NULL;
-	game->textures.ea_ptr = NULL;
 	game->textures.color_floor[0] = -1;
 	game->textures.color_floor[1] = -1;
 	game->textures.color_floor[2] = -1;

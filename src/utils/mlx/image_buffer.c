@@ -6,7 +6,7 @@
 /*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:30:00 by adriescr          #+#    #+#             */
-/*   Updated: 2025/12/18 17:24:20 by adriescr         ###   ########.fr       */
+/*   Updated: 2025/12/18 18:58:21 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ int	init_image_buffer(t_game *game)
 		mlx_destroy_image(game->mlx_ptr, game->img.img);
 		return (0);
 	}
+
+	// Inicializar dimensiones del buffer principal
+	game->img.width = WINDOW_WIDTH;
+	game->img.height = WINDOW_HEIGHT;
 
 	return (1);
 }
@@ -74,4 +78,29 @@ void	img_pixel_put(t_img *img, int x, int y, int color)
 void	render_frame(t_game *game)
 {
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.img, 0, 0);
+}
+
+/**
+ * ENGLISH: Get color from texture at specific coordinates.
+ *          Safely extracts pixel color from texture image data.
+ *
+ * SPANISH: Obtiene color de la textura en coordenadas específicas.
+ *          Extrae de forma segura el color del píxel de los datos de la imagen de textura.
+ *
+ * @param texture Pointer to texture image structure
+ * @param x X coordinate in texture (0 to TEX_WIDTH-1)
+ * @param y Y coordinate in texture (0 to TEX_HEIGHT-1)
+ * @return Color value at specified coordinates
+ */
+int	get_texture_color(t_img *texture, int x, int y)
+{
+	char	*dst;
+
+	if (!texture || !texture->addr)
+		return (0x000000);
+	if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
+		return (0x000000);
+
+	dst = texture->addr + (y * texture->line_len + x * (texture->bpp / 8));
+	return (*(unsigned int*)dst);
 }

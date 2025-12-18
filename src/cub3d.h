@@ -1,12 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
+/*                  // Game loop functions
+void		start_game_loop(t_game *game);
+
+// Player movement functions
+void		move_forward(t_game *game);
+void		move_backward(t_game *game);
+void		move_left(t_game *game);
+void		move_right(t_game *game);
+void		rotate_left(t_game *game);
+void		rotate_right(t_game *game);
+int			is_valid_position(t_game *game, double x, double y);
+
+// Print                                  :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:50:52 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/18 18:31:35 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/18 18:37:02 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +46,9 @@
 # define WHITE "\033[0;37m"
 # define RESET "\033[0m"
 
+/* ************************************************************************** */
+/*                               WINDOW DIMENSIONS                            */
+/* ************************************************************************** */
 # ifndef WINDOW_WIDTH
 #  define WINDOW_WIDTH 800
 # endif
@@ -41,6 +56,44 @@
 # ifndef WINDOW_HEIGHT
 #  define WINDOW_HEIGHT 600
 # endif
+
+/* ************************************************************************** */
+/*                               KEY MAPPING                                  */
+/* ************************************************************************** */
+# define KEY_W 13
+# define KEY_A 2
+# define KEY_S 1
+# define KEY_D 0
+# define KEY_LEFT 124
+# define KEY_RIGHT 123
+# define KEY_UP 126
+# define KEY_DOWN 125
+# define KEY_ESC 53
+
+// Movement constants
+# define MOVE_SPEED 0.05
+# define ROT_SPEED 0.03
+
+// Texture constants
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
+
+/**
+ * ENGLISH: Key states structure for continuous movement.
+ *
+ * SPANISH: Estructura de estados de teclas para movimiento continuo.
+ */
+typedef struct s_keys
+{
+	int		w;
+	int		a;
+	int		s;
+	int		d;
+	int		left;
+	int		right;
+	int		up;
+	int		down;
+}				t_keys;
 
 /**
  * ENGLISH: Image structure for pixel manipulation.
@@ -68,6 +121,8 @@ typedef struct s_img
 	int			bpp;
 	int			line_len;
 	int			endian;
+	int			width;
+	int			height;
 }				t_img;
 
 typedef struct s_player
@@ -81,10 +136,10 @@ typedef struct s_player
 }				t_player;
 typedef struct s_texture
 {
-	void		*no_ptr;
-	void		*so_ptr;
-	void		*we_ptr;
-	void		*ea_ptr;
+	t_img		no;		// North texture
+	t_img		so;		// South texture
+	t_img		we;		// West texture
+	t_img		ea;		// East texture
 	int			*color_floor;
 	int			*color_ceiling;
 }				t_texture;
@@ -116,6 +171,11 @@ typedef struct s_raycast
 	// Límites de dibujo
 	int			draw_start;
 	int			draw_end;
+	// Texture calculations
+	double		wall_x;		// Exact position where wall was hit
+	int			tex_x;		// X coordinate on texture
+	double		step;		// How much to increase texture coordinate per screen pixel
+	double		tex_pos;	// Current texture position
 }				t_raycast;
 typedef struct s_game
 {
@@ -126,6 +186,7 @@ typedef struct s_game
 	t_texture	textures;
 	t_player	player;
 	t_raycast	raycast;
+	t_keys		keys;
 }				t_game;
 
 // Map utilities
@@ -155,13 +216,26 @@ void			draw_column(t_game *game, int x);
 // Utils
 void			parse_rgb(char *line, int *color);
 void			clear_game(t_game *game);
+
+// Player movement functions
+void			move_forward(t_game *game);
+void			move_backward(t_game *game);
+void			move_left(t_game *game);
+void			move_right(t_game *game);
+void			rotate_left(t_game *game);
+void			rotate_right(t_game *game);
+int				is_valid_position(t_game *game, double x, double y);
+
 // Image buffer functions
 int				init_image_buffer(t_game *game);
 void			img_pixel_put(t_img *img, int x, int y, int color);
 void			render_frame(t_game *game);
+int				get_texture_color(t_img *texture, int x, int y);
 
 // Game loop functions
 void			start_game_loop(t_game *game);
+void			init_keys(t_game *game);
+void			update_movement(t_game *game);
 
 // Print
 long			ft_error(const char *function, char **str);
