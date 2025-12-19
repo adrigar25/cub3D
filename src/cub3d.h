@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                  // Game loop functions
-void		start_game_loop(t_game *game);
+void			start_game_loop(t_game *game);
 
 // Player movement functions
-void		move_forward(t_game *game);
-void		move_backward(t_game *game);
-void		move_left(t_game *game);
-void		move_right(t_game *game);
-void		rotate_left(t_game *game);
-void		rotate_right(t_game *game);
-int			is_valid_position(t_game *game, double x, double y);
+void			move_forward(t_game *game);
+void			move_backward(t_game *game);
+void			move_left(t_game *game);
+void			move_right(t_game *game);
+void			rotate_left(t_game *game);
+void			rotate_right(t_game *game);
+int				is_valid_position(t_game *game, double x, double y);
 
 // Print                                  :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
@@ -50,11 +50,11 @@ int			is_valid_position(t_game *game, double x, double y);
 /*                               WINDOW DIMENSIONS                            */
 /* ************************************************************************** */
 # ifndef WINDOW_WIDTH
-#  define WINDOW_WIDTH 800
+#  define WINDOW_WIDTH 1700
 # endif
 
 # ifndef WINDOW_HEIGHT
-#  define WINDOW_HEIGHT 600
+#  define WINDOW_HEIGHT 980
 # endif
 
 /* ************************************************************************** */
@@ -85,14 +85,14 @@ int			is_valid_position(t_game *game, double x, double y);
  */
 typedef struct s_keys
 {
-	int		w;
-	int		a;
-	int		s;
-	int		d;
-	int		left;
-	int		right;
-	int		up;
-	int		down;
+	int			w;
+	int			a;
+	int			s;
+	int			d;
+	int			left;
+	int			right;
+	int			up;
+	int			down;
 }				t_keys;
 
 /**
@@ -136,12 +136,12 @@ typedef struct s_player
 }				t_player;
 typedef struct s_texture
 {
-	t_img		no;		// North texture
-	t_img		so;		// South texture
-	t_img		we;		// West texture
-	t_img		ea;		// East texture
-	int			*color_floor;
-	int			*color_ceiling;
+	t_img no; // North texture
+	t_img so; // South texture
+	t_img we; // West texture
+	t_img ea; // East texture
+	int			color_floor;
+	int			color_ceiling;
 }				t_texture;
 
 typedef struct s_raycast
@@ -172,10 +172,10 @@ typedef struct s_raycast
 	int			draw_start;
 	int			draw_end;
 	// Texture calculations
-	double		wall_x;		// Exact position where wall was hit
-	int			tex_x;		// X coordinate on texture
-	double		step;		// How much to increase texture coordinate per screen pixel
-	double		tex_pos;	// Current texture position
+	double wall_x;  // Exact position where wall was hit
+	int tex_x;      // X coordinate on texture
+	double step;    // How much to increase texture coordinate per screen pixel
+	double tex_pos; // Current texture position
 }				t_raycast;
 typedef struct s_game
 {

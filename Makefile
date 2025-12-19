@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+         #
+#    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2025/12/18 19:06:50 by adriescr         ###   ########.fr        #
+#    Updated: 2025/12/18 19:40:29 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= cub3D
 
 CC			:= cc
-CFLAGS		:=
+CFLAGS		:= -Wall -Wextra -Werror
 
 SRC_DIR		:= src
 DATA_DIR	:= $(SRC_DIR)/data
