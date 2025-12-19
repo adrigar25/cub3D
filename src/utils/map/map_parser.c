@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/18 17:33:43 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/19 13:48:18 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ int	read_map(char ***map, int fd)
 		temp = ft_realloc(*map, sizeof(char *) * i, sizeof(char *) * (i + 2));
 		if (!temp)
 			return (free(line), free_map(*map), ft_error("read_map",
-					(char *[]){"Memory allocation failed", NULL}));
+					(char *[]){"Memory allocation failed", NULL}), -1);
 		*map = temp;
 		(*map)[i] = ft_strtrim(line, '\n');
 		if (!(*map)[i])
 			return (free(line), free_map(*map), ft_error("read_map",
-					(char *[]){"Memory allocation failed", NULL}));
+					(char *[]){"Memory allocation failed", NULL}), -1);
 		free(line);
 		if ((*map)[i][0] == '\0')
 		{
@@ -89,6 +89,6 @@ int	read_map(char ***map, int fd)
 		(*map)[i] = NULL;
 	if (i > 256)
 		return (free_map(*map), ft_error("read_map", (char *[]){"Map too large",
-				NULL}));
+				NULL}), -1);
 	return (0);
 }

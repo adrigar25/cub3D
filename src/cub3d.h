@@ -136,10 +136,10 @@ typedef struct s_player
 }				t_player;
 typedef struct s_texture
 {
-	t_img no; // North texture
-	t_img so; // South texture
-	t_img we; // West texture
-	t_img ea; // East texture
+	t_img		no;
+	t_img		so;
+	t_img		we;
+	t_img		ea;
 	int			color_floor;
 	int			color_ceiling;
 }				t_texture;
@@ -198,7 +198,7 @@ int				check_map(char **map);
 int				get_player_position(t_game *game);
 
 // Initialization
-void			read_data(t_game **game_data, char *file);
+int				read_data(t_game **game_data, char *file);
 int				init_data_structs(t_game *game);
 
 // MLX Initialization
@@ -214,7 +214,7 @@ void			perpendicular_wall_distance(t_raycast *ray, t_game *game);
 void			draw_column(t_game *game, int x);
 
 // Utils
-void			parse_rgb(char *line, int *color);
+int				parse_rgb(char *line);
 void			clear_game(t_game *game);
 
 // Player movement functions
@@ -241,5 +241,8 @@ void			update_movement(t_game *game);
 long			ft_error(const char *function, char **str);
 long			ft_putcolor(int fd, int color);
 long			ft_putstr_fd_color(const char *str, int fd, int color);
+
+// Color utilities
+int				rgb_to_hex(int r, int g, int b);
 
 #endif // CUB3D_H

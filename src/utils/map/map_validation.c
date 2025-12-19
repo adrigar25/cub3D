@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/18 17:33:43 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/19 13:36:02 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,10 @@ int	check_map(char **map)
 	int	j;
 
 	if (!map)
-		return (ft_error("check_map", (char *[]){"Map is NULL", NULL}));
+		return (ft_error("check_map", (char *[]){"Map is NULL", NULL}), -1);
 	if (check_empty(map) == -1)
-		return (ft_error("check_map", (char *[]){"Map has empty lines", NULL}));
+		return (ft_error("check_map", (char *[]){"Map has empty lines", NULL}),
+			-1);
 	i = 0;
 	while (map[i])
 	{
@@ -130,10 +131,10 @@ int	check_map(char **map)
 		{
 			if (ft_strchr(" 01NSEW\n", map[i][j]) == NULL)
 				return (ft_error("check_map",
-						(char *[]){"Invalid character in map", NULL}));
+						(char *[]){"Invalid character in map", NULL}), -1);
 			if (check_walls(map, i, j) == -1)
 				return (ft_error("check_map", (char *[]){"Map not closed",
-						NULL}));
+						NULL}), -1);
 			j++;
 		}
 		i++;

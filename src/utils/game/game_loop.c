@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:45:00 by adriescr          #+#    #+#             */
-/*   Updated: 2025/12/18 18:46:07 by adriescr         ###   ########.fr       */
+/*   Updated: 2025/12/19 13:36:14 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,42 +19,41 @@
  * SPANISH: Limpia el buffer de imagen llenándolo con negro (0x000000).
  *          Llama a esto al comienzo de cada frame.
  */
-static void	clear_image_buffer(t_game *game)
-{
-	int	x;
-	int	y;
+// static void	clear_image_buffer(t_game *game)
+// {
+// 	int	x;
+// 	int	y;
 
-	y = 0;
-	while (y < WINDOW_HEIGHT)
-	{
-		x = 0;
-		while (x < WINDOW_WIDTH)
-		{
-			img_pixel_put(&game->img, x, y, 0x000000);
-			x++;
-		}
-		y++;
-	}
-}
+// 	y = 0;
+// 	while (y < WINDOW_HEIGHT)
+// 	{
+// 		x = 0;
+// 		while (x < WINDOW_WIDTH)
+// 		{
+// 			img_pixel_put(&game->img, x, y, 0x000000);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
 
 /**
  * ENGLISH: Main render loop function called every frame.
- *          Updates movement, clears buffer, performs raycasting, and displays the result.
+ *          Updates movement, clears buffer, performs raycasting,
+	and displays the result.
  *
  * SPANISH: Función principal del loop de render llamada cada frame.
- *          Actualiza movimiento, limpia el buffer, realiza raycasting y muestra el resultado.
+ *          Actualiza movimiento, limpia el buffer,
+	realiza raycasting y muestra el resultado.
  */
 static int	render_loop(t_game *game)
 {
 	// Actualizar movimiento basado en teclas presionadas
 	update_movement(game);
-
 	// Realizar raycasting y renderizar
 	raycast(game);
-
 	// Mostrar el frame completo en la ventana
 	render_frame(game);
-
 	return (0);
 }
 
@@ -78,7 +77,8 @@ void	init_keys(t_game *game)
 /**
  * ENGLISH: Handle key press events - set key state to 1.
  *
- * SPANISH: Maneja eventos de teclas presionadas - establece el estado de la tecla a 1.
+ * SPANISH: Maneja eventos de teclas presionadas
+	- establece el estado de la tecla a 1.
  */
 static int	handle_keypress(int keycode, t_game *game)
 {
@@ -106,7 +106,8 @@ static int	handle_keypress(int keycode, t_game *game)
 /**
  * ENGLISH: Handle key release events - set key state to 0.
  *
- * SPANISH: Maneja eventos de teclas liberadas - establece el estado de la tecla a 0.
+ * SPANISH: Maneja eventos de teclas liberadas
+	- establece el estado de la tecla a 0.
  */
 static int	handle_keyrelease(int keycode, t_game *game)
 {
@@ -132,7 +133,9 @@ static int	handle_keyrelease(int keycode, t_game *game)
 /**
  * ENGLISH: Update player movement based on current key states.
  *
- * SPANISH: Actualiza el movimiento del jugador basado en los estados actuales de las teclas.
+
+	* SPANISH: Actualiza el movimiento del jugador basado en los
+	estados actuales de las teclas.
  */
 void	update_movement(t_game *game)
 {
@@ -173,17 +176,13 @@ void	start_game_loop(t_game *game)
 {
 	// Inicializar estados de teclas
 	init_keys(game);
-
 	// Configurar eventos de teclado (presionar y soltar)
-	mlx_hook(game->win_ptr, 2, 1L<<0, handle_keypress, game);    // KeyPress
-	mlx_hook(game->win_ptr, 3, 1L<<1, handle_keyrelease, game);  // KeyRelease
-
+	mlx_hook(game->win_ptr, 2, 1L << 0, handle_keypress, game);   // KeyPress
+	mlx_hook(game->win_ptr, 3, 1L << 1, handle_keyrelease, game); // KeyRelease
 	// Configurar evento de cierre de ventana
 	mlx_hook(game->win_ptr, 17, 0, handle_close, game);
-
 	// Configurar el loop de render (se ejecuta continuamente)
 	mlx_loop_hook(game->mlx_ptr, render_loop, game);
-
 	// Iniciar el loop principal de MLX
 	mlx_loop(game->mlx_ptr);
 }
