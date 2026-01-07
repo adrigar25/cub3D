@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/07 16:12:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/07 16:40:11 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ static int	is_valid_neighbor(char **map, int x, int y, int dx, int dy)
 		return (0);
 	if (ft_strchr(" \0", map[new_x][new_y]))
 		return (0);
-	if (ft_strchr("1", map[new_x][new_y]))
-		return (1);
-	return (0);
+	return (1);
 }
 
 int	check_walls(char **map)

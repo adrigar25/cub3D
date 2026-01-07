@@ -17,6 +17,7 @@ int	check_empty_rows(char **map, int *max_len)
 	int	i;
 	int	j;
 	int	all_spaces;
+	int	len;
 
 	i = -1;
 	*max_len = 0;
@@ -26,16 +27,16 @@ int	check_empty_rows(char **map, int *max_len)
 		all_spaces = 1;
 		while (map[i][++j])
 		{
-			if (ft_strchr(" \t", map[i][j]) == NULL)
-			{
+			if (ft_strchr(" \t\n", map[i][j]) == NULL)
 				all_spaces = 0;
-				break ;
-			}
 		}
 		if (all_spaces)
 			return (-1);
-		if (j > *max_len)
-			*max_len = j;
+		len = (int)ft_strlen(map[i]);
+		if (len > 0 && map[i][len - 1] == '\n')
+			len--;
+		if (len > *max_len)
+			*max_len = len;
 	}
 	return (0);
 }
@@ -55,7 +56,7 @@ int	check_empty_columns(char **map, int max_len)
 		{
 			if (j >= (int)ft_strlen(map[i]))
 				continue ;
-			if (ft_strchr(" \t", map[i][j]) == NULL)
+			if (ft_strchr(" \t\n", map[i][j]) == NULL)
 			{
 				all_spaces = 0;
 				break ;
