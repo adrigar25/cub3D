@@ -6,69 +6,76 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2025/12/19 13:48:25 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/07 16:10:58 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-static void	load_texture_image(t_game *game_data, t_img *texture, char *path)
+static int	is_texture_line(char *line)
 {
-	texture->img = mlx_xpm_file_to_image(game_data->mlx_ptr, path,
-			&texture->width, &texture->height);
-	if (texture->img)
+	return (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3)
+		|| !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3));
+}
+
+static int	load_texture_image(t_game *game_data, char *path, char *dir)
+{
+	t_img	*texture;
+
+	if (dir == NULL || path == NULL)
+		return (-1);
+	texture = NULL;
+	if (ft_strncmp(dir, "NO", 2) == 0)
+		texture = &game_data->textures.no;
+	else if (ft_strncmp(dir, "SO", 2) == 0)
+		texture = &game_data->textures.so;
+	else if (ft_strncmp(dir, "WE", 2) == 0)
+		texture = &game_data->textures.we;
+	else if (ft_strncmp(dir, "EA", 2) == 0)
+		texture = &game_data->textures.ea;
+	if (texture && texture->img == NULL)
 	{
-		texture->addr = mlx_get_data_addr(texture->img, &texture->bpp,
-				&texture->line_len, &texture->endian);
+		printf("Loading texture %s from path: %s\n", dir, path);
+		texture->img = mlx_xpm_file_to_image(game_data->mlx_ptr, path,
+				&texture->width, &texture->height);
+		if (texture->img)
+			texture->addr = mlx_get_data_addr(texture->img, &texture->bpp,
+					&texture->line_len, &texture->endian);
 	}
+	else if (texture && texture->img != NULL)
+		return (ft_fprintf(2, "\033[0;31mTexture %s is duplicated\n", dir), -1);
+	free(path);
+	free(dir);
+	return (0);
 }
 
 static int	get_data(t_game *game_data, int fd)
 {
 	char	*line;
+	int		last;
 	char	*path;
-	int		lastLine;
 
-	lastLine = 0;
+	last = 0;
 	line = ft_get_next_line(fd);
 	while (line)
 	{
-		lastLine = (line[ft_strlen(line) - 1] == '\n');
-		if (ft_strncmp(line, "NO ", 3) == 0)
+		last = (line[ft_strlen(line) - 1] == '\n');
+		if (is_texture_line(line))
 		{
-			path = ft_substr(line, 3, ft_strlen(line) - 3 - lastLine);
-			load_texture_image(game_data, &game_data->textures.no, path);
-			free(path);
+			path = ft_substr(line, 3, ft_strlen(line) - 3 - last);
+			if (load_texture_image(game_data, path, ft_substr(line, 0, 2)) ==
+				-1)
+				return (-1);
 		}
-		else if (ft_strncmp(line, "SO ", 3) == 0)
-		{
-			path = ft_substr(line, 3, ft_strlen(line) - 3 - lastLine);
-			load_texture_image(game_data, &game_data->textures.so, path);
-			free(path);
-		}
-		else if (ft_strncmp(line, "WE ", 3) == 0)
-		{
-			path = ft_substr(line, 3, ft_strlen(line) - 3 - lastLine);
-			load_texture_image(game_data, &game_data->textures.we, path);
-			free(path);
-		}
-		else if (ft_strncmp(line, "EA ", 3) == 0)
-		{
-			path = ft_substr(line, 3, ft_strlen(line) - 3 - lastLine);
-			load_texture_image(game_data, &game_data->textures.ea, path);
-			free(path);
-		}
-		else if (ft_strncmp(line, "F ", 2) == 0)
+		else if (ft_strncmp(line, "F ", 2) == 0
+			&& game_data->textures.color_floor == -1)
 			game_data->textures.color_floor = parse_rgb(line);
-		else if (ft_strncmp(line, "C ", 2) == 0)
+		else if (ft_strncmp(line, "C ", 2) == 0
+			&& game_data->textures.color_ceiling == -1)
 			game_data->textures.color_ceiling = parse_rgb(line);
 		free(line);
 		line = ft_get_next_line(fd);
 	}
-	if (!game_data->textures.no.img || !game_data->textures.so.img
-		|| !game_data->textures.we.img || !game_data->textures.ea.img)
-		return (ft_error("init_textures",
-				(char *[]){"Failed to create textures", NULL}), -1);
 	return (0);
 }
 

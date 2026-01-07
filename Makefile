@@ -6,14 +6,14 @@
 #    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2025/12/18 19:40:29 by agarcia          ###   ########.fr        #
+#    Updated: 2026/01/07 15:55:41 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= cub3D
 
 CC			:= cc
-CFLAGS		:= -Wall -Wextra -Werror
+CFLAGS		:= -Wall -Wextra -Werror -lm
 
 SRC_DIR		:= src
 DATA_DIR	:= $(SRC_DIR)/data
@@ -23,18 +23,23 @@ UTILS_DIR	:= $(SRC_DIR)/utils
 SRCS_UTILS	:=	${UTILS_DIR}/game/clear_game.c \
 				${UTILS_DIR}/game/game_loop.c \
 				${UTILS_DIR}/game/player_movement.c \
-				${UTILS_DIR}/parse_rgb.c \
 				${UTILS_DIR}/print/ft_error.c \
 				${UTILS_DIR}/print/ft_putstr_fd_color.c \
 				${UTILS_DIR}/print/ft_putcolor.c \
 				$(UTILS_DIR)/map/map_parser.c \
  				$(UTILS_DIR)/map/map_validation.c \
  				$(UTILS_DIR)/map/map_memory.c \
+				$(UTILS_DIR)/map/check_walls.c \
+				$(UTILS_DIR)/map/check_empty.c \
+				$(UTILS_DIR)/map/check_characters.c \
+				$(UTILS_DIR)/map/check_player.c \
 				$(UTILS_DIR)/data/init_data.c \
 				$(UTILS_DIR)/data/read_data.c \
+				$(UTILS_DIR)/data/check_data.c \
 				$(UTILS_DIR)/mlx/init_mlx.c \
 				$(UTILS_DIR)/mlx/image_buffer.c \
 				$(UTILS_DIR)/color/color_utils.c \
+				$(UTILS_DIR)/color/parse_rgb.c \
 				$(UTILS_DIR)/player/player_utils.c \
 				$(UTILS_DIR)/raycast/dda.c \
 				$(UTILS_DIR)/raycast/draw_column.c \

@@ -6,13 +6,13 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/19 13:48:18 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/20 18:01:22 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-int	is_valid_map_line(char *line)
+static int	is_valid_map_line(char *line)
 {
 	int	j;
 

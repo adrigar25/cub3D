@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 01:03:21 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/19 13:29:31 by agarcia          ###   ########.fr       */
+/*   Updated: 2025/12/20 18:23:36 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,12 @@ int	init_mlx(t_game *game)
 			"Cub3D");
 	if (!game->win_ptr)
 	{
-		free(game->mlx_ptr);
 		return (ft_error("init_mlx", (char *[]){"Failed to create window",
 				NULL}));
 	}
 	if (!init_image_buffer(game))
 	{
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-		free(game->mlx_ptr);
 		return (ft_error("init_mlx", (char *[]){"Failed to create image buffer",
 				NULL}));
 	}

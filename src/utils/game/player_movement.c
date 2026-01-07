@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 23:00:00 by adriescr          #+#    #+#             */
-/*   Updated: 2025/12/18 18:40:02 by adriescr         ###   ########.fr       */
+/*   Updated: 2025/12/20 18:00:18 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,14 @@ int	is_valid_position(t_game *game, double x, double y)
 
 	map_x = (int)x;
 	map_y = (int)y;
-
 	// Comprobar límites del mapa
 	if (map_y < 0 || map_x < 0)
 		return (0);
 	if (!game->map[map_y] || !game->map[map_y][map_x])
 		return (0);
-
 	// Comprobar si es una pared
 	if (game->map[map_y][map_x] == '1')
 		return (0);
-
 	return (1);
 }
 
@@ -51,7 +48,6 @@ void	move_forward(t_game *game)
 
 	new_x = game->player.pos_x + game->player.dir_x * MOVE_SPEED;
 	new_y = game->player.pos_y + game->player.dir_y * MOVE_SPEED;
-
 	if (is_valid_position(game, new_x, game->player.pos_y))
 		game->player.pos_x = new_x;
 	if (is_valid_position(game, game->player.pos_x, new_y))
@@ -70,7 +66,6 @@ void	move_backward(t_game *game)
 
 	new_x = game->player.pos_x - game->player.dir_x * MOVE_SPEED;
 	new_y = game->player.pos_y - game->player.dir_y * MOVE_SPEED;
-
 	if (is_valid_position(game, new_x, game->player.pos_y))
 		game->player.pos_x = new_x;
 	if (is_valid_position(game, game->player.pos_x, new_y))
@@ -80,7 +75,8 @@ void	move_backward(t_game *game)
 /**
  * ENGLISH: Strafe left (move perpendicular to facing direction, to the left).
  *
- * SPANISH: Moverse hacia la izquierda (perpendicular a la dirección, a la izquierda).
+ * SPANISH: Moverse hacia la izquierda (perpendicular a la dirección,
+	a la izquierda).
  */
 void	move_left(t_game *game)
 {
@@ -90,7 +86,6 @@ void	move_left(t_game *game)
 	// El vector perpendicular izquierdo es (-dir_y, dir_x)
 	new_x = game->player.pos_x - game->player.dir_y * MOVE_SPEED;
 	new_y = game->player.pos_y + game->player.dir_x * MOVE_SPEED;
-
 	if (is_valid_position(game, new_x, game->player.pos_y))
 		game->player.pos_x = new_x;
 	if (is_valid_position(game, game->player.pos_x, new_y))
@@ -100,7 +95,8 @@ void	move_left(t_game *game)
 /**
  * ENGLISH: Strafe right (move perpendicular to facing direction, to the right).
  *
- * SPANISH: Moverse hacia la derecha (perpendicular a la dirección, a la derecha).
+ * SPANISH: Moverse hacia la derecha (perpendicular a la dirección,
+	a la derecha).
  */
 void	move_right(t_game *game)
 {
@@ -110,7 +106,6 @@ void	move_right(t_game *game)
 	// El vector perpendicular derecho es (dir_y, -dir_x)
 	new_x = game->player.pos_x + game->player.dir_y * MOVE_SPEED;
 	new_y = game->player.pos_y - game->player.dir_x * MOVE_SPEED;
-
 	if (is_valid_position(game, new_x, game->player.pos_y))
 		game->player.pos_x = new_x;
 	if (is_valid_position(game, game->player.pos_x, new_y))
@@ -130,14 +125,13 @@ void	rotate_left(t_game *game)
 	old_dir_x = game->player.dir_x;
 	game->player.dir_x = game->player.dir_x * cos(ROT_SPEED)
 		- game->player.dir_y * sin(ROT_SPEED);
-	game->player.dir_y = old_dir_x * sin(ROT_SPEED)
-		+ game->player.dir_y * cos(ROT_SPEED);
-
+	game->player.dir_y = old_dir_x * sin(ROT_SPEED) + game->player.dir_y
+		* cos(ROT_SPEED);
 	old_plane_x = game->player.plane_x;
 	game->player.plane_x = game->player.plane_x * cos(ROT_SPEED)
 		- game->player.plane_y * sin(ROT_SPEED);
-	game->player.plane_y = old_plane_x * sin(ROT_SPEED)
-		+ game->player.plane_y * cos(ROT_SPEED);
+	game->player.plane_y = old_plane_x * sin(ROT_SPEED) + game->player.plane_y
+		* cos(ROT_SPEED);
 }
 
 /**
@@ -153,12 +147,11 @@ void	rotate_right(t_game *game)
 	old_dir_x = game->player.dir_x;
 	game->player.dir_x = game->player.dir_x * cos(-ROT_SPEED)
 		- game->player.dir_y * sin(-ROT_SPEED);
-	game->player.dir_y = old_dir_x * sin(-ROT_SPEED)
-		+ game->player.dir_y * cos(-ROT_SPEED);
-
+	game->player.dir_y = old_dir_x * sin(-ROT_SPEED) + game->player.dir_y
+		* cos(-ROT_SPEED);
 	old_plane_x = game->player.plane_x;
 	game->player.plane_x = game->player.plane_x * cos(-ROT_SPEED)
 		- game->player.plane_y * sin(-ROT_SPEED);
-	game->player.plane_y = old_plane_x * sin(-ROT_SPEED)
-		+ game->player.plane_y * cos(-ROT_SPEED);
+	game->player.plane_y = old_plane_x * sin(-ROT_SPEED) + game->player.plane_y
+		* cos(-ROT_SPEED);
 }

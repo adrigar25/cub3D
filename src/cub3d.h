@@ -50,11 +50,11 @@ int				is_valid_position(t_game *game, double x, double y);
 /*                               WINDOW DIMENSIONS                            */
 /* ************************************************************************** */
 # ifndef WINDOW_WIDTH
-#  define WINDOW_WIDTH 1700
+#  define WINDOW_WIDTH 1920
 # endif
 
 # ifndef WINDOW_HEIGHT
-#  define WINDOW_HEIGHT 980
+#  define WINDOW_HEIGHT 1080
 # endif
 
 /* ************************************************************************** */
@@ -193,6 +193,14 @@ typedef struct s_game
 int				read_map(char ***map, int fd);
 void			free_map(char **map);
 int				check_map(char **map);
+int				check_walls(char **map);
+int				check_empty_rows(char **map, int *max_len);
+int				check_empty_columns(char **map, int max_len);
+int				check_valid_characters(char **map);
+int				check_player(char **map);
+
+// Data utilities
+int				check_data(t_game *game_data);
 
 // Player utilities
 int				get_player_position(t_game *game);
@@ -214,6 +222,8 @@ void			perpendicular_wall_distance(t_raycast *ray, t_game *game);
 void			draw_column(t_game *game, int x);
 
 // Utils
+int				rgb_to_hex(int r, int g, int b);
+int				check_rgb_format(char *values);
 int				parse_rgb(char *line);
 void			clear_game(t_game *game);
 
