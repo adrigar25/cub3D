@@ -6,17 +6,53 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/07 16:40:11 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/11 18:30:15 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-static int	is_valid_neighbor(char **map, int x, int y, int dx, int dy)
+static void	get_direction(int i, int *dx, int *dy)
+{
+	if (i == 0)
+		*dx = 1;
+	else if (i == 1)
+		*dx = -1;
+	else if (i == 2)
+		*dy = 1;
+	else if (i == 3)
+		*dy = -1;
+	else if (i == 4)
+	{
+		*dx = 1;
+		*dy = 1;
+	}
+	else if (i == 5)
+	{
+		*dx = 1;
+		*dy = -1;
+	}
+	else if (i == 6)
+	{
+		*dx = -1;
+		*dy = 1;
+	}
+	else if (i == 7)
+	{
+		*dx = -1;
+		*dy = -1;
+	}
+}
+static int	is_valid_neighbor(char **map, int x, int y, int i)
 {
 	int	new_x;
 	int	new_y;
+	int	dx;
+	int	dy;
 
+	dx = 0;
+	dy = 0;
+	get_direction(i, &dx, &dy);
 	new_x = x + dx;
 	new_y = y + dy;
 	if (new_x < 0)
@@ -34,11 +70,9 @@ static int	is_valid_neighbor(char **map, int x, int y, int dx, int dy)
 
 int	check_walls(char **map)
 {
-	static int	dir[8][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1},
-			{-1, 1}, {-1, -1}};
-	int			i;
-	int			x;
-	int			y;
+	int	i;
+	int	x;
+	int	y;
 
 	x = -1;
 	while (map[++x])
@@ -50,7 +84,7 @@ int	check_walls(char **map)
 				continue ;
 			i = -1;
 			while (++i < 8)
-				if (!is_valid_neighbor(map, x, y, dir[i][0], dir[i][1]))
+				if (!is_valid_neighbor(map, x, y, i))
 					return (-1);
 		}
 	}

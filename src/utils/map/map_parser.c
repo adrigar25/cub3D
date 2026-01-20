@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/20 18:01:22 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/11 17:41:46 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,49 @@ static int	is_valid_map_line(char *line)
 	return (1);
 }
 
+static int	alloc_map_line(char ***map, int i, char *line)
+{
+	char	**temp;
+
+	temp = ft_realloc(*map, sizeof(char *) * i, sizeof(char *) * (i + 2));
+	if (!temp)
+		return (free(line), free_map(*map), ft_error("read_map",
+				(char *[]){"Memory allocation failed", NULL}), -1);
+	*map = temp;
+	(*map)[i] = ft_strtrim(line, '\n');
+	if (!(*map)[i])
+		return (free(line), free_map(*map), ft_error("read_map",
+				(char *[]){"Memory allocation failed", NULL}), -1);
+	return (0);
+}
+
+static int	process_line(char ***map, int *i, int *map_started)
+{
+	if ((*map)[*i][0] == '\0')
+	{
+		if (!*map_started)
+			free((*map)[*i]);
+		else
+			(*i)++;
+	}
+	else if (is_valid_map_line((*map)[*i]))
+	{
+		*map_started = 1;
+		(*i)++;
+	}
+	else
+	{
+		if (*map_started)
+			return ((*i)++, 0);
+		free((*map)[*i]);
+	}
+	return (1);
+}
+
 int	read_map(char ***map, int fd)
 {
 	int		i;
 	char	*line;
-	char	**temp;
 	int		map_started;
 
 	i = 0;
@@ -39,56 +77,16 @@ int	read_map(char ***map, int fd)
 	line = ft_get_next_line(fd);
 	while (line)
 	{
-		temp = ft_realloc(*map, sizeof(char *) * i, sizeof(char *) * (i + 2));
-		if (!temp)
-			return (free(line), free_map(*map), ft_error("read_map",
-					(char *[]){"Memory allocation failed", NULL}), -1);
-		*map = temp;
-		(*map)[i] = ft_strtrim(line, '\n');
-		if (!(*map)[i])
-			return (free(line), free_map(*map), ft_error("read_map",
-					(char *[]){"Memory allocation failed", NULL}), -1);
+		if (alloc_map_line(map, i, line) == -1)
+			return (-1);
 		free(line);
-		if ((*map)[i][0] == '\0')
-		{
-			if (!map_started)
-			{
-				free((*map)[i]);
-				line = ft_get_next_line(fd);
-				continue ;
-			}
-			else
-			{
-				line = ft_get_next_line(fd);
-				i++;
-				continue ;
-			}
-		}
-		if (is_valid_map_line((*map)[i]))
-		{
-			map_started = 1;
-			line = ft_get_next_line(fd);
-			i++;
-		}
-		else
-		{
-			if (!map_started)
-			{
-				free((*map)[i]);
-				line = ft_get_next_line(fd);
-				continue ;
-			}
-			else
-			{
-				i++;
-				break ;
-			}
-		}
+		if (!process_line(map, &i, &map_started))
+			break ;
+		line = ft_get_next_line(fd);
 	}
 	if (*map)
 		(*map)[i] = NULL;
 	if (i > 256)
-		return (free_map(*map), ft_error("read_map", (char *[]){"Map too large",
-				NULL}), -1);
+		return (ft_error("read_map", (char *[]){"Map too large", NULL}), -1);
 	return (0);
 }

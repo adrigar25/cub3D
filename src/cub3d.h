@@ -172,10 +172,14 @@ typedef struct s_raycast
 	int			draw_start;
 	int			draw_end;
 	// Texture calculations
-	double wall_x;  // Exact position where wall was hit
-	int tex_x;      // X coordinate on texture
-	double step;    // How much to increase texture coordinate per screen pixel
-	double tex_pos; // Current texture position
+	// Exact position where wall was hit
+	double		wall_x;
+	// X coordinate on texture
+	int			tex_x;
+	// How much to increase texture coordinate per screen pixel
+	double		step;
+	// Current texture position
+	double		tex_pos;
 }				t_raycast;
 typedef struct s_game
 {
@@ -244,7 +248,11 @@ int				get_texture_color(t_img *texture, int x, int y);
 
 // Game loop functions
 void			start_game_loop(t_game *game);
+
+// Key handling functions
 void			init_keys(t_game *game);
+int				handle_keypress(int keycode, t_game *game);
+int				handle_keyrelease(int keycode, t_game *game);
 void			update_movement(t_game *game);
 
 // Print
