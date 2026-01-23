@@ -140,8 +140,8 @@ typedef struct s_texture
 	t_img		so;
 	t_img		we;
 	t_img		ea;
-	int			color_floor;
-	int			color_ceiling;
+	int			color_f;
+	int			color_c;
 }				t_texture;
 
 typedef struct s_raycast

@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:31:46 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/07 18:44:18 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/23 17:11:11 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,29 @@
 
 void	init_step_and_side_dist(t_game *game)
 {
-	t_raycast	*ray;
-
-	ray = &game->raycast;
-	if (ray->ray_dir_x < 0)
+	if (game->raycast.ray_dir_x < 0)
 	{
-		ray->step_x = -1;
-		ray->side_dist_x = (game->player.pos_x - ray->map_x)
-			* ray->delta_dist_x;
+		game->raycast.step_x = -1;
+		game->raycast.side_dist_x = (game->player.pos_x - game->raycast.map_x)
+			* game->raycast.delta_dist_x;
 	}
 	else
 	{
-		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1.0 - game->player.pos_x)
-			* ray->delta_dist_x;
+		game->raycast.step_x = 1;
+		game->raycast.side_dist_x = (game->raycast.map_x + 1.0
+				- game->player.pos_x) * game->raycast.delta_dist_x;
 	}
-	if (ray->ray_dir_y < 0)
+	if (game->raycast.ray_dir_y < 0)
 	{
-		ray->step_y = -1;
-		ray->side_dist_y = (game->player.pos_y - ray->map_y)
-			* ray->delta_dist_y;
+		game->raycast.step_y = -1;
+		game->raycast.side_dist_y = (game->player.pos_y - game->raycast.map_y)
+			* game->raycast.delta_dist_y;
 	}
 	else
 	{
-		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1.0 - game->player.pos_y)
-			* ray->delta_dist_y;
+		game->raycast.step_y = 1;
+		game->raycast.side_dist_y = (game->raycast.map_y + 1.0
+				- game->player.pos_y) * game->raycast.delta_dist_y;
 	}
 }
 

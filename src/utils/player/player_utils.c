@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 18:25:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/07 15:34:08 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/23 17:04:43 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ int	get_player_position(t_game *game)
 		j = -1;
 		while (game->map[i][++j])
 		{
-			if (game->map[i][j] == 'N' || game->map[i][j] == 'S'
-				|| game->map[i][j] == 'E' || game->map[i][j] == 'W')
+			if (ft_strchr("NSEW", game->map[i][j]))
 			{
 				game->player.pos_x = j + 0.5;
 				game->player.pos_y = i + 0.5;

@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/11 17:41:46 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/23 16:22:56 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	alloc_map_line(char ***map, int i, char *line)
 		return (free(line), free_map(*map), ft_error("read_map",
 				(char *[]){"Memory allocation failed", NULL}), -1);
 	*map = temp;
-	(*map)[i] = ft_strtrim(line, '\n');
+	(*map)[i] = ft_strtrim(line, "\n");
 	if (!(*map)[i])
 		return (free(line), free_map(*map), ft_error("read_map",
 				(char *[]){"Memory allocation failed", NULL}), -1);

@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:57:57 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/11 18:29:12 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/23 17:07:57 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,7 @@ void	draw_column(t_game *game, int x)
 	calculate_texture_coords(game, texture);
 	y = 0;
 	while (y < game->raycast.draw_start)
-	{
-		img_pixel_put(&game->img, x, y, game->textures.color_ceiling);
-		y++;
-	}
+		img_pixel_put(&game->img, x, y++, game->textures.color_c);
 	y = game->raycast.draw_start;
 	while (y <= game->raycast.draw_end)
 	{
@@ -94,13 +91,9 @@ void	draw_column(t_game *game, int x)
 		color = get_texture_color(texture, game->raycast.tex_x, tex_y);
 		if (game->raycast.side == 1)
 			color = (color >> 1) & 8355711;
-		img_pixel_put(&game->img, x, y, color);
-		y++;
-		y = game->raycast.draw_end + 1;
-		while (y < WINDOW_HEIGHT)
-		{
-			img_pixel_put(&game->img, x, y, game->textures.color_floor);
-			y++;
-		}
+		img_pixel_put(&game->img, x, y++, color);
 	}
+	y = game->raycast.draw_end + 1;
+	while (y < WINDOW_HEIGHT)
+		img_pixel_put(&game->img, x, y++, game->textures.color_f);
 }
