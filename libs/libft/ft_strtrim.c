@@ -3,58 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 00:45:00 by agarcia           #+#    #+#             */
-/*   Updated: 2025/09/22 12:54:49 by adriescr         ###   ########.fr       */
+/*   Updated: 2026/01/23 15:57:27 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /**
- * ENGLISH: Trims all occurrences of the specified character from the start
+ * ENGLISH: Trims all occurrences of characters in set from the start
  *          and end of the given string.
  *
- * SPANISH: Elimina todas las ocurrencias del carácter especificado
+ * SPANISH: Elimina todas las ocurrencias de los caracteres en set
  *          del inicio y el final de la cadena dada.
  *
- * @param str  The string to be trimmed. /
+ * @param s1   The string to be trimmed. /
  *             La cadena a ser recortada.
  *
- * @param c    The character to trim from the string. /
- *             El carácter a eliminar de la cadena.
+ * @param set  The set of characters to trim from the string. /
+ *             El conjunto de caracteres a eliminar de la cadena.
  *
  * @returns A pointer to the newly allocated trimmed string. /
  *          Un puntero a la nueva cadena recortada asignada.
- * @returns Returns NULL if memory allocation fails or if str is NULL. /
- *          Devuelve NULL si la asignación de memoria falla o si str es NULL.
+ * @returns Returns NULL if memory allocation fails or if s1 is NULL. /
+ *          Devuelve NULL si la asignación de memoria falla o si s1 es NULL.
  */
-char	*ft_strtrim(const char *str, char c)
+
+static int	ft_isinset(char c, char const *set)
 {
-	int		array[4];
+	int	i;
+
+	i = 0;
+	while (set[i])
+	{
+		if (set[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	int		start;
+	int		end;
+	int		len;
 	char	*trimmed;
 
-	if (!str)
+	if (!s1 || !set)
 		return (NULL);
-	array[0] = 0;
-	array[1] = ft_strlen(str) - 1;
-	while (str[array[0]] && str[array[0]] == c)
-		array[0]++;
-	while (array[1] >= array[0] && str[array[1]] == c)
-		array[1]--;
-	array[2] = array[1] - array[0] + 1;
-	if (array[2] <= 0)
+	start = 0;
+	end = ft_strlen(s1) - 1;
+	while (s1[start] && ft_isinset(s1[start], set))
+		start++;
+	while (end >= start && ft_isinset(s1[end], set))
+		end--;
+	len = end - start + 1;
+	if (len <= 0)
 		return (ft_strdup(""));
-	trimmed = malloc((array[2] + 1) * sizeof(char));
+	trimmed = malloc((len + 1) * sizeof(char));
 	if (!trimmed)
 		return (NULL);
-	array[3] = 0;
-	while (array[3] < array[2])
-	{
-		trimmed[array[3]] = str[array[0] + array[3]];
-		array[3]++;
-	}
-	trimmed[array[3]] = '\0';
+	ft_strlcpy(trimmed, s1 + start, len + 1);
 	return (trimmed);
 }

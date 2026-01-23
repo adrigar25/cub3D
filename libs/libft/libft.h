@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 13:22:52 by adriescr          #+#    #+#             */
-/*   Updated: 2025/12/18 00:49:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/23 15:58:20 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_strstr(const char *haystack, const char *needle);
 char			*ft_strcpy(char *dest, const char *src);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);
-char			*ft_strtrim(const char *str, char c);
+char			*ft_strtrim(const char *s1, const char *set);
 void			ft_skip_whitespace(const char *cmd, int *i);
 int				ft_isspace(int c);
 int				ft_isalnum(int c);
