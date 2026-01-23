@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 18:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/07 15:50:39 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/23 15:10:02 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,20 @@ int	check_rgb_format(char *values)
 
 	i = 0;
 	comma_count = 0;
-	while (values[i])
+	while (values[i] && values[i] != '\n')
 	{
+		if (values[i] == ' ' || values[i] == '\t')
+		{
+			i++;
+			while (values[i] && (values[i] == ' ' || values[i] == '\t'))
+				i++;
+			if (values[i] && values[i] != '\n')
+				return (-1);
+			break ;
+		}
 		if (values[i] == ',')
 			comma_count++;
-		else if (!ft_is_digit(values[i]) && !ft_isspace(values[i]))
+		else if (!ft_is_digit(values[i]))
 			return (-1);
 		i++;
 	}
