@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/23 17:14:08 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 17:35:12 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ static void	get_direction(int i, int *dx, int *dy)
 
 static int	is_valid_neighbor(char **map, int x, int y, int i)
 {
-	int	new_x;
-	int	new_y;
-	int	dx;
-	int	dy;
+	static int	directions[8][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1},
+			{1, -1}, {-1, 1}, {-1, -1}};
+	int			new_x;
+	int			new_y;
+	int			dx;
+	int			dy;
 
 	dx = 0;
 	dy = 0;
@@ -61,7 +63,7 @@ int	check_walls(char **map)
 		y = -1;
 		while (map[x][++y])
 		{
-			if (!(map[x][y] == '0' || ft_strchr("NSEW", map[x][y])))
+			if (!(map[x][y] == '0' || is_player_char(map[x][y])))
 				continue ;
 			i = 0;
 			while (i < 8)

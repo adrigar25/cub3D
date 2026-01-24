@@ -6,11 +6,16 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 18:25:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 13:17:41 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 17:35:02 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+
+int	is_player_char(char c)
+{
+	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
+}
 
 static void	set_north_south(t_player *player, char orientation)
 {
@@ -56,25 +61,20 @@ int	get_player_position(t_game *game)
 {
 	int	i;
 	int	j;
-	int	player_count;
 
 	i = -1;
-	player_count = 0;
 	while (game->map[++i])
 	{
 		j = -1;
 		while (game->map[i][++j])
 		{
-			if (ft_strchr("NSEW", game->map[i][j]))
+			if (is_player_char(game->map[i][j]))
 			{
 				game->player.pos_x = j + 0.5;
 				game->player.pos_y = i + 0.5;
 				set_player_direction(&game->player, game->map[i][j]);
-				player_count++;
 			}
 		}
 	}
-	if (player_count != 1)
-		return (ft_fprintf(2, "Map must have exactly one player position"), -1);
 	return (0);
 }
