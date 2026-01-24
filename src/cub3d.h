@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:50:52 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 16:23:31 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 17:34:42 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,10 @@
 /*                               CONSTANTS                                    */
 /* ************************************************************************** */
 
+# define SHADOW_MASK 0x7F7F7F
+
 // Movement constants
-# define MOVE_SPEED 0.05
+# define MOVE_SPEED 0.07
 # define ROT_SPEED 0.03
 
 // Texture constants
@@ -227,6 +229,7 @@ int				check_player(char **map);
 int				check_data(t_game *game_data);
 
 // Player utilities
+int				is_player_char(char c);
 int				get_player_position(t_game *game);
 
 // Initialization
@@ -280,8 +283,5 @@ void			update_movement(t_game *game);
 long			ft_error(const char *function, char **str);
 long			ft_putcolor(int fd, int color);
 long			ft_putstr_fd_color(const char *str, int fd, int color);
-
-// Color utilities
-int				rgb_to_hex(int r, int g, int b);
 
 #endif // CUB3D_H
