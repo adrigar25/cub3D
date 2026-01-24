@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 16:32:54 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 18:20:18 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,15 @@ static int	process_line(char ***map, int *i, char *line, int *started)
 	return (0);
 }
 
+static int	validate_map_size(char ***map, int i)
+{
+	if (i > 256)
+		return (ft_fprintf(2, RED "Error: Map too large\n" RESET), -1);
+	if (*map)
+		(*map)[i] = NULL;
+	return (0);
+}
+
 int	read_map(char ***map, int fd)
 {
 	char	*line;
@@ -74,9 +83,5 @@ int	read_map(char ***map, int fd)
 		if (result == -1)
 			break ;
 	}
-	if (*map)
-		(*map)[i] = NULL;
-	if (i > 256)
-		return (ft_fprintf(2, RED "Error: Map too large\n" RESET), -1);
-	return (0);
+	return (validate_map_size(map, i));
 }
