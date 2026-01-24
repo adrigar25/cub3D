@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:41:35 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 12:58:51 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 16:50:37 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,14 @@ int	cub3d(char *file)
 
 int	main(int argc, char **argv)
 {
-	if (argc != 2 || !argv || !argv[0])
+	if (argc != 2)
 	{
 		ft_fprintf(2, "Usage: %s <map_file.cub>\n", argv[0]);
 		return (-1);
 	}
 	if (!valid_extension(argv[1], ".cub"))
 	{
-		ft_fprintf(2,
-			RED "Error: Map file must have a .cub extension" RESET "\n");
+		ft_fprintf(2, RED "Error: Map file must have a .cub extension\n" RESET);
 		return (-1);
 	}
 	return (cub3d(argv[1]));

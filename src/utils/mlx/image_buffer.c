@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:30:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/24 13:15:36 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 17:35:51 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ int	get_texture_color(t_img *texture, int x, int y)
 {
 	char	*dst;
 
-	if (!texture || !texture->addr)
-		return (0x000000);
 	if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
 		return (0x000000);
 	dst = texture->addr + (y * texture->line_len + x * (texture->bpp / 8));

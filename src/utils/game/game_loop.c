@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:45:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/11 18:23:00 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 17:12:49 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static int	handle_close(t_game *game)
 {
 	clear_game(game);
 	exit(0);
-	return (0);
 }
 
 /**
