@@ -6,13 +6,13 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:07:37 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/24 16:23:03 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 18:01:44 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-static void	free_map(char **map)
+void	free_map(char **map)
 {
 	int	i;
 

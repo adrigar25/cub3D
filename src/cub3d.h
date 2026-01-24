@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:50:52 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 17:34:42 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 18:01:45 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,6 +254,7 @@ int				rgb_to_hex(int r, int g, int b);
 int				check_rgb_format(char *values);
 int				parse_rgb(char *line);
 void			clear_game(t_game *game);
+void			free_map(char **map);
 
 // Player movement functions
 void			move_forward(t_game *game);
