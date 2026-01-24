@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:30:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/24 17:35:51 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 18:20:19 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	init_image_buffer(t_game *game)
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bpp,
 			&game->img.line_len, &game->img.endian);
 	if (!game->img.addr)
-		return (mlx_destroy_image(game->mlx_ptr, game->img.img), 0);
+		return (0);
 	game->img.width = WIN_W;
 	game->img.height = WIN_H;
 	return (1);
