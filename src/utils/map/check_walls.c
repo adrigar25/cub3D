@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 17:35:12 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 17:44:02 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,10 @@ static void	get_direction(int i, int *dx, int *dy)
 
 static int	is_valid_neighbor(char **map, int x, int y, int i)
 {
-	static int	directions[8][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1},
-			{1, -1}, {-1, 1}, {-1, -1}};
-	int			new_x;
-	int			new_y;
-	int			dx;
-	int			dy;
+	int	new_x;
+	int	new_y;
+	int	dx;
+	int	dy;
 
 	dx = 0;
 	dy = 0;
