@@ -6,31 +6,11 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:57:57 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/24 13:16:18 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 17:25:51 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
-
-int	ft_draw_start(int line_height)
-{
-	int	draw_start;
-
-	draw_start = -line_height / 2 + WIN_H / 2;
-	if (draw_start < 0)
-		draw_start = 0;
-	return (draw_start);
-}
-
-int	ft_draw_end(int line_height)
-{
-	int	draw_end;
-
-	draw_end = line_height / 2 + WIN_H / 2;
-	if (draw_end >= WIN_H)
-		draw_end = WIN_H - 1;
-	return (draw_end);
-}
 
 static void	calculate_texture_coords(t_game *game, t_img *texture)
 {
@@ -76,8 +56,6 @@ void	draw_column(t_game *game, int x)
 	int		color;
 	t_img	*texture;
 
-	game->raycast.draw_start = ft_draw_start(game->raycast.line_height);
-	game->raycast.draw_end = ft_draw_end(game->raycast.line_height);
 	texture = get_wall_texture(game);
 	calculate_texture_coords(game, texture);
 	y = 0;
@@ -90,7 +68,7 @@ void	draw_column(t_game *game, int x)
 		game->raycast.tex_pos += game->raycast.step;
 		color = get_texture_color(texture, game->raycast.tex_x, tex_y);
 		if (game->raycast.side == 1)
-			color = (color >> 1) & 8355711;
+			color = (color >> 1) & SHADOW_MASK;
 		img_pixel_put(&game->img, x, y++, color);
 	}
 	y = game->raycast.draw_end + 1;
