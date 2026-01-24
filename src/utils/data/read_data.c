@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/24 17:38:37 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 17:55:22 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	process_line(t_game *game_data, char *line)
 	key = ft_substr(temp, 0, 2);
 	value = ft_strtrim(line + 2, " \t\n");
 	if (!key || !value)
-		return (0);
+		return (free(key), free(value), free(temp), 0);
 	if (key[0] == 'F' && game_data->textures.color_f == -1)
 		game_data->textures.color_f = parse_rgb(value);
 	else if (key[0] == 'C' && game_data->textures.color_c == -1)
