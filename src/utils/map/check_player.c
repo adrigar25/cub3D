@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:15:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/07 15:56:26 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 13:35:45 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,13 @@ int	check_player(char **map)
 	i = -1;
 	while (map[++i])
 	{
-		j = -1;
-		while (map[i][++j])
-		{
-			if (ft_strchr("NSEW", map[i][j]))
-				player_count++;
-		}
+		j = 0;
+		while (map[i][j] && player_count <= 1)
+			player_count += ft_strchr("NSEW", map[i][j++]) != NULL;
 	}
 	if (player_count == 0)
-		return (ft_error("check_player", (char *[]){"No player found", NULL}),
-			-1);
+		return (ft_fprintf(2, RED "No player found" RESET "\n"), -1);
 	if (player_count > 1)
-		return (ft_error("check_player", (char *[]){"Multiple players found",
-				NULL}), -1);
+		return (ft_fprintf(2, RED "Multiple players found" RESET "\n"), -1);
 	return (0);
 }

@@ -6,26 +6,48 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 14:50:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/23 13:45:58 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 15:34:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
+static int	check_texture_file(char *path, char *direction)
+{
+	if (access(path, F_OK) == -1)
+	{
+		ft_fprintf(2, RED "Error: %s texture file not found" RESET "\n",
+			direction);
+		return (-1);
+	}
+	return (0);
+}
+
+static int	check_colors(t_game *game)
+{
+	if (game->textures.color_f == -1 || game->textures.color_c == -1)
+	{
+		ft_fprintf(2, RED "Error: Missing floor or ceiling color" RESET "\n");
+		return (-1);
+	}
+	if (game->textures.color_c == -2)
+		return (ft_fprintf(2, RED "Error: Invalid ceiling RGB" RESET "\n"), -1);
+	if (game->textures.color_f == -2)
+		return (ft_fprintf(2, RED "Error: Invalid floor RGB" RESET "\n"), -1);
+	return (0);
+}
+
 int	check_data(t_game *game_data)
 {
-	if (!game_data->textures.no.img || !game_data->textures.so.img
-		|| !game_data->textures.we.img || !game_data->textures.ea.img)
-		return (ft_error("check_data", (char *[]){"Missing texture images",
-				NULL}), -1);
-	if (game_data->textures.color_f == -1
-		|| game_data->textures.color_c == -1)
-		return (ft_error("check_data",
-				(char *[]){"Missing floor or ceiling color", NULL}), -1);
-	if (game_data->textures.color_c == -2
-		|| game_data->textures.color_f == -2)
-		return (ft_error("check_data",
-				(char *[]){"Invalid RGB values for floor or ceiling", NULL}),
-			-1);
+	if (check_texture_file(game_data->textures.path_no, "North") == -1)
+		return (-1);
+	if (check_texture_file(game_data->textures.path_so, "South") == -1)
+		return (-1);
+	if (check_texture_file(game_data->textures.path_we, "West") == -1)
+		return (-1);
+	if (check_texture_file(game_data->textures.path_ea, "East") == -1)
+		return (-1);
+	if (check_colors(game_data) == -1)
+		return (-1);
 	return (0);
 }

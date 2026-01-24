@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:31:46 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/23 17:11:11 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 13:16:27 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,13 @@ static void	calc_wall_height(t_game *game)
 	t_raycast	*ray;
 
 	ray = &game->raycast;
-	ray->line_height = (int)(WINDOW_HEIGHT / ray->perp_wall_dist);
-	ray->draw_start = -ray->line_height / 2 + WINDOW_HEIGHT / 2;
+	ray->line_height = (int)(WIN_H / ray->perp_wall_dist);
+	ray->draw_start = -ray->line_height / 2 + WIN_H / 2;
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
-	ray->draw_end = ray->line_height / 2 + WINDOW_HEIGHT / 2;
-	if (ray->draw_end >= WINDOW_HEIGHT)
-		ray->draw_end = WINDOW_HEIGHT - 1;
+	ray->draw_end = ray->line_height / 2 + WIN_H / 2;
+	if (ray->draw_end >= WIN_H)
+		ray->draw_end = WIN_H - 1;
 }
 
 /**

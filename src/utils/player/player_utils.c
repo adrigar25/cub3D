@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 18:25:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/23 17:04:43 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 13:17:41 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ int	get_player_position(t_game *game)
 		}
 	}
 	if (player_count != 1)
-		return (ft_error("get_player_position",
-				(char *[]){"Map must have exactly one player position", NULL}),
-			-1);
+		return (ft_fprintf(2, "Map must have exactly one player position"), -1);
 	return (0);
 }

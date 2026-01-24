@@ -6,11 +6,26 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:07:37 by adriescr          #+#    #+#             */
-/*   Updated: 2025/12/19 13:27:26 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 16:23:03 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+
+static void	free_map(char **map)
+{
+	int	i;
+
+	if (!map)
+		return ;
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}
 
 static void	destroy_texture_images(t_game *game)
 {
@@ -24,19 +39,28 @@ static void	destroy_texture_images(t_game *game)
 		mlx_destroy_image(game->mlx_ptr, game->textures.ea.img);
 }
 
+static void	free_texture_paths(t_game *game)
+{
+	if (game->textures.path_no)
+		free(game->textures.path_no);
+	if (game->textures.path_so)
+		free(game->textures.path_so);
+	if (game->textures.path_we)
+		free(game->textures.path_we);
+	if (game->textures.path_ea)
+		free(game->textures.path_ea);
+}
+
 void	clear_game(t_game *game)
 {
 	if (!game)
 		return ;
-	if (game->mlx_ptr)
-	{
-		if (game->img.img)
-			mlx_destroy_image(game->mlx_ptr, game->img.img);
-		destroy_texture_images(game);
-		if (game->win_ptr)
-			mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-	}
-	if (game->map)
-		free_map(game->map);
+	if (game->mlx_ptr && game->img.img)
+		mlx_destroy_image(game->mlx_ptr, game->img.img);
+	destroy_texture_images(game);
+	if (game->mlx_ptr && game->win_ptr)
+		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+	free_texture_paths(game);
+	free_map(game->map);
 	free(game);
 }

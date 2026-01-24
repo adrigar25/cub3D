@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:30:00 by adriescr          #+#    #+#             */
-/*   Updated: 2025/12/19 13:35:30 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 13:15:36 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,15 @@
  */
 int	init_image_buffer(t_game *game)
 {
-	game->img.img = mlx_new_image(game->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	game->img.img = mlx_new_image(game->mlx_ptr, WIN_W, WIN_H);
 	if (!game->img.img)
 		return (0);
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bpp,
 			&game->img.line_len, &game->img.endian);
 	if (!game->img.addr)
-	{
-		mlx_destroy_image(game->mlx_ptr, game->img.img);
-		return (0);
-	}
-	game->img.width = WINDOW_WIDTH;
-	game->img.height = WINDOW_HEIGHT;
+		return (mlx_destroy_image(game->mlx_ptr, game->img.img), 0);
+	game->img.width = WIN_W;
+	game->img.height = WIN_H;
 	return (1);
 }
 
@@ -63,7 +60,7 @@ void	img_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
+	if (x < 0 || x >= WIN_W || y < 0 || y >= WIN_H)
 		return ;
 	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	*(unsigned int *)dst = color;

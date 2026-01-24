@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                  // Game loop functions
-void			start_game_loop(t_game *game);
-
-// Player movement functions
-void			move_forward(t_game *game);
-void			move_backward(t_game *game);
-void			move_left(t_game *game);
-void			move_right(t_game *game);
-void			rotate_left(t_game *game);
-void			rotate_right(t_game *game);
-int				is_valid_position(t_game *game, double x, double y);
-
-// Print                                  :::      ::::::::   */
+/*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:50:52 by agarcia           #+#    #+#             */
-/*   Updated: 2025/12/18 18:37:02 by adriescr         ###   ########.fr       */
+/*   Updated: 2026/01/24 16:23:31 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+/* ************************************************************************** */
+/*                               LIBRARIES                                    */
+/* ************************************************************************** */
 
 # include "../libs/libft/libft.h"
 # include "../libs/mlx/mlx.h"
@@ -49,26 +41,43 @@ int				is_valid_position(t_game *game, double x, double y);
 /* ************************************************************************** */
 /*                               WINDOW DIMENSIONS                            */
 /* ************************************************************************** */
-# ifndef WINDOW_WIDTH
-#  define WINDOW_WIDTH 1920
+# ifndef WIN_W
+#  define WIN_W 1920
 # endif
 
-# ifndef WINDOW_HEIGHT
-#  define WINDOW_HEIGHT 1080
+# ifndef WIN_H
+#  define WIN_H 1080
 # endif
 
 /* ************************************************************************** */
 /*                               KEY MAPPING                                  */
 /* ************************************************************************** */
-# define KEY_W 13
-# define KEY_A 2
-# define KEY_S 1
-# define KEY_D 0
-# define KEY_LEFT 124
-# define KEY_RIGHT 123
-# define KEY_UP 126
-# define KEY_DOWN 125
-# define KEY_ESC 53
+
+// MACOS Keycodes
+# define KEY_W_M 13
+# define KEY_A_M 2
+# define KEY_S_M 1
+# define KEY_D_M 0
+# define KEY_LEFT_M 124
+# define KEY_RIGHT_M 123
+# define KEY_UP_M 126
+# define KEY_DOWN_M 125
+# define KEY_ESC_M 53
+
+// LINUX Keycodes
+# define KEY_W_L 119
+# define KEY_A_L 97
+# define KEY_S_L 115
+# define KEY_D_L 100
+# define KEY_LEFT_L 65361
+# define KEY_RIGHT_L 65363
+# define KEY_UP_L 65362
+# define KEY_DOWN_L 65364
+# define KEY_ESC_L 65307
+
+/* ************************************************************************** */
+/*                               CONSTANTS                                    */
+/* ************************************************************************** */
 
 // Movement constants
 # define MOVE_SPEED 0.05
@@ -77,6 +86,10 @@ int				is_valid_position(t_game *game, double x, double y);
 // Texture constants
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
+
+/* ************************************************************************** */
+/*                               STRUCTURES                                   */
+/* ************************************************************************** */
 
 /**
  * ENGLISH: Key states structure for continuous movement.
@@ -142,6 +155,10 @@ typedef struct s_texture
 	t_img		ea;
 	int			color_f;
 	int			color_c;
+	char		*path_no;
+	char		*path_so;
+	char		*path_we;
+	char		*path_ea;
 }				t_texture;
 
 typedef struct s_raycast
@@ -193,13 +210,16 @@ typedef struct s_game
 	t_keys		keys;
 }				t_game;
 
+/* ************************************************************************** */
+/*                               FUNCTION PROTOTYPES                          */
+/* ************************************************************************** */
+
 // Map utilities
 int				read_map(char ***map, int fd);
-void			free_map(char **map);
 int				check_map(char **map);
 int				check_walls(char **map);
-int				check_empty_rows(char **map, int *max_len);
-int				check_empty_columns(char **map, int max_len);
+int				check_empty_rows(char **map);
+int				check_empty_columns(char **map);
 int				check_valid_characters(char **map);
 int				check_player(char **map);
 
@@ -211,11 +231,12 @@ int				get_player_position(t_game *game);
 
 // Initialization
 int				read_data(t_game **game_data, char *file);
-int				init_data_structs(t_game *game);
+t_game			*init_data(void);
 
 // MLX Initialization
 int				init_mlx(t_game *game);
 int				init_textures(t_game *game);
+int				load_textures_images(t_game *game);
 
 // Raycasting
 void			raycast(t_game *game);

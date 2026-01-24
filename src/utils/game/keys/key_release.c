@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/11 18:23:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 12:54:27 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@
  */
 int	handle_keyrelease(int keycode, t_game *game)
 {
-	if (keycode == KEY_W)
+	if (keycode == KEY_W_M)
 		game->keys.w = 0;
-	else if (keycode == KEY_A)
+	else if (keycode == KEY_A_M)
 		game->keys.a = 0;
-	else if (keycode == KEY_S)
+	else if (keycode == KEY_S_M)
 		game->keys.s = 0;
-	else if (keycode == KEY_D)
+	else if (keycode == KEY_D_M)
 		game->keys.d = 0;
-	else if (keycode == KEY_LEFT)
+	else if (keycode == KEY_LEFT_M)
 		game->keys.left = 0;
-	else if (keycode == KEY_RIGHT)
+	else if (keycode == KEY_RIGHT_M)
 		game->keys.right = 0;
-	else if (keycode == KEY_UP)
+	else if (keycode == KEY_UP_M)
 		game->keys.up = 0;
-	else if (keycode == KEY_DOWN)
+	else if (keycode == KEY_DOWN_M)
 		game->keys.down = 0;
 	return (0);
 }

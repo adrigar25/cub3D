@@ -6,25 +6,42 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:41:35 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/07 15:57:04 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 12:58:51 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int	valid_extension(const char *filename, const char *extension)
+{
+	size_t	filename_len;
+	size_t	extension_len;
+
+	filename_len = ft_strlen(filename);
+	extension_len = ft_strlen(extension);
+	if (filename_len < extension_len)
+		return (0);
+	return (ft_strncmp(filename + filename_len - extension_len, extension,
+			extension_len) == 0);
+}
+
 int	cub3d(char *file)
 {
 	t_game	*game_data;
 
-	game_data = malloc(sizeof(t_game));
-	if (!game_data)
-		return (ft_error("cub3d", (char *[]){"Memory allocation failed", NULL}),
-			-1);
-	if (init_mlx(game_data) || read_data(&game_data, file) == -1)
-		return (clear_game(game_data), -1);
-	if (check_data(game_data) == -1 || check_map(game_data->map) == -1)
-		return (clear_game(game_data), -1);
-	get_player_position(game_data);
+	game_data = init_data();
+	if (read_data(&game_data, file))
+		return (clear_game(game_data), 1);
+	if (check_data(game_data))
+		return (clear_game(game_data), 1);
+	if (check_map(game_data->map))
+		return (clear_game(game_data), 1);
+	if (init_mlx(game_data))
+		return (clear_game(game_data), 1);
+	if (load_textures_images(game_data))
+		return (clear_game(game_data), 1);
+	if (get_player_position(game_data))
+		return (clear_game(game_data), 1);
 	start_game_loop(game_data);
 	return (0);
 }
@@ -36,9 +53,10 @@ int	main(int argc, char **argv)
 		ft_fprintf(2, "Usage: %s <map_file.cub>\n", argv[0]);
 		return (-1);
 	}
-	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4) != 0)
+	if (!valid_extension(argv[1], ".cub"))
 	{
-		ft_fprintf(2, "Error: Map file must have a .cub extension\n");
+		ft_fprintf(2,
+			RED "Error: Map file must have a .cub extension" RESET "\n");
 		return (-1);
 	}
 	return (cub3d(argv[1]));

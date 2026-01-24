@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:05:09 by adriescr          #+#    #+#             */
-/*   Updated: 2025/12/18 16:28:41 by adriescr         ###   ########.fr       */
+/*   Updated: 2026/01/24 13:15:51 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	raycast(t_game *game)
 	int	x;
 
 	x = 0;
-	while (x < WINDOW_WIDTH)
+	while (x < WIN_W)
 	{
 		init_ray(game, x);
 		dda(game);

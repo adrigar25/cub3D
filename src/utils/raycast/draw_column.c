@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:57:57 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/23 17:07:57 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 13:16:18 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_draw_start(int line_height)
 {
 	int	draw_start;
 
-	draw_start = -line_height / 2 + WINDOW_HEIGHT / 2;
+	draw_start = -line_height / 2 + WIN_H / 2;
 	if (draw_start < 0)
 		draw_start = 0;
 	return (draw_start);
@@ -26,9 +26,9 @@ int	ft_draw_end(int line_height)
 {
 	int	draw_end;
 
-	draw_end = line_height / 2 + WINDOW_HEIGHT / 2;
-	if (draw_end >= WINDOW_HEIGHT)
-		draw_end = WINDOW_HEIGHT - 1;
+	draw_end = line_height / 2 + WIN_H / 2;
+	if (draw_end >= WIN_H)
+		draw_end = WIN_H - 1;
 	return (draw_end);
 }
 
@@ -47,7 +47,7 @@ static void	calculate_texture_coords(t_game *game, t_img *texture)
 	if (game->raycast.side == 1 && game->raycast.ray_dir_y < 0)
 		game->raycast.tex_x = texture->width - game->raycast.tex_x - 1;
 	game->raycast.step = 1.0 * texture->height / game->raycast.line_height;
-	game->raycast.tex_pos = (game->raycast.draw_start - WINDOW_HEIGHT / 2
+	game->raycast.tex_pos = (game->raycast.draw_start - WIN_H / 2
 			+ game->raycast.line_height / 2) * game->raycast.step;
 }
 
@@ -94,6 +94,6 @@ void	draw_column(t_game *game, int x)
 		img_pixel_put(&game->img, x, y++, color);
 	}
 	y = game->raycast.draw_end + 1;
-	while (y < WINDOW_HEIGHT)
+	while (y < WIN_H)
 		img_pixel_put(&game->img, x, y++, game->textures.color_f);
 }

@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/23 16:04:11 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 15:48:36 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,82 +14,91 @@
 
 static int	is_texture_line(char *line)
 {
-	return (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3)
-		|| !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3));
+	return (!ft_strcmp(line, "NO") || !ft_strcmp(line, "SO") || !ft_strcmp(line,
+			"WE") || !ft_strcmp(line, "EA"));
 }
 
-static int	load_img(t_game *game_data, char *path, char *dir)
+static int	store_path(t_game *game_data, char *path, char *dir)
 {
-	t_img	*text[4];
-	t_img	*texture;
+	char	**dest;
+	char	*trimmed;
 
-	text[0] = &game_data->textures.no;
-	text[1] = &game_data->textures.so;
-	text[2] = &game_data->textures.we;
-	text[3] = &game_data->textures.ea;
-	texture = NULL;
-	if (!ft_strncmp(dir, "NO", 2))
-		texture = text[0];
-	else if (!ft_strncmp(dir, "SO", 2))
-		texture = text[1];
-	else if (!ft_strncmp(dir, "WE", 2))
-		texture = text[2];
-	else if (!ft_strncmp(dir, "EA", 2))
-		texture = text[3];
-	texture->img = mlx_xpm_file_to_image(game_data->mlx_ptr, path,
-			&texture->width, &texture->height);
-	if (!texture->img)
-		return (ft_fprintf(2, "\033[0;31m'Failed to load texture %s'\n", path),
-			free(path), free(dir), -1);
-	texture->addr = mlx_get_data_addr(texture->img, &texture->bpp,
-			&texture->line_len, &texture->endian);
-	return (free(path), free(dir), 0);
+	dest = NULL;
+	if (!ft_strcmp(dir, "NO"))
+		dest = &game_data->textures.path_no;
+	else if (!ft_strcmp(dir, "SO"))
+		dest = &game_data->textures.path_so;
+	else if (!ft_strcmp(dir, "WE"))
+		dest = &game_data->textures.path_we;
+	else if (!ft_strcmp(dir, "EA"))
+		dest = &game_data->textures.path_ea;
+	if (!dest || *dest != NULL)
+		return (0);
+	trimmed = ft_strtrim(path, " \t\n");
+	*dest = ft_strdup(trimmed);
+	free(trimmed);
+	if (!*dest)
+		return (ft_fprintf(2, RED "Memory allocation failed" RESET "\n"), -1);
+	return (0);
+}
+
+static int	process_line(t_game *game_data, char *line)
+{
+	char	*temp;
+	char	*key;
+	char	*value;
+	int		result;
+
+	result = 0;
+	temp = ft_strtrim(line, " \t\n");
+	if (!temp)
+		return (0);
+	key = ft_substr(temp, 0, 2);
+	value = ft_strtrim(line + 2, " \t\n");
+	if (!key || !value)
+		return (0);
+	if (key[0] == 'F' && game_data->textures.color_f == -1)
+		game_data->textures.color_f = parse_rgb(value);
+	else if (key[0] == 'C' && game_data->textures.color_c == -1)
+		game_data->textures.color_c = parse_rgb(value);
+	else if (is_texture_line(key))
+		result = store_path(game_data, value, key);
+	free(temp);
+	free(key);
+	free(value);
+	return (result);
 }
 
 static int	get_data(t_game *game_data, int fd)
 {
 	char	*line;
-	char	*trimmed;
-	char	*value;
+	int		result;
 
-	line = ft_get_next_line(fd);
-	while (line)
+	result = 0;
+	if (!game_data)
+		return (-1);
+	while (result != -1)
 	{
-		trimmed = ft_strtrim(line, " \t\n");
-		value = ft_strtrim(trimmed + 2, " \t\n");
-		if (trimmed && is_texture_line(trimmed))
-		{
-			if (load_img(game_data, value, ft_substr(trimmed, 0, 2)) == -1)
-				return (free(line), free(trimmed), -1);
-		}
-		else if (trimmed[0] == 'F' && game_data->textures.color_f == -1)
-			game_data->textures.color_f = parse_rgb(value);
-		else if (trimmed[0] == 'C' && game_data->textures.color_c == -1)
-			game_data->textures.color_c = parse_rgb(value);
-		free(trimmed);
-		free(line);
 		line = ft_get_next_line(fd);
+		if (!line)
+			break ;
+		result = process_line(game_data, line);
+		free(line);
 	}
-	return (0);
+	return (result);
 }
 
 int	read_data(t_game **game_data, char *file)
 {
 	int	fd;
 
-	if (init_data_structs(*game_data) != 0)
-		return (-1);
 	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (ft_fprintf(2, "\033[0;31mFailed to open file\n"), -1);
 	if (get_data(*game_data, fd) == -1)
-		return (ft_fprintf(2, "\033[0;31mFailed to get data\n"), -1);
+		return (ft_fprintf(2, RED "Failed to get data" RESET "\n"), -1);
 	close(fd);
 	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (ft_fprintf(2, "\033[0;31mFailed to reopen file\n"), -1);
 	if (read_map(&(*game_data)->map, fd) == -1)
-		return (ft_fprintf(2, "\033[0;31mFailed to read map\n"), -1);
+		return (ft_fprintf(2, RED "Failed to read map" RESET "\n"), -1);
 	close(fd);
 	return (0);
 }

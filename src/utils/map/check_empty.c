@@ -6,63 +6,80 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/07 18:02:34 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 14:32:38 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-int	check_empty_rows(char **map, int *max_len)
+static int	get_max_len(char **map)
+{
+	int	max_len;
+	int	i;
+	int	current_len;
+	int	j;
+
+	max_len = 0;
+	i = 0;
+	while (map[i])
+	{
+		current_len = 0;
+		j = 0;
+		while (map[i][j])
+		{
+			if (ft_strchr(" \t\n", map[i][j]) == NULL)
+				current_len = j + 1;
+			j++;
+		}
+		if (current_len > max_len)
+			max_len = current_len;
+		i++;
+	}
+	return (max_len);
+}
+
+static int	get_starting_column(char **map, int max_len)
+{
+	int	start;
+
+	start = 0;
+	while (start < max_len && map[0][start] && map[0][start] != '1')
+		start++;
+	return (start);
+}
+
+int	check_empty_rows(char **map)
 {
 	int	i;
 	int	j;
-	int	all_spaces;
-	int	len;
 
 	i = -1;
-	*max_len = 0;
 	while (map[++i])
 	{
-		j = -1;
-		all_spaces = 1;
-		while (map[i][++j])
-		{
-			if (ft_strchr(" \t\n", map[i][j]) == NULL)
-				all_spaces = 0;
-		}
-		if (all_spaces)
+		j = 0;
+		while (map[i][j] && ft_strchr(" \t\n", map[i][j]) != NULL)
+			j++;
+		if (map[i][j] == '\0')
 			return (-1);
-		len = (int)ft_strlen(map[i]);
-		if (len > 0 && map[i][len - 1] == '\n')
-			len--;
-		if (len > *max_len)
-			*max_len = len;
 	}
 	return (0);
 }
 
-int	check_empty_columns(char **map, int max_len)
+int	check_empty_columns(char **map)
 {
 	int	i;
 	int	j;
-	int	all_spaces;
+	int	max_len;
 
-	j = -1;
+	max_len = get_max_len(map);
+	j = get_starting_column(map, max_len) - 1;
 	while (++j < max_len)
 	{
 		i = -1;
-		all_spaces = 1;
-		while (map[++i])
-		{
-			if (j >= (int)ft_strlen(map[i]))
-				continue ;
+		while (map[++i] && j < (int)ft_strlen(map[i]))
 			if (ft_strchr(" \t\n", map[i][j]) == NULL)
-			{
-				all_spaces = 0;
 				break ;
-			}
-		}
-		if (all_spaces)
+		if (!map[i])
 			return (-1);
 	}
 	return (0);

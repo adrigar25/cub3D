@@ -6,7 +6,7 @@
 #    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2026/01/11 18:23:02 by agarcia          ###   ########.fr        #
+#    Updated: 2026/01/24 16:23:19 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,9 +36,8 @@ SRCS_UTILS	:=	${UTILS_DIR}/game/clear_game.c \
 				${UTILS_DIR}/print/ft_error.c \
 				${UTILS_DIR}/print/ft_putstr_fd_color.c \
 				${UTILS_DIR}/print/ft_putcolor.c \
-				$(UTILS_DIR)/map/map_parser.c \
- 				$(UTILS_DIR)/map/map_validation.c \
- 				$(UTILS_DIR)/map/map_memory.c \
+				$(UTILS_DIR)/map/read_map.c \
+ 				$(UTILS_DIR)/map/check_map.c \
 				$(UTILS_DIR)/map/check_walls.c \
 				$(UTILS_DIR)/map/check_empty.c \
 				$(UTILS_DIR)/map/check_characters.c \

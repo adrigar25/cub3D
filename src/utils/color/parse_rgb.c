@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:05:47 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/23 15:28:18 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 12:45:23 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	parse_rgb(char *line)
 	char	*first_comma;
 	char	*second_comma;
 
-	printf("Parsing RGB from line: '%s'\n", line);
 	if (check_rgb_format(line) == -1)
 		return (-2);
 	first_comma = ft_strchr(line, ',');
