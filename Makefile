@@ -6,7 +6,7 @@
 #    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2026/01/24 16:23:19 by agarcia          ###   ########.fr        #
+#    Updated: 2026/01/24 17:08:11 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,12 +26,8 @@ SRCS_UTILS	:=	${UTILS_DIR}/game/clear_game.c \
 				${UTILS_DIR}/game/keys/key_press.c \
 				${UTILS_DIR}/game/keys/key_release.c \
 				${UTILS_DIR}/game/keys/key_update.c \
-				${UTILS_DIR}/game/movement/move_forward.c \
-				${UTILS_DIR}/game/movement/move_backward.c \
-				${UTILS_DIR}/game/movement/move_left.c \
-				${UTILS_DIR}/game/movement/move_right.c \
-				${UTILS_DIR}/game/movement/rotate_left.c \
-				${UTILS_DIR}/game/movement/rotate_right.c \
+				${UTILS_DIR}/game/movement/move_player.c \
+				${UTILS_DIR}/game/movement/rotate_player.c \
 				${UTILS_DIR}/game/movement/position_validation.c \
 				${UTILS_DIR}/print/ft_error.c \
 				${UTILS_DIR}/print/ft_putstr_fd_color.c \
