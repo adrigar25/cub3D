@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parser.c                                       :+:      :+:    :+:   */
+/*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 16:21:47 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 16:32:54 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	read_map(char ***map, int fd)
 
 	i = 0;
 	started = 0;
-	*map = NULL;
 	while (1)
 	{
 		line = ft_get_next_line(fd);
@@ -78,6 +77,6 @@ int	read_map(char ***map, int fd)
 	if (*map)
 		(*map)[i] = NULL;
 	if (i > 256)
-		return (ft_error("read_map", (char *[]){"Map too large", NULL}), -1);
+		return (ft_fprintf(2, RED "Error: Map too large\n" RESET), -1);
 	return (0);
 }

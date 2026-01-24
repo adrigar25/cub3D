@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 14:50:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 15:34:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 16:34:27 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	check_texture_file(char *path, char *direction)
 {
 	if (access(path, F_OK) == -1)
 	{
-		ft_fprintf(2, RED "Error: %s texture file not found" RESET "\n",
+		ft_fprintf(2, RED "Error: %s texture file not found\n" RESET,
 			direction);
 		return (-1);
 	}
@@ -27,13 +27,13 @@ static int	check_colors(t_game *game)
 {
 	if (game->textures.color_f == -1 || game->textures.color_c == -1)
 	{
-		ft_fprintf(2, RED "Error: Missing floor or ceiling color" RESET "\n");
+		ft_fprintf(2, RED "Error: Missing floor or ceiling color\n" RESET);
 		return (-1);
 	}
 	if (game->textures.color_c == -2)
-		return (ft_fprintf(2, RED "Error: Invalid ceiling RGB" RESET "\n"), -1);
+		return (ft_fprintf(2, RED "Error: Invalid ceiling RGB\n" RESET), -1);
 	if (game->textures.color_f == -2)
-		return (ft_fprintf(2, RED "Error: Invalid floor RGB" RESET "\n"), -1);
+		return (ft_fprintf(2, RED "Error: Invalid floor RGB\n" RESET), -1);
 	return (0);
 }
 

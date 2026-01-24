@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/24 15:48:36 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 17:38:37 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ static int	store_path(t_game *game_data, char *path, char *dir)
 	*dest = ft_strdup(trimmed);
 	free(trimmed);
 	if (!*dest)
-		return (ft_fprintf(2, RED "Memory allocation failed" RESET "\n"), -1);
+	{
+		ft_fprintf(2, RED "Error: Malloc failed for texture path\n" RESET);
+		return (-1);
+	}
 	return (0);
 }
 
@@ -93,12 +96,18 @@ int	read_data(t_game **game_data, char *file)
 	int	fd;
 
 	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return (ft_fprintf(2, RED "Error: Cannot open file\n" RESET), -1);
 	if (get_data(*game_data, fd) == -1)
-		return (ft_fprintf(2, RED "Failed to get data" RESET "\n"), -1);
+		return (close(fd), ft_fprintf(2,
+				RED "Error: Failed to read data\n" RESET), -1);
 	close(fd);
 	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return (ft_fprintf(2, RED "Error: Cannot open file\n" RESET), -1);
 	if (read_map(&(*game_data)->map, fd) == -1)
-		return (ft_fprintf(2, RED "Failed to read map" RESET "\n"), -1);
+		return (close(fd), ft_fprintf(2,
+				RED "Error: Failed to read map\n" RESET), -1);
 	close(fd);
 	return (0);
 }

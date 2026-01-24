@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:40:42 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 12:44:38 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 17:38:21 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_game	*init_data(void)
 	game = malloc(sizeof(t_game));
 	if (!game)
 	{
-		ft_error("cub3d", (char *[]){"Malloc failed", NULL});
+		ft_fprintf(2, RED "Error: Malloc failed\n" RESET);
 		exit(EXIT_FAILURE);
 	}
 	game->textures.color_c = -1;
