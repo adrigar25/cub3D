@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 01:03:21 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 17:38:14 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/24 18:20:16 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,6 @@ int	init_mlx(t_game *game)
 	if (!game->win_ptr)
 		return (ft_fprintf(2, "Error: Failed to create window\n"), -1);
 	if (!init_image_buffer(game))
-	{
-		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 		return (ft_fprintf(2, "Error: Failed to create image buffer\n"), -1);
-	}
 	return (0);
 }
