@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/24 17:55:22 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/26 17:40:18 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,15 @@ static int	store_path(t_game *game_data, char *path, char *dir)
 	if (!dest || *dest != NULL)
 		return (0);
 	trimmed = ft_strtrim(path, " \t\n");
-	*dest = ft_strdup(trimmed);
-	free(trimmed);
-	if (!*dest)
+	if (dest != NULL)
 	{
-		ft_fprintf(2, RED "Error: Malloc failed for texture path\n" RESET);
-		return (-1);
+		ft_fprintf(2, RED "Error: Duplicated texture: %s\n" RESET, path);
+		return (free(trimmed), -1);
 	}
-	return (0);
+	*dest = ft_strdup(trimmed);
+	if (!*dest)
+		return (free(trimmed), -1);
+	return (free(trimmed), 0);
 }
 
 static int	process_line(t_game *game_data, char *line)
@@ -99,15 +100,19 @@ int	read_data(t_game **game_data, char *file)
 	if (fd == -1)
 		return (ft_fprintf(2, RED "Error: Cannot open file\n" RESET), -1);
 	if (get_data(*game_data, fd) == -1)
-		return (close(fd), ft_fprintf(2,
-				RED "Error: Failed to read data\n" RESET), -1);
+	{
+		close(fd);
+		return (ft_fprintf(2, RED "Error: Failed to read data\n" RESET), -1);
+	}
 	close(fd);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (ft_fprintf(2, RED "Error: Cannot open file\n" RESET), -1);
 	if (read_map(&(*game_data)->map, fd) == -1)
-		return (close(fd), ft_fprintf(2,
-				RED "Error: Failed to read map\n" RESET), -1);
+	{
+		close(fd);
+		return (ft_fprintf(2, RED "Error: Failed to read map\n" RESET), -1);
+	}
 	close(fd);
 	return (0);
 }
