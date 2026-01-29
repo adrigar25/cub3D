@@ -6,7 +6,7 @@
 #    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2026/01/29 02:34:03 by agarcia          ###   ########.fr        #
+#    Updated: 2026/01/29 02:38:57 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,42 +62,42 @@ OBJS_MAND		:= $(SRCS_MAND:$(SRC_MAND_DIR)/%.c=$(OBJS_MAND_DIR)/%.o)
 SRC_BONUS_DIR	:= ./src/bonus
 UTILS_BONUS_DIR	:= $(SRC_BONUS_DIR)/utils
 
-SRCS_BONUS_UTILS :=	${UTILS_BONUS_DIR}/game/clear_game.c \
-					${UTILS_BONUS_DIR}/game/game_loop.c \
-					${UTILS_BONUS_DIR}/game/keys/key_init.c \
-					${UTILS_BONUS_DIR}/game/keys/key_press.c \
-					${UTILS_BONUS_DIR}/game/keys/key_release.c \
-					${UTILS_BONUS_DIR}/game/keys/key_update.c \
-					${UTILS_BONUS_DIR}/game/keys/mouse_handler.c \
-					${UTILS_BONUS_DIR}/game/movement/move_player.c \
-					${UTILS_BONUS_DIR}/game/movement/rotate_player.c \
-					${UTILS_BONUS_DIR}/game/movement/position_validation.c \
-					${UTILS_BONUS_DIR}/print/ft_error.c \
-					${UTILS_BONUS_DIR}/print/ft_putstr_fd_color.c \
-					${UTILS_BONUS_DIR}/print/ft_putcolor.c \
-					$(UTILS_BONUS_DIR)/map/read_map.c \
-					$(UTILS_BONUS_DIR)/map/check_map.c \
-					$(UTILS_BONUS_DIR)/map/check_walls.c \
-					$(UTILS_BONUS_DIR)/map/check_empty.c \
-					$(UTILS_BONUS_DIR)/map/check_characters.c \
-					$(UTILS_BONUS_DIR)/map/check_player.c \
-					$(UTILS_BONUS_DIR)/minimap/print_minimap.c \
-					$(UTILS_BONUS_DIR)/minimap/print_player.c \
-					$(UTILS_BONUS_DIR)/data/init_data.c \
-					$(UTILS_BONUS_DIR)/data/read_data.c \
-					$(UTILS_BONUS_DIR)/data/check_data.c \
-					$(UTILS_BONUS_DIR)/mlx/init_mlx.c \
-					$(UTILS_BONUS_DIR)/mlx/image_buffer.c \
-					$(UTILS_BONUS_DIR)/color/color_utils.c \
-					$(UTILS_BONUS_DIR)/color/parse_rgb.c \
-					$(UTILS_BONUS_DIR)/player/player_utils.c \
-					$(UTILS_BONUS_DIR)/raycast/dda.c \
-					$(UTILS_BONUS_DIR)/raycast/draw_column.c \
-					$(UTILS_BONUS_DIR)/raycast/init_raycast.c \
-					$(UTILS_BONUS_DIR)/raycast/perpendicular_wall_distance.c \
-					$(UTILS_BONUS_DIR)/raycast/raycast.c \
+SRCS_BONUS_UTILS :=	${UTILS_BONUS_DIR}/game/clear_game_bonus.c \
+					${UTILS_BONUS_DIR}/game/game_loop_bonus.c \
+					${UTILS_BONUS_DIR}/game/keys/key_init_bonus.c \
+					${UTILS_BONUS_DIR}/game/keys/key_press_bonus.c \
+					${UTILS_BONUS_DIR}/game/keys/key_release_bonus.c \
+					${UTILS_BONUS_DIR}/game/keys/key_update_bonus.c \
+					${UTILS_BONUS_DIR}/game/keys/mouse_handler_bonus.c \
+					${UTILS_BONUS_DIR}/game/movement/move_player_bonus.c \
+					${UTILS_BONUS_DIR}/game/movement/rotate_player_bonus.c \
+					${UTILS_BONUS_DIR}/game/movement/position_validation_bonus.c \
+					${UTILS_BONUS_DIR}/print/ft_error_bonus.c \
+					${UTILS_BONUS_DIR}/print/ft_putstr_fd_color_bonus.c \
+					${UTILS_BONUS_DIR}/print/ft_putcolor_bonus.c \
+					$(UTILS_BONUS_DIR)/map/read_map_bonus.c \
+					$(UTILS_BONUS_DIR)/map/check_map_bonus.c \
+					$(UTILS_BONUS_DIR)/map/check_walls_bonus.c \
+					$(UTILS_BONUS_DIR)/map/check_empty_bonus.c \
+					$(UTILS_BONUS_DIR)/map/check_characters_bonus.c \
+					$(UTILS_BONUS_DIR)/map/check_player_bonus.c \
+					$(UTILS_BONUS_DIR)/minimap/print_minimap_bonus.c \
+					$(UTILS_BONUS_DIR)/minimap/print_player_bonus.c \
+					$(UTILS_BONUS_DIR)/data/init_data_bonus.c \
+					$(UTILS_BONUS_DIR)/data/read_data_bonus.c \
+					$(UTILS_BONUS_DIR)/data/check_data_bonus.c \
+					$(UTILS_BONUS_DIR)/mlx/init_mlx_bonus.c \
+					$(UTILS_BONUS_DIR)/mlx/image_buffer_bonus.c \
+					$(UTILS_BONUS_DIR)/color/color_utils_bonus.c \
+					$(UTILS_BONUS_DIR)/color/parse_rgb_bonus.c \
+					$(UTILS_BONUS_DIR)/player/player_utils_bonus.c \
+					$(UTILS_BONUS_DIR)/raycast/dda_bonus.c \
+					$(UTILS_BONUS_DIR)/raycast/draw_column_bonus.c \
+					$(UTILS_BONUS_DIR)/raycast/init_raycast_bonus.c \
+					$(UTILS_BONUS_DIR)/raycast/perpendicular_wall_distance_bonus.c \
+					$(UTILS_BONUS_DIR)/raycast/raycast_bonus.c \
 
-SRCS_BONUS	:= 	$(SRC_BONUS_DIR)/main.c \
+SRCS_BONUS	:= 	$(SRC_BONUS_DIR)/main_bonus.c \
 				$(SRCS_BONUS_UTILS) \
 
 OBJS_BONUS_DIR	:= objs_bonus
