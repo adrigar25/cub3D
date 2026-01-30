@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_data.c                                       :+:      :+:    :+:   */
+/*   check_data_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 14:50:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 16:34:27 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/30 00:28:19 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	check_data(t_game *game_data)
 	if (check_texture_file(game_data->textures.path_we, "West") == -1)
 		return (-1);
 	if (check_texture_file(game_data->textures.path_ea, "East") == -1)
+		return (-1);
+	if (check_texture_file(game_data->textures.path_door, "Door") == -1)
 		return (-1);
 	if (check_colors(game_data) == -1)
 		return (-1);

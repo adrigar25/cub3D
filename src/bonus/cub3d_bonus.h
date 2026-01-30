@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:50:52 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/29 02:16:14 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/30 16:00:18 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@
 # define KEY_UP_M 126
 # define KEY_DOWN_M 125
 # define KEY_ESC_M 53
+# define KEY_E_M 14
 
 // LINUX Keycodes
 # define KEY_W_L 119
@@ -63,6 +64,7 @@
 # define KEY_UP_L 65362
 # define KEY_DOWN_L 65364
 # define KEY_ESC_L 65307
+# define KEY_E_L 101
 
 /* ************************************************************************** */
 /*                               CONSTANTS                                    */
@@ -99,7 +101,7 @@
 # endif
 
 # ifndef MINIMAP_SCALE
-#  define MINIMAP_SCALE 20
+#  define MINIMAP_SCALE 30
 # endif
 
 # ifndef MINIMAP_BORDER
@@ -122,6 +124,10 @@
 #  define MINIMAP_FLOOR_COLOR 0x9c9c9c
 # endif
 
+# ifndef MINIMAP_DOOR_COLOR
+#  define MINIMAP_DOOR_COLOR 0x8B4513
+# endif
+
 # ifndef MINIMAP_X
 #  define MINIMAP_X 1070
 # endif
@@ -132,7 +138,7 @@
 
 // Crosshair constants
 # ifndef CROSSHAIR_SIZE
-#  define CROSSHAIR_SIZE 25
+#  define CROSSHAIR_SIZE 10
 # endif
 
 # ifndef CROSSHAIR_COLOR
@@ -140,7 +146,7 @@
 # endif
 
 # ifndef CROSSHAIR_THICKNESS
-#  define CROSSHAIR_THICKNESS 3
+#  define CROSSHAIR_THICKNESS 2.5
 # endif
 
 // Player constants
@@ -218,12 +224,14 @@ typedef struct s_texture
 	t_img		so;
 	t_img		we;
 	t_img		ea;
+	t_img		door;
 	int			color_f;
 	int			color_c;
 	char		*path_no;
 	char		*path_so;
 	char		*path_we;
 	char		*path_ea;
+	char		*path_door;
 }				t_texture;
 
 typedef struct s_raycast
@@ -352,6 +360,9 @@ void			init_keys(t_game *game);
 int				handle_keypress(int keycode, t_game *game);
 int				handle_keyrelease(int keycode, t_game *game);
 void			update_movement(t_game *game);
+
+// Door functions
+void			open_door(t_game *game);
 
 // Print
 long			ft_error(const char *function, char **str);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_walls.c                                      :+:      :+:    :+:   */
+/*   check_walls_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 17:44:02 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/30 00:24:01 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static int	is_valid_neighbor(char **map, int x, int y, int i)
 		return (0);
 	if (new_y >= (int)ft_strlen(map[new_x]))
 		return (0);
+	// AQUÍ está el cambio: también permitir 'D' como vecino válido
 	if (ft_strchr(" \0", map[new_x][new_y]))
 		return (0);
 	return (1);
@@ -51,17 +52,20 @@ static int	is_valid_neighbor(char **map, int x, int y, int i)
 
 int	check_walls(char **map)
 {
-	int	i;
-	int	x;
-	int	y;
+	int i;
+	int x;
+	int y;
 
+	y = -1;
 	x = -1;
 	while (map[++x])
 	{
 		y = -1;
 		while (map[x][++y])
 		{
-			if (!(map[x][y] == '0' || is_player_char(map[x][y])))
+			// Verificar espacios vacíos ('0'), jugador Y puertas ('D')
+			if (!(map[x][y] == '0' || is_player_char(map[x][y])
+					|| map[x][y] == 'D'))
 				continue ;
 			i = 0;
 			while (i < 8)

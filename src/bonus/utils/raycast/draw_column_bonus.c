@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_column.c                                      :+:      :+:    :+:   */
+/*   draw_column_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:57:57 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/29 02:10:27 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/30 00:29:33 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	calculate_texture_coords(t_game *game, t_img *texture)
 
 static t_img	*get_wall_texture(t_game *game)
 {
+	if (game->map[game->raycast.map_y][game->raycast.map_x] == 'D')
+		return (&game->textures.door);
 	if (game->raycast.side == 0)
 	{
 		if (game->raycast.ray_dir_x > 0)

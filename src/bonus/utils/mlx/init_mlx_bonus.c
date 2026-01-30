@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_mlx.c                                         :+:      :+:    :+:   */
+/*   init_mlx_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 01:03:21 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/28 12:59:55 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/29 23:43:50 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ int	load_textures_images(t_game *game)
 	if (load_texture(game, &game->textures.we, game->textures.path_we) == -1)
 		return (-1);
 	if (load_texture(game, &game->textures.ea, game->textures.path_ea) == -1)
+		return (-1);
+	if (load_texture(game, &game->textures.door, game->textures.path_door) ==
+		-1)
 		return (-1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2026/01/29 02:38:57 by agarcia          ###   ########.fr        #
+#    Updated: 2026/01/30 00:02:18 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,6 +96,7 @@ SRCS_BONUS_UTILS :=	${UTILS_BONUS_DIR}/game/clear_game_bonus.c \
 					$(UTILS_BONUS_DIR)/raycast/init_raycast_bonus.c \
 					$(UTILS_BONUS_DIR)/raycast/perpendicular_wall_distance_bonus.c \
 					$(UTILS_BONUS_DIR)/raycast/raycast_bonus.c \
+					$(UTILS_BONUS_DIR)/door/door_utils_bonus.c \
 
 SRCS_BONUS	:= 	$(SRC_BONUS_DIR)/main_bonus.c \
 				$(SRCS_BONUS_UTILS) \
@@ -150,6 +151,7 @@ $(OBJS_BONUS_DIR):
 	@mkdir -p $(OBJS_BONUS_DIR)/utils/player
 	@mkdir -p $(OBJS_BONUS_DIR)/utils/raycast
 	@mkdir -p $(OBJS_BONUS_DIR)/utils/print
+	@mkdir -p $(OBJS_BONUS_DIR)/utils/door/door_utils_bonus.c
 
 $(OBJS_BONUS_DIR)/%.o: $(SRC_BONUS_DIR)/%.c | $(OBJS_BONUS_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dda.c                                              :+:      :+:    :+:   */
+/*   dda_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:31:46 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/28 20:16:44 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/30 15:51:24 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ static void	perform_dda(t_game *game)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (game->map[ray->map_y][ray->map_x] == '1')
+		if (game->map[ray->map_y][ray->map_x] == '1'
+			|| game->map[ray->map_y][ray->map_x] == 'D')
 			ray->hit = 1;
 	}
 }

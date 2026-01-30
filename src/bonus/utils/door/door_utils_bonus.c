@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_characters_bonus.c                           :+:      :+:    :+:   */
+/*   door_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 16:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/29 23:32:25 by agarcia          ###   ########.fr       */
+/*   Created: 2026/01/29 23:36:33 by agarcia           #+#    #+#             */
+/*   Updated: 2026/01/30 00:44:08 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d_bonus.h"
 
-int	check_valid_characters(char **map)
+void	open_door(t_game *game)
 {
-	int	i;
-	int	j;
+	int	next_x;
+	int	next_y;
 
-	i = -1;
-	while (map[++i])
+	next_x = (int)(game->player.pos_x + game->player.dir_x);
+	next_y = (int)(game->player.pos_y + game->player.dir_y);
+	if (next_y >= 0 && next_y < game->map_h && next_x >= 0
+		&& next_x < game->map_w && game->map[next_y][next_x] == 'D')
 	{
-		j = 0;
-		while (map[i][j])
-			if (ft_strchr(" 01NSEWD\n", map[i][j++]) == NULL)
-				return (-1);
+		game->map[next_y][next_x] = '0';
 	}
-	return (0);
 }

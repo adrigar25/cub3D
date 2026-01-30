@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_characters_bonus.c                           :+:      :+:    :+:   */
+/*   enemies_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 16:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/29 23:32:25 by agarcia          ###   ########.fr       */
+/*   Created: 2026/01/30 16:03:49 by agarcia           #+#    #+#             */
+/*   Updated: 2026/01/30 16:08:44 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d_bonus.h"
 
-int	check_valid_characters(char **map)
+int	is_enemy_char(char c)
 {
-	int	i;
-	int	j;
-
-	i = -1;
-	while (map[++i])
-	{
-		j = 0;
-		while (map[i][j])
-			if (ft_strchr(" 01NSEWD\n", map[i][j++]) == NULL)
-				return (-1);
-	}
-	return (0);
+	return (c == 'E' || c == 'F' || c == 'G');
 }

@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/11 18:23:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/30 15:42:15 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * ENGLISH: Check if a position (x, y) is valid (not a wall).
  *
- * SPANISH: Comprueba si una posición (x, y) es válida (no es una pared).
+ * SPANISH: Comprueba si una posición (x, y) es válida (no está fuera del mapa).
  */
 int	is_valid_position(t_game *game, double x, double y)
 {

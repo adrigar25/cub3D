@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_data.c                                        :+:      :+:    :+:   */
+/*   read_data_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/28 01:11:31 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/29 23:42:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	is_texture_line(char *line)
 {
 	return (!ft_strcmp(line, "NO") || !ft_strcmp(line, "SO") || !ft_strcmp(line,
-			"WE") || !ft_strcmp(line, "EA"));
+			"WE") || !ft_strcmp(line, "EA") || !ft_strcmp(line, "DO"));
 }
 
 static int	store_path(t_game *game_data, char *path, char *dir)
@@ -32,13 +32,13 @@ static int	store_path(t_game *game_data, char *path, char *dir)
 		dest = &game_data->textures.path_we;
 	else if (!ft_strcmp(dir, "EA"))
 		dest = &game_data->textures.path_ea;
+	else if (!ft_strcmp(dir, "DO"))
+		dest = &game_data->textures.path_door;
 	if (!dest)
 		return (0);
 	if (*dest != NULL)
-	{
-		ft_fprintf(2, RED "Error: Duplicated texture: %s\n" RESET, path);
-		return (0);
-	}
+		return (ft_fprintf(2, RED "Error: Duplicated texture: %s\n" RESET,
+				path), 0);
 	trimmed = ft_strtrim(path, " \t\n");
 	*dest = ft_strdup(trimmed);
 	if (!*dest)

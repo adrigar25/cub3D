@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:31:46 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/24 17:36:29 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/30 15:47:26 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,13 @@ static void	perform_dda(t_game *game)
 			ray->side_dist_y += ray->delta_dist_y;
 			ray->map_y += ray->step_y;
 			ray->side = 1;
+		}
+		// Comprobación de límites para evitar crash
+		if (ray->map_y < 0 || ray->map_x < 0 || !game->map[ray->map_y]
+			|| !game->map[ray->map_y][ray->map_x])
+		{
+			ray->hit = 1;
+			break ;
 		}
 		if (game->map[ray->map_y][ray->map_x] == '1')
 			ray->hit = 1;

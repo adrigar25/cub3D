@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   game_loop_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:45:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/29 02:06:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/29 17:39:37 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ static void	draw_crosshair(t_game *game)
  *          Actualiza movimiento, limpia el buffer,
 	realiza raycasting y muestra el resultado.
  */
+// Limita el bucle a FPS_TARGET usando gettimeofday/usleep
+#include <sys/time.h>
+
 static int	render_loop(t_game *game)
 {
 	update_movement(game);

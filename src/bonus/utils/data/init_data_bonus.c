@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
+/*   init_data_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:40:42 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 17:38:21 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/29 23:43:16 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ t_game	*init_data(void)
 	game->textures.so.img = NULL;
 	game->textures.we.img = NULL;
 	game->textures.ea.img = NULL;
+	game->textures.door.img = NULL;
 	game->textures.path_no = NULL;
 	game->textures.path_so = NULL;
 	game->textures.path_we = NULL;
 	game->textures.path_ea = NULL;
+	game->textures.path_door = NULL;
 	game->map = NULL;
 	return (game);
 }

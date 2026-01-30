@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_press.c                                        :+:      :+:    :+:   */
+/*   key_press_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 12:54:14 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/30 00:47:42 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ int	handle_keypress(int keycode, t_game *game)
 		game->keys.up = 1;
 	else if (keycode == KEY_DOWN_M)
 		game->keys.down = 1;
+	else if (keycode == KEY_E_M)
+		open_door(game);
 	return (0);
 }
