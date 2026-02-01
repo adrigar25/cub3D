@@ -6,29 +6,46 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:57:57 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/30 00:28:54 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/30 18:54:03 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+#include "../math/math_utils.h"
 
 static void	calculate_texture_coords(t_game *game, t_img *texture)
 {
+	double	impact;
+	double	wall_x;
+	int		tex_x;
+	double	step;
+	double	tex_pos;
+
+	// 1. Calcular el punto de impacto en la pared
 	if (game->raycast.side == 0)
-		game->raycast.wall_x = game->player.pos_y + game->raycast.perp_wall_dist
-			* game->raycast.ray_dir_y;
+		impact = calc_wall_impact(game->player.pos_y,
+				game->raycast.perp_wall_dist, game->raycast.ray_dir_y);
 	else
-		game->raycast.wall_x = game->player.pos_x + game->raycast.perp_wall_dist
-			* game->raycast.ray_dir_x;
-	game->raycast.wall_x -= floor(game->raycast.wall_x);
-	game->raycast.tex_x = (int)(game->raycast.wall_x * (double)texture->width);
-	if (game->raycast.side == 0 && game->raycast.ray_dir_x > 0)
-		game->raycast.tex_x = texture->width - game->raycast.tex_x - 1;
-	if (game->raycast.side == 1 && game->raycast.ray_dir_y < 0)
-		game->raycast.tex_x = texture->width - game->raycast.tex_x - 1;
-	game->raycast.step = 1.0 * texture->height / game->raycast.line_height;
-	game->raycast.tex_pos = (game->raycast.draw_start - WIN_H / 2
-			+ game->raycast.line_height / 2) * game->raycast.step;
+		impact = calc_wall_impact(game->player.pos_x,
+				game->raycast.perp_wall_dist, game->raycast.ray_dir_x);
+	// 2. Obtener solo la parte decimal (posición dentro del bloque)
+	wall_x = clamp(fract(impact), 0.0, 1.0);
+	// 3. Calcular coordenada X de la textura con ajuste de dirección
+	if (game->raycast.side == 0)
+		tex_x = calc_texture_x_coord(wall_x, game->raycast.side,
+				game->raycast.ray_dir_x, texture->width);
+	else
+		tex_x = calc_texture_x_coord(wall_x, game->raycast.side,
+				game->raycast.ray_dir_y, texture->width);
+	// 4. Calcular el paso vertical y posición inicial en la textura
+	step = safe_div((double)texture->height, game->raycast.line_height, 1.0);
+	tex_pos = (game->raycast.draw_start - WIN_H / 2 + game->raycast.line_height
+			/ 2) * step;
+	// 5. Guardar en la estructura
+	game->raycast.wall_x = wall_x;
+	game->raycast.tex_x = tex_x;
+	game->raycast.step = step;
+	game->raycast.tex_pos = tex_pos;
 }
 
 static t_img	*get_wall_texture(t_game *game)

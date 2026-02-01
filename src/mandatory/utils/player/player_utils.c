@@ -6,10 +6,11 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 18:25:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 17:35:02 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/01 23:02:39 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../..//utils/math/math_utils.h"
 #include "../../cub3d.h"
 
 int	is_player_char(char c)

@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 22:39:09 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/01 22:49:28 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 00:50:37 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,11 @@ double	clamp(double val, double min, double max)
 	if (val > max)
 		return (max);
 	return (val);
+}
+
+double	fabs_custom(double x)
+{
+	if (x < 0)
+		return (-x);
+	return (x);
 }

@@ -6,50 +6,30 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:31:46 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/30 15:47:26 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/01 18:36:42 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+#include "../math/math_utils.h"
 
 void	init_step_and_side_dist(t_game *game)
 {
-	if (game->raycast.ray_dir_x < 0)
-	{
-		game->raycast.step_x = -1;
-		game->raycast.side_dist_x = (game->player.pos_x - game->raycast.map_x)
-			* game->raycast.delta_dist_x;
-	}
-	else
-	{
-		game->raycast.step_x = 1;
-		game->raycast.side_dist_x = (game->raycast.map_x + 1.0
-				- game->player.pos_x) * game->raycast.delta_dist_x;
-	}
-	if (game->raycast.ray_dir_y < 0)
-	{
-		game->raycast.step_y = -1;
-		game->raycast.side_dist_y = (game->player.pos_y - game->raycast.map_y)
-			* game->raycast.delta_dist_y;
-	}
-	else
-	{
-		game->raycast.step_y = 1;
-		game->raycast.side_dist_y = (game->raycast.map_y + 1.0
-				- game->player.pos_y) * game->raycast.delta_dist_y;
-	}
+	t_raycast	*ray;
+
+	ray = &game->raycast;
+	ray->step_x = calc_step(ray->ray_dir_x);
+	ray->side_dist_x = calc_side_dist(game->player.pos_x, ray->map_x,
+			ray->ray_dir_x, ray->delta_dist_x);
+	ray->step_y = calc_step(ray->ray_dir_y);
+	ray->side_dist_y = calc_side_dist(game->player.pos_y, ray->map_y,
+			ray->ray_dir_y, ray->delta_dist_y);
 }
 
 static void	init_delta_dist(t_raycast *ray)
 {
-	if (ray->ray_dir_x == 0)
-		ray->delta_dist_x = 1e30;
-	else
-		ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
-	if (ray->ray_dir_y == 0)
-		ray->delta_dist_y = 1e30;
-	else
-		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
+	ray->delta_dist_x = calc_delta_dist(ray->ray_dir_x);
+	ray->delta_dist_y = calc_delta_dist(ray->ray_dir_y);
 }
 
 static void	perform_dda(t_game *game)
@@ -72,9 +52,7 @@ static void	perform_dda(t_game *game)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		// Comprobación de límites para evitar crash
-		if (ray->map_y < 0 || ray->map_x < 0 || !game->map[ray->map_y]
-			|| !game->map[ray->map_y][ray->map_x])
+		if (is_out_of_bounds(ray->map_x, ray->map_y, game->map))
 		{
 			ray->hit = 1;
 			break ;
@@ -89,13 +67,11 @@ static void	calc_wall_height(t_game *game)
 	t_raycast	*ray;
 
 	ray = &game->raycast;
-	ray->line_height = (int)(WIN_H / ray->perp_wall_dist);
+	ray->line_height = (int)safe_div(WIN_H, ray->perp_wall_dist, WIN_H);
 	ray->draw_start = -ray->line_height / 2 + WIN_H / 2;
-	if (ray->draw_start < 0)
-		ray->draw_start = 0;
+	ray->draw_start = clamp(ray->draw_start, 0, WIN_H - 1);
 	ray->draw_end = ray->line_height / 2 + WIN_H / 2;
-	if (ray->draw_end >= WIN_H)
-		ray->draw_end = WIN_H - 1;
+	ray->draw_end = clamp(ray->draw_end, 0, WIN_H - 1);
 }
 
 /**

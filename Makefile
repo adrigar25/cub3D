@@ -6,7 +6,7 @@
 #    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2026/01/30 00:02:18 by agarcia          ###   ########.fr        #
+#    Updated: 2026/02/01 22:49:13 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ CFLAGS		:= -Wall -Wextra -Werror
 # ============ MANDATORY ============ #
 SRC_MAND_DIR	:= ./src/mandatory
 UTILS_MAND_DIR	:= $(SRC_MAND_DIR)/utils
+
 
 SRCS_MAND_UTILS	:=	${UTILS_MAND_DIR}/game/clear_game.c \
 					${UTILS_MAND_DIR}/game/game_loop.c \
@@ -51,6 +52,12 @@ SRCS_MAND_UTILS	:=	${UTILS_MAND_DIR}/game/clear_game.c \
 					$(UTILS_MAND_DIR)/raycast/init_raycast.c \
 					$(UTILS_MAND_DIR)/raycast/perpendicular_wall_distance.c \
 					$(UTILS_MAND_DIR)/raycast/raycast.c \
+					$(UTILS_MAND_DIR)/math/geometry.c \
+					$(UTILS_MAND_DIR)/math/camera.c \
+					$(UTILS_MAND_DIR)/math/map.c \
+					$(UTILS_MAND_DIR)/math/utils_basic.c \
+					$(UTILS_MAND_DIR)/math/utils_raycast.c \
+					$(UTILS_MAND_DIR)/math/vector.c \
 
 SRCS_MAND	:= 	$(SRC_MAND_DIR)/main.c \
 				$(SRCS_MAND_UTILS) \
@@ -98,6 +105,7 @@ SRCS_BONUS_UTILS :=	${UTILS_BONUS_DIR}/game/clear_game_bonus.c \
 					$(UTILS_BONUS_DIR)/raycast/raycast_bonus.c \
 					$(UTILS_BONUS_DIR)/door/door_utils_bonus.c \
 
+
 SRCS_BONUS	:= 	$(SRC_BONUS_DIR)/main_bonus.c \
 				$(SRCS_BONUS_UTILS) \
 
@@ -131,6 +139,11 @@ $(OBJS_MAND_DIR):
 	@mkdir -p $(OBJS_MAND_DIR)/utils/player
 	@mkdir -p $(OBJS_MAND_DIR)/utils/raycast
 	@mkdir -p $(OBJS_MAND_DIR)/utils/print
+	@mkdir -p $(OBJS_MAND_DIR)/utils/math
+	@mkdir -p $(OBJS_MAND_DIR)/utils/math/geometry
+	@mkdir -p $(OBJS_MAND_DIR)/utils/math/map
+	@mkdir -p $(OBJS_MAND_DIR)/utils/math/utils
+	@mkdir -p $(OBJS_MAND_DIR)/utils/math/vector
 
 $(OBJS_MAND_DIR)/%.o: $(SRC_MAND_DIR)/%.c | $(OBJS_MAND_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@

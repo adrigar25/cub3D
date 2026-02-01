@@ -6,11 +6,12 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 17:36:01 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/30 18:52:16 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../cub3d.h"
+#include "../../../utils/math/math_utils.h"
 
 /**
  * ENGLISH: Apply rotation to player direction and camera plane.
@@ -24,22 +25,8 @@
  */
 static void	apply_rotation(t_game *game, double angle)
 {
-	double	old_dir_x;
-	double	old_plane_x;
-	double	cos_val;
-	double	sin_val;
-
-	cos_val = cos(angle);
-	sin_val = sin(angle);
-	old_dir_x = game->player.dir_x;
-	game->player.dir_x = game->player.dir_x * cos_val - game->player.dir_y
-		* sin_val;
-	game->player.dir_y = old_dir_x * sin_val + game->player.dir_y * cos_val;
-	old_plane_x = game->player.plane_x;
-	game->player.plane_x = game->player.plane_x * cos_val - game->player.plane_y
-		* sin_val;
-	game->player.plane_y = old_plane_x * sin_val + game->player.plane_y
-		* cos_val;
+	rotate_vector(&game->player.dir_x, &game->player.dir_y, angle);
+	rotate_vector(&game->player.plane_x, &game->player.plane_y, angle);
 }
 
 /**

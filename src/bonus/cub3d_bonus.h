@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:50:52 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/30 16:00:18 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 00:10:03 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@
 # define SHADOW_MASK 0x7F7F7F
 
 // Movement constants
-# define MOVE_SPEED 0.07
-# define ROT_SPEED 0.03
+# define MOVE_SPEED 0.03
+# define ROT_SPEED 0.008
 # define MOUSE_SENSITIVITY 0.003
 
 // Texture constants
