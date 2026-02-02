@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:41:35 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 16:50:37 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 18:44:38 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	cub3d(char *file, int is_server, const char *ip, int port)
 		return (clear_game(game_data), 1);
 	if (get_player_position(game_data))
 		return (clear_game(game_data), 1);
-	
+
 	// Initialize network if multiplayer mode
 	if (is_server >= 0)
 	{
@@ -71,7 +71,7 @@ int	cub3d(char *file, int is_server, const char *ip, int port)
 		}
 		ft_fprintf(1, "Network initialized successfully\n");
 	}
-	
+
 	start_game_loop(game_data);
 	return (0);
 }
@@ -100,13 +100,13 @@ int	main(int argc, char **argv)
 	int			is_server = -1;  // -1 = single player, 0 = client, 1 = server
 	const char	*ip = NULL;
 	int			port = 8080;  // DEFAULT_PORT
-	
+
 	if (argc < 2)
 	{
 		print_usage(argv[0]);
 		return (-1);
 	}
-	
+
 	if (!valid_extension(argv[1], ".cub"))
 	{
 		ft_fprintf(2, RED "Error: Map file must have a .cub extension\n" RESET);

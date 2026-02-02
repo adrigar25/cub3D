@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   network_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 12:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/02 12:00:00 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 18:44:38 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ static int	init_server_socket(t_network *net, int port)
 		return (ft_fprintf(2, "Error: Failed to create socket\n"), 1);
 	if (setsockopt(net->socket_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0)
 		return (ft_fprintf(2, "Error: Failed to set socket options\n"), 1);
-	
+
 	net->server_addr.sin_family = AF_INET;
 	net->server_addr.sin_addr.s_addr = INADDR_ANY;
 	net->server_addr.sin_port = htons(port);
 
 	if (bind(net->socket_fd, (struct sockaddr*)&net->server_addr, sizeof(net->server_addr)) < 0)
 		return (ft_fprintf(2, "Error: Failed to bind socket\n"), 1);
-	
+
 	if (listen(net->socket_fd, MAX_PLAYERS) < 0)
 		return (ft_fprintf(2, "Error: Failed to listen on socket\n"), 1);
 
@@ -73,7 +73,7 @@ static int	init_client_socket(t_network *net, const char *ip, int port)
 
 	net->server_addr.sin_family = AF_INET;
 	net->server_addr.sin_port = htons(port);
-	
+
 	if (inet_pton(AF_INET, ip, &net->server_addr.sin_addr) <= 0)
 		return (ft_fprintf(2, "Error: Invalid IP address\n"), 1);
 
@@ -108,7 +108,7 @@ int	init_network(t_network *net, int is_server, const char *ip, int port)
 	// Create network threads
 	if (pthread_create(&net->listen_thread, NULL, network_listen_thread, net) != 0)
 		return (ft_fprintf(2, "Error: Failed to create listen thread\n"), 1);
-	
+
 	if (pthread_create(&net->send_thread, NULL, network_send_thread, net) != 0)
 		return (ft_fprintf(2, "Error: Failed to create send thread\n"), 1);
 
@@ -123,7 +123,7 @@ void	cleanup_network(t_network *net)
 	int	i;
 
 	net->running = 0;
-	
+
 	// Join threads
 	if (net->listen_thread)
 		pthread_join(net->listen_thread, NULL);
@@ -133,7 +133,7 @@ void	cleanup_network(t_network *net)
 	// Close sockets
 	if (net->socket_fd >= 0)
 		close(net->socket_fd);
-	
+
 	i = 0;
 	while (i < MAX_PLAYERS)
 	{

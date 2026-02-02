@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   network_client.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 12:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/02 12:00:00 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 18:44:38 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,10 @@ void	update_remote_players(t_network *net)
 		return;
 
 	pthread_mutex_lock(&net->players_mutex);
-	
+
 	// Here you can add interpolation logic if needed
 	// For now, we just keep the data as is
-	
+
 	pthread_mutex_unlock(&net->players_mutex);
 }
 

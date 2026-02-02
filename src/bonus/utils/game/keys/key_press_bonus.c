@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_press_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/30 00:47:42 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 18:44:40 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	handle_keypress(int keycode, t_game *game)
 		handle_enter_ip_key(keycode, game);
 		return (0);
 	}
-	
+
 	// Handle game input
 	if (game->menu.state == GAME_RUNNING)
 	{

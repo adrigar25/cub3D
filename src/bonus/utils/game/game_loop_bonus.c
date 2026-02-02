@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:45:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/29 17:39:37 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 18:44:40 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,11 @@ static int	render_loop(t_game *game)
 		render_enter_ip_menu(game);
 		return (0);
 	}
-	
+
 	if (game->menu.state == GAME_RUNNING)
 	{
 		update_movement(game);
-		
+
 		// Handle networking if enabled
 		if (game->network && game->network->running)
 		{
@@ -92,18 +92,18 @@ static int	render_loop(t_game *game)
 			broadcast_player_state(game);
 			update_remote_players(game);
 		}
-		
+
 		raycast(game);
-		
+
 		// Render remote players if networking is enabled
 		if (game->network && game->network->running)
 			render_network_players(game);
-			
+
 		draw_crosshair(game);
 		render_frame(game);
 		print_minimap(game);
 	}
-	
+
 	return (0);
 }
 

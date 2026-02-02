@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   network_threads.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 12:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/02 12:00:00 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 18:44:38 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	*network_listen_thread(void *arg)
 	ssize_t			bytes_read;
 
 	net = (t_network *)arg;
-	
+
 	while (net->running)
 	{
 		FD_ZERO(&read_fds);
@@ -160,12 +160,12 @@ void	*network_send_thread(void *arg)
 	t_network	*net;
 
 	net = (t_network *)arg;
-	
+
 	while (net->running)
 	{
 		// Sleep for 50ms (20 FPS for network updates)
 		usleep(50000);
-		
+
 		// Check for inactive players (timeout after 5 seconds)
 		if (net->is_server)
 		{
@@ -174,7 +174,7 @@ void	*network_send_thread(void *arg)
 			int i = 0;
 			while (i < MAX_PLAYERS)
 			{
-				if (net->remote_players[i].active && 
+				if (net->remote_players[i].active &&
 					(current_time - net->remote_players[i].last_update) > 5000)
 				{
 					net->remote_players[i].active = 0;

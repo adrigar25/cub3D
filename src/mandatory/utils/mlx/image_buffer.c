@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image_buffer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:30:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/24 18:20:19 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 18:44:40 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	img_pixel_put(t_img *img, int x, int y, int color)
 void	render_frame(t_game *game)
 {
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.img, 0, 0);
-	
+
 	// Draw network status overlay if multiplayer mode is active
 	if (game->network.running)
 		draw_network_status(game);

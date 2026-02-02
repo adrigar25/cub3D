@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   network_server.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 12:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/02 12:00:00 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 18:44:38 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	handle_new_client(t_network *net)
 	i = 0;
 	while (i < MAX_PLAYERS && net->client_sockets[i] >= 0)
 		i++;
-	
+
 	if (i >= MAX_PLAYERS)
 	{
 		ft_fprintf(1, "Server full, rejecting client\n");
@@ -145,7 +145,7 @@ void	broadcast_packet(t_network *net, t_net_packet *packet, int except_fd)
 				close(net->client_sockets[i]);
 				net->client_sockets[i] = -1;
 				net->client_count--;
-				
+
 				// Mark remote player as inactive
 				pthread_mutex_lock(&net->players_mutex);
 				int j = 0;

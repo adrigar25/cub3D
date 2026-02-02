@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 18:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/02 18:30:00 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 18:44:40 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	render_menu(t_game *game)
 
 	// Draw title
 	mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 100, y_offset, 0xFFFFFF, title);
-	
+
 	y_offset += 80;
 
 	// Draw menu options with selection highlight
@@ -41,9 +41,9 @@ void	render_menu(t_game *game)
 		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0x00FF00, option1);
 	else
 		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0xFFFFFF, option1);
-	
+
 	y_offset += 40;
-	
+
 	if (game->menu.selected_option == 1)
 		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0x00FF00, option2);
 	else
@@ -128,7 +128,7 @@ void	render_multiplayer_menu(t_game *game)
 
 	// Draw title
 	mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0xFFFFFF, title);
-	
+
 	y_offset += 80;
 
 	// Draw options with selection highlight
@@ -136,16 +136,16 @@ void	render_multiplayer_menu(t_game *game)
 		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0x00FF00, option1);
 	else
 		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0xFFFFFF, option1);
-	
+
 	y_offset += 40;
-	
+
 	if (game->menu.selected_option == 1)
 		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0x00FF00, option2);
 	else
 		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0xFFFFFF, option2);
-	
+
 	y_offset += 40;
-	
+
 	if (game->menu.selected_option == 2)
 		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0x00FF00, option3);
 	else
@@ -238,18 +238,18 @@ void	load_available_maps(t_game *game)
 {
 	// Free existing maps if any
 	free_available_maps(game);
-	
+
 	// For now, hardcode the valid maps we know exist
 	game->menu.map_count = 3;
 	game->menu.available_maps = malloc(sizeof(char *) * (game->menu.map_count + 1));
 	if (!game->menu.available_maps)
 		return;
-	
+
 	game->menu.available_maps[0] = ft_strdup("map1.cub");
 	game->menu.available_maps[1] = ft_strdup("map2.cub");
 	game->menu.available_maps[2] = ft_strdup("map3.cub");
 	game->menu.available_maps[3] = NULL;
-	
+
 	game->menu.selected_map = 0;
 }
 
@@ -259,10 +259,10 @@ void	load_available_maps(t_game *game)
 void	free_available_maps(t_game *game)
 {
 	int i;
-	
+
 	if (!game->menu.available_maps)
 		return;
-		
+
 	i = 0;
 	while (i < game->menu.map_count && game->menu.available_maps[i])
 	{
@@ -306,7 +306,7 @@ void	render_map_selection_menu(t_game *game)
 
 	// Draw title
 	mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 60, y_offset, 0xFFFFFF, title);
-	
+
 	y_offset += 60;
 
 	// Draw map options
@@ -320,9 +320,9 @@ void	render_map_selection_menu(t_game *game)
 		y_offset += 35;
 		i++;
 	}
-	
+
 	y_offset += 20;
-	
+
 	// Draw back option
 	if (game->menu.selected_option == game->menu.map_count)
 		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 60, y_offset, 0x00FF00, back_option);
@@ -342,7 +342,7 @@ void	handle_map_selection_key(int keycode, t_game *game)
 {
 	int max_options = game->menu.map_count; // maps + back option
 	char map_path[256];
-	
+
 	if (keycode == KEY_UP_M || keycode == KEY_UP_L)
 	{
 		game->menu.selected_option--;
@@ -373,7 +373,7 @@ void	handle_map_selection_key(int keycode, t_game *game)
 		else // Map selected
 		{
 			snprintf(map_path, sizeof(map_path), "MAPS/%s", game->menu.available_maps[game->menu.selected_option]);
-			
+
 			// Load complete game with selected map
 			if (read_data(&game, map_path) == 0 &&
 				check_data(game) == 0 &&
@@ -383,7 +383,7 @@ void	handle_map_selection_key(int keycode, t_game *game)
 			{
 				free_available_maps(game);
 				game->menu.state = GAME_RUNNING;
-				
+
 				// TODO: Initialize network if multiplayer mode
 				if (game->menu.game_mode != 0)
 				{
@@ -444,12 +444,12 @@ void	render_enter_ip_menu(t_game *game)
 
 	// Draw title
 	mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 100, y_offset, 0xFFFFFF, title);
-	
+
 	y_offset += 80;
 
 	// Draw prompt
 	mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 120, y_offset, 0xAAAAAA, prompt);
-	
+
 	y_offset += 50;
 
 	// Draw input field with cursor
@@ -471,7 +471,7 @@ void	handle_enter_ip_key(int keycode, t_game *game)
 	char map_path[256];
 
 	len = ft_strlen(game->menu.server_ip);
-	
+
 	// Handle ENTER key - connect to server
 	if (keycode == 36 || keycode == 65293) // ENTER
 	{
@@ -479,7 +479,7 @@ void	handle_enter_ip_key(int keycode, t_game *game)
 		{
 			// Use default map for client connection
 			snprintf(map_path, sizeof(map_path), "MAPS/map1.cub");
-			
+
 			// Load the map and initialize game
 			if (read_data(&game, map_path) == 0 &&
 				check_data(game) == 0 &&
@@ -488,7 +488,7 @@ void	handle_enter_ip_key(int keycode, t_game *game)
 				get_player_position(game) == 0)
 			{
 				game->menu.state = GAME_RUNNING;
-				
+
 				// TODO: Initialize network connection with server_ip
 				printf("Connecting to server: %s\n", game->menu.server_ip);
 				// init_network(game, 0, game->menu.server_ip, 8080);
@@ -517,7 +517,7 @@ void	handle_enter_ip_key(int keycode, t_game *game)
 	else if (len < 255)
 	{
 		char c = 0;
-		
+
 		// Numbers 0-9
 		if (keycode >= 18 && keycode <= 21) // 1-4
 			c = '1' + (keycode - 18);
@@ -533,7 +533,7 @@ void	handle_enter_ip_key(int keycode, t_game *game)
 			c = '.';
 		else if (keycode == 41) // : (colon for IPv6 or port)
 			c = ':';
-		
+
 		if (c != 0)
 		{
 			game->menu.server_ip[len] = c;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:05:09 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/24 13:15:51 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 18:44:40 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	raycast(t_game *game)
 		draw_column(game, x);
 		x++;
 	}
-	
+
 	// Render remote players after drawing walls
 	if (game->network.running)
 		render_remote_players(game);
