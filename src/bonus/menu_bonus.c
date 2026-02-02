@@ -382,12 +382,30 @@ void	handle_map_selection_key(int keycode, t_game *game)
 				get_player_position(game) == 0)
 			{
 				free_available_maps(game);
-				game->menu.state = GAME_RUNNING;
-
-				// TODO: Initialize network if multiplayer mode
-				if (game->menu.game_mode != 0)
+				
+				// Initialize network if multiplayer mode
+				if (game->menu.game_mode == 1) // Server mode
 				{
-					// Network initialization would go here
+					printf("Starting server on port %d\n", DEFAULT_PORT);
+					if (init_network(game, 1, NULL, DEFAULT_PORT) == 0)
+					{
+						game->menu.state = GAME_RUNNING;
+						printf("Server started successfully!\n");
+					}
+					else
+					{
+						printf("Failed to start server\n");
+						game->menu.state = MENU_MULTIPLAYER;
+						game->menu.selected_option = 0;
+					}
+				}
+				else if (game->menu.game_mode == 2) // Client mode (shouldn't happen here)
+				{
+					game->menu.state = GAME_RUNNING;
+				}
+				else // Single player
+				{
+					game->menu.state = GAME_RUNNING;
 				}
 			}
 			else
@@ -430,9 +448,9 @@ void	render_enter_ip_menu(t_game *game)
 {
 	int y_offset;
 	char *title = "CONNECT TO SERVER";
-	char *prompt = "Enter server IP address:";
+	char *prompt = "Enter server IP address (port 8080):";
 	char display_ip[270];
-	char *controls = "Type IP address, ENTER to connect, ESC to cancel";
+	char *controls = "Type IP address (e.g. 192.168.1.5), ENTER to connect, ESC to cancel";
 
 	if (!game || !game->mlx_ptr || !game->win_ptr)
 		return;
@@ -487,11 +505,20 @@ void	handle_enter_ip_key(int keycode, t_game *game)
 				load_textures_images(game) == 0 &&
 				get_player_position(game) == 0)
 			{
-				game->menu.state = GAME_RUNNING;
-
-				// TODO: Initialize network connection with server_ip
-				printf("Connecting to server: %s\n", game->menu.server_ip);
-				// init_network(game, 0, game->menu.server_ip, 8080);
+				// Initialize network connection with server_ip
+				printf("Connecting to server: %s:%d\n", game->menu.server_ip, DEFAULT_PORT);
+				if (init_network(game, 0, game->menu.server_ip, DEFAULT_PORT) == 0)
+				{
+					game->menu.state = GAME_RUNNING;
+					printf("Connected successfully!\n");
+				}
+				else
+				{
+					printf("Failed to connect to server\n");
+					game->menu.state = MENU_MULTIPLAYER;
+					game->menu.server_ip[0] = '\0';
+					game->menu.selected_option = 0;
+				}
 			}
 			else
 			{
@@ -541,8 +568,6 @@ void	handle_enter_ip_key(int keycode, t_game *game)
 			c = '9';
 		else if (keycode == 47) // . (period)
 			c = '.';
-		else if (keycode == 41) // : (colon for IPv6 or port)
-			c = ':';
 
 		if (c != 0)
 		{
