@@ -39,6 +39,7 @@ void	handle_new_client(t_network *net, int client_socket)
 	struct sockaddr_in	addr;
 	socklen_t			addr_len;
 	char				ip_str[INET_ADDRSTRLEN];
+	t_net_packet		packet;
 
 	// Get client IP address
 	addr_len = sizeof(addr);
@@ -60,6 +61,12 @@ void	handle_new_client(t_network *net, int client_socket)
 		net->client_count++;
 		printf(GREEN "🌐 New client connected from %s\n" RESET, ip_str);
 		printf(GREEN "   Total clients: %d\n" RESET, net->client_count);
+		
+		// Send map info to new client
+		packet.type = PACKET_MAP_INFO;
+		packet.player_id = net->my_player_id;
+		ft_strlcpy(packet.map_name, net->map_name, 256);
+		send_packet(client_socket, &packet);
 	}
 	else
 	{

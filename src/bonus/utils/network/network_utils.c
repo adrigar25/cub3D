@@ -79,7 +79,35 @@ int	receive_packet(int socket_fd, t_net_packet *packet)
  */
 static void	process_packet(t_game *game, t_net_packet *packet)
 {
-	if (packet->type == PACKET_DOOR_TOGGLE)
+	char	map_path[512];
+	
+	if (packet->type == PACKET_MAP_INFO)
+	{
+		// Client received map info from server - reload with correct map
+		if (!game->network->is_server)
+		{
+			printf("Server map: %s\n", packet->map_name);
+			snprintf(map_path, sizeof(map_path), "MAPS/%s", packet->map_name);
+			
+			// Clear current game data
+			clear_game_data(game);
+			
+			// Reload with correct map
+			if (read_data(&game, map_path) == 0 &&
+				check_data(game) == 0 &&
+				check_map(game->map) == 0 &&
+				load_textures_images(game) == 0 &&
+				get_player_position(game) == 0)
+			{
+				printf("Map loaded successfully: %s\n", packet->map_name);
+			}
+			else
+			{
+				printf("Failed to load map: %s\n", packet->map_name);
+			}
+		}
+	}
+	else if (packet->type == PACKET_DOOR_TOGGLE)
 	{
 		// Apply door toggle to map
 		if (packet->door_y >= 0 && packet->door_y < game->map_h &&

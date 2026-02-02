@@ -338,6 +338,7 @@ typedef struct s_raycast
 // Packet types
 # define PACKET_PLAYER_UPDATE 1
 # define PACKET_DOOR_TOGGLE 2
+# define PACKET_MAP_INFO 3
 
 // Forward declaration
 struct s_player;
@@ -354,6 +355,7 @@ typedef struct s_net_packet
 	double		plane_y;
 	int			door_x;
 	int			door_y;
+	char		map_name[256];
 }				t_net_packet;
 
 typedef struct s_network
@@ -368,6 +370,7 @@ typedef struct s_network
 	int				running;
 	int				my_player_id;
 	struct s_player	*remote_players[MAX_CLIENTS];
+	char			map_name[256];
 }					t_network;
 
 typedef struct s_game
@@ -433,6 +436,7 @@ int				rgb_to_hex(int r, int g, int b);
 int				check_rgb_format(char *values);
 int				parse_rgb(char *line);
 void			clear_game(t_game *game);
+void			clear_game_data(t_game *game);
 void			free_map(char **map);
 
 // Player movement functions

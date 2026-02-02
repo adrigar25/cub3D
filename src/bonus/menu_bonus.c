@@ -498,6 +498,9 @@ void	handle_map_selection_key(int keycode, t_game *game)
 					printf("Starting server on port %d\n", DEFAULT_PORT);
 					if (init_network(game, 1, NULL, DEFAULT_PORT) == 0)
 					{
+						// Store map name in network structure
+						ft_strlcpy(game->network->map_name, 
+							game->menu.available_maps[game->menu.selected_option], 256);
 						game->menu.state = GAME_RUNNING;
 						printf("Server started successfully!\n");
 					}

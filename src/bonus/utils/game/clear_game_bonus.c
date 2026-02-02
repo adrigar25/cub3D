@@ -53,6 +53,21 @@ static void	free_texture_paths(t_game *game)
 		free(game->textures.path_ea);
 	if (game->textures.path_door)
 		free(game->textures.path_door);
+	game->textures.path_no = NULL;
+	game->textures.path_so = NULL;
+	game->textures.path_we = NULL;
+	game->textures.path_ea = NULL;
+	game->textures.path_door = NULL;
+}
+
+void	clear_game_data(t_game *game)
+{
+	if (!game)
+		return;
+	destroy_texture_images(game);
+	free_texture_paths(game);
+	free_map(game->map);
+	game->map = NULL;
 }
 
 void	clear_game(t_game *game)
