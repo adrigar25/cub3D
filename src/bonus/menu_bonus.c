@@ -6,7 +6,7 @@
 /*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 18:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/02 18:50:15 by adriescr         ###   ########.fr       */
+/*   Updated: 2026/02/02 18:56:03 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -382,7 +382,7 @@ void	handle_map_selection_key(int keycode, t_game *game)
 				get_player_position(game) == 0)
 			{
 				free_available_maps(game);
-				
+
 				// Initialize network if multiplayer mode
 				if (game->menu.game_mode == 1) // Server mode
 				{
