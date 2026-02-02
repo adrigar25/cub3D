@@ -24,7 +24,7 @@ void	broadcast_player_state(t_game *game)
 	if (!game || !game->network)
 		return;
 	net = game->network;
-	packet.type = 1;
+	packet.type = PACKET_PLAYER_UPDATE;
 	packet.player_id = net->my_player_id;
 	packet.pos_x = game->player.pos_x;
 	packet.pos_y = game->player.pos_y;
@@ -75,6 +75,28 @@ int	receive_packet(int socket_fd, t_net_packet *packet)
 }
 
 /**
+ * Process received packet
+ */
+static void	process_packet(t_game *game, t_net_packet *packet)
+{
+	if (packet->type == PACKET_DOOR_TOGGLE)
+	{
+		// Apply door toggle to map
+		if (packet->door_y >= 0 && packet->door_y < game->map_h &&
+			packet->door_x >= 0 && packet->door_x < game->map_w)
+		{
+			if (game->map[packet->door_y][packet->door_x] == 'D')
+				game->map[packet->door_y][packet->door_x] = '0';
+		}
+	}
+	else if (packet->type == PACKET_PLAYER_UPDATE)
+	{
+		// TODO: Update remote player position
+		(void)game;
+	}
+}
+
+/**
  * Handle incoming network packets
  */
 void	handle_network_packets(t_game *game)
@@ -85,6 +107,9 @@ void	handle_network_packets(t_game *game)
 	socklen_t			addr_len;
 	fd_set				read_fds;
 	struct timeval		timeout;
+	t_net_packet		packet;
+	int					i;
+	int					max_fd;
 
 	if (!game || !game->network)
 		return;
@@ -96,13 +121,28 @@ void	handle_network_packets(t_game *game)
 	{
 		FD_ZERO(&read_fds);
 		FD_SET(net->server_socket, &read_fds);
+		max_fd = net->server_socket;
 		
-		// Non-blocking check for new connections
+		// Add all client sockets to the set
+		i = 0;
+		while (i < MAX_CLIENTS)
+		{
+			if (net->client_sockets[i] >= 0)
+			{
+				FD_SET(net->client_sockets[i], &read_fds);
+				if (net->client_sockets[i] > max_fd)
+					max_fd = net->client_sockets[i];
+			}
+			i++;
+		}
+		
+		// Non-blocking check
 		timeout.tv_sec = 0;
 		timeout.tv_usec = 0;
 		
-		if (select(net->server_socket + 1, &read_fds, NULL, NULL, &timeout) > 0)
+		if (select(max_fd + 1, &read_fds, NULL, NULL, &timeout) > 0)
 		{
+			// Check for new connections
 			if (FD_ISSET(net->server_socket, &read_fds))
 			{
 				addr_len = sizeof(client_addr);
@@ -110,14 +150,45 @@ void	handle_network_packets(t_game *game)
 					(struct sockaddr *)&client_addr, &addr_len);
 				
 				if (new_socket >= 0)
-				{
 					handle_new_client(net, new_socket);
+			}
+			
+			// Check for data from existing clients
+			i = 0;
+			while (i < MAX_CLIENTS)
+			{
+				if (net->client_sockets[i] >= 0 && 
+					FD_ISSET(net->client_sockets[i], &read_fds))
+				{
+					if (receive_packet(net->client_sockets[i], &packet) == 0)
+					{
+						process_packet(game, &packet);
+						// Broadcast to other clients
+						broadcast_packet(net, &packet);
+					}
 				}
+				i++;
 			}
 		}
 	}
-	
-	// TODO: Handle packets from connected clients
+	else if (!net->is_server && net->server_socket >= 0)
+	{
+		// Client: check for data from server
+		FD_ZERO(&read_fds);
+		FD_SET(net->server_socket, &read_fds);
+		
+		timeout.tv_sec = 0;
+		timeout.tv_usec = 0;
+		
+		if (select(net->server_socket + 1, &read_fds, NULL, NULL, &timeout) > 0)
+		{
+			if (FD_ISSET(net->server_socket, &read_fds))
+			{
+				if (receive_packet(net->server_socket, &packet) == 0)
+					process_packet(game, &packet);
+			}
+		}
+	}
 }
 
 /**

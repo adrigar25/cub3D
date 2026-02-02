@@ -335,6 +335,10 @@ typedef struct s_raycast
 /*                               NETWORKING STRUCTURES                        */
 /* ************************************************************************** */
 
+// Packet types
+# define PACKET_PLAYER_UPDATE 1
+# define PACKET_DOOR_TOGGLE 2
+
 // Forward declaration
 struct s_player;
 
@@ -348,6 +352,8 @@ typedef struct s_net_packet
 	double		dir_y;
 	double		plane_x;
 	double		plane_y;
+	int			door_x;
+	int			door_y;
 }				t_net_packet;
 
 typedef struct s_network
