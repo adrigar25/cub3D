@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 01:03:21 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/29 23:43:50 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 23:21:14 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ int	load_textures_images(t_game *game)
 		return (-1);
 	if (load_texture(game, &game->textures.door, game->textures.path_door) ==
 		-1)
+		return (-1);
+	// Load enemy icon from fixed path
+	if (load_texture(game, &game->enemy_icon, "textures/enemy.xpm") == -1)
 		return (-1);
 	return (0);
 }

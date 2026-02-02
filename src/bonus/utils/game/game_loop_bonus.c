@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:45:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/29 17:39:37 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 23:41:38 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,17 @@ static int	render_loop(t_game *game)
 {
 	update_movement(game);
 	raycast(game);
+	// Dibujar enemigos (letra 'X' en el mapa)
+	for (int i = 0; i < game->map_h; ++i)
+	{
+		if (!game->map[i])
+			continue ;
+		for (int j = 0; j < (int)ft_strlen(game->map[i]); ++j)
+		{
+			if (game->map[i][j] == 'X')
+				draw_sprite_at(game, &game->enemy_icon, j + 0.5, i + 0.5, 1.0);
+		}
+	}
 	draw_crosshair(game);
 	render_frame(game);
 	print_minimap(game);

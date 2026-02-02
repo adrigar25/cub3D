@@ -6,7 +6,7 @@
 #    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2026/02/02 22:54:11 by agarcia          ###   ########.fr        #
+#    Updated: 2026/02/02 23:41:40 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,6 @@ SRCS_BONUS_UTILS :=	${UTILS_BONUS_DIR}/game/clear_game_bonus.c \
 					$(UTILS_BONUS_DIR)/map/check_player_bonus.c \
 					$(UTILS_BONUS_DIR)/minimap/print_minimap_bonus.c \
 					$(UTILS_BONUS_DIR)/minimap/print_player_bonus.c \
-					$(UTILS_BONUS_DIR)/minimap/minimap_put_image_bonus.c \
 					$(UTILS_BONUS_DIR)/data/init_data_bonus.c \
 					$(UTILS_BONUS_DIR)/data/read_data_bonus.c \
 					$(UTILS_BONUS_DIR)/data/check_data_bonus.c \
@@ -105,6 +104,7 @@ SRCS_BONUS_UTILS :=	${UTILS_BONUS_DIR}/game/clear_game_bonus.c \
 					$(UTILS_BONUS_DIR)/raycast/perpendicular_wall_distance_bonus.c \
 					$(UTILS_BONUS_DIR)/raycast/raycast_bonus.c \
 					$(UTILS_BONUS_DIR)/door/door_utils_bonus.c \
+					$(UTILS_BONUS_DIR)/sprite/draw_sprite_bonus.c \
 
 
 SRCS_BONUS	:= 	$(SRC_BONUS_DIR)/main_bonus.c \
@@ -166,6 +166,7 @@ $(OBJS_BONUS_DIR):
 	@mkdir -p $(OBJS_BONUS_DIR)/utils/raycast
 	@mkdir -p $(OBJS_BONUS_DIR)/utils/print
 	@mkdir -p $(OBJS_BONUS_DIR)/utils/door/door_utils_bonus.c
+	@mkdir -p $(OBJS_BONUS_DIR)/utils/sprite
 
 $(OBJS_BONUS_DIR)/%.o: $(SRC_BONUS_DIR)/%.c | $(OBJS_BONUS_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@

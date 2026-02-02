@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/30 00:24:01 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 23:57:21 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static int	is_valid_neighbor(char **map, int x, int y, int i)
 		return (0);
 	if (new_y >= (int)ft_strlen(map[new_x]))
 		return (0);
-	// AQUÍ está el cambio: también permitir 'D' como vecino válido
 	if (ft_strchr(" \0", map[new_x][new_y]))
 		return (0);
 	return (1);
@@ -52,9 +51,13 @@ static int	is_valid_neighbor(char **map, int x, int y, int i)
 
 int	check_walls(char **map)
 {
-	int i;
-	int x;
-	int y;
+	int	i;
+	int	x;
+	int	y;
+	int	dx;
+	int	dy;
+					int nx;
+					int ny;
 
 	y = -1;
 	x = -1;
@@ -63,14 +66,25 @@ int	check_walls(char **map)
 		y = -1;
 		while (map[x][++y])
 		{
-			// Verificar espacios vacíos ('0'), jugador Y puertas ('D')
 			if (!(map[x][y] == '0' || is_player_char(map[x][y])
 					|| map[x][y] == 'D'))
 				continue ;
 			i = 0;
 			while (i < 8)
-				if (!is_valid_neighbor(map, x, y, i++))
-					return (-1);
+			{
+				if (!is_valid_neighbor(map, x, y, i))
+				{
+					dx = 0;
+					dy = 0;
+					get_direction(i, &dx, &dy);
+					nx = x + dx;
+					ny = y + dy;
+					if (nx >= 0 && map[nx] && ny >= 0
+						&& ny < (int)ft_strlen(map[nx]))
+						return (-1);
+				}
+				i++;
+			}
 		}
 	}
 	return (0);

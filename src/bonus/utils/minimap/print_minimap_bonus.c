@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 02:01:25 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/30 15:57:39 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 23:41:37 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,8 @@ static void	draw_rotated_minimap(t_game *game, double tile_size,
 						img_pixel_put(&game->minimap, px, py,
 							MINIMAP_DOOR_COLOR);
 					else if (game->map[map_y][map_x] == '0'
-						|| is_player_char(game->map[map_y][map_x]))
+						|| is_player_char(game->map[map_y][map_x])
+						|| game->map[map_y][map_x] == 'X')
 						img_pixel_put(&game->minimap, px, py,
 							MINIMAP_FLOOR_COLOR);
 				}

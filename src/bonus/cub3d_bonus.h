@@ -6,12 +6,12 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:50:52 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/02 22:54:11 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 23:41:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 /* ************************************************************************** */
 /*                               LIBRARIES                                    */
@@ -276,10 +276,13 @@ typedef struct s_game
 	char		**map;
 	int			map_w;
 	int			map_h;
+		// Z-Buffer por columna para sprites (profundidad de pared)
+		double		zbuffer[WIN_W];
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_img		minimap;
 	t_img		img;
+	t_img		enemy_icon;
 	t_texture	textures;
 	t_player	player;
 	t_raycast	raycast;
@@ -302,8 +305,6 @@ int				check_player(char **map);
 // Minimap utilities
 void			draw_player(t_game *game, double center_x, double center_y);
 int				print_minimap(t_game *game);
-void			minimap_put_image_at(t_game *game, t_img *image, int map_x,
-					int map_y);
 
 // Data utilities
 int				check_data(t_game *game_data);
@@ -328,6 +329,12 @@ void			dda(t_game *game);
 void			init_step_and_side_dist(t_game *game);
 void			perpendicular_wall_distance(t_raycast *ray, t_game *game);
 void			draw_column(t_game *game, int x);
+
+// Sprites / Entidades
+// Dibuja una imagen (sprite) en coordenadas del mundo (x, y),
+// siempre orientada hacia el jugador y escalada por distancia.
+void			draw_sprite_at(t_game *game, t_img *texture,
+				double world_x, double world_y, double size);
 
 // Utils
 int				rgb_to_hex(int r, int g, int b);

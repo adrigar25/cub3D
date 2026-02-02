@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/29 23:32:25 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 23:41:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_valid_characters(char **map)
 	{
 		j = 0;
 		while (map[i][j])
-			if (ft_strchr(" 01NSEWD\n", map[i][j++]) == NULL)
+			if (ft_strchr(" 01NSEWDX\n", map[i][j++]) == NULL)
 				return (-1);
 	}
 	return (0);

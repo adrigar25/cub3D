@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/30 00:25:49 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 23:56:41 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	is_map_line(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (!ft_strchr(" 10NSWED\n\t", line[i]))
+		if (!ft_strchr(" 10NSWEDX\n\t", line[i]))
 			return (0);
 		i++;
 	}
