@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:50:52 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/02 00:10:03 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 22:54:11 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,6 +302,8 @@ int				check_player(char **map);
 // Minimap utilities
 void			draw_player(t_game *game, double center_x, double center_y);
 int				print_minimap(t_game *game);
+void			minimap_put_image_at(t_game *game, t_img *image, int map_x,
+					int map_y);
 
 // Data utilities
 int				check_data(t_game *game_data);

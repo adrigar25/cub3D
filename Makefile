@@ -6,7 +6,7 @@
 #    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2026/02/01 22:49:13 by agarcia          ###   ########.fr        #
+#    Updated: 2026/02/02 22:54:11 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,6 +90,7 @@ SRCS_BONUS_UTILS :=	${UTILS_BONUS_DIR}/game/clear_game_bonus.c \
 					$(UTILS_BONUS_DIR)/map/check_player_bonus.c \
 					$(UTILS_BONUS_DIR)/minimap/print_minimap_bonus.c \
 					$(UTILS_BONUS_DIR)/minimap/print_player_bonus.c \
+					$(UTILS_BONUS_DIR)/minimap/minimap_put_image_bonus.c \
 					$(UTILS_BONUS_DIR)/data/init_data_bonus.c \
 					$(UTILS_BONUS_DIR)/data/read_data_bonus.c \
 					$(UTILS_BONUS_DIR)/data/check_data_bonus.c \
