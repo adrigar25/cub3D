@@ -68,12 +68,6 @@ int	handle_keypress(int keycode, t_game *game)
 			game->keys.up = 1;
 		else if (keycode == KEY_DOWN_M)
 			game->keys.down = 1;
-		else if (keycode == KEY_SPACE_M)
-			game->keys.space = 1;
-		else if (keycode == KEY_CTRL_M || keycode == 59) // Control izquierdo
-			game->keys.ctrl = 1;
-		else if (keycode == KEY_SHIFT_M || keycode == 56) // Shift izquierdo
-			game->keys.shift = 1;
 		else if (keycode == KEY_E_M)
 			open_door(game);
 	}

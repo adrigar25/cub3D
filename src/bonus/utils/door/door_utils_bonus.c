@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 23:36:33 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/30 00:44:08 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 23:00:04 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	open_door(t_game *game)
 		&& next_x < game->map_w && game->map[next_y][next_x] == 'D')
 	{
 		game->map[next_y][next_x] = '0';
-		
+
 		// Send door toggle packet to network
 		if (game->network && game->network->running)
 		{
@@ -33,7 +33,7 @@ void	open_door(t_game *game)
 			packet.player_id = game->network->my_player_id;
 			packet.door_x = next_x;
 			packet.door_y = next_y;
-			
+
 			if (game->network->is_server)
 				broadcast_packet(game->network, &packet);
 			else

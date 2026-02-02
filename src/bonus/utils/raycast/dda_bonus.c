@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:31:46 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/30 15:51:24 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 23:00:11 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,11 @@ static void	perform_dda(t_game *game)
 static void	calc_wall_height(t_game *game)
 {
 	t_raycast	*ray;
-	int			height_offset;
 
 	ray = &game->raycast;
 	ray->line_height = (int)(WIN_H / ray->perp_wall_dist);
-	height_offset = (int)(game->player.height * WIN_H) + game->player.pitch;
-	ray->draw_start = -ray->line_height / 2 + WIN_H / 2 + height_offset;
-	ray->draw_end = ray->line_height / 2 + WIN_H / 2 + height_offset;
+	ray->draw_start = -ray->line_height / 2 + WIN_H / 2 + game->player.pitch;
+	ray->draw_end = ray->line_height / 2 + WIN_H / 2 + game->player.pitch;
 }
 
 /**

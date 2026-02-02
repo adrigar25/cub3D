@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_release.c                                      :+:      :+:    :+:   */
+/*   key_release_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 12:54:27 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 23:00:04 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,5 @@ int	handle_keyrelease(int keycode, t_game *game)
 		game->keys.up = 0;
 	else if (keycode == KEY_DOWN_M)
 		game->keys.down = 0;
-	else if (keycode == KEY_SPACE_M)
-		game->keys.space = 0;
-	else if (keycode == KEY_CTRL_M || keycode == 59)
-		game->keys.ctrl = 0;
-	else if (keycode == KEY_SHIFT_M || keycode == 56)
-		game->keys.shift = 0;
 	return (0);
 }

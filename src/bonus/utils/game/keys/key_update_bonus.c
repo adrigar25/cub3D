@@ -33,43 +33,4 @@ void	update_movement(t_game *game)
 		rotate_left(game);
 	if (game->keys.right)
 		rotate_right(game);
-	
-	// Jump - apply upward force if on ground
-	if (game->keys.space && game->player.height <= NORMAL_HEIGHT)
-	{
-		game->player.z_velocity = JUMP_FORCE;
-	}
-	
-	// Apply gravity
-	game->player.height += game->player.z_velocity;
-	game->player.z_velocity -= GRAVITY;
-	
-	// Crouch - lower height
-	if (game->keys.ctrl)
-	{
-		if (game->player.height > CROUCH_HEIGHT)
-			game->player.height -= 0.05;
-		if (game->player.height < CROUCH_HEIGHT)
-			game->player.height = CROUCH_HEIGHT;
-	}
-	
-	// Return to normal height when not crouching
-	if (!game->keys.ctrl && game->player.height < NORMAL_HEIGHT && !game->keys.space)
-	{
-		game->player.height += 0.05;
-		if (game->player.height > NORMAL_HEIGHT)
-			game->player.height = NORMAL_HEIGHT;
-	}
-	
-	// Ground collision
-	if (game->player.height < NORMAL_HEIGHT && !game->keys.ctrl)
-	{
-		game->player.height = NORMAL_HEIGHT;
-		game->player.z_velocity = 0;
-	}
-	else if (game->player.height < CROUCH_HEIGHT)
-	{
-		game->player.height = CROUCH_HEIGHT;
-		game->player.z_velocity = 0;
-	}
 }

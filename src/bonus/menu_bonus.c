@@ -6,7 +6,7 @@
 /*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 18:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/02 19:03:07 by adriescr         ###   ########.fr       */
+/*   Updated: 2026/02/02 23:00:02 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	render_menu(t_game *game)
 
 	// Draw animated background dots
 	for (i = 0; i < 50; i++)
-		mlx_pixel_put(game->mlx_ptr, game->win_ptr, (i * 30) % WIN_WIDTH, 
+		mlx_pixel_put(game->mlx_ptr, game->win_ptr, (i * 30) % WIN_WIDTH,
 			(i * 20) % WIN_HEIGHT, 0x333333);
 
 	y_offset = WIN_HEIGHT / 5;
@@ -147,7 +147,7 @@ void	render_multiplayer_menu(t_game *game)
 
 	// Draw animated background
 	for (i = 0; i < 50; i++)
-		mlx_pixel_put(game->mlx_ptr, game->win_ptr, (i * 30) % WIN_WIDTH, 
+		mlx_pixel_put(game->mlx_ptr, game->win_ptr, (i * 30) % WIN_WIDTH,
 			(i * 20) % WIN_HEIGHT, 0x333333);
 
 	y_offset = WIN_HEIGHT / 5;
@@ -524,9 +524,9 @@ void	handle_map_selection_key(int keycode, t_game *game)
 		else // Map selected
 		{
 			char selected_map_name[256];
-			
+
 			snprintf(map_path, sizeof(map_path), "MAPS/%s", game->menu.available_maps[game->menu.selected_option]);
-			
+
 			// Save map name before freeing the list
 			ft_strlcpy(selected_map_name, game->menu.available_maps[game->menu.selected_option], 256);
 

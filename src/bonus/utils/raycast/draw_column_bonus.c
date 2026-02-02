@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_column_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:57:57 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/30 00:29:33 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 23:00:21 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ static void	calculate_texture_coords(t_game *game, t_img *texture)
 		game->raycast.tex_x = texture->width - game->raycast.tex_x - 1;
 	game->raycast.step = 1.0 * texture->height / game->raycast.line_height;
 	game->raycast.tex_pos = (game->raycast.draw_start - WIN_H / 2
-			+ game->raycast.line_height / 2 
-			- (int)(game->player.height * WIN_H) - game->player.pitch)
+			+ game->raycast.line_height / 2 - game->player.pitch)
 		* game->raycast.step;
 }
 

@@ -23,17 +23,9 @@ static void	apply_movement(t_game *game, double dx, double dy)
 {
 	double	new_x;
 	double	new_y;
-	double	speed;
 
-	// Calculate speed based on player state
-	speed = MOVE_SPEED;
-	if (game->keys.shift && !game->keys.ctrl)
-		speed = SPRINT_SPEED;
-	else if (game->keys.ctrl)
-		speed = CROUCH_SPEED;
-
-	new_x = game->player.pos_x + dx * speed;
-	new_y = game->player.pos_y + dy * speed;
+	new_x = game->player.pos_x + dx * MOVE_SPEED;
+	new_y = game->player.pos_y + dy * MOVE_SPEED;
 	if (is_valid_position(game, new_x, game->player.pos_y))
 		game->player.pos_x = new_x;
 	if (is_valid_position(game, game->player.pos_x, new_y))
