@@ -518,15 +518,25 @@ void	handle_enter_ip_key(int keycode, t_game *game)
 	{
 		char c = 0;
 
-		// Numbers 0-9
-		if (keycode >= 18 && keycode <= 21) // 1-4
-			c = '1' + (keycode - 18);
-		else if (keycode >= 23 && keycode <= 26) // 5-8
-			c = '5' + (keycode - 23);
-		else if (keycode == 22) // 6 (between 5 and 7)
-			c = '6';
-		else if (keycode == 29) // 0
+		// Numbers 0-9 (macOS keycodes)
+		if (keycode == 29) // 0
 			c = '0';
+		else if (keycode == 18) // 1
+			c = '1';
+		else if (keycode == 19) // 2
+			c = '2';
+		else if (keycode == 20) // 3
+			c = '3';
+		else if (keycode == 21) // 4
+			c = '4';
+		else if (keycode == 23) // 5
+			c = '5';
+		else if (keycode == 22) // 6
+			c = '6';
+		else if (keycode == 26) // 7
+			c = '7';
+		else if (keycode == 28) // 8
+			c = '8';
 		else if (keycode == 25) // 9
 			c = '9';
 		else if (keycode == 47) // . (period)
