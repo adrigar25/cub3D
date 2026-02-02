@@ -191,8 +191,17 @@ void	handle_network_packets(t_game *game)
 					if (receive_packet(net->client_sockets[i], &packet) == 0)
 					{
 						process_packet(game, &packet);
-						// Broadcast to other clients
-						broadcast_packet(net, &packet);
+						// Only broadcast to OTHER clients (not sender)
+						if (packet.type == PACKET_DOOR_TOGGLE)
+						{
+							int j = 0;
+							while (j < MAX_CLIENTS)
+							{
+								if (net->client_sockets[j] >= 0 && j != i)
+									send_packet(net->client_sockets[j], &packet);
+								j++;
+							}
+						}
 					}
 				}
 				i++;

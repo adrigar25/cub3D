@@ -88,9 +88,13 @@ static int	render_loop(t_game *game)
 		// Handle networking if enabled
 		if (game->network && game->network->running)
 		{
+			static int frame_count = 0;
 			handle_network_packets(game);
-			broadcast_player_state(game);
+			// Only send player position every 5 frames to reduce network load
+			if (frame_count % 5 == 0)
+				broadcast_player_state(game);
 			update_remote_players(game);
+			frame_count++;
 		}
 
 		raycast(game);
