@@ -481,7 +481,12 @@ void	handle_map_selection_key(int keycode, t_game *game)
 		}
 		else // Map selected
 		{
+			char selected_map_name[256];
+			
 			snprintf(map_path, sizeof(map_path), "MAPS/%s", game->menu.available_maps[game->menu.selected_option]);
+			
+			// Save map name before freeing the list
+			ft_strlcpy(selected_map_name, game->menu.available_maps[game->menu.selected_option], 256);
 
 			// Load complete game with selected map
 			if (read_data(&game, map_path) == 0 &&
@@ -499,8 +504,7 @@ void	handle_map_selection_key(int keycode, t_game *game)
 					if (init_network(game, 1, NULL, DEFAULT_PORT) == 0)
 					{
 						// Store map name in network structure
-						ft_strlcpy(game->network->map_name, 
-							game->menu.available_maps[game->menu.selected_option], 256);
+						ft_strlcpy(game->network->map_name, selected_map_name, 256);
 						game->menu.state = GAME_RUNNING;
 						printf("Server started successfully!\n");
 					}
