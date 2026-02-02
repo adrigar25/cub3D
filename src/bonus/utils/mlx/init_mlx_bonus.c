@@ -35,9 +35,12 @@ int	load_textures_images(t_game *game)
 		return (-1);
 	if (load_texture(game, &game->textures.ea, game->textures.path_ea) == -1)
 		return (-1);
-	if (load_texture(game, &game->textures.door, game->textures.path_door) ==
-		-1)
-		return (-1);
+	// Door texture is optional
+	if (game->textures.path_door)
+	{
+		if (load_texture(game, &game->textures.door, game->textures.path_door) == -1)
+			return (-1);
+	}
 	return (0);
 }
 

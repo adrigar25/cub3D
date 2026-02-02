@@ -14,11 +14,35 @@
 
 static int	check_texture_file(char *path, char *direction)
 {
+	if (!path)
+		return (-1);
 	if (access(path, F_OK) == -1)
 	{
 		ft_fprintf(2, RED "Error: %s texture file not found\n" RESET,
 			direction);
 		return (-1);
+	}
+	return (0);
+}
+
+static int	map_has_doors(char **map)
+{
+	int	i;
+	int	j;
+
+	if (!map)
+		return (0);
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'D')
+				return (1);
+			j++;
+		}
+		i++;
 	}
 	return (0);
 }
@@ -47,8 +71,12 @@ int	check_data(t_game *game_data)
 		return (-1);
 	if (check_texture_file(game_data->textures.path_ea, "East") == -1)
 		return (-1);
-	if (check_texture_file(game_data->textures.path_door, "Door") == -1)
-		return (-1);
+	// Only check door texture if map has doors
+	if (map_has_doors(game_data->map))
+	{
+		if (check_texture_file(game_data->textures.path_door, "Door") == -1)
+			return (-1);
+	}
 	if (check_colors(game_data) == -1)
 		return (-1);
 	return (0);

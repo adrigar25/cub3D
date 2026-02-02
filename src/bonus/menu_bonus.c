@@ -232,25 +232,134 @@ void	init_menu(t_game *game)
 }
 
 /**
+ * Check if a filename ends with .cub
+ */
+static int	is_cub_file(const char *filename)
+{
+	size_t	len;
+
+	if (!filename)
+		return (0);
+	len = ft_strlen(filename);
+	if (len < 5)
+		return (0);
+	return (ft_strncmp(filename + len - 4, ".cub", 4) == 0);
+}
+
+/**
+ * Validate if a map is playable
+ */
+static int	is_valid_map(const char *map_path)
+{
+	t_game	*temp_game;
+	int		valid;
+	int		saved_stderr;
+	int		dev_null;
+
+	// Silence error messages by redirecting stderr
+	saved_stderr = dup(STDERR_FILENO);
+	dev_null = open("/dev/null", O_WRONLY);
+	dup2(dev_null, STDERR_FILENO);
+	close(dev_null);
+
+	temp_game = init_data();
+	if (!temp_game)
+	{
+		dup2(saved_stderr, STDERR_FILENO);
+		close(saved_stderr);
+		return (0);
+	}
+	
+	// Try to read and validate the map
+	valid = 0;
+	if (read_data(&temp_game, (char *)map_path) == 0)
+	{
+		if (check_data(temp_game) == 0)
+		{
+			if (check_map(temp_game->map) == 0)
+				valid = 1;
+		}
+	}
+	
+	// Clean up temporary game data
+	clear_game(temp_game);
+	
+	// Restore stderr
+	dup2(saved_stderr, STDERR_FILENO);
+	close(saved_stderr);
+	
+	return (valid);
+}
+
+/**
+ * Add a map to the available maps list
+ */
+static void	add_map_to_list(t_game *game, const char *mapname)
+{
+	char	**new_list;
+	int		i;
+
+	new_list = malloc(sizeof(char *) * (game->menu.map_count + 2));
+	if (!new_list)
+		return;
+	
+	i = 0;
+	while (i < game->menu.map_count)
+	{
+		new_list[i] = game->menu.available_maps[i];
+		i++;
+	}
+	new_list[i] = ft_strdup(mapname);
+	new_list[i + 1] = NULL;
+	
+	if (game->menu.available_maps)
+		free(game->menu.available_maps);
+	game->menu.available_maps = new_list;
+	game->menu.map_count++;
+}
+
+/**
  * Load available maps from MAPS directory
  */
 void	load_available_maps(t_game *game)
 {
+	DIR				*dir;
+	struct dirent	*entry;
+
 	// Free existing maps if any
 	free_available_maps(game);
-
-	// For now, hardcode the valid maps we know exist
-	game->menu.map_count = 3;
-	game->menu.available_maps = malloc(sizeof(char *) * (game->menu.map_count + 1));
-	if (!game->menu.available_maps)
+	
+	// Open MAPS directory
+	dir = opendir("MAPS");
+	if (!dir)
+	{
+		printf("Error: Cannot open MAPS directory\n");
 		return;
-
-	game->menu.available_maps[0] = ft_strdup("map1.cub");
-	game->menu.available_maps[1] = ft_strdup("map2.cub");
-	game->menu.available_maps[2] = ft_strdup("map3.cub");
-	game->menu.available_maps[3] = NULL;
-
+	}
+	
+	// Read all .cub files from directory
+	entry = readdir(dir);
+	while (entry != NULL)
+	{
+		if (is_cub_file(entry->d_name))
+		{
+			char map_path[512];
+			snprintf(map_path, sizeof(map_path), "MAPS/%s", entry->d_name);
+			
+			// Only add valid maps to the list
+			if (is_valid_map(map_path))
+			{
+				add_map_to_list(game, entry->d_name);
+			}
+		}
+		entry = readdir(dir);
+	}
+	
+	closedir(dir);
 	game->menu.selected_map = 0;
+	
+	if (game->menu.map_count == 0)
+		printf("Warning: No valid maps found in MAPS directory\n");
 }
 
 /**

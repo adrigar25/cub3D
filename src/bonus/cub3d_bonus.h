@@ -31,6 +31,7 @@
 # include <errno.h>
 # include <string.h>
 # include <pthread.h>
+# include <dirent.h>
 
 /* ************************************************************************** */
 /*                               NETWORKING CONSTANTS                         */
