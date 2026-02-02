@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:50:52 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/02 00:10:03 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/02 18:09:24 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,21 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <sys/socket.h>
+# include <netinet/in.h>
+# include <arpa/inet.h>
+# include <sys/select.h>
+# include <errno.h>
+# include <string.h>
+# include <pthread.h>
+
+/* ************************************************************************** */
+/*                               NETWORKING CONSTANTS                         */
+/* ************************************************************************** */
+
+# define MAX_CLIENTS 10
+# define PACKET_SIZE 64
+# define DEFAULT_PORT 8080
 
 /* ************************************************************************** */
 /*                               COLOR CONSOLE                                */
@@ -53,6 +68,8 @@
 # define KEY_DOWN_M 125
 # define KEY_ESC_M 53
 # define KEY_E_M 14
+# define KEY_C_M 8
+# define KEY_S_M 1
 
 // LINUX Keycodes
 # define KEY_W_L 119
@@ -65,6 +82,8 @@
 # define KEY_DOWN_L 65364
 # define KEY_ESC_L 65307
 # define KEY_E_L 101
+# define KEY_C_L 99
+# define KEY_S_L 115
 
 /* ************************************************************************** */
 /*                               CONSTANTS                                    */
@@ -89,6 +108,9 @@
 # ifndef WIN_H
 #  define WIN_H 720
 # endif
+
+# define WIN_WIDTH WIN_W
+# define WIN_HEIGHT WIN_H
 
 // MINIMAP CONSTANTS
 
@@ -154,6 +176,19 @@
 #  define PLAYER_HITBOX 0.25
 # endif
 
+// Menu constants
+# define MENU_WIDTH 400
+# define MENU_HEIGHT 300
+# define MENU_OPTION_HEIGHT 50
+# define MENU_FONT_SIZE 20
+
+// Menu states
+# define MENU_MAIN 0
+# define MENU_MULTIPLAYER 1
+# define MENU_MAP_SELECTION 2
+# define MENU_ENTER_IP 3
+# define GAME_RUNNING 4
+
 /* ************************************************************************** */
 /*                               STRUCTURES                                   */
 /* ************************************************************************** */
@@ -174,6 +209,27 @@ typedef struct s_keys
 	int			up;
 	int			down;
 }				t_keys;
+
+/**
+ * ENGLISH: Menu structure for game states and options.
+ *
+ * SPANISH: Estructura de menú para estados y opciones del juego.
+ */
+typedef struct s_menu
+{
+	int			state;
+	int			selected_option;
+	int			option_count;
+	char		*options[10];
+	char		**available_maps;
+	int			map_count;
+	int			selected_map;
+	int			game_mode;
+	int			mouse_x;
+	int			mouse_y;
+	char		server_ip[256];
+	int			ip_cursor;
+}				t_menu;
 
 /**
  * ENGLISH: Image structure for pixel manipulation.
@@ -271,6 +327,39 @@ typedef struct s_raycast
 	// Current texture position
 	double		tex_pos;
 }				t_raycast;
+/* ************************************************************************** */
+/*                               NETWORKING STRUCTURES                        */
+/* ************************************************************************** */
+
+// Forward declaration
+struct s_player;
+
+typedef struct s_net_packet
+{
+	int			type;
+	int			player_id;
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
+}				t_net_packet;
+
+typedef struct s_network
+{
+	int				is_server;
+	int				server_socket;
+	int				client_sockets[MAX_CLIENTS];
+	int				client_count;
+	struct sockaddr_in	server_addr;
+	pthread_t		listen_thread;
+	pthread_t		send_thread;
+	int				running;
+	int				my_player_id;
+	struct s_player	*remote_players[MAX_CLIENTS];
+}					t_network;
+
 typedef struct s_game
 {
 	char		**map;
@@ -284,6 +373,8 @@ typedef struct s_game
 	t_player	player;
 	t_raycast	raycast;
 	t_keys		keys;
+	t_network	*network;
+	t_menu		menu;
 }				t_game;
 
 /* ************************************************************************** */
@@ -363,6 +454,33 @@ void			update_movement(t_game *game);
 
 // Door functions
 void			open_door(t_game *game);
+
+// Network functions
+int				init_network(t_game *game, int is_server, const char *ip, int port);
+void			cleanup_network(t_game *game);
+void			broadcast_player_state(t_game *game);
+void			handle_network_packets(t_game *game);
+void			update_remote_players(t_game *game);
+void			render_network_players(t_game *game);
+
+// Menu functions
+void			init_menu(t_game *game);
+void			render_menu(t_game *game);
+void			render_multiplayer_menu(t_game *game);
+void			render_map_selection_menu(t_game *game);
+void			render_enter_ip_menu(t_game *game);
+void			handle_menu_key(int keycode, t_game *game);
+void			handle_multiplayer_menu_key(int keycode, t_game *game);
+void			handle_map_selection_key(int keycode, t_game *game);
+void			handle_enter_ip_key(int keycode, t_game *game);
+void			start_single_player(t_game *game);
+void			start_multiplayer_menu(t_game *game);
+void			start_map_selection(t_game *game, int mode);
+void			load_available_maps(t_game *game);
+void			free_available_maps(t_game *game);
+void			start_server(t_game *game);
+void			connect_to_server(t_game *game);
+void			start_enter_ip_menu(t_game *game);
 
 // Print
 long			ft_error(const char *function, char **str);

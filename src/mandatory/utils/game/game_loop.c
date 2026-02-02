@@ -24,6 +24,11 @@
 static int	render_loop(t_game *game)
 {
 	update_movement(game);
+	
+	// Update network if multiplayer mode is active
+	if (game->network.running)
+		update_network(game);
+	
 	raycast(game);
 	render_frame(game);
 	return (0);
@@ -36,6 +41,9 @@ static int	render_loop(t_game *game)
  */
 static int	handle_close(t_game *game)
 {
+	// Cleanup network if active
+	if (game->network.running)
+		cleanup_game_network(game);
 	clear_game(game);
 	exit(0);
 }

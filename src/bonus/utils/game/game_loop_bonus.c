@@ -60,11 +60,50 @@ static void	draw_crosshair(t_game *game)
 
 static int	render_loop(t_game *game)
 {
-	update_movement(game);
-	raycast(game);
-	draw_crosshair(game);
-	render_frame(game);
-	print_minimap(game);
+	if (game->menu.state == MENU_MAIN)
+	{
+		render_menu(game);
+		return (0);
+	}
+	else if (game->menu.state == MENU_MULTIPLAYER)
+	{
+		render_multiplayer_menu(game);
+		return (0);
+	}
+	else if (game->menu.state == MENU_MAP_SELECTION)
+	{
+		render_map_selection_menu(game);
+		return (0);
+	}
+	else if (game->menu.state == MENU_ENTER_IP)
+	{
+		render_enter_ip_menu(game);
+		return (0);
+	}
+	
+	if (game->menu.state == GAME_RUNNING)
+	{
+		update_movement(game);
+		
+		// Handle networking if enabled
+		if (game->network && game->network->running)
+		{
+			handle_network_packets(game);
+			broadcast_player_state(game);
+			update_remote_players(game);
+		}
+		
+		raycast(game);
+		
+		// Render remote players if networking is enabled
+		if (game->network && game->network->running)
+			render_network_players(game);
+			
+		draw_crosshair(game);
+		render_frame(game);
+		print_minimap(game);
+	}
+	
 	return (0);
 }
 
@@ -76,6 +115,8 @@ static int	render_loop(t_game *game)
 static int	handle_close(t_game *game)
 {
 	mlx_mouse_show();
+	if (game->network)
+		cleanup_network(game);
 	clear_game(game);
 	exit(0);
 }

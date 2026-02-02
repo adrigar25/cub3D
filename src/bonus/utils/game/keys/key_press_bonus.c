@@ -20,25 +20,51 @@
  */
 int	handle_keypress(int keycode, t_game *game)
 {
-	if (keycode == KEY_ESC_M)
-		exit(0);
-	else if (keycode == KEY_W_M)
-		game->keys.w = 1;
-	else if (keycode == KEY_A_M)
-		game->keys.a = 1;
-	else if (keycode == KEY_S_M)
-		game->keys.s = 1;
-	else if (keycode == KEY_D_M)
-		game->keys.d = 1;
-	else if (keycode == KEY_LEFT_M)
-		game->keys.left = 1;
-	else if (keycode == KEY_RIGHT_M)
-		game->keys.right = 1;
-	else if (keycode == KEY_UP_M)
-		game->keys.up = 1;
-	else if (keycode == KEY_DOWN_M)
-		game->keys.down = 1;
-	else if (keycode == KEY_E_M)
-		open_door(game);
+	// Handle menu input
+	if (game->menu.state == MENU_MAIN)
+	{
+		handle_menu_key(keycode, game);
+		return (0);
+	}
+	else if (game->menu.state == MENU_MULTIPLAYER)
+	{
+		handle_multiplayer_menu_key(keycode, game);
+		return (0);
+	}
+	else if (game->menu.state == MENU_MAP_SELECTION)
+	{
+		handle_map_selection_key(keycode, game);
+		return (0);
+	}
+	else if (game->menu.state == MENU_ENTER_IP)
+	{
+		handle_enter_ip_key(keycode, game);
+		return (0);
+	}
+	
+	// Handle game input
+	if (game->menu.state == GAME_RUNNING)
+	{
+		if (keycode == KEY_ESC_M)
+			exit(0);
+		else if (keycode == KEY_W_M)
+			game->keys.w = 1;
+		else if (keycode == KEY_A_M)
+			game->keys.a = 1;
+		else if (keycode == KEY_S_M)
+			game->keys.s = 1;
+		else if (keycode == KEY_D_M)
+			game->keys.d = 1;
+		else if (keycode == KEY_LEFT_M)
+			game->keys.left = 1;
+		else if (keycode == KEY_RIGHT_M)
+			game->keys.right = 1;
+		else if (keycode == KEY_UP_M)
+			game->keys.up = 1;
+		else if (keycode == KEY_DOWN_M)
+			game->keys.down = 1;
+		else if (keycode == KEY_E_M)
+			open_door(game);
+	}
 	return (0);
 }

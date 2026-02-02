@@ -37,6 +37,8 @@ static void	destroy_texture_images(t_game *game)
 		mlx_destroy_image(game->mlx_ptr, game->textures.we.img);
 	if (game->textures.ea.img)
 		mlx_destroy_image(game->mlx_ptr, game->textures.ea.img);
+	if (game->textures.door.img)
+		mlx_destroy_image(game->mlx_ptr, game->textures.door.img);
 }
 
 static void	free_texture_paths(t_game *game)
@@ -49,12 +51,16 @@ static void	free_texture_paths(t_game *game)
 		free(game->textures.path_we);
 	if (game->textures.path_ea)
 		free(game->textures.path_ea);
+	if (game->textures.path_door)
+		free(game->textures.path_door);
 }
 
 void	clear_game(t_game *game)
 {
 	if (!game)
 		return ;
+	if (game->network)
+		cleanup_network(game);
 	if (game->mlx_ptr && game->img.img)
 		mlx_destroy_image(game->mlx_ptr, game->img.img);
 	destroy_texture_images(game);

@@ -35,5 +35,6 @@ t_game	*init_data(void)
 	game->textures.path_ea = NULL;
 	game->textures.path_door = NULL;
 	game->map = NULL;
+	game->network = NULL;
 	return (game);
 }

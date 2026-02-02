@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   network.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/17 15:50:52 by agarcia           #+#    #+#             */
+/*   Created: 2026/02/02 12:00:00 by agarcia           #+#    #+#             */
 /*   Updated: 2026/02/02 12:00:00 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#ifndef NETWORK_H
+# define NETWORK_H
 
-/**
- * ENGLISH: Main entry point for the game
- * 
- * SPANISH: Punto de entrada principal del juego
- */
-int	main(void)
-{
-	t_game	*game_data;
+# include "../../cub3d_bonus.h"
 
-	game_data = init_data();
-	if (!game_data)
-		return (1);
-	
-	if (init_mlx(game_data))
-		return (clear_game(game_data), 1);
-	
-	init_menu(game_data);
-	start_game_loop(game_data);
-	
-	clear_game(game_data);
-	return (0);
-}
+// Function prototypes
+int		init_server_socket(t_network *net, int port);
+int		init_client_socket(t_network *net, const char *ip, int port);
+void		*listen_thread_func(void *arg);
+void		*send_thread_func(void *arg);
+void		handle_new_client(t_network *net, int client_socket);
+void		broadcast_packet(t_network *net, t_net_packet *packet);
+int		receive_packet(int socket_fd, t_net_packet *packet);
+int		send_packet(int socket_fd, t_net_packet *packet);
+
+#endif

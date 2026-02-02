@@ -24,4 +24,8 @@ void	raycast(t_game *game)
 		draw_column(game, x);
 		x++;
 	}
+	
+	// Render remote players after drawing walls
+	if (game->network.running)
+		render_remote_players(game);
 }

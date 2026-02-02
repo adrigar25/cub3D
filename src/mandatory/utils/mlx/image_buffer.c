@@ -80,6 +80,10 @@ void	img_pixel_put(t_img *img, int x, int y, int color)
 void	render_frame(t_game *game)
 {
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.img, 0, 0);
+	
+	// Draw network status overlay if multiplayer mode is active
+	if (game->network.running)
+		draw_network_status(game);
 }
 
 /**

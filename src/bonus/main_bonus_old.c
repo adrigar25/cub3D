@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:41:35 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 16:50:37 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/01/29 02:40:13 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	valid_extension(const char *filename, const char *extension)
 {
@@ -43,6 +43,18 @@ int	valid_extension(const char *filename, const char *extension)
 	return (ft_strcmp(file_ext, extension) == 0);
 }
 
+static void	print_usage(const char *program_name)
+{
+	ft_fprintf(1, "Usage: %s <map_file.cub> [options]\n", program_name);
+	ft_fprintf(1, "\nOptions:\n");
+	ft_fprintf(1, "  -s <port>           Start as server on specified port (default: 8080)\n");
+	ft_fprintf(1, "  -c <ip> <port>      Connect to server at IP:port\n");
+	ft_fprintf(1, "\nExamples:\n");
+	ft_fprintf(1, "  %s map.cub                    # Single player\n", program_name);
+	ft_fprintf(1, "  %s map.cub -s 8080           # Server mode\n", program_name);
+	ft_fprintf(1, "  %s map.cub -c 192.168.1.5 8080  # Client mode\n", program_name);
+}
+
 int	cub3d(char *file, int is_server, const char *ip, int port)
 {
 	t_game	*game_data;
@@ -61,38 +73,18 @@ int	cub3d(char *file, int is_server, const char *ip, int port)
 	if (get_player_position(game_data))
 		return (clear_game(game_data), 1);
 	
-	// Initialize network if multiplayer mode
-	if (is_server >= 0)
+	// Inicializar networking si es necesario
+	if (is_server != -1) // Si no es modo single player
 	{
-		if (init_game_network(game_data, is_server, ip, port))
+		if (init_network(game_data, is_server, ip, port) != 0)
 		{
-			ft_fprintf(2, "Failed to initialize network\n");
+			ft_fprintf(2, RED "Failed to initialize networking\n" RESET);
 			return (clear_game(game_data), 1);
 		}
-		ft_fprintf(1, "Network initialized successfully\n");
 	}
 	
 	start_game_loop(game_data);
 	return (0);
-}
-
-void	print_usage(const char *program_name)
-{
-	ft_fprintf(1, "Usage:\n");
-	ft_fprintf(1, "  Single player: %s <map_file.cub>\n", program_name);
-	ft_fprintf(1, "  Server mode:   %s <map_file.cub> -s [port]\n", program_name);
-	ft_fprintf(1, "  Client mode:   %s <map_file.cub> -c <server_ip> [port]\n", program_name);
-	ft_fprintf(1, "\n");
-	ft_fprintf(1, "Options:\n");
-	ft_fprintf(1, "  -s [port]           Start as server (default port: 8080)\n");
-	ft_fprintf(1, "  -c <ip> [port]      Connect to server at <ip> (default port: 8080)\n");
-	ft_fprintf(1, "\n");
-	ft_fprintf(1, "Examples:\n");
-	ft_fprintf(1, "  %s map.cub                    # Single player\n", program_name);
-	ft_fprintf(1, "  %s map.cub -s                # Server on port 8080\n", program_name);
-	ft_fprintf(1, "  %s map.cub -s 9000           # Server on port 9000\n", program_name);
-	ft_fprintf(1, "  %s map.cub -c 192.168.1.100  # Client to 192.168.1.100:8080\n", program_name);
-	ft_fprintf(1, "  %s map.cub -c 192.168.1.100 9000  # Client to 192.168.1.100:9000\n", program_name);
 }
 
 int	main(int argc, char **argv)

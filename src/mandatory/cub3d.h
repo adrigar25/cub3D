@@ -19,6 +19,7 @@
 
 # include "../../libs/libft/libft.h"
 # include "../../libs/mlx/mlx.h"
+# include "utils/network/network.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
@@ -210,6 +211,7 @@ typedef struct s_game
 	t_player	player;
 	t_raycast	raycast;
 	t_keys		keys;
+	t_network	network;
 }				t_game;
 
 /* ************************************************************************** */
@@ -249,6 +251,10 @@ void			init_step_and_side_dist(t_game *game);
 void			perpendicular_wall_distance(t_raycast *ray, t_game *game);
 void			draw_column(t_game *game, int x);
 
+// Multiplayer rendering
+void			render_remote_players(t_game *game);
+void			draw_network_status(t_game *game);
+
 // Utils
 int				rgb_to_hex(int r, int g, int b);
 int				check_rgb_format(char *values);
@@ -279,6 +285,11 @@ void			init_keys(t_game *game);
 int				handle_keypress(int keycode, t_game *game);
 int				handle_keyrelease(int keycode, t_game *game);
 void			update_movement(t_game *game);
+
+// Network functions
+int				init_game_network(t_game *game, int is_server, const char *ip, int port);
+void			update_network(t_game *game);
+void			cleanup_game_network(t_game *game);
 
 // Print
 long			ft_error(const char *function, char **str);

@@ -14,7 +14,7 @@ NAME		:= cub3D
 NAME_BONUS	:= cub3D_bonus
 
 CC			:= cc
-CFLAGS		:= -Wall -Wextra -Werror
+CFLAGS		:= -Wall -Wextra -Werror -pthread
 
 # ============ MANDATORY ============ #
 SRC_MAND_DIR	:= ./src/mandatory
@@ -52,6 +52,12 @@ SRCS_MAND_UTILS	:=	${UTILS_MAND_DIR}/game/clear_game.c \
 					$(UTILS_MAND_DIR)/raycast/init_raycast.c \
 					$(UTILS_MAND_DIR)/raycast/perpendicular_wall_distance.c \
 					$(UTILS_MAND_DIR)/raycast/raycast.c \
+					$(UTILS_MAND_DIR)/raycast/render_players.c \
+					$(UTILS_MAND_DIR)/network/network_init.c \
+					$(UTILS_MAND_DIR)/network/network_server.c \
+					$(UTILS_MAND_DIR)/network/network_threads.c \
+					$(UTILS_MAND_DIR)/network/network_client.c \
+					$(UTILS_MAND_DIR)/network/network_utils.c \
 					$(UTILS_MAND_DIR)/math/geometry.c \
 					$(UTILS_MAND_DIR)/math/camera.c \
 					$(UTILS_MAND_DIR)/math/map.c \
@@ -103,10 +109,15 @@ SRCS_BONUS_UTILS :=	${UTILS_BONUS_DIR}/game/clear_game_bonus.c \
 					$(UTILS_BONUS_DIR)/raycast/init_raycast_bonus.c \
 					$(UTILS_BONUS_DIR)/raycast/perpendicular_wall_distance_bonus.c \
 					$(UTILS_BONUS_DIR)/raycast/raycast_bonus.c \
+					$(UTILS_BONUS_DIR)/raycast/render_players_bonus.c \
 					$(UTILS_BONUS_DIR)/door/door_utils_bonus.c \
+					$(UTILS_BONUS_DIR)/network/network_init.c \
+					$(UTILS_BONUS_DIR)/network/network_threads.c \
+					$(UTILS_BONUS_DIR)/network/network_utils.c \
 
 
 SRCS_BONUS	:= 	$(SRC_BONUS_DIR)/main_bonus.c \
+				$(SRC_BONUS_DIR)/menu_bonus.c \
 				$(SRCS_BONUS_UTILS) \
 
 OBJS_BONUS_DIR	:= objs_bonus
@@ -138,6 +149,7 @@ $(OBJS_MAND_DIR):
 	@mkdir -p $(OBJS_MAND_DIR)/utils/color
 	@mkdir -p $(OBJS_MAND_DIR)/utils/player
 	@mkdir -p $(OBJS_MAND_DIR)/utils/raycast
+	@mkdir -p $(OBJS_MAND_DIR)/utils/network
 	@mkdir -p $(OBJS_MAND_DIR)/utils/print
 	@mkdir -p $(OBJS_MAND_DIR)/utils/math
 	@mkdir -p $(OBJS_MAND_DIR)/utils/math/geometry
@@ -164,7 +176,8 @@ $(OBJS_BONUS_DIR):
 	@mkdir -p $(OBJS_BONUS_DIR)/utils/player
 	@mkdir -p $(OBJS_BONUS_DIR)/utils/raycast
 	@mkdir -p $(OBJS_BONUS_DIR)/utils/print
-	@mkdir -p $(OBJS_BONUS_DIR)/utils/door/door_utils_bonus.c
+	@mkdir -p $(OBJS_BONUS_DIR)/utils/door
+	@mkdir -p $(OBJS_BONUS_DIR)/utils/network
 
 $(OBJS_BONUS_DIR)/%.o: $(SRC_BONUS_DIR)/%.c | $(OBJS_BONUS_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -181,7 +194,7 @@ $(MLX_LIB):
 
 # LINKING
 $(NAME): $(LIBFT_LIB) $(MLX_LIB) $(OBJS_MAND)
-	@$(CC) $(CFLAGS) $(SRCS_MAND) $(LIBFT_LIB) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(SRCS_MAND) $(LIBFT_LIB) $(MLX_LIB) $(MLX_FLAGS) -pthread -o $(NAME)
 	@if [ $$? -ne 0 ]; then \
 		echo "\033[31mError durante la compilación de ${NAME}.\033[0m"; \
 	else \
@@ -189,7 +202,7 @@ $(NAME): $(LIBFT_LIB) $(MLX_LIB) $(OBJS_MAND)
 	fi
 
 $(NAME_BONUS): $(LIBFT_LIB) $(MLX_LIB) $(OBJS_BONUS)
-	@$(CC) $(CFLAGS) $(SRCS_BONUS) $(LIBFT_LIB) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME_BONUS)
+	@$(CC) $(CFLAGS) $(SRCS_BONUS) $(LIBFT_LIB) $(MLX_LIB) $(MLX_FLAGS) -pthread -o $(NAME_BONUS)
 	@if [ $$? -ne 0 ]; then \
 		echo "\033[31mError durante la compilación de ${NAME_BONUS}.\033[0m"; \
 	else \
