@@ -23,9 +23,17 @@ static void	apply_movement(t_game *game, double dx, double dy)
 {
 	double	new_x;
 	double	new_y;
+	double	speed;
 
-	new_x = game->player.pos_x + dx;
-	new_y = game->player.pos_y + dy;
+	// Calculate speed based on player state
+	speed = MOVE_SPEED;
+	if (game->keys.shift && !game->keys.ctrl)
+		speed = SPRINT_SPEED;
+	else if (game->keys.ctrl)
+		speed = CROUCH_SPEED;
+
+	new_x = game->player.pos_x + dx * speed;
+	new_y = game->player.pos_y + dy * speed;
 	if (is_valid_position(game, new_x, game->player.pos_y))
 		game->player.pos_x = new_x;
 	if (is_valid_position(game, game->player.pos_x, new_y))
@@ -39,8 +47,7 @@ static void	apply_movement(t_game *game, double dx, double dy)
  */
 void	move_forward(t_game *game)
 {
-	apply_movement(game, game->player.dir_x * MOVE_SPEED, game->player.dir_y
-		* MOVE_SPEED);
+	apply_movement(game, game->player.dir_x, game->player.dir_y);
 }
 
 /**
@@ -50,8 +57,7 @@ void	move_forward(t_game *game)
  */
 void	move_backward(t_game *game)
 {
-	apply_movement(game, -game->player.dir_x * MOVE_SPEED, -game->player.dir_y
-		* MOVE_SPEED);
+	apply_movement(game, -game->player.dir_x, -game->player.dir_y);
 }
 
 /**
@@ -61,8 +67,7 @@ void	move_backward(t_game *game)
  */
 void	move_left(t_game *game)
 {
-	apply_movement(game, -game->player.dir_y * MOVE_SPEED, game->player.dir_x
-		* MOVE_SPEED);
+	apply_movement(game, -game->player.dir_y, game->player.dir_x);
 }
 
 /**
@@ -72,6 +77,5 @@ void	move_left(t_game *game)
  */
 void	move_right(t_game *game)
 {
-	apply_movement(game, game->player.dir_y * MOVE_SPEED, -game->player.dir_x
-		* MOVE_SPEED);
+	apply_movement(game, game->player.dir_y, -game->player.dir_x);
 }

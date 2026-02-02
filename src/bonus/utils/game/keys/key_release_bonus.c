@@ -36,5 +36,11 @@ int	handle_keyrelease(int keycode, t_game *game)
 		game->keys.up = 0;
 	else if (keycode == KEY_DOWN_M)
 		game->keys.down = 0;
+	else if (keycode == KEY_SPACE_M)
+		game->keys.space = 0;
+	else if (keycode == KEY_CTRL_M || keycode == 59)
+		game->keys.ctrl = 0;
+	else if (keycode == KEY_SHIFT_M || keycode == 56)
+		game->keys.shift = 0;
 	return (0);
 }

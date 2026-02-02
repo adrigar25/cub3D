@@ -70,6 +70,9 @@
 # define KEY_ESC_M 53
 # define KEY_E_M 14
 # define KEY_C_M 8
+# define KEY_SPACE_M 49
+# define KEY_CTRL_M 256
+# define KEY_SHIFT_M 257
 # define KEY_S_M 1
 
 // LINUX Keycodes
@@ -84,6 +87,9 @@
 # define KEY_ESC_L 65307
 # define KEY_E_L 101
 # define KEY_C_L 99
+# define KEY_SPACE_L 32
+# define KEY_CTRL_L 65507
+# define KEY_SHIFT_L 65505
 # define KEY_S_L 115
 
 /* ************************************************************************** */
@@ -94,8 +100,16 @@
 
 // Movement constants
 # define MOVE_SPEED 0.03
+# define SPRINT_SPEED 0.06
+# define CROUCH_SPEED 0.015
 # define ROT_SPEED 0.008
 # define MOUSE_SENSITIVITY 0.003
+
+// Height constants
+# define NORMAL_HEIGHT 0.0
+# define CROUCH_HEIGHT -0.3
+# define JUMP_FORCE 0.15
+# define GRAVITY 0.01
 
 // Texture constants
 # define TEX_WIDTH 64
@@ -212,6 +226,9 @@ typedef struct s_keys
 	int			right;
 	int			up;
 	int			down;
+	int			space;
+	int			ctrl;
+	int			shift;
 }				t_keys;
 
 /**
@@ -276,6 +293,8 @@ typedef struct s_player
 	double		plane_x;
 	double		plane_y;
 	int			pitch;
+	double		height;
+	double		z_velocity;
 }				t_player;
 
 typedef struct s_texture
@@ -353,6 +372,7 @@ typedef struct s_net_packet
 	double		dir_y;
 	double		plane_x;
 	double		plane_y;
+	double		height;
 	int			door_x;
 	int			door_y;
 	char		map_name[256];

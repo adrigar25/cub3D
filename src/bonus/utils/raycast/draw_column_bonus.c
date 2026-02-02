@@ -28,7 +28,8 @@ static void	calculate_texture_coords(t_game *game, t_img *texture)
 		game->raycast.tex_x = texture->width - game->raycast.tex_x - 1;
 	game->raycast.step = 1.0 * texture->height / game->raycast.line_height;
 	game->raycast.tex_pos = (game->raycast.draw_start - WIN_H / 2
-			+ game->raycast.line_height / 2 - game->player.pitch)
+			+ game->raycast.line_height / 2 
+			- (int)(game->player.height * WIN_H) - game->player.pitch)
 		* game->raycast.step;
 }
 

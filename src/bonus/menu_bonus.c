@@ -18,41 +18,60 @@
 void	render_menu(t_game *game)
 {
 	int y_offset;
-	char *title = "CUB3D - MULTIPLAYER";
-	char *option1 = "1. Single Player";
-	char *option2 = "2. Multiplayer";
-	char *controls = "Use ARROW KEYS to navigate, ENTER to select, ESC to quit";
+	int i;
+	char *title = "╔════════════════════════════════════╗";
+	char *title2 = "║      CUB3D - MULTIPLAYER      ║";
+	char *title3 = "╚════════════════════════════════════╝";
+	char *option1 = "►  Single Player";
+	char *option2 = "►  Multiplayer";
+	char *controls = "↑↓ Navigate  |  ENTER Select  |  ESC Quit";
 
 	if (!game || !game->mlx_ptr || !game->win_ptr)
 		return;
 
-	// Clear screen
 	mlx_clear_window(game->mlx_ptr, game->win_ptr);
 
-	y_offset = WIN_HEIGHT / 4;
+	// Draw animated background dots
+	for (i = 0; i < 50; i++)
+		mlx_pixel_put(game->mlx_ptr, game->win_ptr, (i * 30) % WIN_WIDTH, 
+			(i * 20) % WIN_HEIGHT, 0x333333);
 
-	// Draw title
-	mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 100, y_offset, 0xFFFFFF, title);
+	y_offset = WIN_HEIGHT / 5;
+
+	// Draw title box
+	mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 150, y_offset, 0x00FFFF, title);
+	y_offset += 25;
+	mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 150, y_offset, 0x00FFFF, title2);
+	y_offset += 25;
+	mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 150, y_offset, 0x00FFFF, title3);
 
 	y_offset += 80;
 
-	// Draw menu options with selection highlight
+	// Draw menu options with selection highlight and boxes
 	if (game->menu.selected_option == 0)
-		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0x00FF00, option1);
+	{
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 100, y_offset - 5, 0xFFFF00, "┌──────────────────────────┐");
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 90, y_offset + 15, 0x00FF00, option1);
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 100, y_offset + 30, 0xFFFF00, "└──────────────────────────┘");
+	}
 	else
-		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0xFFFFFF, option1);
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 90, y_offset + 15, 0x888888, option1);
 
-	y_offset += 40;
+	y_offset += 60;
 
 	if (game->menu.selected_option == 1)
-		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0x00FF00, option2);
+	{
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 100, y_offset - 5, 0xFFFF00, "┌──────────────────────────┐");
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 90, y_offset + 15, 0x00FF00, option2);
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 100, y_offset + 30, 0xFFFF00, "└──────────────────────────┘");
+	}
 	else
-		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0xFFFFFF, option2);
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 90, y_offset + 15, 0x888888, option2);
 
-	y_offset += 100;
+	y_offset += 120;
 
-	// Draw controls
-	mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 200, y_offset, 0xAAAAAA, controls);
+	// Draw controls with style
+	mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 180, y_offset, 0x00AAFF, controls);
 }
 
 /**
@@ -112,49 +131,72 @@ void	start_multiplayer_menu(t_game *game)
 void	render_multiplayer_menu(t_game *game)
 {
 	int y_offset;
-	char *title = "MULTIPLAYER MODE";
-	char *option1 = "1. Start Server";
-	char *option2 = "2. Connect to Server";
-	char *option3 = "3. Back to Main Menu";
-	char *controls = "Use ARROW KEYS to navigate, ENTER to select, ESC to back";
+	int i;
+	char *title = "╔════════════════════════════════════╗";
+	char *title2 = "║       MULTIPLAYER MODE        ║";
+	char *title3 = "╚════════════════════════════════════╝";
+	char *option1 = "►  Start Server";
+	char *option2 = "►  Connect to Server";
+	char *option3 = "►  Back to Main Menu";
+	char *controls = "↑↓ Navigate  |  ENTER Select  |  ESC Back";
 
 	if (!game || !game->mlx_ptr || !game->win_ptr)
 		return;
 
-	// Clear screen
 	mlx_clear_window(game->mlx_ptr, game->win_ptr);
 
-	y_offset = WIN_HEIGHT / 4;
+	// Draw animated background
+	for (i = 0; i < 50; i++)
+		mlx_pixel_put(game->mlx_ptr, game->win_ptr, (i * 30) % WIN_WIDTH, 
+			(i * 20) % WIN_HEIGHT, 0x333333);
 
-	// Draw title
-	mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0xFFFFFF, title);
+	y_offset = WIN_HEIGHT / 5;
 
-	y_offset += 80;
+	// Draw title box
+	mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 150, y_offset, 0x00FFFF, title);
+	y_offset += 25;
+	mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 150, y_offset, 0x00FFFF, title2);
+	y_offset += 25;
+	mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 150, y_offset, 0x00FFFF, title3);
 
-	// Draw options with selection highlight
+	y_offset += 70;
+
+	// Draw options with selection highlight and boxes
 	if (game->menu.selected_option == 0)
-		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0x00FF00, option1);
+	{
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 100, y_offset - 5, 0xFFFF00, "┌──────────────────────────┐");
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 90, y_offset + 15, 0x00FF00, option1);
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 100, y_offset + 30, 0xFFFF00, "└──────────────────────────┘");
+	}
 	else
-		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0xFFFFFF, option1);
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 90, y_offset + 15, 0x888888, option1);
 
-	y_offset += 40;
+	y_offset += 55;
 
 	if (game->menu.selected_option == 1)
-		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0x00FF00, option2);
+	{
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 100, y_offset - 5, 0xFFFF00, "┌──────────────────────────┐");
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 90, y_offset + 15, 0x00FF00, option2);
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 100, y_offset + 30, 0xFFFF00, "└──────────────────────────┘");
+	}
 	else
-		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0xFFFFFF, option2);
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 90, y_offset + 15, 0x888888, option2);
 
-	y_offset += 40;
+	y_offset += 55;
 
 	if (game->menu.selected_option == 2)
-		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0x00FF00, option3);
+	{
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 100, y_offset - 5, 0xFFFF00, "┌──────────────────────────┐");
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 90, y_offset + 15, 0x00FF00, option3);
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 100, y_offset + 30, 0xFFFF00, "└──────────────────────────┘");
+	}
 	else
-		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 80, y_offset, 0xFFFFFF, option3);
+		mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 90, y_offset + 15, 0x888888, option3);
 
-	y_offset += 100;
+	y_offset += 110;
 
-	// Draw controls
-	mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 200, y_offset, 0xAAAAAA, controls);
+	// Draw controls with style
+	mlx_string_put(game->mlx_ptr, game->win_ptr, WIN_WIDTH / 2 - 180, y_offset, 0x00AAFF, controls);
 }
 
 /**

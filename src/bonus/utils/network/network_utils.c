@@ -32,6 +32,7 @@ void	broadcast_player_state(t_game *game)
 	packet.dir_y = game->player.dir_y;
 	packet.plane_x = game->player.plane_x;
 	packet.plane_y = game->player.plane_y;
+	packet.height = game->player.height;
 	if (net->is_server)
 	{
 		i = 0;
