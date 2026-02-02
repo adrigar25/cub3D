@@ -6,7 +6,7 @@
 /*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 18:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/02 18:56:03 by adriescr         ###   ########.fr       */
+/*   Updated: 2026/02/02 19:03:07 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,7 +269,7 @@ static int	is_valid_map(const char *map_path)
 		close(saved_stderr);
 		return (0);
 	}
-	
+
 	// Try to read and validate the map
 	valid = 0;
 	if (read_data(&temp_game, (char *)map_path) == 0)
@@ -280,14 +280,14 @@ static int	is_valid_map(const char *map_path)
 				valid = 1;
 		}
 	}
-	
+
 	// Clean up temporary game data
 	clear_game(temp_game);
-	
+
 	// Restore stderr
 	dup2(saved_stderr, STDERR_FILENO);
 	close(saved_stderr);
-	
+
 	return (valid);
 }
 
@@ -302,7 +302,7 @@ static void	add_map_to_list(t_game *game, const char *mapname)
 	new_list = malloc(sizeof(char *) * (game->menu.map_count + 2));
 	if (!new_list)
 		return;
-	
+
 	i = 0;
 	while (i < game->menu.map_count)
 	{
@@ -311,7 +311,7 @@ static void	add_map_to_list(t_game *game, const char *mapname)
 	}
 	new_list[i] = ft_strdup(mapname);
 	new_list[i + 1] = NULL;
-	
+
 	if (game->menu.available_maps)
 		free(game->menu.available_maps);
 	game->menu.available_maps = new_list;
@@ -328,7 +328,7 @@ void	load_available_maps(t_game *game)
 
 	// Free existing maps if any
 	free_available_maps(game);
-	
+
 	// Open MAPS directory
 	dir = opendir("MAPS");
 	if (!dir)
@@ -336,7 +336,7 @@ void	load_available_maps(t_game *game)
 		printf("Error: Cannot open MAPS directory\n");
 		return;
 	}
-	
+
 	// Read all .cub files from directory
 	entry = readdir(dir);
 	while (entry != NULL)
@@ -345,7 +345,7 @@ void	load_available_maps(t_game *game)
 		{
 			char map_path[512];
 			snprintf(map_path, sizeof(map_path), "MAPS/%s", entry->d_name);
-			
+
 			// Only add valid maps to the list
 			if (is_valid_map(map_path))
 			{
@@ -354,10 +354,10 @@ void	load_available_maps(t_game *game)
 		}
 		entry = readdir(dir);
 	}
-	
+
 	closedir(dir);
 	game->menu.selected_map = 0;
-	
+
 	if (game->menu.map_count == 0)
 		printf("Warning: No valid maps found in MAPS directory\n");
 }
