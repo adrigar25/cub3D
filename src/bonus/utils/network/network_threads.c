@@ -35,7 +35,21 @@ void	*send_thread_func(void *arg)
  */
 void	handle_new_client(t_network *net, int client_socket)
 {
-	int	i;
+	int					i;
+	struct sockaddr_in	addr;
+	socklen_t			addr_len;
+	char				ip_str[INET_ADDRSTRLEN];
+
+	// Get client IP address
+	addr_len = sizeof(addr);
+	if (getpeername(client_socket, (struct sockaddr *)&addr, &addr_len) == 0)
+	{
+		inet_ntop(AF_INET, &addr.sin_addr, ip_str, INET_ADDRSTRLEN);
+	}
+	else
+	{
+		ft_strlcpy(ip_str, "unknown", INET_ADDRSTRLEN);
+	}
 
 	i = 0;
 	while (i < MAX_CLIENTS && net->client_sockets[i] >= 0)
@@ -44,11 +58,12 @@ void	handle_new_client(t_network *net, int client_socket)
 	{
 		net->client_sockets[i] = client_socket;
 		net->client_count++;
-		printf("New client connected. Total clients: %d\n", net->client_count);
+		printf(GREEN "🌐 New client connected from %s\n" RESET, ip_str);
+		printf(GREEN "   Total clients: %d\n" RESET, net->client_count);
 	}
 	else
 	{
-		printf("Max clients reached, rejecting connection\n");
+		printf(RED "❌ Max clients reached, rejecting connection from %s\n" RESET, ip_str);
 		close(client_socket);
 	}
 }
