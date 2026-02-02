@@ -79,8 +79,45 @@ int	receive_packet(int socket_fd, t_net_packet *packet)
  */
 void	handle_network_packets(t_game *game)
 {
-	(void)game;
-	// Simplified version - no actual packet handling for basic integration
+	t_network			*net;
+	int					new_socket;
+	struct sockaddr_in	client_addr;
+	socklen_t			addr_len;
+	fd_set				read_fds;
+	struct timeval		timeout;
+
+	if (!game || !game->network)
+		return;
+	
+	net = game->network;
+	
+	// If server, check for new connections
+	if (net->is_server && net->server_socket >= 0)
+	{
+		FD_ZERO(&read_fds);
+		FD_SET(net->server_socket, &read_fds);
+		
+		// Non-blocking check for new connections
+		timeout.tv_sec = 0;
+		timeout.tv_usec = 0;
+		
+		if (select(net->server_socket + 1, &read_fds, NULL, NULL, &timeout) > 0)
+		{
+			if (FD_ISSET(net->server_socket, &read_fds))
+			{
+				addr_len = sizeof(client_addr);
+				new_socket = accept(net->server_socket, 
+					(struct sockaddr *)&client_addr, &addr_len);
+				
+				if (new_socket >= 0)
+				{
+					handle_new_client(net, new_socket);
+				}
+			}
+		}
+	}
+	
+	// TODO: Handle packets from connected clients
 }
 
 /**
