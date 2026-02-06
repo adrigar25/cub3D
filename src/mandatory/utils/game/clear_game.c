@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:07:37 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/24 18:01:44 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/04 17:55:15 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,25 @@ void	free_map(char **map)
 	free(map);
 }
 
-static void	destroy_texture_images(t_game *game)
+static void	free_textures(t_game *game)
 {
-	if (game->textures.no.img)
-		mlx_destroy_image(game->mlx_ptr, game->textures.no.img);
-	if (game->textures.so.img)
-		mlx_destroy_image(game->mlx_ptr, game->textures.so.img);
-	if (game->textures.we.img)
-		mlx_destroy_image(game->mlx_ptr, game->textures.we.img);
-	if (game->textures.ea.img)
-		mlx_destroy_image(game->mlx_ptr, game->textures.ea.img);
-}
+	t_texture	*current;
+	t_texture	*next;
 
-static void	free_texture_paths(t_game *game)
-{
-	if (game->textures.path_no)
-		free(game->textures.path_no);
-	if (game->textures.path_so)
-		free(game->textures.path_so);
-	if (game->textures.path_we)
-		free(game->textures.path_we);
-	if (game->textures.path_ea)
-		free(game->textures.path_ea);
+	current = game->textures;
+	while (current)
+	{
+		next = current->next;
+		if (current->path)
+			free(current->path);
+		if (current->name)
+			free(current->name);
+		if (game->mlx_ptr && current->img.img)
+			mlx_destroy_image(game->mlx_ptr, current->img.img);
+		free(current);
+		current = next;
+	}
+	game->textures = NULL;
 }
 
 void	clear_game(t_game *game)
@@ -57,7 +54,7 @@ void	clear_game(t_game *game)
 		return ;
 	if (game->mlx_ptr && game->img.img)
 		mlx_destroy_image(game->mlx_ptr, game->img.img);
-	destroy_texture_images(game);
+	free_textures(game);
 	if (game->mlx_ptr && game->win_ptr)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	free_texture_paths(game);
