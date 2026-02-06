@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+         #
+#    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/03 13:25:07 by adriescr          #+#    #+#              #
-#    Updated: 2025/12/17 22:36:36 by adriescr         ###   ########.fr        #
+#    Updated: 2026/02/04 20:31:57 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ MY_LIBFT = \
 	ft_strstr.c \
 	ft_strcpy.c \
 	ft_strlcpy.c \
+	ft_strcat.c \
 	ft_strtrim.c \
 	ft_skip_whitespace.c \
 	ft_isspace.c \

@@ -6,7 +6,7 @@
 #    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2026/02/02 23:41:40 by agarcia          ###   ########.fr        #
+#    Updated: 2026/02/05 22:25:59 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,8 +103,17 @@ SRCS_BONUS_UTILS :=	${UTILS_BONUS_DIR}/game/clear_game_bonus.c \
 					$(UTILS_BONUS_DIR)/raycast/init_raycast_bonus.c \
 					$(UTILS_BONUS_DIR)/raycast/perpendicular_wall_distance_bonus.c \
 					$(UTILS_BONUS_DIR)/raycast/raycast_bonus.c \
+					$(UTILS_BONUS_DIR)/enemy/enemy_create_bonus.c \
+					$(UTILS_BONUS_DIR)/enemy/enemy_list_bonus.c \
+					$(UTILS_BONUS_DIR)/enemy/enemy_collect_bonus.c \
+					$(UTILS_BONUS_DIR)/enemy/enemy_ai_bonus.c \
+					$(UTILS_BONUS_DIR)/enemy/enemy_vision_bonus.c \
 					$(UTILS_BONUS_DIR)/door/door_utils_bonus.c \
 					$(UTILS_BONUS_DIR)/sprite/draw_sprite_bonus.c \
+					$(UTILS_BONUS_DIR)/sprite/sprite_window_bonus.c \
+					$(UTILS_BONUS_DIR)/sprite/sprite_count_bonus.c \
+					$(UTILS_BONUS_DIR)/sprite/sprite_append_bonus.c \
+					$(UTILS_BONUS_DIR)/sprite/sprite_lookup_bonus.c \
 
 
 SRCS_BONUS	:= 	$(SRC_BONUS_DIR)/main_bonus.c \
@@ -167,6 +176,7 @@ $(OBJS_BONUS_DIR):
 	@mkdir -p $(OBJS_BONUS_DIR)/utils/print
 	@mkdir -p $(OBJS_BONUS_DIR)/utils/door/door_utils_bonus.c
 	@mkdir -p $(OBJS_BONUS_DIR)/utils/sprite
+	@mkdir -p $(OBJS_BONUS_DIR)/utils/enemy
 
 $(OBJS_BONUS_DIR)/%.o: $(SRC_BONUS_DIR)/%.c | $(OBJS_BONUS_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -207,6 +217,8 @@ clean:
 fclean: clean
 	@rm -f $(NAME) $(NAME_BONUS)
 	@if [ -d "$(LIBFT_DIR)" ]; then $(MAKE) -C $(LIBFT_DIR) fclean; else echo "Warning: $(LIBFT_DIR) not found, skipping libft fclean"; fi
+	# Fallback: eliminar cualquier .o/.a residual en libft
+	@if [ -d "$(LIBFT_DIR)" ]; then find "$(LIBFT_DIR)" -type f \( -name "*.o" -o -name "*.a" \) -delete; fi
 
 re: fclean all
 

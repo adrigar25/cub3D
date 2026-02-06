@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 13:22:52 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/23 15:58:20 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/04 20:31:55 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int				ft_is_numeric(const char *str);
 int				ft_count_arg(char **args);
 char			**ft_copy_args(char **src, char **dst);
 int				ft_matrix_size(char **matrix);
+char			*ft_strcat(char *dest, const char *src);
 
 // Especial functions
 unsigned int	ft_simple_rand(unsigned int *seed);
