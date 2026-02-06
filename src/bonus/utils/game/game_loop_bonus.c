@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:45:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/02 23:41:38 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/05 22:39:16 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,27 +55,20 @@ static void	draw_crosshair(t_game *game)
  *          Actualiza movimiento, limpia el buffer,
 	realiza raycasting y muestra el resultado.
  */
-// Limita el bucle a FPS_TARGET usando gettimeofday/usleep
+
 #include <sys/time.h>
 
 static int	render_loop(t_game *game)
 {
+	if (!game->mouse_captured)
+		mlx_mouse_show();
 	update_movement(game);
+	enemy_update_ai(game);
 	raycast(game);
-	// Dibujar enemigos (letra 'X' en el mapa)
-	for (int i = 0; i < game->map_h; ++i)
-	{
-		if (!game->map[i])
-			continue ;
-		for (int j = 0; j < (int)ft_strlen(game->map[i]); ++j)
-		{
-			if (game->map[i][j] == 'X')
-				draw_sprite_at(game, &game->enemy_icon, j + 0.5, i + 0.5, 1.0);
-		}
-	}
+	render_sprites(game);
 	draw_crosshair(game);
 	render_frame(game);
-	print_minimap(game);
+	render_minimap(game);
 	return (0);
 }
 
@@ -100,11 +93,10 @@ static int	handle_close(t_game *game)
  */
 void	start_game_loop(t_game *game)
 {
-	init_keys(game);
-	mlx_mouse_hide();
 	mlx_hook(game->win_ptr, 2, 1L << 0, handle_keypress, game);
 	mlx_hook(game->win_ptr, 3, 1L << 1, handle_keyrelease, game);
-	mlx_hook(game->win_ptr, 6, 1L << 6, handle_mouse, game);
+	mlx_hook(game->win_ptr, 4, 1L << 2, handle_mouse_press, game);
+	mlx_hook(game->win_ptr, 6, 1L << 6, handle_mouse_move, game);
 	mlx_hook(game->win_ptr, 17, 0, handle_close, game);
 	mlx_loop_hook(game->mlx_ptr, render_loop, game);
 	mlx_loop(game->mlx_ptr);
