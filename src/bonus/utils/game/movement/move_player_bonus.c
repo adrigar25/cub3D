@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_player.c                                      :+:      :+:    :+:   */
+/*   move_player_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/24 17:10:03 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/05 21:16:52 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,13 @@ static void	apply_movement(t_game *game, double dx, double dy)
  */
 void	move_forward(t_game *game)
 {
-	apply_movement(game, game->player.dir_x * MOVE_SPEED, game->player.dir_y
-		* MOVE_SPEED);
+	double	speed;
+
+	speed = MOVE_SPEED;
+	if (game->keys.shift)
+		speed *= SPRINT_MULTIPLIER;
+	apply_movement(game, game->player.dir_x * speed, game->player.dir_y
+		* speed);
 }
 
 /**
@@ -50,8 +55,13 @@ void	move_forward(t_game *game)
  */
 void	move_backward(t_game *game)
 {
-	apply_movement(game, -game->player.dir_x * MOVE_SPEED, -game->player.dir_y
-		* MOVE_SPEED);
+	double	speed;
+
+	speed = MOVE_SPEED;
+	if (game->keys.shift)
+		speed *= SPRINT_MULTIPLIER;
+	apply_movement(game, -game->player.dir_x * speed, -game->player.dir_y
+		* speed);
 }
 
 /**
@@ -61,8 +71,13 @@ void	move_backward(t_game *game)
  */
 void	move_left(t_game *game)
 {
-	apply_movement(game, -game->player.dir_y * MOVE_SPEED, game->player.dir_x
-		* MOVE_SPEED);
+	double	speed;
+
+	speed = MOVE_SPEED;
+	if (game->keys.shift)
+		speed *= SPRINT_MULTIPLIER;
+	apply_movement(game, -game->player.dir_y * speed, game->player.dir_x
+		* speed);
 }
 
 /**
@@ -72,6 +87,11 @@ void	move_left(t_game *game)
  */
 void	move_right(t_game *game)
 {
-	apply_movement(game, game->player.dir_y * MOVE_SPEED, -game->player.dir_x
-		* MOVE_SPEED);
+	double	speed;
+
+	speed = MOVE_SPEED;
+	if (game->keys.shift)
+		speed *= SPRINT_MULTIPLIER;
+	apply_movement(game, game->player.dir_y * speed, -game->player.dir_x
+		* speed);
 }

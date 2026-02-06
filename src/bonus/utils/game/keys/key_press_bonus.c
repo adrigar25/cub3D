@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/01/30 00:47:42 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/05 16:48:42 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,11 @@ int	handle_keypress(int keycode, t_game *game)
 		game->keys.up = 1;
 	else if (keycode == KEY_DOWN_M)
 		game->keys.down = 1;
+	else if (keycode == KEY_SHIFT_M || keycode == KEY_SHIFT_L)
+		game->keys.shift = 1;
 	else if (keycode == KEY_E_M)
 		open_door(game);
+	else if (keycode == KEY_CTRL_M)
+		game->mouse_captured = 0;
 	return (0);
 }
