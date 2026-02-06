@@ -6,74 +6,108 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/29 23:42:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/05 22:31:10 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d_bonus.h"
 
-static int	is_texture_line(char *line)
+static int	push_texture(t_game *game, t_texture *new_texture)
 {
-	return (!ft_strcmp(line, "NO") || !ft_strcmp(line, "SO") || !ft_strcmp(line,
-			"WE") || !ft_strcmp(line, "EA") || !ft_strcmp(line, "DO"));
-}
+	t_texture	*current;
 
-static int	store_path(t_game *game_data, char *path, char *dir)
-{
-	char	**dest;
-	char	*trimmed;
-
-	dest = NULL;
-	if (!ft_strcmp(dir, "NO"))
-		dest = &game_data->textures.path_no;
-	else if (!ft_strcmp(dir, "SO"))
-		dest = &game_data->textures.path_so;
-	else if (!ft_strcmp(dir, "WE"))
-		dest = &game_data->textures.path_we;
-	else if (!ft_strcmp(dir, "EA"))
-		dest = &game_data->textures.path_ea;
-	else if (!ft_strcmp(dir, "DO"))
-		dest = &game_data->textures.path_door;
-	if (!dest)
+	if (!game->sprites)
+	{
+		game->sprites = new_texture;
 		return (0);
-	if (*dest != NULL)
-		return (ft_fprintf(2, RED "Error: Duplicated texture: %s\n" RESET,
-				path), 0);
-	trimmed = ft_strtrim(path, " \t\n");
-	*dest = ft_strdup(trimmed);
-	if (!*dest)
-		return (free(trimmed), -1);
-	return (free(trimmed), 0);
+	}
+	current = game->sprites;
+	while (current->next)
+		current = current->next;
+	current->next = new_texture;
+	return (0);
 }
 
-static int	process_line(t_game *game_data, char *line)
+static int	process_texture(t_game *game, char *key, char *value)
+{
+	t_texture	*new_texture;
+	char		c;
+	int			exists;
+
+	new_texture = malloc(sizeof(t_texture));
+	if (!new_texture)
+		return (-1);
+	new_texture->name = ft_strtrim(key, " \t\n");
+	new_texture->path = ft_strdup(value);
+	new_texture->next = NULL;
+	ft_fprintf(2, "DBG texture key='%s' value='%s'\n", key, value);
+	if (!ft_strcmp(key, "SO"))
+		game->txt_so = new_texture;
+	else if (!ft_strcmp(key, "NO"))
+		game->txt_no = new_texture;
+	else if (!ft_strcmp(key, "WE"))
+		game->txt_we = new_texture;
+	else if (!ft_strcmp(key, "EA"))
+		game->txt_ea = new_texture;
+	else if (!ft_strcmp(key, "DO"))
+		game->txt_door = new_texture;
+	else if (!ft_strcmp(key, "X1"))
+		game->e_txt_s = new_texture;
+	else if (!ft_strcmp(key, "X2"))
+		game->e_txt_w1 = new_texture;
+	else if (!ft_strcmp(key, "X3"))
+		game->e_txt_w2 = new_texture;
+	else
+	{
+		push_texture(game, new_texture);
+		if (new_texture->name && new_texture->name[0])
+		{
+			c = new_texture->name[0];
+			exists = 0;
+			for (int i = 0; i < game->allowed_count; ++i)
+				if (game->allowed_chars[i] == c)
+					exists = 1;
+			if (!exists
+				&& game->allowed_count < (int)sizeof(game->allowed_chars) - 1)
+			{
+				game->allowed_chars[game->allowed_count++] = c;
+				game->allowed_chars[game->allowed_count] = '\0';
+			}
+		}
+	}
+	return (0);
+}
+
+static int	process_line(t_game *game, char *line)
 {
 	char	*temp;
 	char	*key;
+	char	*key2;
 	char	*value;
 	int		result;
 
 	result = 0;
 	temp = ft_strtrim(line, " \t\n");
-	if (!temp)
-		return (0);
+	if (!temp || temp[0] == '\0')
+		return (free(temp), 0);
 	key = ft_substr(temp, 0, 2);
-	value = ft_strtrim(line + 2, " \t\n");
-	if (!key || !value)
-		return (free(key), free(value), free(temp), 0);
-	if (key[0] == 'F' && game_data->textures.color_f == -1)
-		game_data->textures.color_f = parse_rgb(value);
-	else if (key[0] == 'C' && game_data->textures.color_c == -1)
-		game_data->textures.color_c = parse_rgb(value);
-	else if (is_texture_line(key))
-		result = store_path(game_data, value, key);
+	key2 = ft_strtrim(key, " \t\n");
+	value = ft_strtrim(temp + 2, " \t\n");
+	if (!ft_strcmp(key2, "C"))
+		game->ceiling_color = parse_rgb(value);
+	else if (!ft_strcmp(key2, "F"))
+		game->floor_color = parse_rgb(value);
+	else
+		result = process_texture(game, key2, value);
+	printf("DBG processed line: key='%s' value='%s'\n", key2, value);
 	free(temp);
 	free(key);
+	free(key2);
 	free(value);
 	return (result);
 }
 
-static int	get_data(t_game *game_data, int fd)
+static int	get_data(t_game *game_data, int fd, char **first_map_line)
 {
 	char	*line;
 	int		result;
@@ -81,11 +115,17 @@ static int	get_data(t_game *game_data, int fd)
 	result = 0;
 	if (!game_data)
 		return (-1);
-	while (result != -1)
+	*first_map_line = NULL;
+	while (result != -1 && !*first_map_line)
 	{
 		line = ft_get_next_line(fd);
 		if (!line)
 			break ;
+		if (is_map_line(game_data, line))
+		{
+			*first_map_line = line;
+			break ;
+		}
 		result = process_line(game_data, line);
 		free(line);
 	}
@@ -94,21 +134,19 @@ static int	get_data(t_game *game_data, int fd)
 
 int	read_data(t_game **game_data, char *file)
 {
-	int	fd;
+	int		fd;
+	char	*first_line;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (ft_fprintf(2, RED "Error: Cannot open file\n" RESET), -1);
-	if (get_data(*game_data, fd) == -1)
+	first_line = NULL;
+	if (get_data(*game_data, fd, &first_line) == -1)
 	{
 		close(fd);
 		return (ft_fprintf(2, RED "Error: Failed to read data\n" RESET), -1);
 	}
-	close(fd);
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (ft_fprintf(2, RED "Error: Cannot open file\n" RESET), -1);
-	if (read_map(*game_data, fd) == -1)
+	if (read_map(*game_data, fd, first_line) == -1)
 	{
 		close(fd);
 		return (ft_fprintf(2, RED "Error: Failed to read map\n" RESET), -1);
