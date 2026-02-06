@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:57:57 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/30 00:29:33 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/04 18:31:55 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,20 @@ static void	calculate_texture_coords(t_game *game, t_img *texture)
 static t_img	*get_wall_texture(t_game *game)
 {
 	if (game->map[game->raycast.map_y][game->raycast.map_x] == 'D')
-		return (&game->textures.door);
+		return (&game->txt_door->img);
 	if (game->raycast.side == 0)
 	{
 		if (game->raycast.ray_dir_x > 0)
-			return (&game->textures.ea);
+			return (&game->txt_ea->img);
 		else
-			return (&game->textures.we);
+			return (&game->txt_we->img);
 	}
 	else
 	{
 		if (game->raycast.ray_dir_y > 0)
-			return (&game->textures.so);
+			return (&game->txt_so->img);
 		else
-			return (&game->textures.no);
+			return (&game->txt_no->img);
 	}
 }
 
@@ -69,7 +69,7 @@ void	draw_column(t_game *game, int x)
 	if (game->raycast.draw_end >= WIN_H)
 		game->raycast.draw_end = WIN_H - 1;
 	while (y < game->raycast.draw_start)
-		img_pixel_put(&game->img, x, y++, game->textures.color_c);
+		img_pixel_put(&game->img, x, y++, game->ceiling_color);
 	y = game->raycast.draw_start;
 	while (y <= game->raycast.draw_end)
 	{
@@ -82,5 +82,5 @@ void	draw_column(t_game *game, int x)
 	}
 	y = game->raycast.draw_end + 1;
 	while (y < WIN_H)
-		img_pixel_put(&game->img, x, y++, game->textures.color_f);
+		img_pixel_put(&game->img, x, y++, game->floor_color);
 }
