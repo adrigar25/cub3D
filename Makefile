@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
+#    By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2026/02/07 00:37:01 by agarcia          ###   ########.fr        #
+#    Updated: 2026/02/09 17:21:15 by adriescr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,6 +89,8 @@ SRCS_BONUS_UTILS :=	${UTILS_BONUS_DIR}/game/clear_game_bonus.c \
 					$(UTILS_BONUS_DIR)/map/check_characters_bonus.c \
 					$(UTILS_BONUS_DIR)/map/check_player_bonus.c \
 					$(UTILS_BONUS_DIR)/minimap/print_minimap_bonus.c \
+					$(UTILS_BONUS_DIR)/minimap/minimap_tiles_bonus.c \
+					$(UTILS_BONUS_DIR)/minimap/minimap_clear_bonus.c \
 					$(UTILS_BONUS_DIR)/minimap/player_draw_bonus.c \
 					$(UTILS_BONUS_DIR)/minimap/draw_line_bonus.c \
 					$(UTILS_BONUS_DIR)/minimap/triangle_helpers_bonus.c \
@@ -96,6 +98,8 @@ SRCS_BONUS_UTILS :=	${UTILS_BONUS_DIR}/game/clear_game_bonus.c \
 					$(UTILS_BONUS_DIR)/minimap/minimap_put_image_bonus.c \
 					$(UTILS_BONUS_DIR)/data/init_data_bonus.c \
 					$(UTILS_BONUS_DIR)/data/read_data_bonus.c \
+					$(UTILS_BONUS_DIR)/data/texture_management_bonus.c \
+					$(UTILS_BONUS_DIR)/data/line_parser_bonus.c \
 					$(UTILS_BONUS_DIR)/data/check_data_bonus.c \
 					$(UTILS_BONUS_DIR)/mlx/init_mlx_bonus.c \
 					$(UTILS_BONUS_DIR)/mlx/image_buffer_bonus.c \

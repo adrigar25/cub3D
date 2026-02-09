@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enemy_ai_BONUS.c                                   :+:      :+:    :+:   */
+/*   enemy_ai_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:30:30 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/05 22:50:01 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/09 17:25:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d_bonus.h"
-#include <math.h>
 
 static void	enemy_try_move(t_game *game, t_enemy *e)
 {

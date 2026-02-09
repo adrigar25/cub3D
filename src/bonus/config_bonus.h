@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 16:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/06 22:19:03 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/09 16:59:31 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,6 @@
 
 # ifndef MINIMAP_DOOR_COLOR
 #  define MINIMAP_DOOR_COLOR 0x8B4513
-# endif
-
-# ifndef MINIMAP_X
-#  define MINIMAP_X 1070
-# endif
-
-# ifndef MINIMAP_Y
-#  define MINIMAP_Y 510
 # endif
 
 /* ========== PERFORMANCE ========== */

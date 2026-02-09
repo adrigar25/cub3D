@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   enemy_create_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/05 22:45:47 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/09 17:25:50 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d_bonus.h"
-#include <stdlib.h>
 
 static void	set_enemy_coords(t_enemy *e, int tile_x, int tile_y)
 {

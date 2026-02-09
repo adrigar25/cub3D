@@ -3,111 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   read_data_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/07 17:29:29 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/09 16:56:25 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d_bonus.h"
 
-static int	push_texture(t_game *game, t_texture *new_texture)
-{
-	t_texture	*current;
-
-	if (!game->sprites)
-	{
-		game->sprites = new_texture;
-		return (0);
-	}
-	current = game->sprites;
-	while (current->next)
-		current = current->next;
-	current->next = new_texture;
-	return (0);
-}
-
-static int	process_texture(t_game *game, char *key, char *value)
-{
-	t_texture	*new_texture;
-	char		c;
-	int			exists;
-	int			i;
-
-	new_texture = malloc(sizeof(t_texture));
-	if (!new_texture)
-		return (-1);
-	new_texture->name = ft_strtrim(key, " \t\n");
-	new_texture->path = ft_strdup(value);
-	new_texture->next = NULL;
-	ft_fprintf(2, "DBG texture key='%s' value='%s'\n", key, value);
-	if (!ft_strcmp(key, "SO"))
-		game->txt_so = new_texture;
-	else if (!ft_strcmp(key, "NO"))
-		game->txt_no = new_texture;
-	else if (!ft_strcmp(key, "WE"))
-		game->txt_we = new_texture;
-	else if (!ft_strcmp(key, "EA"))
-		game->txt_ea = new_texture;
-	else if (!ft_strcmp(key, "DO"))
-		game->txt_door = new_texture;
-	else if (!ft_strcmp(key, "X1"))
-		game->e_txt_s = new_texture;
-	else if (!ft_strcmp(key, "X2"))
-		game->e_txt_w1 = new_texture;
-	else if (!ft_strcmp(key, "X3"))
-		game->e_txt_w2 = new_texture;
-	else
-	{
-		push_texture(game, new_texture);
-		if (new_texture->name && new_texture->name[0])
-		{
-			c = new_texture->name[0];
-			exists = 0;
-			i = -1;
-			while (i++ < game->allowed_count)
-				if (game->allowed_chars[i] == c)
-					exists = 1;
-			if (!exists)
-			{
-				game->allowed_chars[game->allowed_count++] = c;
-				game->allowed_chars[game->allowed_count] = '\0';
-			}
-		}
-	}
-	return (0);
-}
-
-static int	process_line(t_game *game, char *line)
-{
-	char	*temp;
-	char	*key;
-	char	*key2;
-	char	*value;
-	int		result;
-
-	result = 0;
-	temp = ft_strtrim(line, " \t\n");
-	if (!temp || temp[0] == '\0')
-		return (free(temp), 0);
-	key = ft_substr(temp, 0, 2);
-	key2 = ft_strtrim(key, " \t\n");
-	value = ft_strtrim(temp + 2, " \t\n");
-	if (!ft_strcmp(key2, "C"))
-		game->ceiling_color = parse_rgb(value);
-	else if (!ft_strcmp(key2, "F"))
-		game->floor_color = parse_rgb(value);
-	else
-		result = process_texture(game, key2, value);
-	printf("DBG processed line: key='%s' value='%s'\n", key2, value);
-	free(temp);
-	free(key);
-	free(key2);
-	free(value);
-	return (result);
-}
-
+/**
+ * ENGLISH: Read configuration data from file until map starts.
+ *
+ * SPANISH: Lee datos de configuración del archivo hasta que comienza el mapa.
+ */
 static int	get_data(t_game *game_data, int fd, char **first_map_line)
 {
 	char	*line;
@@ -127,12 +36,17 @@ static int	get_data(t_game *game_data, int fd, char **first_map_line)
 			*first_map_line = line;
 			break ;
 		}
-		result = process_line(game_data, line);
+		result = process_config_line(game_data, line);
 		free(line);
 	}
 	return (result);
 }
 
+/**
+ * ENGLISH: Main function to read and parse the configuration file.
+ *
+ * SPANISH: Función principal para leer y parsear el archivo de configuración.
+ */
 int	read_data(t_game **game_data, char *file)
 {
 	int		fd;

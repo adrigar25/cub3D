@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 16:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/05 16:48:42 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/09 16:19:11 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@
 
 /* ========== WINDOW DIMENSIONS ========== */
 # ifndef WIN_W
-#  define WIN_W 1280
+#  define WIN_W 1920
 # endif
 
 # ifndef WIN_H
-#  define WIN_H 720
+#  define WIN_H 1080
 # endif
 
 /* ========== TEXTURE CONSTANTS ========== */

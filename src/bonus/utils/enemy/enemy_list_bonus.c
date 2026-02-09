@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   enemy_list_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:30:10 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/05 22:45:53 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/09 17:25:59 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d_bonus.h"
-#include <stdlib.h>
 
 void	enemy_add(t_game *game, t_enemy *node)
 {

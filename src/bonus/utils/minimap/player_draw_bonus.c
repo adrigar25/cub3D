@@ -13,8 +13,7 @@
 #include "../../cub3d_bonus.h"
 #include "minimap_bonus.h"
 
-extern t_triangle	create_triangle(int x1, int y1, int x2, int y2, int x3,
-						int y3);
+extern t_triangle	create_triangle(int x[3], int y[3]);
 extern void			sort_triangle_vertices(t_triangle *tri);
 extern void			fill_bottom_triangle(t_game *game, const t_triangle *tri);
 extern void			fill_top_triangle(t_game *game, const t_triangle *tri);
@@ -24,13 +23,19 @@ t_triangle	player_triangle(double cx, double cy)
 	double	arrow_len;
 	double	base_width;
 	double	offset_y;
+	int		x[3];
+	int		y[3];
 
 	arrow_len = MINIMAP_PLAYER_SIZE * 2.5;
 	base_width = MINIMAP_PLAYER_SIZE;
 	offset_y = arrow_len / 3.0;
-	return (create_triangle((int)cx, (int)(cy - arrow_len + offset_y), (int)(cx
-				- base_width), (int)(cy + offset_y), (int)(cx + base_width),
-			(int)(cy + offset_y)));
+	x[0] = (int)cx;
+	x[1] = (int)(cx - base_width);
+	x[2] = (int)(cx + base_width);
+	y[0] = (int)(cy - arrow_len + offset_y);
+	y[1] = (int)(cy + offset_y);
+	y[2] = (int)(cy + offset_y);
+	return (create_triangle(x, y));
 }
 
 static void	fill_split(t_game *game, t_triangle *tri)

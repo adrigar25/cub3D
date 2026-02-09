@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   triangle_helpers_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 18:50:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/07 18:06:36 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/09 17:12:10 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ void	sort_triangle_vertices(t_triangle *tri)
 		swap_vertices(&tri->x2, &tri->y2, &tri->x3, &tri->y3);
 }
 
-t_triangle	create_triangle(int x1, int y1, int x2, int y2, int x3, int y3)
+t_triangle	create_triangle(int x[3], int y[3])
 {
 	t_triangle	tri;
 
-	tri.x1 = x1;
-	tri.y1 = y1;
-	tri.x2 = x2;
-	tri.y2 = y2;
-	tri.x3 = x3;
-	tri.y3 = y3;
+	tri.x1 = x[0];
+	tri.y1 = y[0];
+	tri.x2 = x[1];
+	tri.y2 = y[1];
+	tri.x3 = x[2];
+	tri.y3 = y[2];
 	return (tri);
 }

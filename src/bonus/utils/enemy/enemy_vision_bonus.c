@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   enemy_vision_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 16:20:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/07 18:47:53 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/09 17:26:03 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d_bonus.h"
-#include <math.h>
 
 static int	is_blocking_tile(t_game *game, int mx, int my)
 {

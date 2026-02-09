@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 16:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/05 22:13:14 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/09 16:23:37 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ typedef struct s_game
 	int					map_w;
 	int					map_h;
 	int					mouse_captured;
-	double				zbuffer[1280];
+	double				zbuffer[WIN_W];
 	void				*mlx_ptr;
 	void				*win_ptr;
 	t_img				minimap;
