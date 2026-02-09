@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 18:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/04 19:28:34 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/06 16:34:12 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,8 @@
  * @param b Blue component (0-255)
  * @return int Color in hexadecimal format (0xRRGGBB)
  */
-int	rgb_to_hex(char *values)
+int	rgb_to_hex(int r, int g, int b)
 {
-	int		r;
-	int		g;
-	int		b;
-	char	**rgb_values;
-
-	rgb_values = ft_split(values, ',');
-	if (!rgb_values || !rgb_values[0] || !rgb_values[1] || !rgb_values[2])
-	{
-		ft_free_split(rgb_values);
-		return (-1);
-	}
-	r = ft_atoi(rgb_values[0]);
-	g = ft_atoi(rgb_values[1]);
-	b = ft_atoi(rgb_values[2]);
-	ft_free_split(rgb_values);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		return (-1);
 	return ((r << 16) | (g << 8) | b);

@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/05 22:31:10 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/07 17:29:29 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static int	process_texture(t_game *game, char *key, char *value)
 	t_texture	*new_texture;
 	char		c;
 	int			exists;
+	int			i;
 
 	new_texture = malloc(sizeof(t_texture));
 	if (!new_texture)
@@ -64,11 +65,11 @@ static int	process_texture(t_game *game, char *key, char *value)
 		{
 			c = new_texture->name[0];
 			exists = 0;
-			for (int i = 0; i < game->allowed_count; ++i)
+			i = -1;
+			while (i++ < game->allowed_count)
 				if (game->allowed_chars[i] == c)
 					exists = 1;
-			if (!exists
-				&& game->allowed_count < (int)sizeof(game->allowed_chars) - 1)
+			if (!exists)
 			{
 				game->allowed_chars[game->allowed_count++] = c;
 				game->allowed_chars[game->allowed_count] = '\0';

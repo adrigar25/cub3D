@@ -6,10 +6,11 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 18:47:14 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/01 23:29:47 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/06 12:45:06 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../cub3d.h"
 #include "math_utils.h"
 
 int	is_out_of_bounds(int map_x, int map_y, char **map)
@@ -21,9 +22,12 @@ int	is_out_of_bounds(int map_x, int map_y, char **map)
 	return (0);
 }
 
-double	calc_wall_impact(double player_pos, double perp_dist, double ray_dir)
+double	calc_wall_impact(t_player player, t_raycast ray)
 {
-	return (player_pos + perp_dist * ray_dir);
+	if (ray.side == 0)
+		return (player.pos_y + ray.perp_wall_dist * ray.ray_dir_y);
+	else
+		return (player.pos_x + ray.perp_wall_dist * ray.ray_dir_x);
 }
 
 double	calc_texture_x_coord(double wall_x, int side, double ray_dir,

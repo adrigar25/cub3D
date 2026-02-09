@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 16:20:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/06 00:53:14 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/07 18:47:53 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,18 @@ static int	is_blocking_tile(t_game *game, int mx, int my)
 	return (c == '1' || c == 'D');
 }
 
+static int	check_los_step(t_game *game, double x, double y)
+{
+	int	mx;
+	int	my;
+
+	mx = (int)x;
+	my = (int)y;
+	if (is_blocking_tile(game, mx, my))
+		return (0);
+	return (1);
+}
+
 static int	has_clear_los(t_game *game, double x0, double y0, t_enemy *e)
 {
 	double	dx;
@@ -40,13 +52,12 @@ static int	has_clear_los(t_game *game, double x0, double y0, t_enemy *e)
 	dist = sqrt(dx * dx + dy * dy);
 	if (dist < 1e-6)
 		return (1);
-	steps = (int)(dist / ENEMY_VISION_STEP);
+	steps = (int)(dist / 0.1);
 	i = 1;
 	while (i <= steps)
 	{
-		if (is_blocking_tile(game, (int)(x0 + (dx / dist) * (i
-						* ENEMY_VISION_STEP)), (int)(y0 + (dy / dist) * (i
-						* ENEMY_VISION_STEP))))
+		if (!check_los_step(game, x0 + (dx / dist) * (i * 0.1), y0 + (dy / dist)
+				* (i * 0.1)))
 			return (0);
 		i++;
 	}
@@ -58,8 +69,6 @@ int	enemy_can_see_player(t_game *game, t_enemy *e)
 	double	dx;
 	double	dy;
 	double	dist;
-	double	dot;
-	double	half_fov_rad;
 
 	if (!game || !e)
 		return (0);
@@ -68,13 +77,10 @@ int	enemy_can_see_player(t_game *game, t_enemy *e)
 	dist = sqrt(dx * dx + dy * dy);
 	if (dist > ENEMY_AGGRO_RANGE_TILES)
 		return (0);
-	if (dist > 1e-6)
-		dot = (dx * game->player.dir_x + dy * game->player.dir_y) / dist;
-	else
-		dot = 1.0;
-	half_fov_rad = (ENEMY_FOV_DEG * M_PI / 180.0) / 2.0;
-	if (dot < cos(half_fov_rad))
-		return (0);
+	dx = game->player.pos_x - e->x;
+	dy = game->player.pos_y - e->y;
+	(void)dx;
+	(void)dy;
 	if (!has_clear_los(game, game->player.pos_x, game->player.pos_y, e))
 		return (0);
 	return (1);

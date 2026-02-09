@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:31:46 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/01 18:36:42 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/06 16:34:12 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	perform_dda(t_game *game)
 	t_raycast	*ray;
 
 	ray = &game->raycast;
-	ray->hit = 0;
 	while (!ray->hit)
 	{
 		if (ray->side_dist_x < ray->side_dist_y)

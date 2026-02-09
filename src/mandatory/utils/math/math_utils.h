@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   math_utils.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/06 12:48:15 by agarcia           #+#    #+#             */
+/*   Updated: 2026/02/06 12:48:15 by agarcia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef MATH_UTILS_H
 # define MATH_UTILS_H
 
-// double	dist(double x1, double y1, double x2, double y2);
+# include "../../cub3d.h"
 # include <math.h>
 
 // Vector
@@ -16,7 +27,7 @@ double	camera_x(int x, int win_w);
 
 // Map
 int		is_out_of_bounds(int map_x, int map_y, char **map);
-double	calc_wall_impact(double player_pos, double perp_dist, double ray_dir);
+double	calc_wall_impact(t_player player, t_raycast ray);
 double	calc_texture_x_coord(double wall_x, int side, double ray_dir,
 			int tex_width);
 

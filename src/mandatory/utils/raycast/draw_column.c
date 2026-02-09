@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:57:57 by adriescr          #+#    #+#             */
-/*   Updated: 2026/01/30 18:54:03 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/06 16:51:19 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,17 @@ static void	calculate_texture_coords(t_game *game, t_img *texture)
 	double	step;
 	double	tex_pos;
 
-	// 1. Calcular el punto de impacto en la pared
-	if (game->raycast.side == 0)
-		impact = calc_wall_impact(game->player.pos_y,
-				game->raycast.perp_wall_dist, game->raycast.ray_dir_y);
-	else
-		impact = calc_wall_impact(game->player.pos_x,
-				game->raycast.perp_wall_dist, game->raycast.ray_dir_x);
-	// 2. Obtener solo la parte decimal (posición dentro del bloque)
+	impact = calc_wall_impact(game->player, game->raycast);
 	wall_x = clamp(fract(impact), 0.0, 1.0);
-	// 3. Calcular coordenada X de la textura con ajuste de dirección
 	if (game->raycast.side == 0)
 		tex_x = calc_texture_x_coord(wall_x, game->raycast.side,
 				game->raycast.ray_dir_x, texture->width);
 	else
 		tex_x = calc_texture_x_coord(wall_x, game->raycast.side,
 				game->raycast.ray_dir_y, texture->width);
-	// 4. Calcular el paso vertical y posición inicial en la textura
 	step = safe_div((double)texture->height, game->raycast.line_height, 1.0);
 	tex_pos = (game->raycast.draw_start - WIN_H / 2 + game->raycast.line_height
 			/ 2) * step;
-	// 5. Guardar en la estructura
 	game->raycast.wall_x = wall_x;
 	game->raycast.tex_x = tex_x;
 	game->raycast.step = step;

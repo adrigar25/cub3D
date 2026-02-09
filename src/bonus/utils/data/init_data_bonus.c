@@ -6,15 +6,11 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:40:42 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/05 22:16:24 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/06 13:07:07 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d_bonus.h"
-
-static const char	g_allowed_chars[] = " 01NSEWDX\n\t";
-static const int	g_default_floor_color = -1;
-static const int	g_default_ceiling_color = -1;
 
 static void	init_textures(t_game *game)
 {
@@ -28,34 +24,21 @@ static void	init_textures(t_game *game)
 	game->e_txt_w2 = NULL;
 }
 
-static void	init_entities(t_game *game)
-{
-	game->sprites = NULL;
-	game->enemies = NULL;
-}
-
-static void	init_colors(t_game *game)
-{
-	game->floor_color = g_default_floor_color;
-	game->ceiling_color = g_default_ceiling_color;
-}
-
-static void	init_map_data(t_game *game)
-{
-	game->map = NULL;
-}
-
 static void	init_allowed_chars(t_game *game)
 {
-	int	i;
-	int	len;
+	char	*default_allowed;
+	int		i;
+	int		len;
 
-	len = (int)(sizeof(g_allowed_chars) - 1);
-	game->allowed_count = 0;
+	default_allowed = " 01NSEWDX\n\t";
 	i = 0;
-	while (i < len)
+	while (default_allowed[i])
+		i++;
+	len = i;
+	i = 0;
+	while (default_allowed[i])
 	{
-		game->allowed_chars[i] = g_allowed_chars[i];
+		game->allowed_chars[i] = default_allowed[i];
 		i++;
 	}
 	game->allowed_count = len;
@@ -73,9 +56,11 @@ t_game	*init_data(void)
 		exit(EXIT_FAILURE);
 	}
 	init_textures(game);
-	init_entities(game);
-	init_colors(game);
-	init_map_data(game);
 	init_allowed_chars(game);
+	game->sprites = NULL;
+	game->enemies = NULL;
+	game->floor_color = -1;
+	game->ceiling_color = -1;
+	game->map = NULL;
 	return (game);
 }

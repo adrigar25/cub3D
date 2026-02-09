@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:45:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/05 22:39:16 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/07 00:24:09 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ static void	draw_crosshair(t_game *game)
 	realiza raycasting y muestra el resultado.
  */
 
-#include <sys/time.h>
-
 static int	render_loop(t_game *game)
 {
 	if (!game->mouse_captured)
@@ -65,7 +63,7 @@ static int	render_loop(t_game *game)
 	update_movement(game);
 	enemy_update_ai(game);
 	raycast(game);
-	render_sprites(game);
+	sprite_render(game);
 	draw_crosshair(game);
 	render_frame(game);
 	render_minimap(game);

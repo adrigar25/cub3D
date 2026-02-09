@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/02 23:57:21 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/06 18:17:49 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,37 @@ static int	is_valid_neighbor(char **map, int x, int y, int i)
 	return (1);
 }
 
-int	check_walls(char **map)
+int	check_directions(char **map, int x, int y)
 {
 	int	i;
-	int	x;
-	int	y;
 	int	dx;
 	int	dy;
-					int nx;
-					int ny;
+	int	nx;
+	int	ny;
 
-	y = -1;
+	i = 0;
+	while (i < 8)
+	{
+		if (!is_valid_neighbor(map, x, y, i))
+		{
+			dx = 0;
+			dy = 0;
+			get_direction(i, &dx, &dy);
+			nx = x + dx;
+			ny = y + dy;
+			if (nx >= 0 && map[nx] && ny >= 0 && ny < (int)ft_strlen(map[nx]))
+				return (-1);
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	check_walls(char **map)
+{
+	int	x;
+	int	y;
+
 	x = -1;
 	while (map[++x])
 	{
@@ -69,23 +89,9 @@ int	check_walls(char **map)
 			if (!(map[x][y] == '0' || is_player_char(map[x][y])
 					|| map[x][y] == 'D'))
 				continue ;
-			i = 0;
-			while (i < 8)
-			{
-				if (!is_valid_neighbor(map, x, y, i))
-				{
-					dx = 0;
-					dy = 0;
-					get_direction(i, &dx, &dy);
-					nx = x + dx;
-					ny = y + dy;
-					if (nx >= 0 && map[nx] && ny >= 0
-						&& ny < (int)ft_strlen(map[nx]))
-						return (-1);
-				}
-				i++;
-			}
+			if (!check_directions(map, x, y))
+				return (0);
 		}
 	}
-	return (0);
+	return (1);
 }

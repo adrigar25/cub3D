@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 16:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/04 17:02:51 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/06 16:34:12 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@
  */
 typedef struct s_keys
 {
-	int			w;
-	int			a;
-	int			s;
-	int			d;
-	int			left;
-	int			right;
-	int			up;
-	int			down;
-}				t_keys;
+	int					w;
+	int					a;
+	int					s;
+	int					d;
+	int					left;
+	int					right;
+	int					up;
+	int					down;
+}						t_keys;
 
 /* ========== IMAGE STRUCTURE ========== */
 /**
@@ -53,94 +53,97 @@ typedef struct s_keys
  */
 typedef struct s_img
 {
-	void		*img;
-	char		*addr;
-	int			bpp;
-	int			line_len;
-	int			endian;
-	int			width;
-	int			height;
-}				t_img;
+	void				*img;
+	char				*addr;
+	int					bpp;
+	int					line_len;
+	int					endian;
+	int					width;
+	int					height;
+}						t_img;
 
 /* ========== PLAYER STRUCTURE ========== */
 typedef struct s_player
 {
-	double		pos_x;
-	double		pos_y;
-	double		dir_x;
-	double		dir_y;
-	double		vertical_dir_x;
-	double		vertical_dir_y;
-	double		plane_x;
-	double		plane_y;
-	int			pitch;
-}				t_player;
+	double				pos_x;
+	double				pos_y;
+	double				dir_x;
+	double				dir_y;
+	double				vertical_dir_x;
+	double				vertical_dir_y;
+	double				plane_x;
+	double				plane_y;
+	int					pitch;
+}						t_player;
 
 /* ========== TEXTURE STRUCTURE ========== */
-typedef struct s_texture
+typedef struct s_textures
 {
-	t_img		img;
-	char		*name;
-	char		*path;
-	struct s_texture	*next;
-}				t_texture;
+	t_img				no;
+	char				*path_no;
+	t_img				so;
+	char				*path_so;
+	t_img				ea;
+	char				*path_ea;
+	t_img				we;
+	char				*path_we;
+	int					color_c;
+	int					color_f;
+}						t_textures;
 
 /* ========== RAYCAST STRUCTURE ========== */
 typedef struct s_raycast
 {
 	// Posición de la camara
-	double		camera_x;
-	double		ray_dir_x;
-	double		ray_dir_y;
+	double				camera_x;
+	double				ray_dir_x;
+	double				ray_dir_y;
 	// Posición del mapa
-	int			map_x;
-	int			map_y;
+	int					map_x;
+	int					map_y;
 	// Paso del DDA
-	int			step_x;
-	int			step_y;
+	int					step_x;
+	int					step_y;
 	// Distancias del DDA
-	double		side_dist_x;
-	double		side_dist_y;
-	double		delta_dist_x;
-	double		delta_dist_y;
+	double				side_dist_x;
+	double				side_dist_y;
+	double				delta_dist_x;
+	double				delta_dist_y;
 	// Distancia perpendicular a la pared (Sin ojo de pez)
-	double		perp_wall_dist;
+	double				perp_wall_dist;
 	// Colision
-	int			side;
-	int			hit;
+	int					side;
+	int					hit;
 	// Altura de la línea a dibujar
-	int			line_height;
+	int					line_height;
 	// Límites de dibujo
-	int			draw_start;
-	int			draw_end;
+	int					draw_start;
+	int					draw_end;
 	// Texture calculations
 	// Exact position where wall was hit
-	double		wall_x;
+	double				wall_x;
 	// X coordinate on texture
-	int			tex_x;
+	int					tex_x;
 	// How much to increase texture coordinate per screen pixel
-	double		step;
+	double				step;
 	// Current texture position
-	double		tex_pos;
-}				t_raycast;
+	double				tex_pos;
+}						t_raycast;
 
 /* ========== GAME STRUCTURE ========== */
 typedef struct s_game
 {
-	char		**map;
-	int			map_w;
-	int			map_h;
-	// Z-Buffer por columna para sprites (profundidad de pared)
-	double		zbuffer[1280];
-	void		*mlx_ptr;
-	void		*win_ptr;
-	t_img		img;
-	t_texture	*textures;
-	int			floor_color;
-	int			ceiling_color;
-	t_player	player;
-	t_raycast	raycast;
-	t_keys		keys;
-}				t_game;
+	char				**map;
+	int					map_w;
+	int					map_h;
+	double				zbuffer[1280];
+	void				*mlx_ptr;
+	void				*win_ptr;
+	t_img				img;
+	t_textures			textures;
+	t_player			player;
+	t_raycast			raycast;
+	t_keys				keys;
+}						t_game;
 
 #endif /* STRUCTS_H */

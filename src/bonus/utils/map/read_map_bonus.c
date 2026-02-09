@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/05 15:59:25 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/06 16:30:37 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ int	read_map(t_game *game, int fd, char *first_line)
 	}
 	game->map_h = i;
 	game->map_w = max_width;
-    /* Recoger enemigos del mapa (carácter 'X') */
-    enemy_collect_from_map(game);
+	enemy_collect_from_map(game);
 	return (validate_map_size(&game->map, i));
 }

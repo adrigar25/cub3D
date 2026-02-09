@@ -6,7 +6,7 @@
 #    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2026/02/05 22:25:59 by agarcia          ###   ########.fr        #
+#    Updated: 2026/02/07 00:37:01 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,11 @@ SRCS_BONUS_UTILS :=	${UTILS_BONUS_DIR}/game/clear_game_bonus.c \
 					$(UTILS_BONUS_DIR)/map/check_characters_bonus.c \
 					$(UTILS_BONUS_DIR)/map/check_player_bonus.c \
 					$(UTILS_BONUS_DIR)/minimap/print_minimap_bonus.c \
-					$(UTILS_BONUS_DIR)/minimap/print_player_bonus.c \
+					$(UTILS_BONUS_DIR)/minimap/player_draw_bonus.c \
+					$(UTILS_BONUS_DIR)/minimap/draw_line_bonus.c \
+					$(UTILS_BONUS_DIR)/minimap/triangle_helpers_bonus.c \
+					$(UTILS_BONUS_DIR)/minimap/fill_triangle_bonus.c \
+					$(UTILS_BONUS_DIR)/minimap/minimap_put_image_bonus.c \
 					$(UTILS_BONUS_DIR)/data/init_data_bonus.c \
 					$(UTILS_BONUS_DIR)/data/read_data_bonus.c \
 					$(UTILS_BONUS_DIR)/data/check_data_bonus.c \
@@ -109,7 +113,9 @@ SRCS_BONUS_UTILS :=	${UTILS_BONUS_DIR}/game/clear_game_bonus.c \
 					$(UTILS_BONUS_DIR)/enemy/enemy_ai_bonus.c \
 					$(UTILS_BONUS_DIR)/enemy/enemy_vision_bonus.c \
 					$(UTILS_BONUS_DIR)/door/door_utils_bonus.c \
-					$(UTILS_BONUS_DIR)/sprite/draw_sprite_bonus.c \
+					$(UTILS_BONUS_DIR)/sprite/sprite_draw_bonus.c \
+					$(UTILS_BONUS_DIR)/sprite/sprite_helpers_bonus.c \
+					$(UTILS_BONUS_DIR)/sprite/sprite_render_bonus.c \
 					$(UTILS_BONUS_DIR)/sprite/sprite_window_bonus.c \
 					$(UTILS_BONUS_DIR)/sprite/sprite_count_bonus.c \
 					$(UTILS_BONUS_DIR)/sprite/sprite_append_bonus.c \
@@ -174,7 +180,7 @@ $(OBJS_BONUS_DIR):
 	@mkdir -p $(OBJS_BONUS_DIR)/utils/player
 	@mkdir -p $(OBJS_BONUS_DIR)/utils/raycast
 	@mkdir -p $(OBJS_BONUS_DIR)/utils/print
-	@mkdir -p $(OBJS_BONUS_DIR)/utils/door/door_utils_bonus.c
+	@mkdir -p $(OBJS_BONUS_DIR)/utils/door
 	@mkdir -p $(OBJS_BONUS_DIR)/utils/sprite
 	@mkdir -p $(OBJS_BONUS_DIR)/utils/enemy
 

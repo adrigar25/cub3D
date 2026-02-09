@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:50:52 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/04 17:02:51 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/06 12:48:28 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@
 # include <unistd.h>
 
 /* ========== MODULAR HEADERS ========== */
-# include "defines.h"
 # include "config.h"
-# include "structs.h"
+# include "defines.h"
 # include "functions.h"
+# include "structs.h"
 
 #endif /* CUB3D_H */
-

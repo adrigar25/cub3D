@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:07:37 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/04 17:55:15 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/06 16:34:12 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,24 @@ void	free_map(char **map)
 
 static void	free_textures(t_game *game)
 {
-	t_texture	*current;
-	t_texture	*next;
-
-	current = game->textures;
-	while (current)
-	{
-		next = current->next;
-		if (current->path)
-			free(current->path);
-		if (current->name)
-			free(current->name);
-		if (game->mlx_ptr && current->img.img)
-			mlx_destroy_image(game->mlx_ptr, current->img.img);
-		free(current);
-		current = next;
-	}
-	game->textures = NULL;
+	if (!game)
+		return ;
+	if (game->textures.path_no)
+		free(game->textures.path_no);
+	if (game->textures.path_so)
+		free(game->textures.path_so);
+	if (game->textures.path_we)
+		free(game->textures.path_we);
+	if (game->textures.path_ea)
+		free(game->textures.path_ea);
+	if (game->mlx_ptr && game->textures.no.img)
+		mlx_destroy_image(game->mlx_ptr, game->textures.no.img);
+	if (game->mlx_ptr && game->textures.so.img)
+		mlx_destroy_image(game->mlx_ptr, game->textures.so.img);
+	if (game->mlx_ptr && game->textures.we.img)
+		mlx_destroy_image(game->mlx_ptr, game->textures.we.img);
+	if (game->mlx_ptr && game->textures.ea.img)
+		mlx_destroy_image(game->mlx_ptr, game->textures.ea.img);
 }
 
 void	clear_game(t_game *game)
@@ -57,7 +58,6 @@ void	clear_game(t_game *game)
 	free_textures(game);
 	if (game->mlx_ptr && game->win_ptr)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-	free_texture_paths(game);
 	free_map(game->map);
 	free(game);
 }

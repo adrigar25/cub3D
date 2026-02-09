@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:05:09 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/02 23:41:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/06 16:14:03 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	raycast(t_game *game)
 		init_ray(game, x);
 		dda(game);
 		draw_column(game, x);
-		// Guardar la distancia perpendicular para sprites (zbuffer)
 		game->zbuffer[x] = game->raycast.perp_wall_dist;
 		x++;
 	}

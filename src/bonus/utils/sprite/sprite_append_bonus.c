@@ -6,41 +6,34 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 00:54:31 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/06 01:24:00 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/07 00:45:16 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../sprite_helpers_bonus.h"
 
-#ifndef SPRITE_NEAR_CLIP
-# define SPRITE_NEAR_CLIP 0.05
-#endif
-
-double	sprite_compute_depth(t_game *game, double sx, double sy)
+double	sprite_compute_depth(t_player *p, double sx, double sy)
 {
-	double	spr_x;
-	double	spr_y;
+	double	x;
+	double	y;
 	double	inv_det;
 	double	transform_y;
 
-	spr_x = sx + 0.5 - game->player.pos_x;
-	spr_y = sy + 0.5 - game->player.pos_y;
-	inv_det = 1.0 / (game->player.plane_x * game->player.dir_y
-			- game->player.dir_x * game->player.plane_y);
-	transform_y = inv_det * (-game->player.plane_y * spr_x
-			+ game->player.plane_x * spr_y);
-	if (transform_y > SPRITE_NEAR_CLIP)
+	x = sx + 0.5 - p->pos_x;
+	y = sy + 0.5 - p->pos_y;
+	inv_det = 1.0 / (p->plane_x * p->dir_y - p->dir_x * p->plane_y);
+	transform_y = inv_det * (-p->plane_y * x + p->plane_x * y);
+	if (transform_y > 0.05)
 		return (transform_y);
 	return (0.0);
 }
 
-static void	add_sprite(t_draw_sprite *new_sprite, double x, double y,
-		t_img *tex, double depth)
+static void	add_sprite_info(t_draw_sprite *new, double x, double y,
+		double depth)
 {
-	new_sprite->x = x + 0.5;
-	new_sprite->y = y + 0.5;
-	new_sprite->depth = depth;
-	new_sprite->tex = tex;
+	new->x = x;
+	new->y = y;
+	new->depth = depth;
 }
 
 int	sprite_append_map_sprites(t_game *game, const t_sprite_window *w,
@@ -62,11 +55,11 @@ int	sprite_append_map_sprites(t_game *game, const t_sprite_window *w,
 			if (ft_strchr("X01NSEW", tile))
 				continue ;
 			tex = sprite_get_texture(game, tile);
-			depth = sprite_compute_depth(game, x, y);
+			depth = sprite_compute_depth(&game->player, x, y);
 			if (tex && tex->img.img && depth > 0.0)
 			{
-				add_sprite(&list[i], x, y, &tex->img, depth);
-				i++;
+				add_sprite_info(&list[i], x, y, depth);
+				list[i++].tex = &tex->img;
 			}
 		}
 	}
@@ -98,10 +91,11 @@ int	sprite_append_enemy_sprites(t_game *game, const t_sprite_window *w,
 			&& e->y >= (double)w->min_y && e->y <= (double)w->max_y)
 		{
 			tex = get_enemy_texture(game, e);
-			depth = sprite_compute_depth(game, e->x, e->y);
+			depth = sprite_compute_depth(&game->player, e->x - 0.5, e->y - 0.5);
 			if (tex && tex->img.img && depth > 0.0)
 			{
-				add_sprite(&list[i], e->x, e->y, &tex->img, depth);
+				add_sprite_info(&list[i], e->x, e->y, depth);
+				list[i].tex = &tex->img;
 				i++;
 			}
 		}

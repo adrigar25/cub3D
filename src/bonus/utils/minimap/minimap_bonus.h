@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_raycast.c                                    :+:      :+:    :+:   */
+/*   minimap_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/30 18:48:36 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/01 22:26:07 by agarcia          ###   ########.fr       */
+/*   Created: 2026/02/06 19:00:00 by agarcia           #+#    #+#             */
+/*   Updated: 2026/02/06 19:04:25 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "math_utils.h"
+#ifndef MINIMAP_BONUS_H
+# define MINIMAP_BONUS_H
 
-double	calc_delta_dist(double ray_dir)
+typedef struct s_triangle
 {
-	if (ray_dir == 0)
-		return (1e30);
-	return (fabs(1.0 / ray_dir));
-}
+	int	x1;
+	int	y1;
+	int	x2;
+	int	y2;
+	int	x3;
+	int	y3;
+}	t_triangle;
 
-int	calc_step(double ray_dir)
+typedef struct s_minimap_dims
 {
-	if (ray_dir < 0)
-		return (-1);
-	else
-		return (1);
-}
+	int	px_center;
+	int	py_center;
+	int	target_w;
+	int	target_h;
+	int	start_x;
+	int	start_y;
+}	t_minimap_dims;
 
-double	calc_side_dist(double pos, int map, double ray_dir, double delta_dist)
-{
-	if (ray_dir < 0)
-		return ((pos - map) * delta_dist);
-	else
-		return ((map + 1.0 - pos) * delta_dist);
-}
+#endif

@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 16:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/05 23:12:48 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/07 00:24:08 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	init_enemy_textures(t_game *game);
 
 /* ========== MLX INITIALIZATION ========== */
 int		init_mlx(t_game *game);
-int		load_sprites_images(t_game *game);
+int		load_images(t_game *game);
 
 /* ========== RAYCASTING ========== */
 void	raycast(t_game *game);
@@ -55,8 +55,8 @@ void	perpendicular_wall_distance(t_raycast *ray, t_game *game);
 void	draw_column(t_game *game, int x);
 
 /* ========== SPRITES ========== */
-void	render_sprites(t_game *game);
-void	draw_sprite_at(t_game *game, t_img *texture, double world_x,
+void	sprite_render(t_game *game);
+void	sprite_draw_at(t_game *game, t_img *texture, double world_x,
 			double world_y);
 
 /* ========== UTILS ========== */

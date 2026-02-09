@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 16:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/05 16:48:42 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/06 22:19:03 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,6 @@
 # endif
 # ifndef ENEMY_FOV_DEG
 #  define ENEMY_FOV_DEG 90
-# endif
-# ifndef ENEMY_VISION_STEP
-#  define ENEMY_VISION_STEP 0.1
 # endif
 
 // Greater values = slower animation.
