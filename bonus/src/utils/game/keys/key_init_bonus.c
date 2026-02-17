@@ -27,4 +27,5 @@ void	init_keys(t_game *game)
 	game->keys.right = 0;
 	game->keys.up = 0;
 	game->keys.down = 0;
+	game->keys.shift = 0;
 }

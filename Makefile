@@ -6,7 +6,7 @@
 #    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2026/02/17 16:42:42 by agarcia          ###   ########.fr        #
+#    Updated: 2026/02/17 18:38:16 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -135,7 +135,8 @@ LIBFT_DIR	:= $(LIBS_DIR)/libft
 LIBFT_LIB	:= $(LIBFT_DIR)/libft.a
 MLX_DIR		:= $(LIBS_DIR)/mlx
 MLX_LIB		:= $(MLX_DIR)/libmlx.a
-MLX_FLAGS	:= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+MLX_FLAGS	:= -framework OpenGL -framework AppKit
+# LINUX -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 # MAC -framework OpenGL -framework AppKit
 # LINUX -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
@@ -225,15 +226,13 @@ $(NAME_BONUS): $(LIBFT_LIB) $(MLX_LIB) $(OBJS_BONUS)
 
 # CLEAN
 clean:
-	@if [ -d "$(MLX_DIR)" ]; then $(MAKE) -C $(MLX_DIR) clean; else echo "Warning: $(MLX_DIR) not found, skipping mlx clean"; fi
 	@rm -rf $(OBJS_MAND_DIR) $(OBJS_BONUS_DIR)
 	@if [ -d "$(LIBFT_DIR)" ]; then $(MAKE) -C $(LIBFT_DIR) clean; else echo "Warning: $(LIBFT_DIR) not found, skipping libft clean"; fi
 
 fclean: clean
 	@rm -f $(NAME) $(NAME_BONUS)
 	@if [ -d "$(LIBFT_DIR)" ]; then $(MAKE) -C $(LIBFT_DIR) fclean; else echo "Warning: $(LIBFT_DIR) not found, skipping libft fclean"; fi
-	# Fallback: eliminar cualquier .o/.a residual en libft
-	@if [ -d "$(LIBFT_DIR)" ]; then find "$(LIBFT_DIR)" -type f \( -name "*.o" -o -name "*.a" \) -delete; fi
+	@if [ -d "$(LIBFT_DIR)" ]; then find "$(LIBFT_DIR)" -type f \( -name "*.o" -o -name "*.a" \) -delete 2>/dev/null || true; fi
 
 re: fclean all
 

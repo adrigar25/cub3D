@@ -49,15 +49,24 @@ int	assign_wall_texture(t_game *game, char *key, t_texture *texture)
 	else if (!ft_strcmp(key, "EA"))
 		game->txt_ea = texture;
 	else if (!ft_strcmp(key, "DO"))
+	{
 		game->txt_door = texture;
+		update_allowed_chars(game, 'D');
+	}
 	else if (!ft_strcmp(key, "X1"))
+	{
 		game->e_txt_s = texture;
+		update_allowed_chars(game, 'X');
+	}
 	else if (!ft_strcmp(key, "X2"))
 		game->e_txt_w1 = texture;
 	else if (!ft_strcmp(key, "X3"))
 		game->e_txt_w2 = texture;
 	else if (!ft_strcmp(key, "A"))
+	{
 		game->txt_exit = texture;
+		update_allowed_chars(game, 'A');
+	}
 	else
 		return (0);
 	return (1);
