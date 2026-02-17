@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_escaped_newline.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:27:12 by adriescr          #+#    #+#             */
-/*   Updated: 2025/09/28 16:58:26 by adriescr         ###   ########.fr       */
+/*   Updated: 2026/02/17 01:02:16 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 /**
  * ENGLISH: Prints an escaped newline sequence ("\n") if found in the argument
@@ -20,7 +20,8 @@
  * 			encuentra en la cadena de argumentos.
  *
  * @param arg   The argument string to check for escaped newlines. /
- *              La cadena de argumentos en la que buscar nuevas líneas escapadas.
+
+	*              La cadena de argumentos en la que buscar nuevas líneas escapadas.
  *
  * @param i     Pointer to the current index in the argument string. /
  *              Puntero al índice actual en la cadena de argumentos.

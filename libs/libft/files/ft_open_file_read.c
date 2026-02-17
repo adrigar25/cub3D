@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_open_file_read.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 14:22:22 by adriescr          #+#    #+#             */
-/*   Updated: 2025/09/22 12:48:44 by adriescr         ###   ########.fr       */
+/*   Updated: 2026/02/17 01:02:16 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 /**
  * ENGLISH: Opens a file for reading.
@@ -24,12 +24,11 @@
  *          El descriptor de archivo para el archivo abierto, o -1
  *          en caso de error.
  */
-int	ft_open_file_read(const char *filename)
-{
-	int	fd;
+int	ft_open_file_read(const char *filename) {
+  int fd;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (-1);
-	return (fd);
+  fd = open(filename, O_RDONLY);
+  if (fd < 0)
+    return (-1);
+  return (fd);
 }

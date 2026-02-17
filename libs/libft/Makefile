@@ -6,7 +6,7 @@
 #    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/03 13:25:07 by adriescr          #+#    #+#              #
-#    Updated: 2026/02/04 20:31:57 by agarcia          ###   ########.fr        #
+#    Updated: 2026/02/17 01:12:37 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC = cc
 # Archiver
 AR = ar rcs
 # Compilation flags
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I .
 
 # Directories
 GET_NEXT_LINE_DIR = get_next_line

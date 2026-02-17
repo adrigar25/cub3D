@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_close_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 14:25:57 by adriescr          #+#    #+#             */
-/*   Updated: 2025/09/22 12:48:29 by adriescr         ###   ########.fr       */
+/*   Updated: 2026/02/17 01:10:53 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 /**
  * ENGLISH: Closes a file descriptor.

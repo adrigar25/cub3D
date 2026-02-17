@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_open_file_write.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 14:23:10 by adriescr          #+#    #+#             */
-/*   Updated: 2025/11/24 15:43:53 by adriescr         ###   ########.fr       */
+/*   Updated: 2026/02/17 01:02:16 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 /**
  * ENGLISH: Opens a file for writing.

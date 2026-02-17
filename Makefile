@@ -3,22 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+         #
+#    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2026/02/09 17:21:15 by adriescr         ###   ########.fr        #
+#    Updated: 2026/02/17 01:15:00 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= cub3D
 NAME_BONUS	:= cub3D_bonus
 
-CC			:= cc
-CFLAGS		:= -Wall -Wextra -Werror
-
 # ============ MANDATORY ============ #
-SRC_MAND_DIR	:= ./src/mandatory
+SRC_MAND_DIR	:= ./mandatory/src
+INCLUDES_MANDATORY := ./mandatory/includes
 UTILS_MAND_DIR	:= $(SRC_MAND_DIR)/utils
+
 
 
 SRCS_MAND_UTILS	:=	${UTILS_MAND_DIR}/game/clear_game.c \
@@ -66,7 +65,8 @@ OBJS_MAND_DIR	:= objs_mandatory
 OBJS_MAND		:= $(SRCS_MAND:$(SRC_MAND_DIR)/%.c=$(OBJS_MAND_DIR)/%.o)
 
 # ============ BONUS ============ #
-SRC_BONUS_DIR	:= ./src/bonus
+SRC_BONUS_DIR	:= ./bonus/src
+INCLUDES_BONUS := ./bonus/includes
 UTILS_BONUS_DIR	:= $(SRC_BONUS_DIR)/utils
 
 SRCS_BONUS_UTILS :=	${UTILS_BONUS_DIR}/game/clear_game_bonus.c \
@@ -79,7 +79,6 @@ SRCS_BONUS_UTILS :=	${UTILS_BONUS_DIR}/game/clear_game_bonus.c \
 					${UTILS_BONUS_DIR}/game/movement/move_player_bonus.c \
 					${UTILS_BONUS_DIR}/game/movement/rotate_player_bonus.c \
 					${UTILS_BONUS_DIR}/game/movement/position_validation_bonus.c \
-					${UTILS_BONUS_DIR}/print/ft_error_bonus.c \
 					${UTILS_BONUS_DIR}/print/ft_putstr_fd_color_bonus.c \
 					${UTILS_BONUS_DIR}/print/ft_putcolor_bonus.c \
 					$(UTILS_BONUS_DIR)/map/read_map_bonus.c \
@@ -92,10 +91,8 @@ SRCS_BONUS_UTILS :=	${UTILS_BONUS_DIR}/game/clear_game_bonus.c \
 					$(UTILS_BONUS_DIR)/minimap/minimap_tiles_bonus.c \
 					$(UTILS_BONUS_DIR)/minimap/minimap_clear_bonus.c \
 					$(UTILS_BONUS_DIR)/minimap/player_draw_bonus.c \
-					$(UTILS_BONUS_DIR)/minimap/draw_line_bonus.c \
 					$(UTILS_BONUS_DIR)/minimap/triangle_helpers_bonus.c \
 					$(UTILS_BONUS_DIR)/minimap/fill_triangle_bonus.c \
-					$(UTILS_BONUS_DIR)/minimap/minimap_put_image_bonus.c \
 					$(UTILS_BONUS_DIR)/data/init_data_bonus.c \
 					$(UTILS_BONUS_DIR)/data/read_data_bonus.c \
 					$(UTILS_BONUS_DIR)/data/texture_management_bonus.c \
@@ -140,6 +137,11 @@ MLX_DIR		:= $(LIBS_DIR)/mlx
 MLX_LIB		:= $(MLX_DIR)/libmlx.a
 MLX_FLAGS	:= -framework OpenGL -framework AppKit
 # ---------------------------------- #
+
+# ============== LIBFT ============ #
+
+CC			:= cc
+CFLAGS		:= -Wall -Wextra -Werror -I$(INCLUDES_MANDATORY) -I$(INCLUDES_BONUS) -I $(LIBFT_DIR)
 
 # ============ RULES ============ #
 
