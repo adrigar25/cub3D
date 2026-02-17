@@ -6,7 +6,7 @@
 #    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2026/02/17 18:38:16 by agarcia          ###   ########.fr        #
+#    Updated: 2026/02/17 23:10:22 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,9 @@ UTILS_BONUS_DIR	:= $(SRC_BONUS_DIR)/utils
 
 SRCS_BONUS_UTILS :=	${UTILS_BONUS_DIR}/game/clear_game_bonus.c \
 					${UTILS_BONUS_DIR}/game/game_loop_bonus.c \
+					${UTILS_BONUS_DIR}/game/check_exit_bonus.c \
+					${UTILS_BONUS_DIR}/game/collectible_bonus.c \
+					${UTILS_BONUS_DIR}/game/draw_score.c \
 					${UTILS_BONUS_DIR}/game/keys/key_init_bonus.c \
 					${UTILS_BONUS_DIR}/game/keys/key_press_bonus.c \
 					${UTILS_BONUS_DIR}/game/keys/key_release_bonus.c \
@@ -99,8 +102,9 @@ SRCS_BONUS_UTILS :=	${UTILS_BONUS_DIR}/game/clear_game_bonus.c \
 					$(UTILS_BONUS_DIR)/data/line_parser_bonus.c \
 					$(UTILS_BONUS_DIR)/data/check_data_bonus.c \
 					$(UTILS_BONUS_DIR)/mlx/init_mlx_bonus.c \
-					$(UTILS_BONUS_DIR)/mlx/image_buffer_bonus.c \
-					$(UTILS_BONUS_DIR)/color/color_utils_bonus.c \
+				$(UTILS_BONUS_DIR)/mlx/image_buffer_bonus.c \
+				$(UTILS_BONUS_DIR)/mlx/hud_message_bonus.c \
+				$(UTILS_BONUS_DIR)/color/color_utils_bonus.c \
 					$(UTILS_BONUS_DIR)/color/parse_rgb_bonus.c \
 					$(UTILS_BONUS_DIR)/player/player_utils_bonus.c \
 					$(UTILS_BONUS_DIR)/raycast/dda_bonus.c \
