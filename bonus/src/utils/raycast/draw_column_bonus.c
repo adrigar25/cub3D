@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:57:57 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/17 17:13:50 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 22:20:42 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ static t_img	*get_wall_texture(t_game *game, char **map, t_raycast *raycast)
 	{
 		if (game->txt_door)
 			return (&game->txt_door->img);
+		else
+			return (&game->txt_no->img);
+	}
+	if (map[raycast->map_y][raycast->map_x] == 'A')
+	{
+		if (game->txt_exit)
+			return (&game->txt_exit->img);
 		else
 			return (&game->txt_no->img);
 	}

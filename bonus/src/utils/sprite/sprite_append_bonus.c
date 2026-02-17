@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 00:54:31 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 22:20:45 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	sprite_append_map_sprites(t_game *game, const t_sprite_window *w,
 		while (x++ <= w->max_x && game->map[y][x])
 		{
 			tile = game->map[y][x];
-			if (ft_strchr("X01NSEW", tile))
+			if (ft_strchr("X01NSEWA", tile))
 				continue ;
 			tex = sprite_get_texture(game, tile);
 			depth = sprite_compute_depth(&game->player, x, y);

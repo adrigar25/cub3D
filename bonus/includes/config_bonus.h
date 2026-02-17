@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 16:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 18:30:59 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 22:20:45 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,10 @@
 
 # ifndef MINIMAP_DOOR_COLOR
 #  define MINIMAP_DOOR_COLOR 0x8B4513
+# endif
+
+# ifndef MINIMAP_EXIT_COLOR
+#  define MINIMAP_EXIT_COLOR 0x00CC44
 # endif
 
 /* ========== PERFORMANCE ========== */

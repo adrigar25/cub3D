@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:17 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 22:20:44 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	is_valid_position(t_game *game, double x, double y)
 	int		map_y;
 
 	margin = PLAYER_HITBOX;
-	if (ft_strchr("1D", game->map[(int)(y - margin)][(int)(x - margin)]))
+	if (ft_strchr("1DA", game->map[(int)(y - margin)][(int)(x - margin)]))
 		return (0);
-	if (ft_strchr("1D", game->map[(int)(y - margin)][(int)(x + margin)]))
+	if (ft_strchr("1DA", game->map[(int)(y - margin)][(int)(x + margin)]))
 		return (0);
-	if (ft_strchr("1D", game->map[(int)(y + margin)][(int)(x - margin)]))
+	if (ft_strchr("1DA", game->map[(int)(y + margin)][(int)(x - margin)]))
 		return (0);
-	if (ft_strchr("1D", game->map[(int)(y + margin)][(int)(x + margin)]))
+	if (ft_strchr("1DA", game->map[(int)(y + margin)][(int)(x + margin)]))
 		return (0);
 	map_x = (int)x;
 	map_y = (int)y;
@@ -38,7 +38,7 @@ int	is_valid_position(t_game *game, double x, double y)
 		return (0);
 	if (!game->map[map_y] || !game->map[map_y][map_x])
 		return (0);
-	if (ft_strchr("1D", game->map[map_y][map_x]))
+	if (ft_strchr("1DA", game->map[map_y][map_x]))
 		return (0);
 	return (1);
 }

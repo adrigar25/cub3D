@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:31:46 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 22:20:42 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ static void	perform_dda(t_game *game)
 			ray->side = 1;
 		}
 		if (game->map[ray->map_y][ray->map_x] == '1'
-			|| game->map[ray->map_y][ray->map_x] == 'D')
+			|| game->map[ray->map_y][ray->map_x] == 'D'
+			|| game->map[ray->map_y][ray->map_x] == 'A')
 			ray->hit = 1;
 	}
 }
