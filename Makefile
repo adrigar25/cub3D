@@ -6,7 +6,7 @@
 #    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2026/02/17 01:15:00 by agarcia          ###   ########.fr        #
+#    Updated: 2026/02/17 16:42:42 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -135,7 +135,10 @@ LIBFT_DIR	:= $(LIBS_DIR)/libft
 LIBFT_LIB	:= $(LIBFT_DIR)/libft.a
 MLX_DIR		:= $(LIBS_DIR)/mlx
 MLX_LIB		:= $(MLX_DIR)/libmlx.a
-MLX_FLAGS	:= -framework OpenGL -framework AppKit
+MLX_FLAGS	:= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+
+# MAC -framework OpenGL -framework AppKit
+# LINUX -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 # ---------------------------------- #
 
 # ============== LIBFT ============ #
