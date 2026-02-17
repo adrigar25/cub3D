@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:40:42 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 18:38:39 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 23:06:46 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	init_allowed_chars(t_game *game)
 	int		i;
 	int		len;
 
-	default_allowed = " 01NSEW\n\t";
+	default_allowed = " 01NSEWAC\n\t";
 	i = 0;
 	while (default_allowed[i])
 		i++;
@@ -65,5 +65,7 @@ t_game	*init_data(void)
 	game->ceiling_color = -1;
 	game->map = NULL;
 	game->mouse_captured = 0;
+	game->finished = 0;
+	game->score = 0;
 	return (game);
 }
