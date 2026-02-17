@@ -58,7 +58,7 @@ int	sprite_append_map_sprites(t_game *game, const t_sprite_window *w,
 			depth = sprite_compute_depth(&game->player, x, y);
 			if (tex && tex->img.img && depth > 0.0)
 			{
-				add_sprite_info(&list[i], x, y, depth);
+				add_sprite_info(&list[i], x + 0.5, y + 0.5, depth);
 				list[i++].tex = &tex->img;
 			}
 		}

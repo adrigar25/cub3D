@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 16:43:44 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 19:15:11 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	handle_mouse_press(int button, int x, int y, t_game *game)
 	if (x < 0 || y < 0 || x >= WIN_W || y >= WIN_H)
 		return (0);
 	game->mouse_captured = 1;
-	mlx_mouse_hide(game->win_ptr, game->mlx_ptr);
-	mlx_mouse_move(game->mlx_ptr,game->win_ptr, WIN_W / 2, WIN_H / 2);
+	mlx_mouse_hide();
+	mlx_mouse_move(game->win_ptr, WIN_W / 2, WIN_H / 2);
 	return (0);
 }
 
@@ -48,6 +48,6 @@ int	handle_mouse_move(int x, int y, t_game *game)
 		if (game->player.pitch < -WIN_H / 2)
 			game->player.pitch = -WIN_H / 2;
 	}
-	mlx_mouse_move(game->mlx_ptr, game->win_ptr, center_x, center_y);
+	mlx_mouse_move(game->win_ptr, center_x, center_y);
 	return (0);
 }

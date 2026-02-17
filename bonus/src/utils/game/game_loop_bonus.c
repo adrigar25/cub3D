@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:45:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/17 16:43:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 19:13:05 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	draw_crosshair(t_game *game)
 static int	render_loop(t_game *game)
 {
 	if (!game->mouse_captured)
-		mlx_mouse_show(game->win_ptr, game->mlx_ptr);
+		mlx_mouse_show();
 	update_movement(game);
 	enemy_update_ai(game);
 	raycast(game);
@@ -77,7 +77,7 @@ static int	render_loop(t_game *game)
  */
 static int	handle_close(t_game *game)
 {
-	mlx_mouse_show(game->win_ptr, game->mlx_ptr);
+	mlx_mouse_show();
 	clear_game(game);
 	exit(0);
 }
