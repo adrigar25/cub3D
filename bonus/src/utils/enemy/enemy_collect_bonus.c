@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:30:20 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 17:06:43 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	enemy_collect_from_map(t_game *game)
 
 	if (!game || !game->map)
 		return ;
-	y = -1;
-	while (y++ < game->map_h && game->map[y])
+	y = 0;
+	while (y < game->map_h && game->map[y])
 	{
-		x = -1;
-		while (x++ < (int)ft_strlen(game->map[y]))
+		x = 0;
+		while (x < (int)ft_strlen(game->map[y]))
 		{
 			c = game->map[y][x];
 			if (c == 'X')
@@ -37,6 +37,8 @@ void	enemy_collect_from_map(t_game *game)
 					game->map[y][x] = '0';
 				}
 			}
+			x++;
 		}
+		y++;
 	}
 }

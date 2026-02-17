@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 17:00:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 16:57:18 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	assign_wall_texture(t_game *game, char *key, t_texture *texture)
 		game->e_txt_w1 = texture;
 	else if (!ft_strcmp(key, "X3"))
 		game->e_txt_w2 = texture;
+	else if (!ft_strcmp(key, "A"))
+		game->txt_exit = texture;
 	else
 		return (0);
 	return (1);

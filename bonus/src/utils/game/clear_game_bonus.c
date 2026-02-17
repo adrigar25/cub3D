@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 18:06:54 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 01:17:18 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 16:57:20 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,14 @@ static void	free_textures(t_game *game)
 	free_texture_list(game->mlx_ptr, game->txt_ea);
 	free_texture_list(game->mlx_ptr, game->txt_we);
 	free_texture_list(game->mlx_ptr, game->txt_door);
+	free_texture_list(game->mlx_ptr, game->txt_exit);
 	free_texture_list(game->mlx_ptr, game->sprites);
 	game->txt_no = NULL;
 	game->txt_so = NULL;
 	game->txt_ea = NULL;
 	game->txt_we = NULL;
 	game->txt_door = NULL;
+	game->txt_exit = NULL;
 	game->sprites = NULL;
 }
 

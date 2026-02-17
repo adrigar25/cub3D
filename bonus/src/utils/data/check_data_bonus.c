@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 13:08:58 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 16:19:08 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 17:13:48 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	check_data(t_game *game)
 		return (-1);
 	if (check_texture_file(game->txt_ea->path, "East") == -1)
 		return (-1);
-	if (check_texture_file(game->txt_door->path, "Door") == -1)
+	if (game->txt_door && check_texture_file(game->txt_door->path, "Door") == -1)
 		return (-1);
-	if (check_texture_file(game->txt_exit->path, "Exit") == -1)
+	if (game->txt_exit && check_texture_file(game->txt_exit->path, "Exit") == -1)
 		return (-1);
 	current = game->sprites;
 	while (current)

@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:57:57 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 17:13:50 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,12 @@ static void	calculate_text_coords(t_player p, t_raycast *ray, t_img *tex)
 static t_img	*get_wall_texture(t_game *game, char **map, t_raycast *raycast)
 {
 	if (map[raycast->map_y][raycast->map_x] == 'D')
-		return (&game->txt_door->img);
+	{
+		if (game->txt_door)
+			return (&game->txt_door->img);
+		else
+			return (&game->txt_no->img);
+	}
 	if (raycast->side == 0)
 	{
 		if (raycast->ray_dir_x > 0)
