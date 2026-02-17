@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 16:20:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 22:20:45 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	is_blocking_tile(t_game *game, int mx, int my)
 	if (mx >= (int)ft_strlen(game->map[my]))
 		return (1);
 	c = game->map[my][mx];
-	return (c == '1' || c == 'D');
+	return (c == '1' || c == 'D' || c == 'A');
 }
 
 static int	check_los_step(t_game *game, double x, double y)

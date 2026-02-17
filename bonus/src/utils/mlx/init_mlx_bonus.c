@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 01:03:21 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 17:18:02 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 22:49:59 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	load_images(t_game *game)
 	void	*mlx;
 
 	mlx = game->mlx_ptr;
-	if (game->txt_door && load_texture(mlx, &game->txt_door->img, game->txt_door->path) == -1)
+	if (game->txt_door && load_texture(mlx, &game->txt_door->img,
+			game->txt_door->path) == -1)
 		return (-1);
 	if (load_texture(mlx, &game->txt_no->img, game->txt_no->path) == -1)
 		return (-1);
@@ -58,13 +59,17 @@ int	load_images(t_game *game)
 		return (-1);
 	if (load_texture(mlx, &game->txt_we->img, game->txt_we->path) == -1)
 		return (-1);
-	if (game->e_txt_s && load_texture(mlx, &game->e_txt_s->img, game->e_txt_s->path) == -1)
+	if (game->e_txt_s && load_texture(mlx, &game->e_txt_s->img,
+			game->e_txt_s->path) == -1)
 		return (-1);
-	if (game->e_txt_w1 && load_texture(mlx, &game->e_txt_w1->img, game->e_txt_w1->path) == -1)
+	if (game->e_txt_w1 && load_texture(mlx, &game->e_txt_w1->img,
+			game->e_txt_w1->path) == -1)
 		return (-1);
-	if (game->e_txt_w2 && load_texture(mlx, &game->e_txt_w2->img, game->e_txt_w2->path) == -1)
+	if (game->e_txt_w2 && load_texture(mlx, &game->e_txt_w2->img,
+			game->e_txt_w2->path) == -1)
 		return (-1);
-	if (game->txt_exit && load_texture(mlx, &game->txt_exit->img, game->txt_exit->path) == -1)
+	if (game->txt_exit && load_texture(mlx, &game->txt_exit->img,
+			game->txt_exit->path) == -1)
 		return (-1);
 	if (load_sprites(mlx, game->sprites) == -1)
 		return (-1);

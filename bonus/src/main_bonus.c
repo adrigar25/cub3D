@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:41:35 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/06 16:49:54 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 22:30:49 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ int	cub3d(char *file)
 
 	game_data = init_data();
 	if (read_data(&game_data, file))
-		return (clear_game(game_data), 1);
+		return (clear_game(game_data, -1), 1);
 	if (check_data(game_data))
-		return (clear_game(game_data), 1);
+		return (clear_game(game_data, -1), 1);
 	if (check_map(game_data))
-		return (clear_game(game_data), 1);
+		return (clear_game(game_data, -1), 1);
 	if (init_mlx(game_data))
-		return (clear_game(game_data), 1);
+		return (clear_game(game_data, -1), 1);
 	if (load_images(game_data))
-		return (clear_game(game_data), 1);
+		return (clear_game(game_data, -1), 1);
 	if (get_player_position(game_data))
-		return (clear_game(game_data), 1);
+		return (clear_game(game_data, -1), 1);
 	start_game_loop(game_data);
 	return (0);
 }

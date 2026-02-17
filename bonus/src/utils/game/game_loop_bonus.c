@@ -6,11 +6,27 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:45:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/17 19:13:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 23:10:22 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
+static void	draw_end_hud(t_game *game, const char *title, int color)
+{
+	char	*num;
+	char	*score_line;
+
+	num = ft_itoa(game->score);
+	if (!num)
+		return ;
+	score_line = ft_strjoin("Puntuacion: ", num);
+	free(num);
+	if (!score_line)
+		return ;
+	draw_hud_message(game, title, score_line, "Pulsa ESC para salir.", color);
+	free(score_line);
+}
 
 /**
  * ENGLISH: Draw a crosshair in the center of the screen.
@@ -61,12 +77,20 @@ static int	render_loop(t_game *game)
 	if (!game->mouse_captured)
 		mlx_mouse_show();
 	update_movement(game);
-	enemy_update_ai(game);
+	check_collectibles(game);
+	check_exit_collision(game);
+	if (!game->finished)
+		enemy_update_ai(game);
 	raycast(game);
 	sprite_render(game);
 	draw_crosshair(game);
 	render_frame(game);
 	render_minimap(game);
+	draw_score(game);
+	if (game->finished == 1)
+		draw_end_hud(game, "\xc2\xa1VICTORIA!", 0x00FF55);
+	else if (game->finished == 2)
+		draw_end_hud(game, "GAME OVER", 0xFF4444);
 	return (0);
 }
 
@@ -78,7 +102,7 @@ static int	render_loop(t_game *game)
 static int	handle_close(t_game *game)
 {
 	mlx_mouse_show();
-	clear_game(game);
+	clear_game(game, -1);
 	exit(0);
 }
 

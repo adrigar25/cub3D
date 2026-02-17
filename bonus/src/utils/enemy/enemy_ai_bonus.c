@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:30:30 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 22:53:38 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ static void	enemy_try_move(t_game *game, t_enemy *e)
 			e->x += dx;
 		if (is_valid_position(game, e->x, e->y + dy))
 			e->y += dy;
+		if (dist < 0.5)
+		{
+			game->finished = 2;
+			mlx_mouse_show();
+			return ;
+		}
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 16:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/15 23:34:52 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 23:10:22 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void		sprite_draw_at(t_game *game, t_img *texture, double world_x,
 int			rgb_to_hex(int r, int g, int b);
 int			check_rgb_format(char *values);
 int			parse_rgb(char *line);
-void		clear_game(t_game *game);
+void		clear_game(t_game *game, int exit_code);
 void		free_map(char **map);
 
 /* ========== PLAYER MOVEMENT ========== */
@@ -91,8 +91,15 @@ void		img_pixel_put(t_img *img, int x, int y, int color);
 void		render_frame(t_game *game);
 int			get_texture_color(t_img *texture, int x, int y);
 
+/* ========== HUD MESSAGE ========== */
+void		draw_hud_message(t_game *game, const char *title,
+				const char *sub, const char *sub2, int color);
+
 /* ========== GAME LOOP ========== */
 void		start_game_loop(t_game *game);
+void		check_exit_collision(t_game *game);
+void		check_collectibles(t_game *game);
+void		draw_score(t_game *game);
 
 /* ========== KEY HANDLING ========== */
 void		init_keys(t_game *game);

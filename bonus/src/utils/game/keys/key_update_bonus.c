@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:17 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 22:53:38 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
         estados actuales de las teclas.
  */
 void	update_movement(t_game *game) {
+  if (game->finished)
+    return ;
   if (game->keys.w || game->keys.up)
     move_forward(game);
   if (game->keys.s || game->keys.down)

@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 16:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 16:19:26 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 22:55:43 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ typedef struct s_game
 	int					map_w;
 	int					map_h;
 	int					mouse_captured;
+	int					finished;
 	double				zbuffer[WIN_W];
 	void				*mlx_ptr;
 	void				*win_ptr;
@@ -173,12 +174,13 @@ typedef struct s_game
 	t_texture			*sprites;
 	int					floor_color;
 	int					ceiling_color;
-	t_enemy				*enemies;
-	t_player			player;
 	t_raycast			raycast;
 	t_keys				keys;
 	char				allowed_chars[128];
 	int					allowed_count;
+	t_enemy				*enemies;
+	t_player			player;
+	int					score;
 }						t_game;
 
 #endif /* STRUCTS_BONUS_H */

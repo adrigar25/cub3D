@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 18:06:54 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 16:57:20 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 22:42:01 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,25 @@ static void	free_textures(t_game *game)
 	game->sprites = NULL;
 }
 
-void	clear_game(t_game *game)
+void	clear_game(t_game *game, int exit_code)
 {
-	if (!game)
-		return ;
-	if (game->mlx_ptr && game->img.img)
-		mlx_destroy_image(game->mlx_ptr, game->img.img);
-	free_textures(game);
-	if (game->mlx_ptr && game->win_ptr)
-		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-	free_map(game->map);
-	free(game);
+	if (exit_code == -1)
+	{
+		ft_fprintf(1, GREEN "Exiting game. Goodbye!\n" RESET);
+		if (!game)
+			return ;
+		if (game->mlx_ptr && game->img.img)
+			mlx_destroy_image(game->mlx_ptr, game->img.img);
+		free_textures(game);
+		if (game->mlx_ptr && game->win_ptr)
+			mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+		free_map(game->map);
+		free(game);
+	}
+	else if (exit_code == 1)
+		draw_hud_message(game, "VICTORY!",
+			"You reached the exit!", "Press ESC to exit", 0x00FF55);
+	else if (exit_code == 2)
+		draw_hud_message(game, "GAME OVER", "You died!",
+			"Press ESC to exit", 0xFF0000);
 }

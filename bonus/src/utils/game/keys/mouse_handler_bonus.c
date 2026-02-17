@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 19:15:11 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/17 22:53:38 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	handle_mouse_move(int x, int y, t_game *game)
 	int	delta_x;
 	int	delta_y;
 
-	if (!game->mouse_captured)
+	if (!game->mouse_captured || game->finished)
 		return (0);
 	center_x = WIN_W / 2;
 	center_y = WIN_H / 2;
