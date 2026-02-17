@@ -25,8 +25,8 @@ int	check_player(char **map) {
       player_count += is_player_char(map[i][j++]);
   }
   if (player_count == 0)
-    return (ft_fprintf(2, RED "Error: No player found\n" RESET), -1);
+    return (ft_fprintf(2, RED "Error: No player found. Use N, S, E or W to set starting position\n" RESET), -1);
   if (player_count > 1)
-    return (ft_fprintf(2, RED "Error: Multiple players found\n" RESET), -1);
+    return (ft_fprintf(2, RED "Error: Multiple players found. Only one of N, S, E, W is allowed\n" RESET), -1);
   return (0);
 }

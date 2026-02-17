@@ -52,24 +52,12 @@ static int	is_valid_neighbor(char **map, int x, int y, int i)
 int	check_directions(char **map, int x, int y)
 {
 	int	i;
-	int	dx;
-	int	dy;
-	int	nx;
-	int	ny;
 
 	i = 0;
 	while (i < 8)
 	{
 		if (!is_valid_neighbor(map, x, y, i))
-		{
-			dx = 0;
-			dy = 0;
-			get_direction(i, &dx, &dy);
-			nx = x + dx;
-			ny = y + dy;
-			if (nx >= 0 && map[nx] && ny >= 0 && ny < (int)ft_strlen(map[nx]))
-				return (-1);
-		}
+			return (-1);
 		i++;
 	}
 	return (1);
@@ -87,10 +75,13 @@ int	check_walls(char **map)
 		while (map[x][++y])
 		{
 			if (!(map[x][y] == '0' || is_player_char(map[x][y])
-					|| map[x][y] == 'D'))
+					|| map[x][y] == 'D' || map[x][y] == 'A'
+					|| map[x][y] == 'C'))
 				continue ;
-			if (!check_directions(map, x, y))
-				return (0);
+			if (check_directions(map, x, y) == -1)
+				return (ft_fprintf(2,
+					RED "Error: Open wall or hole at row %d, col %d\n"
+					RESET, x + 1, y + 1), -1);
 		}
 	}
 	return (1);

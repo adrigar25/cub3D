@@ -12,6 +12,26 @@
 
 #include "cub3d_bonus.h"
 
+static int	has_exit(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'A')
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	check_map(t_game *game)
 {
 	char	**map;
@@ -23,14 +43,16 @@ int	check_map(t_game *game)
 	if (!map || !map[0] || !map[0][0])
 		return (ft_fprintf(2, RED "Error: Map is empty\n" RESET), -1);
 	if (check_empty_rows(map) == -1)
-		return (ft_fprintf(2, RED "Error: Map has empty lines\n" RESET), -1);
+		return (-1);
 	if (check_empty_columns(map) == -1)
-		return (ft_fprintf(2, RED "Error: Map has empty cols\n" RESET), -1);
+		return (-1);
 	if (check_valid_characters(game) == -1)
-		return (ft_fprintf(2, RED "Error: Invalid char in map\n" RESET), -1);
+		return (-1);
 	if (check_player(map) == -1)
 		return (-1);
 	if (check_walls(map) == -1)
-		return (ft_fprintf(2, RED "Error: Map not closed\n" RESET), -1);
+		return (-1);
+	if (!has_exit(map))
+		return (ft_fprintf(2, RED "Error: Map has no exit (A)\n" RESET), -1);
 	return (0);
 }

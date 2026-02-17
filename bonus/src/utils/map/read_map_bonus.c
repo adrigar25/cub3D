@@ -48,7 +48,7 @@ static int	add_line(t_game *game, int index, char *line, size_t *max_width) {
       ft_fprintf(2, RED "Error: invalid map line: %s" RESET "\n", line);
     else
       ft_fprintf(2, RED "Error: invalid map line: (null)" RESET "\n");
-    return (free(line), -1);
+    return (-1);
   }
   if (ft_strlen(line) > *max_width)
     *max_width = ft_strlen(line);

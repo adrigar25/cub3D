@@ -14,19 +14,16 @@
 
 static int	is_allowed_char(t_game *game, char c)
 {
-	t_texture	*cur;
+	int	i;
 
-	if (ft_strchr(" 01NSEWD\n", c))
-		return (1);
-	if (game)
-		cur = game->sprites;
-	else
-		cur = NULL;
-	while (cur)
+	if (!game)
+		return (0);
+	i = 0;
+	while (i < game->allowed_count)
 	{
-		if (cur->name && cur->name[0] == c)
+		if (game->allowed_chars[i] == c)
 			return (1);
-		cur = cur->next;
+		i++;
 	}
 	return (0);
 }
@@ -45,7 +42,9 @@ int	check_valid_characters(t_game *game)
 		while (game->map[i][j])
 		{
 			if (!is_allowed_char(game, game->map[i][j]))
-				return (-1);
+				return (ft_fprintf(2,
+					RED "Error: Invalid character '%c' at row %d, col %d\n"
+					RESET, game->map[i][j], i + 1, j + 1), -1);
 			j++;
 		}
 	}

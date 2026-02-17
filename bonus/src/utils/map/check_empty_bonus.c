@@ -59,7 +59,7 @@ int	check_empty_rows(char **map)
     while (map[i][j] && ft_strchr(" \t\n", map[i][j]) != NULL)
       j++;
     if (map[i][j] == '\0')
-      return (-1);
+      return (ft_fprintf(2, RED "Error: Empty row at line %d\n" RESET, i + 1), -1);
     i++;
   }
   return (0);
@@ -81,7 +81,7 @@ int	check_empty_columns(char **map)
       if (ft_strchr(" \t\n", map[i][j]) == NULL)
         break ;
     if (!map[i])
-      return (-1);
+      return (ft_fprintf(2, RED "Error: Empty column at col %d\n" RESET, j + 1), -1);
   }
   return (0);
 }
