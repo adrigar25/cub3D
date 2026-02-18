@@ -6,14 +6,21 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 01:03:21 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 22:49:59 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 01:11:22 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-static int	load_texture(void *mlx, t_img *img, char *path)
+static int	load_texture(void *mlx, t_texture *texture)
 {
+	char	*path;
+	t_img	*img;
+
+	if (!texture)
+		return (ft_fprintf(2, RED "Error: Texture is NULL\n" RESET), -1);
+	path = texture->path;
+	img = &texture->img;
 	if (!path)
 		return (ft_fprintf(2, RED "Error: Texture path is NULL\n" RESET), -1);
 	if (!img)
@@ -36,7 +43,7 @@ static int	load_sprites(void *mlx, t_texture *sprites)
 	current = sprites;
 	while (current)
 	{
-		if (load_texture(mlx, &current->img, current->path) == -1)
+		if (load_texture(mlx, current) == -1)
 			return (-1);
 		current = current->next;
 	}
@@ -48,28 +55,23 @@ int	load_images(t_game *game)
 	void	*mlx;
 
 	mlx = game->mlx_ptr;
-	if (game->txt_door && load_texture(mlx, &game->txt_door->img,
-			game->txt_door->path) == -1)
+	if (game->txt_door && load_texture(mlx, game->txt_door) == -1)
 		return (-1);
-	if (load_texture(mlx, &game->txt_no->img, game->txt_no->path) == -1)
+	if (game->e_txt_s && load_texture(mlx, game->e_txt_s) == -1)
 		return (-1);
-	if (load_texture(mlx, &game->txt_so->img, game->txt_so->path) == -1)
+	if (game->e_txt_w1 && load_texture(mlx, game->e_txt_w1) == -1)
 		return (-1);
-	if (load_texture(mlx, &game->txt_ea->img, game->txt_ea->path) == -1)
+	if (game->e_txt_w2 && load_texture(mlx, game->e_txt_w2) == -1)
 		return (-1);
-	if (load_texture(mlx, &game->txt_we->img, game->txt_we->path) == -1)
+	if (load_texture(mlx, game->txt_no) == -1)
 		return (-1);
-	if (game->e_txt_s && load_texture(mlx, &game->e_txt_s->img,
-			game->e_txt_s->path) == -1)
+	if (load_texture(mlx, game->txt_so) == -1)
 		return (-1);
-	if (game->e_txt_w1 && load_texture(mlx, &game->e_txt_w1->img,
-			game->e_txt_w1->path) == -1)
+	if (load_texture(mlx, game->txt_ea) == -1)
 		return (-1);
-	if (game->e_txt_w2 && load_texture(mlx, &game->e_txt_w2->img,
-			game->e_txt_w2->path) == -1)
+	if (load_texture(mlx, game->txt_we) == -1)
 		return (-1);
-	if (game->txt_exit && load_texture(mlx, &game->txt_exit->img,
-			game->txt_exit->path) == -1)
+	if (game->txt_exit && load_texture(mlx, game->txt_exit) == -1)
 		return (-1);
 	if (load_sprites(mlx, game->sprites) == -1)
 		return (-1);
