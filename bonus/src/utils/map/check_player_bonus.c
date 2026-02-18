@@ -6,27 +6,31 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:15:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 00:28:10 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-int	check_player(char **map) {
-  int i;
-  int j;
-  int player_count;
+int	check_player(char **map)
+{
+	int	i;
+	int	j;
+	int	player_count;
 
-  player_count = 0;
-  i = -1;
-  while (map[++i]) {
-    j = 0;
-    while (map[i][j] && player_count <= 1)
-      player_count += is_player_char(map[i][j++]);
-  }
-  if (player_count == 0)
-    return (ft_fprintf(2, RED "Error: No player found. Use N, S, E or W to set starting position\n" RESET), -1);
-  if (player_count > 1)
-    return (ft_fprintf(2, RED "Error: Multiple players found. Only one of N, S, E, W is allowed\n" RESET), -1);
-  return (0);
+	player_count = 0;
+	i = -1;
+	while (map[++i])
+	{
+		j = 0;
+		while (map[i][j] && player_count <= 1)
+			player_count += is_player_char(map[i][j++]);
+	}
+	if (player_count != 1)
+	{
+		ft_fprintf(2, RED "Error: %d players found.", player_count);
+		ft_fprintf(2, RED "Only one of N, S, E or W is allowed\n" RESET);
+		return (-1);
+	}
+	return (0);
 }

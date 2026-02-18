@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 00:25:53 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,12 @@ int	check_valid_characters(t_game *game)
 		while (game->map[i][j])
 		{
 			if (!is_allowed_char(game, game->map[i][j]))
-				return (ft_fprintf(2,
-					RED "Error: Invalid character '%c' at row %d, col %d\n"
-					RESET, game->map[i][j], i + 1, j + 1), -1);
+			{
+				ft_fprintf(2, RED "Error: Invalid character '%c'");
+				ft_fprintf(2, " at row %d, col %d\n" RESET, game->map[i][j], i
+					+ 1, j + 1);
+				return (-1);
+			}
 			j++;
 		}
 	}

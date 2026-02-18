@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:30:20 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 17:06:43 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 00:59:01 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	enemy_collect_from_map(t_game *game)
 {
 	int		y;
 	int		x;
-	char	c;
 	t_enemy	*e;
 
 	if (!game || !game->map)
@@ -27,8 +26,7 @@ void	enemy_collect_from_map(t_game *game)
 		x = 0;
 		while (x < (int)ft_strlen(game->map[y]))
 		{
-			c = game->map[y][x];
-			if (c == 'X')
+			if (game->map[y][x] == 'X')
 			{
 				e = create_enemy(x, y);
 				if (e)

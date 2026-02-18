@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 22:54:59 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 23:10:42 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 00:57:05 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	draw_score(t_game *game)
 {
-	char *score_str;
-	int x;
-	int y;
+	char	*score_str;
+	int		x;
+	int		y;
 
 	if (!game || !game->win_ptr)
 		return ;

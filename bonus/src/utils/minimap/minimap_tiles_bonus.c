@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 17:30:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/17 22:20:45 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 00:58:16 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ int	has_floor_nearby(t_game *game, int x, int y)
 		dx = -1;
 		while (dx <= 1)
 		{
-			if (y + dy >= 0 && y + dy < game->map_h && x + dx >= 0
-				&& game->map[y + dy] && x + dx < (int)ft_strlen(game->map[y
-					+ dy]) && game->map[y + dy][x + dx] == '0')
-				return (1);
+			if (y + dy >= 0 && y + dy < game->map_h)
+				if (x + dx >= 0 && game->map[y + dy])
+					if (x + dx < (int)ft_strlen(game->map[y + dy]))
+						if (game->map[y + dy][x + dx] == '0')
+							return (1);
 			dx++;
 		}
 		dy++;
