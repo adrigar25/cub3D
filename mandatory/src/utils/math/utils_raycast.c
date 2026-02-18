@@ -6,11 +6,11 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 18:48:36 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/01 22:26:07 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 17:10:05 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "math_utils.h"
+#include "raycast.h"
 
 double	calc_delta_dist(double ray_dir)
 {

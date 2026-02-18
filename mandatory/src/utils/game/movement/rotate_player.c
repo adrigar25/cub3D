@@ -6,12 +6,13 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 01:15:19 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 17:10:05 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "math_utils.h"
+#include "player.h"
+#include "raycast.h"
+#include "game.h"
 
 /**
  * ENGLISH: Apply rotation to player direction and camera plane.

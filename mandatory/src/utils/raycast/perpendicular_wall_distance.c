@@ -6,12 +6,12 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:48:21 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/17 01:16:10 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 17:10:05 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "math_utils.h"
+#include "game.h"
+#include "raycast.h"
 
 void	perpendicular_wall_distance(t_raycast *ray, t_game *game)
 {

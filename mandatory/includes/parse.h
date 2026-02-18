@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   position_validation.c                              :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
+/*   Created: 2026/02/18 00:00:00 by agarcia           #+#    #+#             */
 /*   Updated: 2026/02/18 17:10:05 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "player.h"
-#include "raycast.h"
-#include "game.h"
+#ifndef PARSE_H
+# define PARSE_H
 
-/**
- * ENGLISH: Check if a position (x, y) is valid (not a wall).
- *
- * SPANISH: Comprueba si una posición (x, y) es válida (no está fuera del mapa).
- */
-int	is_valid_position(t_game *game, double x, double y)
-{
-	int	map_x;
-	int	map_y;
+typedef struct s_game	t_game;
 
-	map_x = (int)clamp(x, 0, 10000);
-	map_y = (int)clamp(y, 0, 10000);
-	if (is_out_of_bounds(map_x, map_y, game->map))
-		return (0);
-	if (game->map[map_y][map_x] == '1')
-		return (0);
-	return (1);
-}
+/* ========== DATA INITIALIZATION & LOADING ========== */
+t_game					*init_data(void);
+int						read_data(t_game **game_data, char *file);
+int						check_data(t_game *game_data);
+
+/* ========== COLOR / RGB UTILITIES ========== */
+int						rgb_to_hex(int r, int g, int b);
+int						check_rgb_format(char *values);
+int						parse_rgb(char *line);
+
+#endif /* PARSE_H */

@@ -6,11 +6,11 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 22:39:09 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/02 00:50:37 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 17:10:05 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "math_utils.h"
+#include "raycast.h"
 
 double	safe_div(double num, double denom, double def)
 {

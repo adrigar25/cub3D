@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:22:35 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 17:08:22 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
  *              El código de color (1-8) para el color del texto, o 9
  *              para restablecer.
  *
- * @returns The number of characters printed. / El número de caracteres impresos.
+ * @returns The number of characters printed.
+	/ El número de caracteres impresos.
  */
 long	ft_putcolor(int fd, int color)
 {
