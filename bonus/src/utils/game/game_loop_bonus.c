@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:45:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/18 01:19:28 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 16:15:31 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static void	draw_end_hud(t_game *game, const char *title, int color)
 	num = ft_itoa(game->score);
 	if (!num)
 		return ;
-	score_line = ft_strjoin("Puntuacion: ", num);
+	score_line = ft_strjoin("Score: ", num);
 	free(num);
 	if (!score_line)
 		return ;
 	msg.title = title;
 	msg.sub = score_line;
-	msg.sub2 = "Pulsa ESC para salir.";
+	msg.sub2 = "Press ESC to exit.";
 	msg.color = color;
 	draw_hud_message(game, msg);
 	free(score_line);
@@ -93,7 +93,7 @@ static int	render_loop(t_game *game)
 	render_minimap(game);
 	draw_score(game);
 	if (game->finished == 1)
-		draw_end_hud(game, "\xc2\xa1VICTORIA!", 0x00FF55);
+		draw_end_hud(game, "\xc2\xa1Victory!", 0x00FF55);
 	else if (game->finished == 2)
 		draw_end_hud(game, "GAME OVER", 0xFF4444);
 	return (0);

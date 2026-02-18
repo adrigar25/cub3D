@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 02:01:25 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 02:21:46 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static void	draw_minimap_point(t_game *game, int px, int py)
 {
-	double	c[2];
-	double	rel_x;
-	double	rel_y;
-	double	dist;
-	double	world_x;
+	double		c[2];
+	double		rel_x;
+	double		rel_y;
+	double		dist;
+	t_fcoord	world;
 
 	c[0] = game->minimap.width / 2.0;
 	c[1] = game->minimap.height / 2.0;
@@ -27,9 +27,11 @@ static void	draw_minimap_point(t_game *game, int px, int py)
 	dist = sqrt(rel_x * rel_x + rel_y * rel_y);
 	if (dist <= c[0] - MINIMAP_BORDER)
 	{
-		world_x = (-rel_y * game->player.dir_x - rel_x * game->player.dir_y)
+		world.x = (-rel_y * game->player.dir_x - rel_x * game->player.dir_y)
 			/ (MINIMAP_SCALE / 2) + game->player.pos_x;
-		put_minimap_tile(game, px, py, world_x);
+		world.y = (-rel_y * game->player.dir_y + rel_x * game->player.dir_x)
+			/ (MINIMAP_SCALE / 2) + game->player.pos_y;
+		put_minimap_tile(game, px, py, world);
 	}
 }
 

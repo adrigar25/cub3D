@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 17:30:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/18 00:58:16 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 02:23:50 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ int	has_floor_nearby(t_game *game, int x, int y)
 	return (0);
 }
 
-void	put_minimap_tile(t_game *game, int px, int py, double world_x)
+void	put_minimap_tile(t_game *game, int px, int py, t_fcoord world)
 {
 	int	map_x;
 	int	map_y;
 
-	map_x = (int)world_x;
-	map_y = (int)game->player.pos_y;
+	map_x = (int)world.x;
+	map_y = (int)world.y;
 	if (map_y >= 0 && map_y < game->map_h && map_x >= 0 && game->map[map_y]
 		&& map_x < (int)ft_strlen(game->map[map_y]))
 	{

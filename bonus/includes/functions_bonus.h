@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 16:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 01:19:27 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 02:23:50 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void		open_door(t_game *game);
 
 /* ========== MINIMAP UTILITIES ========== */
 int			has_floor_nearby(t_game *game, int x, int y);
-void		put_minimap_tile(t_game *game, int px, int py, double world_x);
+void		put_minimap_tile(t_game *game, int px, int py, t_fcoord world);
 void		clear_map(t_game *game);
 
 /* ========== PRINT UTILITIES ========== */

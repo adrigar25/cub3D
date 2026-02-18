@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 00:46:03 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 16:15:13 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	check_exit_collision(t_game *game)
 	if (dist < 1.1 && !game->finished)
 	{
 		game->finished = 1;
-		ft_fprintf(1, GREEN "¡Has llegado a la salida! ¡Victoria!\n" RESET);
+		ft_fprintf(1, GREEN "Victory! You found the exit!\n" RESET);
 		mlx_mouse_show();
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 16:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 01:19:28 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 02:23:50 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,14 @@ typedef struct s_game
 	t_player			player;
 	int					score;
 }						t_game;
+
+/* ========== MINIMAP COORD ========== */
+typedef struct s_fcoord
+{
+	double					x;
+	double					y;
+}						t_fcoord;
+
 /* ========== HUD MESSAGE STRUCTS ========== */
 typedef struct s_hud_rect
 {
