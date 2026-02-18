@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 16:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 22:55:43 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 01:19:28 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,5 +182,20 @@ typedef struct s_game
 	t_player			player;
 	int					score;
 }						t_game;
+/* ========== HUD MESSAGE STRUCTS ========== */
+typedef struct s_hud_rect
+{
+	int					x0;
+	int					y0;
+	int					x1;
+	int					y1;
+}						t_hud_rect;
 
+typedef struct s_hud
+{
+	const char			*title;
+	const char			*sub;
+	const char			*sub2;
+	int					color;
+}						t_hud;
 #endif /* STRUCTS_BONUS_H */

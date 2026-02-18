@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 16:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 23:10:22 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 01:19:27 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,7 @@ void		render_frame(t_game *game);
 int			get_texture_color(t_img *texture, int x, int y);
 
 /* ========== HUD MESSAGE ========== */
-void		draw_hud_message(t_game *game, const char *title,
-				const char *sub, const char *sub2, int color);
+void		draw_hud_message(t_game *game, t_hud msg);
 
 /* ========== GAME LOOP ========== */
 void		start_game_loop(t_game *game);

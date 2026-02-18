@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:45:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/17 23:10:22 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 01:19:28 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	draw_end_hud(t_game *game, const char *title, int color)
 {
 	char	*num;
 	char	*score_line;
+	t_hud	msg;
 
 	num = ft_itoa(game->score);
 	if (!num)
@@ -24,7 +25,11 @@ static void	draw_end_hud(t_game *game, const char *title, int color)
 	free(num);
 	if (!score_line)
 		return ;
-	draw_hud_message(game, title, score_line, "Pulsa ESC para salir.", color);
+	msg.title = title;
+	msg.sub = score_line;
+	msg.sub2 = "Pulsa ESC para salir.";
+	msg.color = color;
+	draw_hud_message(game, msg);
 	free(score_line);
 }
 

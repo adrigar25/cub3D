@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 18:06:54 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 22:42:01 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 01:19:26 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,18 @@ static void	free_textures(t_game *game)
 	game->sprites = NULL;
 }
 
+static void	draw_finish_hud(t_game *game, const char *title, const char *sub,
+		int color)
+{
+	t_hud	msg;
+
+	msg.title = title;
+	msg.sub = sub;
+	msg.sub2 = "Press ESC to exit";
+	msg.color = color;
+	draw_hud_message(game, msg);
+}
+
 void	clear_game(t_game *game, int exit_code)
 {
 	if (exit_code == -1)
@@ -85,9 +97,7 @@ void	clear_game(t_game *game, int exit_code)
 		free(game);
 	}
 	else if (exit_code == 1)
-		draw_hud_message(game, "VICTORY!",
-			"You reached the exit!", "Press ESC to exit", 0x00FF55);
+		draw_finish_hud(game, "VICTORY!", "You reached the exit!", 0x00FF55);
 	else if (exit_code == 2)
-		draw_hud_message(game, "GAME OVER", "You died!",
-			"Press ESC to exit", 0xFF0000);
+		draw_finish_hud(game, "GAME OVER", "You died!", 0xFF0000);
 }
