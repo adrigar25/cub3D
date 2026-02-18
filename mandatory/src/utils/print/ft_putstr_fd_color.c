@@ -6,11 +6,12 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:20:04 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/18 17:08:22 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 21:06:13 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
+#include "console.h"
 
 /**
  * ENGLISH: Outputs the string 'str' to the file descriptor 'fd'.

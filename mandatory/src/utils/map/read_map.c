@@ -6,11 +6,15 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:08:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 21:06:13 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
+#include "map.h"
+#include "game.h"
+#include "console.h"
+#include <stdlib.h>
 
 static int	is_map_line(char *line)
 {

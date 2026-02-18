@@ -6,12 +6,14 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:10:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 17:44:15 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
+
+# include "types.h"
 
 typedef struct s_game	t_game;
 
@@ -30,31 +32,6 @@ typedef struct s_game	t_game;
 
 /* ========== SHADOW & EFFECTS ========== */
 # define SHADOW_MASK 0x7F7F7F
-
-/* ========== IMAGE STRUCTURE ========== */
-typedef struct s_img {
-  void *img;
-  char *addr;
-  int bpp;
-  int line_len;
-  int endian;
-  int width;
-  int height;
-}						t_img;
-
-/* ========== TEXTURES STRUCTURE ========== */
-typedef struct s_textures {
-  t_img no;
-  char *path_no;
-  t_img so;
-  char *path_so;
-  t_img ea;
-  char *path_ea;
-  t_img we;
-  char *path_we;
-  int color_c;
-  int color_f;
-}						t_textures;
 
 /* ========== MLX INIT ========== */
 int						init_mlx(t_game *game);

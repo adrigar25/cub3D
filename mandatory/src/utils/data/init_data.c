@@ -6,11 +6,16 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:40:42 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:08:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 21:06:13 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "console.h"
+#include "game.h"
+#include "libft.h"
+#include "parse.h"
+#include "render.h"
+#include <stdlib.h>
 
 t_game	*init_data(void)
 {
@@ -32,6 +37,15 @@ t_game	*init_data(void)
 	game->textures.path_so = NULL;
 	game->textures.path_we = NULL;
 	game->textures.path_ea = NULL;
-	game->map = NULL;
+	game->map.grid = NULL;
+	game->map.width = 0;
+	game->map.height = 0;
+	game->zbuffer = malloc(sizeof(double) * WIN_W);
+	if (!game->zbuffer)
+	{
+		free(game);
+		ft_fprintf(2, RED "Error: Malloc failed (zbuffer)\n" RESET);
+		exit(EXIT_FAILURE);
+	}
 	return (game);
 }

@@ -6,11 +6,12 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 18:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:08:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 17:44:15 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
+#include "parse.h"
 
 /**
  * @brief Converts RGB color values to hexadecimal format

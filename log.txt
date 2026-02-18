@@ -1,30 +1,61 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
+/*   console.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/18 00:00:00 by agarcia           #+#    #+#             */
+/*   Updated: 2026/02/18 21:06:13 by agarcia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CONSOLE_H
+# define CONSOLE_H
+
+/*
+** console.h — ANSI terminal color macros and colored print utilities.
+** Completely independent: no project-specific types, no external libs.
+*/
+
+/* ========== CONSOLE COLOR DEFINES ========== */
+# define RED		"\033[0;31m"
+# define GREEN		"\033[0;32m"
+# define YELLOW		"\033[0;33m"
+# define ORANGE		"\033[38;5;208m"
+# define BLUE		"\033[0;34m"
+# define MAGENTA	"\033[0;35m"
+# define CYAN		"\033[0;36m"
+# define WHITE		"\033[0;37m"
+# define RESET		"\033[0m"
+
+/* ========== PRINT UTILITIES ========== */
+long	ft_error(const char *function, char **str);
+long	ft_putcolor(int fd, int color);
+long	ft_putstr_fd_color(const char *str, int fd, int color);
+
+#endif /* CONSOLE_H */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:50:52 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:10:03 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 21:06:13 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-/* ========== EXTERNAL LIBRARIES ========== */
-# include "../../libs/libft/libft.h"
-# include "../../libs/mlx/mlx.h"
-# include <fcntl.h>
-# include <math.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-/* ========== MODULAR HEADERS ========== */
+/*
+** cub3d.h is the umbrella header for the mandatory project.
+** game.h already pulls in types.h and map.h.
+** Domain headers (render, player, raycast) are included per .c file.
+*/
 # include "game.h"
-# include "map.h"
 # include "parse.h"
 
 #endif /* CUB3D_H */
@@ -36,57 +67,29 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:10:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 21:11:41 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
 
-# include "render.h"
-# include "player.h"
-# include "raycast.h"
+/*
+** game.h no incluye render.h/player.h/raycast.h directamente.
+** Las definiciones de structs vienen de types.h y map.h.
+** Esto elimina el acoplamiento cruzado entre headers funcionales.
+*/
+# include "map.h"
+# include "types.h"
 
 /* ========== GAME STRUCTURE ========== */
-/**
- * Main game container. Includes all subsystems:
- * map, textures, player, raycast state and key states.
- */
-typedef struct s_game
-{
-	char				**map;
-	int					map_w;
-	int					map_h;
-	double				zbuffer[1280];
-	void				*mlx_ptr;
-	void				*win_ptr;
-	t_img				img;
-	t_textures			textures;
-	t_player			player;
-	t_raycast			raycast;
-	t_keys				keys;
-}						t_game;
+# include "types.h"
 
 /* ========== GAME LOOP ========== */
 void	start_game_loop(t_game *game);
 
 /* ========== CLEANUP ========== */
 void	clear_game(t_game *game);
-
-/* ========== PRINT UTILITIES ========== */
-# define RED "\033[0;31m"
-# define GREEN "\033[0;32m"
-# define YELLOW "\033[0;33m"
-# define ORANGE "\033[38;5;208m"
-# define BLUE "\033[0;34m"
-# define MAGENTA "\033[0;35m"
-# define CYAN "\033[0;36m"
-# define WHITE "\033[0;37m"
-# define RESET "\033[0m"
-
-long	ft_error(const char *function, char **str);
-long	ft_putcolor(int fd, int color);
-long	ft_putstr_fd_color(const char *str, int fd, int color);
 
 #endif /* GAME_H */
 /* ************************************************************************** */
@@ -97,24 +100,25 @@ long	ft_putstr_fd_color(const char *str, int fd, int color);
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:10:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 21:10:35 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_H
 # define MAP_H
 
-typedef struct s_game	t_game;
+/* ========== MAP DATA STRUCTURE ========== */
+# include "types.h"
 
 /* ========== MAP VALIDATION ========== */
-int						read_map(char ***map, int fd);
-int						check_map(char **map);
-int						check_walls(char **map);
-int						check_empty_rows(char **map);
-int						check_empty_columns(char **map);
-int						check_valid_characters(char **map);
-int						check_player(char **map);
-void					free_map(char **map);
+int		read_map(char ***map, int fd);
+int		check_map(char **map);
+int		check_walls(char **map);
+int		check_empty_rows(char **map);
+int		check_empty_columns(char **map);
+int		check_valid_characters(char **map);
+int		check_player(char **map);
+void	free_map(char **map);
 
 #endif /* MAP_H */
 /* ************************************************************************** */
@@ -125,24 +129,24 @@ void					free_map(char **map);
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:10:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 21:11:02 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 
-typedef struct s_game	t_game;
+# include "game.h"
 
 /* ========== DATA INITIALIZATION & LOADING ========== */
-t_game					*init_data(void);
-int						read_data(t_game **game_data, char *file);
-int						check_data(t_game *game_data);
+t_game	*init_data(void);
+int		read_data(t_game **game_data, char *file);
+int		check_data(t_game *game_data);
 
 /* ========== COLOR / RGB UTILITIES ========== */
-int						rgb_to_hex(int r, int g, int b);
-int						check_rgb_format(char *values);
-int						parse_rgb(char *line);
+int		rgb_to_hex(int r, int g, int b);
+int		check_rgb_format(char *values);
+int		parse_rgb(char *line);
 
 #endif /* PARSE_H */
 /* ************************************************************************** */
@@ -153,12 +157,14 @@ int						parse_rgb(char *line);
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:10:18 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 17:44:15 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_H
 # define PLAYER_H
+
+# include "types.h"
 
 typedef struct s_game	t_game;
 
@@ -169,33 +175,6 @@ typedef struct s_game	t_game;
 
 /* ========== COLLISION CONSTANT ========== */
 # define PLAYER_HITBOX 0.2
-
-/* ========== PLAYER STRUCTURE ========== */
-typedef struct s_player
-{
-	double				pos_x;
-	double				pos_y;
-	double				dir_x;
-	double				dir_y;
-	double				vertical_dir_x;
-	double				vertical_dir_y;
-	double				plane_x;
-	double				plane_y;
-	int					pitch;
-}						t_player;
-
-/* ========== KEY STATES STRUCTURE ========== */
-typedef struct s_keys
-{
-	int					w;
-	int					a;
-	int					s;
-	int					d;
-	int					left;
-	int					right;
-	int					up;
-	int					down;
-}						t_keys;
 
 /* ========== KEY MAPPING - MACOS ========== */
 # define KEY_W_M 13
@@ -222,24 +201,24 @@ typedef struct s_keys
 # define KEY_E_L 101
 
 /* ========== PLAYER FUNCTIONS ========== */
-int						is_player_char(char c);
-int						get_player_position(t_game *game);
+int		is_player_char(char c);
+int		get_player_position(t_game *game);
 
 /* ========== MOVEMENT FUNCTIONS ========== */
-void					move_forward(t_game *game);
-void					move_backward(t_game *game);
-void					move_left(t_game *game);
-void					move_right(t_game *game);
-void					rotate_left(t_game *game);
-void					rotate_right(t_game *game);
-void					rotate_player(t_game *game, double angle);
-int						is_valid_position(t_game *game, double x, double y);
+void	move_forward(t_game *game);
+void	move_backward(t_game *game);
+void	move_left(t_game *game);
+void	move_right(t_game *game);
+void	rotate_left(t_game *game);
+void	rotate_right(t_game *game);
+void	rotate_player(t_game *game, double angle);
+int		is_valid_position(t_game *game, double x, double y);
 
 /* ========== KEY HANDLING ========== */
-void					init_keys(t_game *game);
-int						handle_keypress(int keycode, t_game *game);
-int						handle_keyrelease(int keycode, t_game *game);
-void					update_movement(t_game *game);
+void	init_keys(t_game *game);
+int		handle_keypress(int keycode, t_game *game);
+int		handle_keyrelease(int keycode, t_game *game);
+void	update_movement(t_game *game);
 
 #endif /* PLAYER_H */
 /* ************************************************************************** */
@@ -250,43 +229,16 @@ void					update_movement(t_game *game);
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:10:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 17:44:15 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAYCAST_H
 # define RAYCAST_H
 
-# include <math.h>
+# include "types.h"
 
 typedef struct s_game	t_game;
-typedef struct s_player	t_player;
-
-/* ========== RAYCAST STRUCTURE ========== */
-typedef struct s_raycast
-{
-	double				camera_x;
-	double				ray_dir_x;
-	double				ray_dir_y;
-	int					map_x;
-	int					map_y;
-	int					step_x;
-	int					step_y;
-	double				side_dist_x;
-	double				side_dist_y;
-	double				delta_dist_x;
-	double				delta_dist_y;
-	double				perp_wall_dist;
-	int					side;
-	int					hit;
-	int					line_height;
-	int					draw_start;
-	int					draw_end;
-	double				wall_x;
-	int					tex_x;
-	double				step;
-	double				tex_pos;
-}						t_raycast;
 
 /* ========== RAYCASTING FUNCTIONS ========== */
 void	raycast(t_game *game);
@@ -319,12 +271,14 @@ double	calc_side_dist(double pos, int map, double ray_dir, double delta_dist);
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:10:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 17:44:15 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
+
+# include "types.h"
 
 typedef struct s_game	t_game;
 
@@ -344,31 +298,6 @@ typedef struct s_game	t_game;
 /* ========== SHADOW & EFFECTS ========== */
 # define SHADOW_MASK 0x7F7F7F
 
-/* ========== IMAGE STRUCTURE ========== */
-typedef struct s_img {
-  void *img;
-  char *addr;
-  int bpp;
-  int line_len;
-  int endian;
-  int width;
-  int height;
-}						t_img;
-
-/* ========== TEXTURES STRUCTURE ========== */
-typedef struct s_textures {
-  t_img no;
-  char *path_no;
-  t_img so;
-  char *path_so;
-  t_img ea;
-  char *path_ea;
-  t_img we;
-  char *path_we;
-  int color_c;
-  int color_f;
-}						t_textures;
-
 /* ========== MLX INIT ========== */
 int						init_mlx(t_game *game);
 int						init_textures(t_game *game);
@@ -381,3 +310,126 @@ void					render_frame(t_game *game);
 int						get_texture_color(t_img *texture, int x, int y);
 
 #endif /* RENDER_H */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   types.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/18 00:00:00 by agarcia           #+#    #+#             */
+/*   Updated: 2026/02/18 21:12:13 by agarcia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef TYPES_H
+# define TYPES_H
+
+/*
+** This header contains ONLY struct definitions — no includes, no prototypes.
+** It is the single source of truth for all sub-types used in t_game.
+** Include this header anywhere a struct body (not just a pointer) is needed.
+*/
+
+/* ========== MAP DATA STRUCTURE ========== */
+typedef struct s_map_data
+{
+	char		**grid;
+	int			width;
+	int			height;
+}				t_map_data;
+/* ========== KEY STATES ========== */
+typedef struct s_keys
+{
+	int			w;
+	int			a;
+	int			s;
+	int			d;
+	int			left;
+	int			right;
+	int			up;
+	int			down;
+}				t_keys;
+
+/* ========== PLAYER ========== */
+typedef struct s_player
+{
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		vertical_dir_x;
+	double		vertical_dir_y;
+	double		plane_x;
+	double		plane_y;
+	int			pitch;
+}				t_player;
+
+/* ========== IMAGE ========== */
+typedef struct s_img
+{
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			line_len;
+	int			endian;
+	int			width;
+	int			height;
+}				t_img;
+
+/* ========== TEXTURES ========== */
+typedef struct s_textures
+{
+	t_img		no;
+	char		*path_no;
+	t_img		so;
+	char		*path_so;
+	t_img		ea;
+	char		*path_ea;
+	t_img		we;
+	char		*path_we;
+	int			color_c;
+	int			color_f;
+}				t_textures;
+
+/* ========== RAYCAST STATE ========== */
+typedef struct s_raycast
+{
+	double		camera_x;
+	double		ray_dir_x;
+	double		ray_dir_y;
+	int			map_x;
+	int			map_y;
+	int			step_x;
+	int			step_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	double		perp_wall_dist;
+	int			side;
+	int			hit;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	double		wall_x;
+	int			tex_x;
+	double		step;
+	double		tex_pos;
+}				t_raycast;
+
+/* ========== GAME STRUCTURE ========== */
+typedef struct s_game
+{
+	t_map_data	map;
+	double		*zbuffer;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_img		img;
+	t_textures	textures;
+	t_player	player;
+	t_raycast	raycast;
+	t_keys		keys;
+}				t_game;
+
+#endif /* TYPES_H */

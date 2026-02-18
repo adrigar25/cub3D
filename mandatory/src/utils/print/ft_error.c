@@ -6,11 +6,12 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:38:46 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/18 17:08:22 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 21:06:13 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "console.h"
+#include "libft.h"
 
 /**
  * ENGLISH: Prints an error message to standard error (file descriptor 2).

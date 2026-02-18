@@ -6,12 +6,13 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:31:46 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/18 17:10:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 17:44:15 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycast.h"
 #include "game.h"
+#include "render.h"
 
 void	init_step_and_side_dist(t_game *game)
 {
@@ -51,12 +52,12 @@ static void	perform_dda(t_game *game)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (is_out_of_bounds(ray->map_x, ray->map_y, game->map))
+		if (is_out_of_bounds(ray->map_x, ray->map_y, game->map.grid))
 		{
 			ray->hit = 1;
 			break ;
 		}
-		if (game->map[ray->map_y][ray->map_x] == '1')
+		if (game->map.grid[ray->map_y][ray->map_x] == '1')
 			ray->hit = 1;
 	}
 }

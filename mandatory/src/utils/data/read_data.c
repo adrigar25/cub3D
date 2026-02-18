@@ -6,11 +6,18 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/18 17:08:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 21:14:53 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "console.h"
+#include "game.h"
+#include "libft.h"
+#include "map.h"
+#include "parse.h"
+#include <fcntl.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 static int	is_texture_line(char *line)
 {
@@ -108,7 +115,7 @@ int	read_data(t_game **game_data, char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (ft_fprintf(2, RED "Error: Cannot open file\n" RESET), -1);
-	if (read_map(&(*game_data)->map, fd) == -1)
+	if (read_map(&(*game_data)->map.grid, fd) == -1)
 	{
 		close(fd);
 		return (ft_fprintf(2, RED "Error: Failed to read map\n" RESET), -1);

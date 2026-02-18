@@ -6,43 +6,16 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:10:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 17:44:15 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAYCAST_H
 # define RAYCAST_H
 
-# include <math.h>
+# include "types.h"
 
 typedef struct s_game	t_game;
-typedef struct s_player	t_player;
-
-/* ========== RAYCAST STRUCTURE ========== */
-typedef struct s_raycast
-{
-	double				camera_x;
-	double				ray_dir_x;
-	double				ray_dir_y;
-	int					map_x;
-	int					map_y;
-	int					step_x;
-	int					step_y;
-	double				side_dist_x;
-	double				side_dist_y;
-	double				delta_dist_x;
-	double				delta_dist_y;
-	double				perp_wall_dist;
-	int					side;
-	int					hit;
-	int					line_height;
-	int					draw_start;
-	int					draw_end;
-	double				wall_x;
-	int					tex_x;
-	double				step;
-	double				tex_pos;
-}						t_raycast;
 
 /* ========== RAYCASTING FUNCTIONS ========== */
 void	raycast(t_game *game);

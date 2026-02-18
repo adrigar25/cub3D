@@ -6,12 +6,14 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:10:18 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 17:44:15 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_H
 # define PLAYER_H
+
+# include "types.h"
 
 typedef struct s_game	t_game;
 
@@ -22,33 +24,6 @@ typedef struct s_game	t_game;
 
 /* ========== COLLISION CONSTANT ========== */
 # define PLAYER_HITBOX 0.2
-
-/* ========== PLAYER STRUCTURE ========== */
-typedef struct s_player
-{
-	double				pos_x;
-	double				pos_y;
-	double				dir_x;
-	double				dir_y;
-	double				vertical_dir_x;
-	double				vertical_dir_y;
-	double				plane_x;
-	double				plane_y;
-	int					pitch;
-}						t_player;
-
-/* ========== KEY STATES STRUCTURE ========== */
-typedef struct s_keys
-{
-	int					w;
-	int					a;
-	int					s;
-	int					d;
-	int					left;
-	int					right;
-	int					up;
-	int					down;
-}						t_keys;
 
 /* ========== KEY MAPPING - MACOS ========== */
 # define KEY_W_M 13
@@ -75,23 +50,23 @@ typedef struct s_keys
 # define KEY_E_L 101
 
 /* ========== PLAYER FUNCTIONS ========== */
-int						is_player_char(char c);
-int						get_player_position(t_game *game);
+int		is_player_char(char c);
+int		get_player_position(t_game *game);
 
 /* ========== MOVEMENT FUNCTIONS ========== */
-void					move_forward(t_game *game);
-void					move_backward(t_game *game);
-void					move_left(t_game *game);
-void					move_right(t_game *game);
-void					rotate_left(t_game *game);
-void					rotate_right(t_game *game);
-void					rotate_player(t_game *game, double angle);
-int						is_valid_position(t_game *game, double x, double y);
+void	move_forward(t_game *game);
+void	move_backward(t_game *game);
+void	move_left(t_game *game);
+void	move_right(t_game *game);
+void	rotate_left(t_game *game);
+void	rotate_right(t_game *game);
+void	rotate_player(t_game *game, double angle);
+int		is_valid_position(t_game *game, double x, double y);
 
 /* ========== KEY HANDLING ========== */
-void					init_keys(t_game *game);
-int						handle_keypress(int keycode, t_game *game);
-int						handle_keyrelease(int keycode, t_game *game);
-void					update_movement(t_game *game);
+void	init_keys(t_game *game);
+int		handle_keypress(int keycode, t_game *game);
+int		handle_keyrelease(int keycode, t_game *game);
+void	update_movement(t_game *game);
 
 #endif /* PLAYER_H */
