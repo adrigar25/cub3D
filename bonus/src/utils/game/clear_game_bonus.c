@@ -32,7 +32,7 @@ static void	free_texture_list(void *mlx, t_texture *head)
 	t_texture	*cur;
 	t_texture	*next;
 
-	if (!mlx || !head)
+	if (!head)
 		return ;
 	cur = head;
 	while (cur)
@@ -42,7 +42,7 @@ static void	free_texture_list(void *mlx, t_texture *head)
 			free(cur->path);
 		if (cur->name)
 			free(cur->name);
-		if (cur->img.img)
+		if (mlx && cur->img.img)
 			mlx_destroy_image(mlx, cur->img.img);
 		free(cur);
 		cur = next;
