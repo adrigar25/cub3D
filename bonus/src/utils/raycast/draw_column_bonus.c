@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:57:57 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/17 22:20:42 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 01:43:22 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,34 +31,29 @@ static void	calculate_text_coords(t_player p, t_raycast *ray, t_img *tex)
 
 static t_img	*get_wall_texture(t_game *game, char **map, t_raycast *raycast)
 {
-	if (map[raycast->map_y][raycast->map_x] == 'D')
+	t_texture	*txt;
+	char		tile;
+
+	tile = map[raycast->map_y][raycast->map_x];
+	if (tile == 'D')
+		txt = game->txt_door;
+	else if (tile == 'A')
+		txt = game->txt_exit;
+	else if (raycast->side == 0)
 	{
-		if (game->txt_door)
-			return (&game->txt_door->img);
-		else
-			return (&game->txt_no->img);
-	}
-	if (map[raycast->map_y][raycast->map_x] == 'A')
-	{
-		if (game->txt_exit)
-			return (&game->txt_exit->img);
-		else
-			return (&game->txt_no->img);
-	}
-	if (raycast->side == 0)
-	{
+		txt = game->txt_we;
 		if (raycast->ray_dir_x > 0)
-			return (&game->txt_ea->img);
-		else
-			return (&game->txt_we->img);
+			txt = game->txt_ea;
 	}
 	else
 	{
+		txt = game->txt_no;
 		if (raycast->ray_dir_y > 0)
-			return (&game->txt_so->img);
-		else
-			return (&game->txt_no->img);
+			txt = game->txt_so;
 	}
+	if (!txt || !txt->img.img)
+		txt = game->txt_no;
+	return (&txt->img);
 }
 
 static void	draw_ceiling_floor(t_game *game, int x)
