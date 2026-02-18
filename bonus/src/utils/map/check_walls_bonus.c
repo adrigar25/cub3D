@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 01:11:22 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,14 @@ int	check_walls(char **map)
 		while (map[x][++y])
 		{
 			if (!(map[x][y] == '0' || is_player_char(map[x][y])
-					|| map[x][y] == 'D' || map[x][y] == 'A'
-					|| map[x][y] == 'C'))
+					|| map[x][y] == 'D' || map[x][y] == 'C'))
 				continue ;
 			if (check_directions(map, x, y) == -1)
-				return (ft_fprintf(2,
-					RED "Error: Open wall or hole at row %d, col %d\n"
-					RESET, x + 1, y + 1), -1);
+			{
+				ft_fprintf(2, RED "Error: Open wall or hole");
+				ft_fprintf(2, "at row %d, col %d\n" RESET, x + 1, y + 1);
+				return (-1);
+			}
 		}
 	}
 	return (1);

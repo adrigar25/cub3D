@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/18 01:11:22 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,8 @@ int	check_map(t_game *game)
 		return (-1);
 	if (!has_exit(map))
 		return (ft_fprintf(2, RED "Error: Map has no exit (A)\n" RESET), -1);
+	if (!game->txt_exit)
+		return (ft_fprintf(2,
+				RED "Error: Exit texture (A) not defined\n" RESET), -1);
 	return (0);
 }
