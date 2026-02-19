@@ -82,7 +82,7 @@ int	check_walls(char **map)
 				continue ;
 			if (check_directions(map, x, y) == -1)
 			{
-				ft_fprintf(2, RED "Error: Open wall or hole");
+				ft_fprintf(2, RED "Error: Open wall or hole ");
 				ft_fprintf(2, "at row %d, col %d\n" RESET, x + 1, y + 1);
 				return (-1);
 			}

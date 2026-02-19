@@ -6,14 +6,14 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 18:52:48 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "game_bonus.h"
-#include "map_bonus.h"
 #include "console_bonus.h"
+#include "game_bonus.h"
+#include "libft.h"
+#include "map_bonus.h"
 
 static int	is_allowed_char(t_game *game, char c)
 {
@@ -46,9 +46,9 @@ int	check_valid_characters(t_game *game)
 		{
 			if (!is_allowed_char(game, game->map.grid[i][j]))
 			{
-				ft_fprintf(2, RED "Error: Invalid character '%c'");
-				ft_fprintf(2, " at row %d, col %d\n" RESET, game->map.grid[i][j], i
-					+ 1, j + 1);
+				ft_fprintf(2, RED "Error: Invalid character '%c' ",
+					game->map.grid[i][j]);
+				ft_fprintf(2, "at row %d, col %d\n" RESET, i + 1, j + 1);
 				return (-1);
 			}
 			j++;

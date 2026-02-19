@@ -32,7 +32,7 @@ int	check_player(char **map)
 	}
 	if (player_count != 1)
 	{
-		ft_fprintf(2, RED "Error: %d players found.", player_count);
+		ft_fprintf(2, RED "Error: %d players found. ", player_count);
 		ft_fprintf(2, RED "Only one of N, S, E or W is allowed\n" RESET);
 		return (-1);
 	}
