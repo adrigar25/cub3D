@@ -6,11 +6,11 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 23:06:44 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "game_bonus.h"
 
 /**
  * ENGLISH: Check if the player is standing on a collectible tile ('C').
@@ -28,13 +28,13 @@ void	check_collectibles(t_game *game)
 		return ;
 	px = (int)game->player.pos_x;
 	py = (int)game->player.pos_y;
-	if (py < 0 || py >= game->map_h || !game->map[py])
+	if (py < 0 || py >= game->map.height || !game->map.grid[py])
 		return ;
-	if (px < 0 || !game->map[py][px])
+	if (px < 0 || !game->map.grid[py][px])
 		return ;
-	if (game->map[py][px] == 'C')
+	if (game->map.grid[py][px] == 'C')
 	{
-		game->map[py][px] = '0';
+		game->map.grid[py][px] = '0';
 		game->score++;
 	}
 }

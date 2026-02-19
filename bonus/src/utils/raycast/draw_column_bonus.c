@@ -6,11 +6,14 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:57:57 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/18 01:43:22 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include <math.h>
+#include "game_bonus.h"
+#include "raycast_bonus.h"
+#include "render_bonus.h"
 
 static void	calculate_text_coords(t_player p, t_raycast *ray, t_img *tex)
 {
@@ -90,7 +93,7 @@ void	draw_column(t_game *game, int x)
 {
 	t_img	*texture;
 
-	texture = get_wall_texture(game, game->map, &game->raycast);
+	texture = get_wall_texture(game, game->map.grid, &game->raycast);
 	calculate_text_coords(game->player, &game->raycast, texture);
 	if (game->raycast.draw_start < 0)
 		game->raycast.tex_pos += game->raycast.step * -game->raycast.draw_start;

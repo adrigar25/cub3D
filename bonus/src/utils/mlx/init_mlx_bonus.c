@@ -6,11 +6,16 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 01:03:21 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 01:11:22 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "../../libs/mlx/mlx.h"
+#include "libft.h"
+#include "game_bonus.h"
+#include "render_bonus.h"
+#include "minimap_bonus.h"
+#include "console_bonus.h"
 
 static int	load_texture(void *mlx, t_texture *texture)
 {

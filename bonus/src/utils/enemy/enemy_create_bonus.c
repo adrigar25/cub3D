@@ -6,11 +6,13 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 00:57:13 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "game_bonus.h"
+#include "enemy_bonus.h"
+#include <stdlib.h>
 
 static void	set_enemy_coords(t_enemy *e, int tile_x, int tile_y)
 {

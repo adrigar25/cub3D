@@ -6,12 +6,13 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
-#include "sprite_helpers_bonus.h"
+#include "game_bonus.h"
+#include "render_bonus.h"
+#include "sprite_bonus.h"
 #include <math.h>
 
 void	sprite_compute_size(t_img *texture, double transform_y, int *height,

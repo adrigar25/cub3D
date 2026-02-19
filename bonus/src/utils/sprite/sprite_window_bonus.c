@@ -6,11 +6,12 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 00:54:21 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sprite_helpers_bonus.h"
+#include "game_bonus.h"
+#include "sprite_bonus.h"
 
 /*
 	* ENGLISH: 	Compute the bounding box of tiles to
@@ -31,12 +32,12 @@ void	sprite_compute_scan_window(t_game *game, t_sprite_window *w)
 	if (w->min_y < 0)
 		w->min_y = 0;
 	w->max_y = pty + r;
-	if (w->max_y >= game->map_h)
-		w->max_y = game->map_h - 1;
+	if (w->max_y >= game->map.height)
+		w->max_y = game->map.height - 1;
 	w->min_x = ptx - r;
 	if (w->min_x < 0)
 		w->min_x = 0;
 	w->max_x = ptx + r;
-	if (w->max_x >= game->map_w)
-		w->max_x = game->map_w - 1;
+	if (w->max_x >= game->map.width)
+		w->max_x = game->map.width - 1;
 }

@@ -6,11 +6,15 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:30:30 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 22:53:38 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "../../libs/mlx/mlx.h"
+#include "game_bonus.h"
+#include "enemy_bonus.h"
+#include "player_bonus.h"
+#include <math.h>
 
 static void	enemy_try_move(t_game *game, t_enemy *e)
 {

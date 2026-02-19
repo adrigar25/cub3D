@@ -6,11 +6,12 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:22:35 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "console_bonus.h"
+#include "libft.h"
 
 /**
  * ENGLISH: Outputs the ANSI escape code for the specified color to the
@@ -25,33 +26,33 @@
  *              El código de color (1-8) para el color del texto, o 9
  *              para restablecer.
  *
- * @returns The number of characters printed. / El número de caracteres impresos.
+ * @returns The number of characters printed. / El número de caracteres
+ * impresos.
  */
-long	ft_putcolor(int fd, int color)
-{
-	const char	*s;
-	long		len;
+long	ft_putcolor(int fd, int color) {
+  const char *s;
+  long len;
 
-	if (color == 1)
-		s = RED;
-	else if (color == 2)
-		s = GREEN;
-	else if (color == 3)
-		s = YELLOW;
-	else if (color == 4)
-		s = ORANGE;
-	else if (color == 5)
-		s = BLUE;
-	else if (color == 6)
-		s = MAGENTA;
-	else if (color == 7)
-		s = CYAN;
-	else if (color == 8)
-		s = WHITE;
-	else if (color == 9)
-		s = RESET;
-	len = ft_strlen(s);
-	if (len > 0)
-		return ((long)write(fd, s, (size_t)len));
-	return (0);
+  if (color == 1)
+    s = RED;
+  else if (color == 2)
+    s = GREEN;
+  else if (color == 3)
+    s = YELLOW;
+  else if (color == 4)
+    s = ORANGE;
+  else if (color == 5)
+    s = BLUE;
+  else if (color == 6)
+    s = MAGENTA;
+  else if (color == 7)
+    s = CYAN;
+  else if (color == 8)
+    s = WHITE;
+  else if (color == 9)
+    s = RESET;
+  len = ft_strlen(s);
+  if (len > 0)
+    return ((long)write(fd, s, (size_t)len));
+  return (0);
 }

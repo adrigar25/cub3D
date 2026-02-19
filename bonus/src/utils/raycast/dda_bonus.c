@@ -6,11 +6,14 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:31:46 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/17 22:20:42 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "game_bonus.h"
+#include "raycast_bonus.h"
+#include "render_bonus.h"
+#include <math.h>
 
 void	init_step_and_side_dist(t_game *game)
 {
@@ -72,9 +75,9 @@ static void	perform_dda(t_game *game)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (game->map[ray->map_y][ray->map_x] == '1'
-			|| game->map[ray->map_y][ray->map_x] == 'D'
-			|| game->map[ray->map_y][ray->map_x] == 'A')
+		if (game->map.grid[ray->map_y][ray->map_x] == '1'
+			|| game->map.grid[ray->map_y][ray->map_x] == 'D'
+			|| game->map.grid[ray->map_y][ray->map_x] == 'A')
 			ray->hit = 1;
 	}
 }

@@ -6,11 +6,16 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 02:16:04 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "libft.h"
+#include "game_bonus.h"
+#include "map_bonus.h"
+#include "enemy_bonus.h"
+#include "console_bonus.h"
+#include <stdlib.h>
 
 static int	find_bad_col(t_game *game, char *line)
 {
@@ -62,14 +67,15 @@ static int	add_line(t_game *game, int index, char *line, size_t *max_width)
 		return (report_invalid_line(game, line, index));
 	if (ft_strlen(line) > *max_width)
 		*max_width = ft_strlen(line);
-	new_map = ft_realloc(game->map, sizeof(char *) * index, sizeof(char *)
+	new_map = ft_realloc(game->map.grid, sizeof(char *) * index, sizeof(char *)
 			* (index + 2));
 	if (!new_map)
 		return (-1);
-	game->map = new_map;
-	game->map[index] = ft_strtrim(line, "\n");
-	if (!game->map[index])
+	game->map.grid = new_map;
+	game->map.grid[index] = ft_strtrim(line, "\n");
+	if (!game->map.grid[index])
 		return (-1);
+	game->map.grid[index + 1] = NULL;
 	return (0);
 }
 
@@ -96,8 +102,8 @@ int	read_map(t_game *game, int fd, char *first_line)
 		free(line);
 		i++;
 	}
-	game->map_h = i;
-	game->map_w = (int)max_width;
+	game->map.height = i;
+	game->map.width = (int)max_width;
 	enemy_collect_from_map(game);
 	return (0);
 }

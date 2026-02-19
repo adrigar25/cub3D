@@ -6,11 +6,19 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:45:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/18 16:15:31 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "libft.h"
+#include "game_bonus.h"
+#include "render_bonus.h"
+#include "raycast_bonus.h"
+#include "player_bonus.h"
+#include "enemy_bonus.h"
+#include "sprite_bonus.h"
+#include "minimap_bonus.h"
+#include "../../libs/mlx/mlx.h"
 
 static void	draw_end_hud(t_game *game, const char *title, int color)
 {

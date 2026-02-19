@@ -6,13 +6,62 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/16 13:42:07 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap_bonus.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/06 19:00:00 by agarcia           #+#    #+#             */
+/*   Updated: 2026/02/18 00:00:00 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIMAP_BONUS_H
 # define MINIMAP_BONUS_H
 
+# include "types_bonus.h"
+
+typedef struct s_game	t_game;
+
+/* ========== MINIMAP CONFIGURATION ========== */
+# ifndef MINIMAP_H
+#  define MINIMAP_H			200
+# endif
+# ifndef MINIMAP_W
+#  define MINIMAP_W			200
+# endif
+# ifndef MINIMAP_SCALE
+#  define MINIMAP_SCALE			30
+# endif
+# ifndef MINIMAP_BORDER
+#  define MINIMAP_BORDER		2
+# endif
+# ifndef MINIMAP_PLAYER_SIZE
+#  define MINIMAP_PLAYER_SIZE	5
+# endif
+# ifndef MINIMAP_PLAYER_COLOR
+#  define MINIMAP_PLAYER_COLOR	0x0000FF
+# endif
+# ifndef MINIMAP_WALL_COLOR
+#  define MINIMAP_WALL_COLOR	0x666666
+# endif
+# ifndef MINIMAP_FLOOR_COLOR
+#  define MINIMAP_FLOOR_COLOR	0x9c9c9c
+# endif
+# ifndef MINIMAP_DOOR_COLOR
+#  define MINIMAP_DOOR_COLOR	0x8B4513
+# endif
+# ifndef MINIMAP_EXIT_COLOR
+#  define MINIMAP_EXIT_COLOR	0x00CC44
+# endif
+
+/* ========== TRIANGLE HELPERS ========== */
 typedef struct s_triangle
 {
 	int		x1;
@@ -38,4 +87,11 @@ void		sort_triangle_vertices(t_triangle *tri);
 void		fill_bottom_triangle(t_game *game, const t_triangle *tri);
 void		fill_top_triangle(t_game *game, const t_triangle *tri);
 
-#endif
+/* ========== MINIMAP UTILITIES ========== */
+void		draw_player(t_game *game, double center_x, double center_y);
+int			render_minimap(t_game *game);
+int			has_floor_nearby(t_game *game, int x, int y);
+void		put_minimap_tile(t_game *game, int px, int py, t_fcoord world);
+void		clear_map(t_game *game);
+
+#endif /* MINIMAP_BONUS_H */

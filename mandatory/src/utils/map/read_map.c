@@ -6,14 +6,14 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 21:06:13 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "console.h"
+#include "game.h"
 #include "libft.h"
 #include "map.h"
-#include "game.h"
-#include "console.h"
 #include <stdlib.h>
 
 static int	is_map_line(char *line)
@@ -44,6 +44,7 @@ static int	add_line(char ***map, int index, char *line)
 	(*map)[index] = ft_strtrim(line, "\n");
 	if (!(*map)[index])
 		return (-1);
+	(*map)[index + 1] = NULL;
 	return (0);
 }
 

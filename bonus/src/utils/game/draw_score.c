@@ -6,11 +6,14 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 22:54:59 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 00:57:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "libft.h"
+#include "game_bonus.h"
+#include "render_bonus.h"
+#include "../../libs/mlx/mlx.h"
 
 void	draw_score(t_game *game)
 {

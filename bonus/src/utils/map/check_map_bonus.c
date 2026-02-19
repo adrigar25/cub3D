@@ -6,11 +6,14 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 01:11:22 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "libft.h"
+#include "game_bonus.h"
+#include "map_bonus.h"
+#include "console_bonus.h"
 
 static int	has_exit(char **map)
 {
@@ -37,7 +40,7 @@ int	check_map(t_game *game)
 	char	**map;
 
 	if (game)
-		map = game->map;
+		map = game->map.grid;
 	else
 		map = NULL;
 	if (!map || !map[0] || !map[0][0])

@@ -6,11 +6,12 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 18:25:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "game_bonus.h"
+#include "player_bonus.h"
 
 int	is_player_char(char c)
 {
@@ -63,16 +64,16 @@ int	get_player_position(t_game *game)
 	int	j;
 
 	i = -1;
-	while (game->map[++i])
+	while (game->map.grid[++i])
 	{
 		j = -1;
-		while (game->map[i][++j])
+		while (game->map.grid[i][++j])
 		{
-			if (is_player_char(game->map[i][j]))
+			if (is_player_char(game->map.grid[i][j]))
 			{
 				game->player.pos_x = j + 0.5;
 				game->player.pos_y = i + 0.5;
-				set_player_direction(&game->player, game->map[i][j]);
+				set_player_direction(&game->player, game->map.grid[i][j]);
 			}
 		}
 	}

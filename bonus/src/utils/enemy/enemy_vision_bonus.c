@@ -6,23 +6,26 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 16:20:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 22:20:45 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "libft.h"
+#include "game_bonus.h"
+#include "enemy_bonus.h"
+#include <math.h>
 
 static int	is_blocking_tile(t_game *game, int mx, int my)
 {
 	char	c;
 
-	if (my < 0 || my >= game->map_h || mx < 0)
+	if (my < 0 || my >= game->map.height || mx < 0)
 		return (1);
-	if (!game->map[my])
+	if (!game->map.grid[my])
 		return (1);
-	if (mx >= (int)ft_strlen(game->map[my]))
+	if (mx >= (int)ft_strlen(game->map.grid[my]))
 		return (1);
-	c = game->map[my][mx];
+	c = game->map.grid[my][mx];
 	return (c == '1' || c == 'D' || c == 'A');
 }
 

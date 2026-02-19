@@ -6,12 +6,13 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
-#include "sprite_helpers_bonus.h"
+#include "game_bonus.h"
+#include "sprite_bonus.h"
+#include <stdlib.h>
 
 static int	spr_cmp_by_depth(const void *a, const void *b)
 {
@@ -47,7 +48,7 @@ void	sprite_render(t_game *game)
 	int				i;
 	t_sprite_window	window;
 
-	if (!game || !game->map)
+	if (!game || !game->map.grid)
 		return ;
 	sprite_compute_scan_window(game, &window);
 	count = sprite_count_total_in_window(game, &window);

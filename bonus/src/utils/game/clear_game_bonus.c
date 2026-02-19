@@ -6,11 +6,17 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 18:06:54 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 02:23:50 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "libft.h"
+#include "game_bonus.h"
+#include "map_bonus.h"
+#include "render_bonus.h"
+#include "console_bonus.h"
+#include "../../libs/mlx/mlx.h"
+#include <stdlib.h>
 
 void	free_map(char **map)
 {
@@ -99,7 +105,9 @@ void	clear_game(t_game *game, int exit_code)
 		free_textures(game);
 		if (game->mlx_ptr && game->win_ptr)
 			mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-		free_map(game->map);
+		free_map(game->map.grid);
+		if (game->zbuffer)
+			free(game->zbuffer);
 		free(game);
 	}
 	else if (exit_code == 1)

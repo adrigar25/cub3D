@@ -6,11 +6,14 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 00:25:53 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "libft.h"
+#include "game_bonus.h"
+#include "map_bonus.h"
+#include "console_bonus.h"
 
 static int	is_allowed_char(t_game *game, char c)
 {
@@ -33,18 +36,18 @@ int	check_valid_characters(t_game *game)
 	int	i;
 	int	j;
 
-	if (!game || !game->map)
+	if (!game || !game->map.grid)
 		return (-1);
 	i = -1;
-	while (game->map[++i])
+	while (game->map.grid[++i])
 	{
 		j = 0;
-		while (game->map[i][j])
+		while (game->map.grid[i][j])
 		{
-			if (!is_allowed_char(game, game->map[i][j]))
+			if (!is_allowed_char(game, game->map.grid[i][j]))
 			{
 				ft_fprintf(2, RED "Error: Invalid character '%c'");
-				ft_fprintf(2, " at row %d, col %d\n" RESET, game->map[i][j], i
+				ft_fprintf(2, " at row %d, col %d\n" RESET, game->map.grid[i][j], i
 					+ 1, j + 1);
 				return (-1);
 			}

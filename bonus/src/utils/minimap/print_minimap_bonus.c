@@ -6,11 +6,15 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 02:01:25 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 02:21:46 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include <math.h>
+#include "../../libs/mlx/mlx.h"
+#include "game_bonus.h"
+#include "render_bonus.h"
+#include "minimap_bonus.h"
 
 static void	draw_minimap_point(t_game *game, int px, int py)
 {

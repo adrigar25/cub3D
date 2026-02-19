@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_player_bonus.c                               :+:      :+:    :+:   */
+/*   raycast_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 16:15:00 by agarcia           #+#    #+#             */
+/*   Created: 2026/02/18 00:00:00 by agarcia           #+#    #+#             */
 /*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "game_bonus.h"
-#include "map_bonus.h"
-#include "player_bonus.h"
-#include "console_bonus.h"
+#ifndef RAYCAST_BONUS_H
+# define RAYCAST_BONUS_H
 
-int	check_player(char **map)
-{
-	int	i;
-	int	j;
-	int	player_count;
+# include "types_bonus.h"
 
-	player_count = 0;
-	i = -1;
-	while (map[++i])
-	{
-		j = 0;
-		while (map[i][j] && player_count <= 1)
-			player_count += is_player_char(map[i][j++]);
-	}
-	if (player_count != 1)
-	{
-		ft_fprintf(2, RED "Error: %d players found.", player_count);
-		ft_fprintf(2, RED "Only one of N, S, E or W is allowed\n" RESET);
-		return (-1);
-	}
-	return (0);
-}
+typedef struct s_game	t_game;
+
+/* ========== RAYCASTING FUNCTIONS ========== */
+void	raycast(t_game *game);
+void	init_ray(t_game *game, int x);
+void	dda(t_game *game);
+void	init_step_and_side_dist(t_game *game);
+void	perpendicular_wall_distance(t_raycast *ray, t_game *game);
+void	draw_column(t_game *game, int x);
+
+#endif /* RAYCAST_BONUS_H */

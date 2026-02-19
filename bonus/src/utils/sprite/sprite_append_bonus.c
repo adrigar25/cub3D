@@ -6,11 +6,13 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 00:54:31 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/17 22:20:45 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sprite_helpers_bonus.h"
+#include "libft.h"
+#include "game_bonus.h"
+#include "sprite_bonus.h"
 
 double	sprite_compute_depth(t_player *p, double sx, double sy)
 {
@@ -45,15 +47,18 @@ int	sprite_append_map_sprites(t_game *game, const t_sprite_window *w,
 	double		depth;
 	t_texture	*tex;
 
-	y = w->min_y - 1;
-	while (y++ <= w->max_y && game->map[y])
+	y = w->min_y;
+	while (y <= w->max_y && game->map.grid[y])
 	{
-		x = w->min_x - 1;
-		while (x++ <= w->max_x && game->map[y][x])
+		x = w->min_x;
+		while (x <= w->max_x && game->map.grid[y][x])
 		{
-			tile = game->map[y][x];
+			tile = game->map.grid[y][x];
 			if (ft_strchr("X01NSEWA", tile))
+			{
+				x++;
 				continue ;
+			}
 			tex = sprite_get_texture(game, tile);
 			depth = sprite_compute_depth(&game->player, x, y);
 			if (tex && tex->img.img && depth > 0.0)
@@ -61,7 +66,9 @@ int	sprite_append_map_sprites(t_game *game, const t_sprite_window *w,
 				add_sprite_info(&list[i], x + 0.5, y + 0.5, depth);
 				list[i++].tex = &tex->img;
 			}
+			x++;
 		}
+		y++;
 	}
 	return (i);
 }

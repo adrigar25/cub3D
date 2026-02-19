@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "game_bonus.h"
 #include "minimap_bonus.h"
 
 t_triangle	player_triangle(double cx, double cy)
