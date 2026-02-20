@@ -6,14 +6,14 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 14:50:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 21:06:13 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/20 10:18:16 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "console.h"
 #include "game.h"
 #include "libft.h"
 #include "parse.h"
-#include "console.h"
 #include <unistd.h>
 
 static int	check_texture_file(char *path, char *direction)

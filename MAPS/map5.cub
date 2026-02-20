@@ -312,3 +312,6 @@ C 42,27,15
 10B01
 10B01
 11A11
+
+export VAR=hola
+echo $VAR | tr a A | wc -c

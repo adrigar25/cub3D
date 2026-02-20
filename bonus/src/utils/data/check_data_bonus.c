@@ -6,15 +6,35 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 13:08:58 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/20 10:27:26 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "game_bonus.h"
-#include "parse_bonus.h"
 #include "console_bonus.h"
+#include "game_bonus.h"
+#include "libft.h"
+#include "parse_bonus.h"
 #include <unistd.h>
+
+static int	check_sprites(t_game *game)
+{
+	t_texture	*current;
+
+	current = game->sprites;
+	while (current)
+	{
+		if (!current->path || access(current->path, F_OK) == -1)
+		{
+			ft_fprintf(2, RED "Error: Sprite texture file");
+			if (current->path)
+				ft_fprintf(2, " '%s'", current->path);
+			ft_fprintf(2, " not found\n" RESET);
+			return (0);
+		}
+		current = current->next;
+	}
+	return (1);
+}
 
 static int	check_texture_file(char *path, char *label)
 {
@@ -42,8 +62,6 @@ static int	check_colors(t_game *game)
 
 int	check_data(t_game *game)
 {
-	t_texture	*current;
-
 	if (!game->txt_no || !game->txt_so || !game->txt_we || !game->txt_ea)
 		return (ft_fprintf(2, RED "Error: faltan texturas\n" RESET), -1);
 	if (!check_texture_file(game->txt_no->path, "North"))
@@ -58,12 +76,9 @@ int	check_data(t_game *game)
 		return (-1);
 	if (game->txt_exit && !check_texture_file(game->txt_exit->path, "Exit"))
 		return (-1);
-	current = game->sprites;
-	while (current)
-	{
-		if (!check_texture_file(current->path, current->name))
-			return (-1);
-		current = current->next;
-	}
-	return (check_colors(game));
+	if (!check_sprites(game))
+		return (-1);
+	if (!check_colors(game))
+		return (-1);
+	return (0);
 }

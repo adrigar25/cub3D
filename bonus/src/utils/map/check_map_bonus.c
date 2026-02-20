@@ -6,14 +6,14 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/20 10:17:09 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "game_bonus.h"
-#include "map_bonus.h"
 #include "console_bonus.h"
+#include "game_bonus.h"
+#include "libft.h"
+#include "map_bonus.h"
 
 static int	has_exit(char **map)
 {
@@ -57,8 +57,5 @@ int	check_map(t_game *game)
 		return (-1);
 	if (!has_exit(map))
 		return (ft_fprintf(2, RED "Error: Map has no exit (A)\n" RESET), -1);
-	if (!game->txt_exit)
-		return (ft_fprintf(2,
-				RED "Error: Exit texture (A) not defined\n" RESET), -1);
 	return (0);
 }
