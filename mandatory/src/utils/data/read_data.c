@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/18 21:14:53 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 17:21:43 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	store_path(t_game *game_data, char *path, char *dir)
 	if (*dest != NULL)
 	{
 		ft_fprintf(2, RED "Error: Duplicated texture: %s\n" RESET, path);
-		return (0);
+		return (-1);
 	}
 	trimmed = ft_strtrim(path, " \t\n");
 	*dest = ft_strdup(trimmed);
@@ -59,13 +59,22 @@ static int	process_line(t_game *game_data, char *line)
 	char	*key;
 	char	*value;
 	int		result;
+	size_t	temp_len;
 
 	result = 0;
 	temp = ft_strtrim(line, " \t\n");
 	if (!temp)
 		return (0);
+	temp_len = ft_strlen(temp);
 	key = ft_substr(temp, 0, 2);
-	value = ft_strtrim(line + 2, " \t\n");
+	/*
+		* Avoid reading past the buffer by using the trimmed `temp` and
+		* only accessing `temp + 2` when the trimmed length is > 2.
+		*/
+	if (temp_len <= 2)
+		value = ft_strdup("");
+	else
+		value = ft_strtrim(temp + 2, " \t\n");
 	if (!key || !value)
 		return (free(key), free(value), free(temp), 0);
 	if (key[0] == 'F' && game_data->textures.color_f == -1)
@@ -96,6 +105,8 @@ static int	get_data(t_game *game_data, int fd)
 		result = process_line(game_data, line);
 		free(line);
 	}
+	if (result == -1)
+		ft_get_next_line(-1);
 	return (result);
 }
 

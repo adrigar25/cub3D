@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:45:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 16:48:38 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "enemy_bonus.h"
 #include "sprite_bonus.h"
 #include "minimap_bonus.h"
-#include "../../libs/mlx/mlx.h"
+#include"mlx.h"
 
 static void	draw_end_hud(t_game *game, const char *title, int color)
 {
@@ -88,7 +88,7 @@ static void	draw_crosshair(t_game *game)
 static int	render_loop(t_game *game)
 {
 	if (!game->mouse_captured)
-		mlx_mouse_show();
+		mlx_mouse_show(game->mlx_ptr, game->win_ptr);
 	update_movement(game);
 	check_collectibles(game);
 	check_exit_collision(game);
@@ -114,7 +114,7 @@ static int	render_loop(t_game *game)
  */
 static int	handle_close(t_game *game)
 {
-	mlx_mouse_show();
+	mlx_mouse_show(game->mlx_ptr, game->win_ptr);
 	clear_game(game, -1);
 	exit(0);
 }

@@ -135,6 +135,12 @@ char	*ft_get_next_line(int fd)
 	static char	*reminder;
 	int			bytes_read;
 
+	if (fd == -1)
+	{
+		free(reminder);
+		reminder = NULL;
+		return (NULL);
+	}
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!reminder)

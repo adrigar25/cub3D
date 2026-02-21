@@ -6,13 +6,13 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:30:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/18 17:44:15 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 16:46:53 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 #include "render.h"
-#include "../../libs/mlx/mlx.h"
+#include "mlx.h"
 
 /**
  * ENGLISH: Initialize the image buffer for efficient pixel manipulation.

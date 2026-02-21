@@ -6,11 +6,11 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 16:48:50 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libs/mlx/mlx.h"
+#include"mlx.h"
 #include "console_bonus.h"
 #include "game_bonus.h"
 #include "libft.h"
@@ -37,6 +37,6 @@ void	check_exit_collision(t_game *game)
 	{
 		game->finished = 1;
 		ft_fprintf(1, GREEN "Victory! You found the exit!\n" RESET);
-		mlx_mouse_show();
+		mlx_mouse_show(game->mlx_ptr, game->win_ptr);
 	}
 }

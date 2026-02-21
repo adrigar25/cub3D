@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:44:15 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 16:53:22 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ typedef struct s_game	t_game;
 
 /* ========== KEY MAPPING - LINUX ========== */
 # define KEY_W_L 119
-# define KEY_A_L 97
+# define KEY_A_L 100
 # define KEY_S_L 115
-# define KEY_D_L 100
-# define KEY_LEFT_L 65361
-# define KEY_RIGHT_L 65363
+# define KEY_D_L 97
+# define KEY_LEFT_L 65363
+# define KEY_RIGHT_L 65361
 # define KEY_UP_L 65362
 # define KEY_DOWN_L 65364
 # define KEY_ESC_L 65307

@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 18:06:54 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 16:47:25 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "map_bonus.h"
 #include "render_bonus.h"
 #include "console_bonus.h"
-#include "../../libs/mlx/mlx.h"
+#include"mlx.h"
 #include <stdlib.h>
 
 void	free_map(char **map)

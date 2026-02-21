@@ -6,14 +6,14 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 16:49:18 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game_bonus.h"
 #include "player_bonus.h"
 #include "render_bonus.h"
-#include "../../libs/mlx/mlx.h"
+#include"mlx.h"
 
 // ...existing code...
 int	handle_mouse_press(int button, int x, int y, t_game *game)
@@ -23,8 +23,8 @@ int	handle_mouse_press(int button, int x, int y, t_game *game)
 	if (x < 0 || y < 0 || x >= WIN_W || y >= WIN_H)
 		return (0);
 	game->mouse_captured = 1;
-	mlx_mouse_hide();
-	mlx_mouse_move(game->win_ptr, WIN_W / 2, WIN_H / 2);
+	mlx_mouse_hide(game->mlx_ptr, game->win_ptr);
+	mlx_mouse_move(game->mlx_ptr, game->win_ptr, WIN_W / 2, WIN_H / 2);
 	return (0);
 }
 
@@ -51,6 +51,6 @@ int	handle_mouse_move(int x, int y, t_game *game)
 		if (game->player.pitch < -WIN_H / 2)
 			game->player.pitch = -WIN_H / 2;
 	}
-	mlx_mouse_move(game->win_ptr, center_x, center_y);
+	mlx_mouse_move(game->mlx_ptr, game->win_ptr, center_x, center_y);
 	return (0);
 }

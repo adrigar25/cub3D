@@ -52,8 +52,6 @@ static int	process_line(char ***map, int *i, char *line, int *started)
 {
 	if (!*started && !is_map_line(line))
 		return (0);
-	if (!is_map_line(line))
-		return (-1);
 	*started = 1;
 	if (add_line(map, (*i)++, line) == -1)
 		return (-1);
@@ -86,7 +84,10 @@ int	read_map(char ***map, int fd)
 		result = process_line(map, &i, line, &started);
 		free(line);
 		if (result == -1)
+		{
+			ft_get_next_line(-1);
 			break ;
+		}
 	}
 	return (validate_map_size(map, i));
 }

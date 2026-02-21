@@ -18,6 +18,11 @@
 
 static int	check_texture_file(char *path, char *direction)
 {
+	if (!path)
+	{
+		ft_fprintf(2, RED "Error: Missing %s texture\n" RESET, direction);
+		return (-1);
+	}
 	if (access(path, F_OK) == -1)
 	{
 		ft_fprintf(2, RED "Error: %s texture file not found\n" RESET,

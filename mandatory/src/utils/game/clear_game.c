@@ -6,13 +6,13 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:07:37 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/18 21:06:13 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 17:09:04 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libs/mlx/mlx.h"
 #include "game.h"
 #include "map.h"
+#include "mlx.h"
 #include <stdlib.h>
 
 void	free_map(char **map)
@@ -64,5 +64,8 @@ void	clear_game(t_game *game)
 	free_map(game->map.grid);
 	if (game->zbuffer)
 		free(game->zbuffer);
+	if (game->mlx_ptr)
+		mlx_destroy_display(game->mlx_ptr);
+	free(game->mlx_ptr);
 	free(game);
 }

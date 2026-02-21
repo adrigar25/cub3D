@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:41:35 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 21:06:13 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 17:07:47 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	cub3d(char *file)
 	if (get_player_position(game_data))
 		return (clear_game(game_data), 1);
 	start_game_loop(game_data);
+	/* Ensure resources are freed when the game loop finishes */
+	clear_game(game_data);
 	return (0);
 }
 

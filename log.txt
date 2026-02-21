@@ -1,26 +1,14 @@
-[0;32mExiting game. Goodbye!
-[0mProcess:         cub3d_bonus [45211]
-Path:            /Users/*/Desktop/*/cub3D_bonus
-Load Address:    0x104bac000
-Identifier:      cub3D_bonus
-Version:         0
-Code Type:       ARM64
-Platform:        macOS
-Parent Process:  leaks [45210]
-Target Type:     live task
-
-Date/Time:       2026-02-20 10:25:04.201 +0100
-Launch Time:     2026-02-20 10:25:04.067 +0100
-OS Version:      macOS 26.0.1 (25A362)
-Report Version:  7
-Analysis Tool:   /usr/bin/leaks
-
-Physical footprint:         4000K
-Physical footprint (peak):  4000K
-Idle exit:                  untracked
-----
-
-leaks Report Version: 4.0, multi-line stacks
-Process 45211: 970 nodes malloced for 101 KB
-Process 45211: 0 leaks for 0 total leaked bytes.
-
+==2080730== Memcheck, a memory error detector
+==2080730== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2080730== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2080730== Command: ./cub3D ./MAPS/map1.cub
+==2080730== 
+==2080730== 
+==2080730== HEAP SUMMARY:
+==2080730==     in use at exit: 0 bytes in 0 blocks
+==2080730==   total heap usage: 1,838 allocs, 1,838 frees, 1,253,009 bytes allocated
+==2080730== 
+==2080730== All heap blocks were freed -- no leaks are possible
+==2080730== 
+==2080730== For lists of detected and suppressed errors, rerun with: -s
+==2080730== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

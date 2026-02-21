@@ -6,11 +6,11 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 01:03:21 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 16:47:25 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libs/mlx/mlx.h"
+#include"mlx.h"
 #include "libft.h"
 #include "game_bonus.h"
 #include "render_bonus.h"
