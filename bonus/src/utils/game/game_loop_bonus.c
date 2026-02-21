@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:45:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/21 18:21:58 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 21:11:06 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ static int	render_loop(t_game *game)
 	raycast(game);
 	sprite_render(game);
 	draw_crosshair(game);
-	render_frame(game);
 	render_minimap(game);
+	render_frame(game);
 	draw_score(game);
 	if (game->finished == 1)
 		draw_end_hud(game, "Victory!", 0x00FF55);

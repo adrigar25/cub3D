@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 13:08:58 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 18:32:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 21:11:07 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ int	check_data(t_game *game)
 	if (game->txt_door && !check_texture_file(game->txt_door->path, "Door"))
 		return (-1);
 	if (!game->txt_exit && has_exit(game->map.grid))
-		return (ft_fprintf(2, RED "Error: Map has exit (A) but no A texture\n"
-				RESET), -1);
+		return (ft_fprintf(2,
+				RED "Error: Map has exit (A) but no A texture\n" RESET), -1);
 	if (game->txt_exit && !check_texture_file(game->txt_exit->path, "Exit"))
 		return (-1);
 	if (!check_sprites(game))

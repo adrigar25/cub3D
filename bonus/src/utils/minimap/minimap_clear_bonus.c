@@ -23,7 +23,7 @@ static void	clear_pixel(t_game *game, int x, int y, double *c)
 	if (dist > c[0])
 		img_pixel_put(&game->minimap, x, y, 0xFF000000);
 	else if (dist > c[0] - MINIMAP_BORDER)
-		img_pixel_put(&game->minimap, x, y, 0x00000000);
+		img_pixel_put(&game->minimap, x, y, MINIMAP_BORDER_COLOR);
 	else
 		img_pixel_put(&game->minimap, x, y, MINIMAP_WALL_COLOR);
 }

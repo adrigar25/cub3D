@@ -60,6 +60,9 @@ typedef struct s_game	t_game;
 # ifndef MINIMAP_EXIT_COLOR
 #  define MINIMAP_EXIT_COLOR	0x00CC44
 # endif
+# ifndef MINIMAP_BORDER_COLOR
+#  define MINIMAP_BORDER_COLOR	0xFFFFFF
+# endif
 
 /* ========== TRIANGLE HELPERS ========== */
 typedef struct s_triangle
