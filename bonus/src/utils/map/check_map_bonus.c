@@ -15,7 +15,7 @@
 #include "libft.h"
 #include "map_bonus.h"
 
-static int	has_exit(char **map)
+int	has_exit(char **map)
 {
 	int	i;
 	int	j;

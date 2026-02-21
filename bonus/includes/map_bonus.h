@@ -31,6 +31,7 @@ int						check_empty_rows(char **map);
 int						check_empty_columns(char **map);
 int						check_valid_characters(t_game *game);
 int						check_player(char **map);
+int						has_exit(char **map);
 int						is_map_line(t_game *game, char *line);
 void					free_map(char **map);
 

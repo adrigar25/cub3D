@@ -13,6 +13,7 @@
 #include "console_bonus.h"
 #include "game_bonus.h"
 #include "libft.h"
+#include "map_bonus.h"
 #include "parse_bonus.h"
 #include <unistd.h>
 
@@ -74,6 +75,9 @@ int	check_data(t_game *game)
 		return (-1);
 	if (game->txt_door && !check_texture_file(game->txt_door->path, "Door"))
 		return (-1);
+	if (!game->txt_exit && has_exit(game->map.grid))
+		return (ft_fprintf(2, RED "Error: Map has exit (A) but no A texture\n"
+				RESET), -1);
 	if (game->txt_exit && !check_texture_file(game->txt_exit->path, "Exit"))
 		return (-1);
 	if (!check_sprites(game))
