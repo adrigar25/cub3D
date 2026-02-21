@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/21 17:21:43 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 20:17:37 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,6 @@ static int	process_line(t_game *game_data, char *line)
 		return (0);
 	temp_len = ft_strlen(temp);
 	key = ft_substr(temp, 0, 2);
-	/*
-		* Avoid reading past the buffer by using the trimmed `temp` and
-		* only accessing `temp + 2` when the trimmed length is > 2.
-		*/
 	if (temp_len <= 2)
 		value = ft_strdup("");
 	else
@@ -83,10 +79,7 @@ static int	process_line(t_game *game_data, char *line)
 		game_data->textures.color_c = parse_rgb(value);
 	else if (is_texture_line(key))
 		result = store_path(game_data, value, key);
-	free(temp);
-	free(key);
-	free(value);
-	return (result);
+	return (free(temp), free(key), free(value), result);
 }
 
 static int	get_data(t_game *game_data, int fd)

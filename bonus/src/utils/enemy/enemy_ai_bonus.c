@@ -6,13 +6,13 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:30:30 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 16:49:27 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 20:20:17 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"mlx.h"
-#include "game_bonus.h"
 #include "enemy_bonus.h"
+#include "game_bonus.h"
+#include "mlx.h"
 #include "player_bonus.h"
 #include <math.h>
 

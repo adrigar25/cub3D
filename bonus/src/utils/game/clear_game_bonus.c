@@ -6,16 +6,17 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 18:06:54 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 16:47:25 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 20:42:04 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "game_bonus.h"
-#include "map_bonus.h"
-#include "render_bonus.h"
 #include "console_bonus.h"
-#include"mlx.h"
+#include "enemy_bonus.h"
+#include "game_bonus.h"
+#include "libft.h"
+#include "map_bonus.h"
+#include "mlx.h"
+#include "render_bonus.h"
 #include <stdlib.h>
 
 void	free_map(char **map)
@@ -81,15 +82,23 @@ static void	free_textures(t_game *game)
 	game->sprites = NULL;
 }
 
-static void	draw_finish_hud(t_game *game, const char *title, const char *sub,
-		int color)
+static void	draw_finish_hud(t_game *game, int exit_code)
 {
 	t_hud	msg;
 
-	msg.title = title;
-	msg.sub = sub;
 	msg.sub2 = "Press ESC to exit";
-	msg.color = color;
+	if (exit_code == 1)
+	{
+		msg.color = 0x00FF55;
+		msg.title = "VICTORY!";
+		msg.sub = "You reached the exit!";
+	}
+	else if (exit_code == 2)
+	{
+		msg.color = 0xFF0000;
+		msg.title = "GAME OVER";
+		msg.sub = "You died!";
+	}
 	draw_hud_message(game, msg);
 }
 
@@ -102,16 +111,22 @@ void	clear_game(t_game *game, int exit_code)
 			return ;
 		if (game->mlx_ptr && game->img.img)
 			mlx_destroy_image(game->mlx_ptr, game->img.img);
+		if (game->mlx_ptr && game->minimap.img)
+			mlx_destroy_image(game->mlx_ptr, game->minimap.img);
 		free_textures(game);
 		if (game->mlx_ptr && game->win_ptr)
 			mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+		enemy_clear(&game->enemies);
 		free_map(game->map.grid);
 		if (game->zbuffer)
 			free(game->zbuffer);
+		if (game->mlx_ptr)
+		{
+			mlx_destroy_display(game->mlx_ptr);
+			free(game->mlx_ptr);
+		}
 		free(game);
 	}
-	else if (exit_code == 1)
-		draw_finish_hud(game, "VICTORY!", "You reached the exit!", 0x00FF55);
-	else if (exit_code == 2)
-		draw_finish_hud(game, "GAME OVER", "You died!", 0xFF0000);
+	else if (exit_code == 1 || exit_code == 2)
+		draw_finish_hud(game, exit_code);
 }

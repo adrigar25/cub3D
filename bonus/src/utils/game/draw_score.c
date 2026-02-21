@@ -6,14 +6,14 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 22:54:59 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 16:47:25 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 20:20:05 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "game_bonus.h"
+#include "libft.h"
+#include "mlx.h"
 #include "render_bonus.h"
-#include"mlx.h"
 
 void	draw_score(t_game *game)
 {

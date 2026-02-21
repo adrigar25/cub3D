@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 14:50:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/20 10:18:16 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 18:01:37 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@
 
 static int	check_texture_file(char *path, char *direction)
 {
-	if (!path)
-	{
-		ft_fprintf(2, RED "Error: Missing %s texture\n" RESET, direction);
-		return (-1);
-	}
 	if (access(path, F_OK) == -1)
 	{
 		ft_fprintf(2, RED "Error: %s texture file not found\n" RESET,

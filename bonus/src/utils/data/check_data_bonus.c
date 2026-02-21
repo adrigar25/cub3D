@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 13:08:58 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/20 10:27:26 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 18:32:06 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,19 @@ static int	check_colors(t_game *game)
 	if (game->floor_color == -1 || game->ceiling_color == -1)
 	{
 		ft_fprintf(2, RED "Error: Missing floor or ceiling color\n" RESET);
-		return (1);
+		return (0);
 	}
 	if (game->ceiling_color == -2)
-		return (ft_fprintf(2, RED "Error: Invalid ceiling RGB\n" RESET), 1);
+		return (ft_fprintf(2, RED "Error: Invalid ceiling RGB\n" RESET), 0);
 	if (game->floor_color == -2)
-		return (ft_fprintf(2, RED "Error: Invalid floor RGB\n" RESET), 1);
-	return (0);
+		return (ft_fprintf(2, RED "Error: Invalid floor RGB\n" RESET), 0);
+	return (1);
 }
 
 int	check_data(t_game *game)
 {
 	if (!game->txt_no || !game->txt_so || !game->txt_we || !game->txt_ea)
-		return (ft_fprintf(2, RED "Error: faltan texturas\n" RESET), -1);
+		return (ft_fprintf(2, RED "Error: Missing textures\n" RESET), -1);
 	if (!check_texture_file(game->txt_no->path, "North"))
 		return (-1);
 	if (!check_texture_file(game->txt_so->path, "South"))

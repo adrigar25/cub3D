@@ -6,17 +6,17 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:41:35 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 17:07:47 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 20:17:01 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "console.h"
 #include "game.h"
+#include "libft.h"
 #include "map.h"
 #include "parse.h"
-#include "render.h"
 #include "player.h"
-#include "console.h"
+#include "render.h"
 
 int	valid_extension(const char *filename, const char *extension)
 {
@@ -49,7 +49,6 @@ int	cub3d(char *file)
 	if (get_player_position(game_data))
 		return (clear_game(game_data), 1);
 	start_game_loop(game_data);
-	/* Ensure resources are freed when the game loop finishes */
 	clear_game(game_data);
 	return (0);
 }

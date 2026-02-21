@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:44:15 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 20:16:47 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@
  *
  * SPANISH: Comprueba si una posición (x, y) es válida (no está fuera del mapa).
  */
-int	is_valid_position(t_game *game, double x, double y) {
-  int map_x;
-  int map_y;
+int	is_valid_position(t_game *game, double x, double y)
+{
+	int	map_x;
+	int	map_y;
 
-  map_x = (int)clamp(x, 0, 10000);
-  map_y = (int)clamp(y, 0, 10000);
-  if (is_out_of_bounds(map_x, map_y, game->map.grid))
-    return (0);
-  if (game->map.grid[map_y][map_x] == '1')
-    return (0);
-  return (1);
+	map_x = (int)clamp(x, 0, 10000);
+	map_y = (int)clamp(y, 0, 10000);
+	if (is_out_of_bounds(map_x, map_y, game->map.grid))
+		return (0);
+	if (game->map.grid[map_y][map_x] == '1')
+		return (0);
+	return (1);
 }

@@ -6,12 +6,12 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 00:54:31 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 20:36:53 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "game_bonus.h"
+#include "libft.h"
 #include "sprite_bonus.h"
 
 double	sprite_compute_depth(t_player *p, double sx, double sy)
@@ -43,32 +43,26 @@ int	sprite_append_map_sprites(t_game *game, const t_sprite_window *w,
 {
 	int			y;
 	int			x;
-	char		tile;
 	double		depth;
 	t_texture	*tex;
 
-	y = w->min_y;
-	while (y <= w->max_y && game->map.grid[y])
+	y = w->min_y - 1;
+	while (++y <= w->max_y && game->map.grid[y])
 	{
-		x = w->min_x;
-		while (x <= w->max_x && game->map.grid[y][x])
+		x = w->min_x - 1;
+		while (++x <= w->max_x && game->map.grid[y][x])
 		{
-			tile = game->map.grid[y][x];
-			if (ft_strchr("X01NSEWA", tile))
+			if (!ft_strchr("X01NSEWA", game->map.grid[y][x]))
 			{
-				x++;
-				continue ;
+				tex = sprite_get_texture(game, game->map.grid[y][x]);
+				depth = sprite_compute_depth(&game->player, x, y);
+				if (tex && tex->img.img && depth > 0.0)
+				{
+					add_sprite_info(&list[i], x + 0.5, y + 0.5, depth);
+					list[i++].tex = &tex->img;
+				}
 			}
-			tex = sprite_get_texture(game, tile);
-			depth = sprite_compute_depth(&game->player, x, y);
-			if (tex && tex->img.img && depth > 0.0)
-			{
-				add_sprite_info(&list[i], x + 0.5, y + 0.5, depth);
-				list[i++].tex = &tex->img;
-			}
-			x++;
 		}
-		y++;
 	}
 	return (i);
 }

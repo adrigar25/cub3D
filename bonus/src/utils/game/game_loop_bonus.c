@@ -6,19 +6,19 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:45:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/21 16:48:38 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 18:21:58 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "game_bonus.h"
-#include "render_bonus.h"
-#include "raycast_bonus.h"
-#include "player_bonus.h"
 #include "enemy_bonus.h"
-#include "sprite_bonus.h"
+#include "game_bonus.h"
+#include "libft.h"
 #include "minimap_bonus.h"
-#include"mlx.h"
+#include "mlx.h"
+#include "player_bonus.h"
+#include "raycast_bonus.h"
+#include "render_bonus.h"
+#include "sprite_bonus.h"
 
 static void	draw_end_hud(t_game *game, const char *title, int color)
 {
@@ -101,7 +101,7 @@ static int	render_loop(t_game *game)
 	render_minimap(game);
 	draw_score(game);
 	if (game->finished == 1)
-		draw_end_hud(game, "\xc2\xa1Victory!", 0x00FF55);
+		draw_end_hud(game, "Victory!", 0x00FF55);
 	else if (game->finished == 2)
 		draw_end_hud(game, "GAME OVER", 0xFF4444);
 	return (0);

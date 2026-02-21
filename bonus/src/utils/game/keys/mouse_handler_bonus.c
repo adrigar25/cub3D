@@ -6,14 +6,14 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 16:49:18 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 20:19:21 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game_bonus.h"
+#include "mlx.h"
 #include "player_bonus.h"
 #include "render_bonus.h"
-#include"mlx.h"
 
 // ...existing code...
 int	handle_mouse_press(int button, int x, int y, t_game *game)
