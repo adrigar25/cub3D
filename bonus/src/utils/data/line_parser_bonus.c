@@ -6,12 +6,13 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 17:00:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/22 19:21:29 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "console_bonus.h"
 #include "game_bonus.h"
+#include "libft.h"
 #include "parse_bonus.h"
 
 /**
@@ -41,6 +42,24 @@ void	update_allowed_chars(t_game *game, char c)
 	}
 }
 
+int	process_color(t_game *game, char *key, char *value)
+{
+	int	*color;
+
+	color = NULL;
+	if (!ft_strcmp(key, "C"))
+		color = &game->ceiling_color;
+	else if (!ft_strcmp(key, "F"))
+		color = &game->floor_color;
+	if (*color != -1)
+	{
+		ft_fprintf(2, RED "Error: Duplicated color:%s\n" RESET, key);
+		return (-1);
+	}
+	*color = parse_rgb(value);
+	return (*color);
+}
+
 /**
  * ENGLISH: Parse a configuration line from the file (texture, color, etc).
  *
@@ -49,8 +68,8 @@ void	update_allowed_chars(t_game *game, char c)
 int	process_config_line(t_game *game, char *line)
 {
 	char	*temp;
+	char	*raw_key;
 	char	*key;
-	char	*key2;
 	char	*value;
 	int		result;
 
@@ -58,18 +77,16 @@ int	process_config_line(t_game *game, char *line)
 	temp = ft_strtrim(line, " \t\n");
 	if (!temp || temp[0] == '\0')
 		return (free(temp), 0);
-	key = ft_substr(temp, 0, 2);
-	key2 = ft_strtrim(key, " \t\n");
+	raw_key = ft_substr(temp, 0, 2);
+	if (!raw_key)
+		return (free(temp), 0);
+	key = ft_strtrim(raw_key, " \t\n");
 	value = ft_strtrim(temp + 2, " \t\n");
-	if (!ft_strcmp(key2, "C"))
-		game->ceiling_color = parse_rgb(value);
-	else if (!ft_strcmp(key2, "F"))
-		game->floor_color = parse_rgb(value);
+	if (!key || !value)
+		return (free(temp), free(raw_key), free(key), free(value), 0);
+	if (!ft_strcmp(key, "C") || !ft_strcmp(key, "F"))
+		result = process_color(game, key, value);
 	else
-		result = process_texture(game, key2, value);
-	free(temp);
-	free(key);
-	free(key2);
-	free(value);
-	return (result);
+		result = process_texture(game, key, value);
+	return (free(temp), free(raw_key), free(key), free(value), result);
 }

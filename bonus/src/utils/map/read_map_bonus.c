@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/22 18:12:07 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/22 18:56:34 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ static int	report_invalid_line(t_game *game, char *line, int index)
 	if (line)
 		col = find_bad_col(game, line);
 	if (col >= 0 && line[col] == 'X')
-		ft_fprintf(2,
-					RED "Error: Enemy 'X' at row %d, col %d"
-						" requires X1/X2/X3 textures\n" RESET,
-					index + 1,
-					col + 1);
+	{
+		ft_fprintf(2, RED "Error: Enemy 'X' at row %d, col %d", index + 1, col
+			+ 1);
+		ft_fprintf(2, " requires X1/X2/X3 textures\n" RESET);
+	}
 	else if (col >= 0)
 	{
 		ft_fprintf(2, RED "Error: invalid character ");

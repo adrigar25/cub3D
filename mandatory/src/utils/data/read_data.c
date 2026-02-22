@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/21 20:17:37 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/22 19:15:38 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
-
-static int	is_texture_line(char *line)
-{
-	return (!ft_strcmp(line, "NO") || !ft_strcmp(line, "SO") || !ft_strcmp(line,
-			"WE") || !ft_strcmp(line, "EA"));
-}
 
 static int	store_path(t_game *game_data, char *path, char *dir)
 {
@@ -53,33 +47,48 @@ static int	store_path(t_game *game_data, char *path, char *dir)
 	return (free(trimmed), 0);
 }
 
-static int	process_line(t_game *game_data, char *line)
+int	process_color(t_game *game, char *key, char *value)
+{
+	int	*color;
+
+	color = NULL;
+	if (!ft_strcmp(key, "C"))
+		color = &game->textures.color_c;
+	else if (!ft_strcmp(key, "F"))
+		color = &game->textures.color_f;
+	if (*color != -1)
+	{
+		ft_fprintf(2, RED "Error: Duplicated color:%s\n" RESET, key);
+		return (-1);
+	}
+	*color = parse_rgb(value);
+	return (*color);
+}
+
+static int	process_config_line(t_game *game_data, char *line)
 {
 	char	*temp;
+	char	*raw_key;
 	char	*key;
 	char	*value;
 	int		result;
-	size_t	temp_len;
 
 	result = 0;
 	temp = ft_strtrim(line, " \t\n");
-	if (!temp)
-		return (0);
-	temp_len = ft_strlen(temp);
-	key = ft_substr(temp, 0, 2);
-	if (temp_len <= 2)
-		value = ft_strdup("");
-	else
-		value = ft_strtrim(temp + 2, " \t\n");
+	if (!temp || temp[0] == '\0')
+		return (free(temp), 0);
+	raw_key = ft_substr(temp, 0, 2);
+	if (!raw_key)
+		return (free(temp), 0);
+	key = ft_strtrim(raw_key, " \t\n");
+	value = ft_strtrim(temp + 2, " \t\n");
 	if (!key || !value)
-		return (free(key), free(value), free(temp), 0);
-	if (key[0] == 'F' && game_data->textures.color_f == -1)
-		game_data->textures.color_f = parse_rgb(value);
-	else if (key[0] == 'C' && game_data->textures.color_c == -1)
-		game_data->textures.color_c = parse_rgb(value);
-	else if (is_texture_line(key))
+		return (free(temp), free(raw_key), free(key), free(value), 0);
+	if (!ft_strcmp(key, "F") || !ft_strcmp(key, "C"))
+		result = process_color(game_data, key, value);
+	else
 		result = store_path(game_data, value, key);
-	return (free(temp), free(key), free(value), result);
+	return (free(temp), free(raw_key), free(key), free(value), result);
 }
 
 static int	get_data(t_game *game_data, int fd)
@@ -95,7 +104,7 @@ static int	get_data(t_game *game_data, int fd)
 		line = ft_get_next_line(fd);
 		if (!line)
 			break ;
-		result = process_line(game_data, line);
+		result = process_config_line(game_data, line);
 		free(line);
 	}
 	if (result == -1)
