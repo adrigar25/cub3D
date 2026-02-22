@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:40:42 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 21:00:53 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/22 17:44:31 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 static void	init_allowed_chars(t_game *game)
 {
-	const char	*default_allowed = " 01NSEWACX\n\t";
+	const char	*default_allowed = " 01NSEWA\n\t";
 	int			i;
 
 	i = 0;

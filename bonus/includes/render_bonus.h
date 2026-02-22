@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 18:20:07 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/22 17:25:07 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ typedef struct s_game	t_game;
 
 /* ========== WINDOW DIMENSIONS ========== */
 # ifndef WIN_W
-#  define WIN_W 1280
+#  define WIN_W 1920
 # endif
 
 # ifndef WIN_H
-#  define WIN_H 720
+#  define WIN_H 1080
 # endif
 
 /* ========== TEXTURE CONSTANTS ========== */
