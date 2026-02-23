@@ -1,2 +1,0 @@
-[0;32mExiting game. Goodbye!
-[0mKey pressed: 65307
