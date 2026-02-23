@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/23 16:06:37 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:10:59 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,19 +209,14 @@ static int	get_data(t_game *game_data, int fd)
  * 			extraer las rutas de las texturas y los valores de color, y luego
  * 			lee los datos del mapa para llenar la estructura del mapa del juego.
  *
- * @param game_data
- * 		ENGLISH: A pointer to the game structure where the extracted data will
- * 		be stored.
- * 		SPANISH: Un puntero a la estructura del juego donde se
+ * @param game_data A pointer to the game structure where the extracted data will
+ * 		be stored. / Un puntero a la estructura del juego donde se
  * 		almacenarán los datos extraídos.
- * @param file
- * 		ENGLISH: The file path of the configuration file to read. /
- * 		SPANISH: La ruta del archivo de configuración a leer.
+ * @param file The file path of the configuration file to read. /
+ * 		La ruta del archivo de configuración a leer.
  *
- * @return
- * 		ENGLISH: 0 if the data was read successfully, or -1 if there was an
- * 		error. /
- * 		SPANISH: 0 si los datos se leyeron correctamente, o -1 si hubo un error.
+ * @return 0 if the data was read successfully, or -1 if there was an
+ * 		error. / 0 si los datos se leyeron correctamente, o -1 si hubo un error.
  */
 int	read_data(t_game **game_data, char *file)
 {
