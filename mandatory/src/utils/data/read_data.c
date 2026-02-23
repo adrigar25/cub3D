@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/23 16:04:04 by adriescr         ###   ########.fr       */
+/*   Updated: 2026/02/23 16:06:37 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,7 +211,7 @@ static int	get_data(t_game *game_data, int fd)
  *
  * @param game_data
  * 		ENGLISH: A pointer to the game structure where the extracted data will
- * 		be stored. \
+ * 		be stored.
  * 		SPANISH: Un puntero a la estructura del juego donde se
  * 		almacenarán los datos extraídos.
  * @param file
