@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_minimap_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 02:01:25 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/22 17:44:39 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@
 #include "render_bonus.h"
 #include <math.h>
 
+/**
+ * ENGLISH: Computes the world coordinates for a minimap pixel and
+ *          draws the appropriate tile colour if inside the circle.
+ *
+ * SPANISH: Calcula las coordenadas del mundo para un píxel del minimapa
+ *          y dibuja el color de casilla adecuado si está dentro del círculo.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param px Pixel X in the minimap image. / Píxel X en la imagen del minimapa.
+ * @param py Pixel Y in the minimap image. / Píxel Y en la imagen del minimapa.
+ */
 static void	draw_minimap_point(t_game *game, int px, int py)
 {
 	double		c[2];
@@ -39,6 +51,16 @@ static void	draw_minimap_point(t_game *game, int px, int py)
 	}
 }
 
+/**
+ * ENGLISH: Iterates over every pixel of the minimap image and calls
+ *          draw_minimap_point to fill in the rotated world view.
+ *
+ * SPANISH: Itera sobre cada píxel de la imagen del minimapa y llama a
+ *          draw_minimap_point para rellenar la vista del mundo rotada.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ */
 static void	draw_rotated_minimap(t_game *game)
 {
 	int	px;
@@ -57,6 +79,20 @@ static void	draw_rotated_minimap(t_game *game)
 	}
 }
 
+/**
+ * ENGLISH: Copies a single pixel from the minimap image buffer into the
+ *          main frame buffer at the given offset.
+ *
+ * SPANISH: Copia un píxel individual del buffer de imagen del minimapa
+ *          al buffer de fotograma principal con el desplazamiento dado.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param px Source pixel X. / Píxel X de origen.
+ * @param py Source pixel Y. / Píxel Y de origen.
+ * @param off Array [off_x, off_y] destination offset. /
+ *            Array [off_x, off_y] de desplazamiento destino.
+ */
 static void	blit_pixel(t_game *game, int px, int py, int off[2])
 {
 	char	*src;
@@ -69,6 +105,20 @@ static void	blit_pixel(t_game *game, int px, int py, int off[2])
 	*(unsigned int *)dst = *(unsigned int *)src;
 }
 
+/**
+ * ENGLISH: Copies the circular minimap image onto the main frame buffer
+ *          at the specified screen offset.
+ *
+ * SPANISH: Copia la imagen circular del minimapa al buffer de fotograma
+ *          principal en el desplazamiento de pantalla especificado.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param off_x Horizontal offset on the screen. /
+ *              Desplazamiento horizontal en pantalla.
+ * @param off_y Vertical offset on the screen. /
+ *              Desplazamiento vertical en pantalla.
+ */
 static void	blit_minimap(t_game *game, int off_x, int off_y)
 {
 	int		px;
@@ -95,6 +145,20 @@ static void	blit_minimap(t_game *game, int off_x, int off_y)
 	}
 }
 
+/**
+ * ENGLISH: Orchestrates the full minimap render: clears the buffer, draws
+ *          the rotated world, draws the player triangle, then blits the
+ *          result to the screen corner.
+ *
+ * SPANISH: Orquesta el renderizado completo del minimapa: limpia el buffer,
+ *          dibuja el mundo rotado, dibuja el triángulo del jugador, luego
+ *          vuelca el resultado a la esquina de la pantalla.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ *
+ * @return Always 0. / Siempre 0.
+ */
 int	render_minimap(t_game *game)
 {
 	int	minimap_x;

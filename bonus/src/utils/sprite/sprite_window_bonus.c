@@ -3,21 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_window_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 00:54:21 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game_bonus.h"
 #include "sprite_bonus.h"
 
-/*
-	* ENGLISH: 	Compute the bounding box of tiles to
-				check for sprites around the player.
-	* SPANISH: 	Calcula el área de tiles a revisar
-				para sprites alrededor del jugador.
+/**
+ * ENGLISH: Computes the bounding box of map tiles to scan for sprites
+ *          around the player, clamped to the map boundaries.
+ *
+ * SPANISH: Calcula el bounding box de casillas del mapa a escanear en
+ *          busca de sprites alrededor del jugador, limitado a los bordes
+ *          del mapa.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param w Output sprite window to fill. /
+ *          Ventana de sprites de salida a rellenar.
  */
 void	sprite_compute_scan_window(t_game *game, t_sprite_window *w)
 {

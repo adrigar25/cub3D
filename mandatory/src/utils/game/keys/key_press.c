@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_press.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 17:08:51 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:54 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,16 @@
 #include <stdlib.h>
 
 /**
- * ENGLISH: Handle key press events - set key state to 1.
+ * ENGLISH: Handles key press events, setting the corresponding key state
+ * 			to 1. ESC key exits the game immediately.
  *
- * SPANISH: Maneja eventos de teclas presionadas
-		- establece el estado de la tecla a 1.
+ * SPANISH: Maneja eventos de teclas presionadas, estableciendo el estado
+ * 			correspondiente a 1. La tecla ESC cierra el juego.
+ *
+ * @param keycode The key code of the pressed key. / Código de la tecla.
+ * @param game Pointer to the game structure. / Puntero al juego.
+ *
+ * @return Always 0. / Siempre 0.
  */
 int	handle_keypress(int keycode, t_game *game)
 {

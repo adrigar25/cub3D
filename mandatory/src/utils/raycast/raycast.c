@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:05:09 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/18 17:10:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:54 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 #include "raycast.h"
 #include "render.h"
 
+/**
+ * ENGLISH: Iterates over every screen column and performs raycasting to
+ * 			render the 3D view.
+ *
+ * SPANISH: Itera sobre cada columna de pantalla y realiza el raycasting
+ * 			para renderizar la vista 3D.
+ *
+ * @param game Pointer to the game structure. / Puntero a la estructura
+ * 		del juego.
+ */
 void	raycast(t_game *game)
 {
 	int	x;

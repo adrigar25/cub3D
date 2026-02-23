@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_player.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:15:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 21:06:13 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:54 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@
 #include "map.h"
 #include "player.h"
 
+/**
+ * ENGLISH: Verifies that the map contains exactly one player start position
+ * 			(N, S, E or W character).
+ *
+ * SPANISH: Verifica que el mapa contenga exactamente una posición de inicio
+ * 			del jugador (carácter N, S, E o W).
+ *
+ * @param map The NULL-terminated map array. / El array del mapa.
+ *
+ * @return 0 if exactly one player is found, or -1 otherwise. /
+ * 		0 si se encuentra exactamente un jugador, o -1 en caso contrario.
+ */
 int	check_player(char **map)
 {
 	int	i;

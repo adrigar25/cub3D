@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:41:35 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 18:34:07 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:54 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,19 @@
 #include "player_bonus.h"
 #include "render_bonus.h"
 
+/**
+ * ENGLISH: Checks if the given filename has the expected extension.
+ *
+ * SPANISH: Comprueba si el nombre de archivo tiene la extensión esperada.
+ *
+ * @param filename The name of the file to check. /
+ *                 El nombre del archivo a comprobar.
+ * @param extension The expected extension (e.g. ".cub"). /
+ *                  La extensión esperada (p.ej. ".cub").
+ *
+ * @return 1 if the extension matches, 0 otherwise. /
+ *         1 si la extensión coincide, 0 en caso contrario.
+ */
 int	valid_extension(const char *filename, const char *extension)
 {
 	size_t	filename_len;
@@ -30,6 +43,18 @@ int	valid_extension(const char *filename, const char *extension)
 			extension_len) == 0);
 }
 
+/**
+ * ENGLISH: Initialises and runs the full cub3D game pipeline: parse,
+ *          validate, load MLX resources, place player and start loop.
+ *
+ * SPANISH: Inicializa y ejecuta el pipeline completo de cub3D: parsear,
+ *          validar, cargar recursos MLX, colocar jugador e iniciar bucle.
+ *
+ * @param file Path to the .cub map file. /
+ *             Ruta al archivo de mapa .cub.
+ *
+ * @return 0 on success, 1 on error. / 0 en éxito, 1 en error.
+ */
 int	cub3d(char *file)
 {
 	t_game	*game_data;
@@ -52,6 +77,19 @@ int	cub3d(char *file)
 	return (0);
 }
 
+/**
+ * ENGLISH: Entry point. Validates argument count and file extension,
+ *          then launches the game.
+ *
+ * SPANISH: Punto de entrada. Valida el número de argumentos y la
+ *          extensión del archivo, luego lanza el juego.
+ *
+ * @param argc Number of arguments. / Número de argumentos.
+ * @param argv Array of argument strings. / Array de cadenas de argumentos.
+ *
+ * @return 0 on success, -1 on invalid arguments. /
+ *         0 en éxito, -1 en argumentos inválidos.
+ */
 int	main(int argc, char **argv)
 {
 	if (argc != 2)

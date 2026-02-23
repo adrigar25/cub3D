@@ -3,16 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   check_empty.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:44:15 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:54 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "map.h"
 
+/**
+ * ENGLISH: Returns the maximum non-whitespace column index across all rows.
+ *
+ * SPANISH: Devuelve el índice de columna máximo no-espaciado en todas las
+ * 			filas.
+ *
+ * @param map The NULL-terminated map array. / El array del mapa.
+ *
+ * @return The length of the longest meaningful row. /
+ * 		La longitud de la fila significativa más larga.
+ */
 static int	get_max_len(char **map)
 {
 	int	max_len;
@@ -39,6 +50,17 @@ static int	get_max_len(char **map)
 	return (max_len);
 }
 
+/**
+ * ENGLISH: Returns the column index of the first wall ('1') in the first row.
+ *
+ * SPANISH: Devuelve el índice de columna de la primera pared ('1') en la
+ * 			primera fila.
+ *
+ * @param map The NULL-terminated map array. / El array del mapa.
+ * @param max_len Maximum column length. / Longitud máxima de columna.
+ *
+ * @return The starting column index. / El índice de columna inicial.
+ */
 static int	get_starting_column(char **map, int max_len)
 {
 	int	start;
@@ -49,6 +71,17 @@ static int	get_starting_column(char **map, int max_len)
 	return (start);
 }
 
+/**
+ * ENGLISH: Checks that no row in the map consists entirely of whitespace.
+ *
+ * SPANISH: Comprueba que ninguna fila del mapa esté formada únicamente
+ * 			por espacios en blanco.
+ *
+ * @param map The NULL-terminated map array. / El array del mapa.
+ *
+ * @return 0 if no empty rows exist, or -1 if one is found. /
+ * 		0 si no hay filas vacías, o -1 si se encuentra alguna.
+ */
 int	check_empty_rows(char **map)
 {
 	int	i;
@@ -66,6 +99,18 @@ int	check_empty_rows(char **map)
 	return (0);
 }
 
+/**
+ * ENGLISH: Checks that no column within the map's bounds is entirely empty
+ * 			(all whitespace from top to bottom).
+ *
+ * SPANISH: Comprueba que ninguna columna dentro del mapa esté completamente
+ * 			vacía (todo espacios de arriba a abajo).
+ *
+ * @param map The NULL-terminated map array. / El array del mapa.
+ *
+ * @return 0 if no empty columns exist, or -1 if one is found. /
+ * 		0 si no hay columnas vacías, o -1 si se encuentra alguna.
+ */
 int	check_empty_columns(char **map)
 {
 	int	i;

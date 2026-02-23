@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_player_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 #include <math.h>
 
 /**
- * ENGLISH: Apply rotation to player direction and camera plane.
- *          Uses rotation matrix to rotate both direction and plane vectors.
+ * ENGLISH: Applies a rotation to the player direction and camera plane
+ *          vectors using a 2D rotation matrix.
  *
- * SPANISH: Aplica rotación a la dirección del jugador y plano de cámara.
- *          Usa matriz de rotación para rotar ambos vectores.
+ * SPANISH: Aplica una rotación a los vectores de dirección del jugador y
+ *          plano de cámara usando una matriz de rotación 2D.
  *
- * @param game Pointer to game structure
- * @param angle Rotation angle (positive = left, negative = right)
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param angle Rotation angle in radians (positive=left, negative=right). /
+ *              Ángulo de rotación en radianes (positivo=izq, negativo=der).
  */
 void	apply_rotation(t_game *game, double angle)
 {
@@ -45,9 +47,12 @@ void	apply_rotation(t_game *game, double angle)
 }
 
 /**
- * ENGLISH: Rotate player view to the left.
+ * ENGLISH: Rotates the player view to the left by ROT_SPEED radians.
  *
- * SPANISH: Rotar la vista del jugador hacia la izquierda.
+ * SPANISH: Rota la vista del jugador hacia la izquierda en ROT_SPEED rad.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
  */
 void	rotate_left(t_game *game)
 {
@@ -55,9 +60,12 @@ void	rotate_left(t_game *game)
 }
 
 /**
- * ENGLISH: Rotate player view to the right.
+ * ENGLISH: Rotates the player view to the right by ROT_SPEED radians.
  *
- * SPANISH: Rotar la vista del jugador hacia la derecha.
+ * SPANISH: Rota la vista del jugador hacia la derecha en ROT_SPEED rad.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
  */
 void	rotate_right(t_game *game)
 {
@@ -65,9 +73,13 @@ void	rotate_right(t_game *game)
 }
 
 /**
- * ENGLISH: Rotate player by a specific angle.
+ * ENGLISH: Rotates the player by the given angle in radians.
  *
- * SPANISH: Rotar jugador por un ángulo específico.
+ * SPANISH: Rota al jugador el ángulo indicado en radianes.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param angle Rotation angle in radians. / Ángulo de rotación en radianes.
  */
 void	rotate_player(t_game *game, double angle)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:45:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/21 16:46:37 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:54 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@
 #include <stdlib.h>
 
 /**
- * ENGLISH: Main render loop function called every frame.
- *          Updates movement, clears buffer, performs raycasting,
-	and displays the result.
+ * ENGLISH: Main render loop callback called every frame. Updates player
+ * 			movement, performs raycasting and pushes the frame to screen.
  *
- * SPANISH: Función principal del loop de render llamada cada frame.
- *          Actualiza movimiento, limpia el buffer,
-	realiza raycasting y muestra el resultado.
+ * SPANISH: Callback principal del loop llamado cada frame. Actualiza el
+ * 			movimiento del jugador, realiza el raycasting y muestra el frame.
+ *
+ * @param game Pointer to the game structure. / Puntero al juego.
+ *
+ * @return Always 0. / Siempre 0.
  */
 static int	render_loop(t_game *game)
 {
@@ -38,6 +40,8 @@ static int	render_loop(t_game *game)
  * ENGLISH: Handle window close event.
  *
  * SPANISH: Maneja el evento de cierre de ventana.
+ *
+ * @param game Pointer to the game structure. / Puntero al juego.
  */
 static int	handle_close(t_game *game)
 {
@@ -51,6 +55,9 @@ static int	handle_close(t_game *game)
  *
  * SPANISH: Inicia el loop principal del juego con manejo de eventos MLX.
  *          Configura eventos de teclado, loop de render e inicia el loop MLX.
+ *
+ * @param game Pointer to the initialized game structure. / Puntero a la
+ *             estructura del juego inicializada.
  */
 void	start_game_loop(t_game *game)
 {

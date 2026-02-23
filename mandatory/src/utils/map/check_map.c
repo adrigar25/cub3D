@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 20:16:41 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:54 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 #include "libft.h"
 #include "map.h"
 
+/**
+ * ENGLISH: Runs all map validation checks: empty rows/columns, valid
+ * 			characters, player count and closed walls.
+ *
+ * SPANISH: Ejecuta todas las validaciones del mapa: filas/columnas vacías,
+ * 			carácteres válidos, contador de jugadores y paredes cerradas.
+ *
+ * @param map The NULL-terminated map array. / El array del mapa.
+ *
+ * @return 0 if the map is valid, or -1 if any check fails. /
+ * 		0 si el mapa es válido, o -1 si alguna comprobación falla.
+ */
 int	check_map(char **map)
 {
 	if (!map || !map[0] || !map[0][0])

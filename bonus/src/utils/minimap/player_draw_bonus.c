@@ -13,6 +13,19 @@
 #include "game_bonus.h"
 #include "minimap_bonus.h"
 
+/**
+ * ENGLISH: Builds a triangle representing the player arrow pointing
+ *          upward (north), centred at (cx, cy) on the minimap.
+ *
+ * SPANISH: Construye un triángulo que representa la flecha del jugador
+ *          apuntando hacia arriba (norte), centrado en (cx, cy).
+ *
+ * @param cx Centre X position. / Posición X del centro.
+ * @param cy Centre Y position. / Posición Y del centro.
+ *
+ * @return t_triangle structure with the three vertices. /
+ *         Estructura t_triangle con los tres vértices.
+ */
 t_triangle	player_triangle(double cx, double cy)
 {
 	double	arrow_len;
@@ -33,6 +46,18 @@ t_triangle	player_triangle(double cx, double cy)
 	return (create_triangle(x, y));
 }
 
+/**
+ * ENGLISH: Splits a general triangle into a flat-bottom and a flat-top
+ *          sub-triangle, then fills both halves.
+ *
+ * SPANISH: Divide un triángulo general en un sub-triángulo con base plana
+ *          inferior y otro con base plana superior, luego rellena ambas.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param tri Pointer to the triangle to split and fill. /
+ *            Puntero al triángulo a dividir y rellenar.
+ */
 static void	fill_split(t_game *game, t_triangle *tri)
 {
 	t_triangle	bottom;
@@ -57,6 +82,19 @@ static void	fill_split(t_game *game, t_triangle *tri)
 	fill_top_triangle(game, &top);
 }
 
+/**
+ * ENGLISH: Draws a filled player arrow triangle on the minimap,
+ *          choosing the appropriate fill method based on vertex layout.
+ *
+ * SPANISH: Dibuja un triángulo de flecha del jugador relleno en el
+ *          minimapa, eligiendo el método de relleno según la disposición
+ *          de los vértices.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param center_x Minimap centre X. / Centro X del minimapa.
+ * @param center_y Minimap centre Y. / Centro Y del minimapa.
+ */
 void	draw_player(t_game *game, double center_x, double center_y)
 {
 	t_triangle	tri;

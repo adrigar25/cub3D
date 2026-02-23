@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:45:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/21 21:11:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:54 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,17 @@
 #include "render_bonus.h"
 #include "sprite_bonus.h"
 
+/**
+ * ENGLISH: Builds and renders the end-of-game HUD overlay, showing
+ *          the round outcome and current score.
+ *
+ * SPANISH: Construye y renderiza el HUD de fin de partida, mostrando
+ *          el resultado de la ronda y la puntuación actual.
+ *
+ * @param game Pointer to game structure. / Puntero a la estructura del juego.
+ * @param title Title string to display. / Cadena de título a mostrar.
+ * @param color Title text colour (hex). / Color del título (en hexadecimal).
+ */
 static void	draw_end_hud(t_game *game, const char *title, int color)
 {
 	char	*num;
@@ -78,11 +89,11 @@ static void	draw_crosshair(t_game *game)
 /**
  * ENGLISH: Main render loop function called every frame.
  *          Updates movement, clears buffer, performs raycasting,
-	and displays the result.
+ *          and displays the result.
  *
  * SPANISH: Función principal del loop de render llamada cada frame.
  *          Actualiza movimiento, limpia el buffer,
-	realiza raycasting y muestra el resultado.
+ *          realiza raycasting y muestra el resultado.
  */
 
 static int	render_loop(t_game *game)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_column_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:57:57 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,20 @@
 #include "raycast_bonus.h"
 #include "render_bonus.h"
 
+/**
+ * ENGLISH: Computes the wall X texture coordinate and texture step for
+ *          the current ray hit, accounting for ray direction to avoid
+ *          texture mirroring.
+ *
+ * SPANISH: Calcula la coordenada X de textura de la pared y el paso de
+ *          textura para el impacto del rayo actual, teniendo en cuenta la
+ *          dirección del rayo para evitar el espejado de texturas.
+ *
+ * @param p Player structure. / Estructura del jugador.
+ * @param ray Pointer to the raycast data. / Puntero a los datos del rayo.
+ * @param tex Pointer to the wall texture image. /
+ *            Puntero a la imagen de textura de la pared.
+ */
 static void	calculate_text_coords(t_player p, t_raycast *ray, t_img *tex)
 {
 	if (ray->side == 0)
@@ -32,6 +46,23 @@ static void	calculate_text_coords(t_player p, t_raycast *ray, t_img *tex)
 			- p.pitch) * ray->step;
 }
 
+/**
+ * ENGLISH: Returns the appropriate texture for the hit wall tile,
+ *          selecting by tile type (door/exit) or ray side (N/S/E/W).
+ *
+ * SPANISH: Retorna la textura apropiada para la casilla de pared
+ *          impactada, seleccionando por tipo de casilla (puerta/salida)
+ *          o lado del rayo (N/S/E/O).
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param map The map grid. / La cuadrícula del mapa.
+ * @param raycast Pointer to the raycast data. /
+ *                Puntero a los datos del rayo.
+ *
+ * @return Pointer to the selected texture image. /
+ *         Puntero a la imagen de textura seleccionada.
+ */
 static t_img	*get_wall_texture(t_game *game, char **map, t_raycast *raycast)
 {
 	t_texture	*txt;
@@ -59,6 +90,17 @@ static t_img	*get_wall_texture(t_game *game, char **map, t_raycast *raycast)
 	return (&txt->img);
 }
 
+/**
+ * ENGLISH: Fills the ceiling (top) and floor (bottom) pixel columns with
+ *          their respective flat colours for screen column x.
+ *
+ * SPANISH: Rellena las columnas de píxeles del techo (arriba) y suelo
+ *          (abajo) con sus colores planos respectivos para la columna x.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param x Screen column index. / Índice de columna de pantalla.
+ */
 static void	draw_ceiling_floor(t_game *game, int x)
 {
 	int	y;
@@ -71,6 +113,19 @@ static void	draw_ceiling_floor(t_game *game, int x)
 		img_pixel_put(&game->img, x, y++, game->floor_color);
 }
 
+/**
+ * ENGLISH: Draws the textured wall slice for screen column x, applying
+ *          a darkness tint to east/west (side==1) faces.
+ *
+ * SPANISH: Dibuja la franja de pared texturizada para la columna x de
+ *          pantalla, aplicando una oscuridad a las caras este/oeste.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param x Screen column index. / Índice de columna de pantalla.
+ * @param texture Pointer to the selected wall texture. /
+ *                Puntero a la textura de pared seleccionada.
+ */
 static void	draw_textured_wall(t_game *game, int x, t_img *texture)
 {
 	int	y;
@@ -89,6 +144,19 @@ static void	draw_textured_wall(t_game *game, int x, t_img *texture)
 	}
 }
 
+/**
+ * ENGLISH: Orchestrates drawing of screen column x: selects texture,
+ *          calculates coords, clamps draw bounds, then draws ceiling,
+ *          floor and textured wall.
+ *
+ * SPANISH: Orquesta el dibujado de la columna x de pantalla: selecciona
+ *          textura, calcula coordenadas, limita los límites de dibujo,
+ *          luego dibuja techo, suelo y pared texturizada.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param x Screen column index. / Índice de columna de pantalla.
+ */
 void	draw_column(t_game *game, int x)
 {
 	t_img	*texture;

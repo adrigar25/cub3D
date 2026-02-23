@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_raycast.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:29:01 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/18 17:44:15 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:54 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 #include "raycast.h"
 #include "render.h"
 
+/**
+ * ENGLISH: Initializes the ray direction and map position for column x.
+ *
+ * SPANISH: Inicializa la dirección del rayo y la posición en el mapa para
+ * 			la columna x.
+ *
+ * @param game Pointer to the game structure. / Puntero a la estructura
+ * 		del juego.
+ * @param x The screen column index. / El índice de columna en pantalla.
+ */
 void	init_ray(t_game *game, int x)
 {
 	t_raycast	*ray;

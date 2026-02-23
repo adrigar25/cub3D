@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_management_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 17:00:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/21 20:53:32 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,18 @@
 #include <stdlib.h>
 
 /**
- * ENGLISH: Add a texture to the sprite linked list.
+ * ENGLISH: Appends a new texture node to the end of the sprite linked
+ *          list stored in the game structure.
  *
- * SPANISH: Añade una textura a la lista enlazada de sprites.
+ * SPANISH: Añade un nuevo nodo de textura al final de la lista enlazada
+ *          de sprites almacenada en la estructura del juego.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param new_texture Pointer to the texture to append. /
+ *                    Puntero a la textura a añadir.
+ *
+ * @return Always 0. / Siempre 0.
  */
 int	push_texture(t_game *game, t_texture *new_texture)
 {
@@ -38,9 +47,20 @@ int	push_texture(t_game *game, t_texture *new_texture)
 }
 
 /**
- * ENGLISH: Assign texture to corresponding wall direction or entity.
+ * ENGLISH: Assigns the texture pointer to the correct game field based
+ *          on the key string (NO/SO/WE/EA/DO/X1/X2/X3/A).
  *
- * SPANISH: Asigna la textura a la dirección de pared o entidad correspondiente.
+ * SPANISH: Asigna el puntero de textura al campo correcto del juego
+ *          según la clave (NO/SO/WE/EA/DO/X1/X2/X3/A).
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param key The texture identifier string. / La cadena identificadora.
+ * @param texture Pointer to the texture to assign. /
+ *                Puntero a la textura a asignar.
+ *
+ * @return 1 if a wall/entity field was assigned, 0 otherwise. /
+ *         1 si se asignó un campo de pared/entidad, 0 en caso contrario.
  */
 int	assign_wall_texture(t_game *game, char *key, t_texture *texture)
 {
@@ -71,9 +91,17 @@ int	assign_wall_texture(t_game *game, char *key, t_texture *texture)
 }
 
 /**
- * ENGLISH: Create a new texture structure with key and path.
+ * ENGLISH: Allocates a new t_texture node and copies the key and path
+ *          strings into it.
  *
- * SPANISH: Crea una nueva estructura de textura con clave y ruta.
+ * SPANISH: Reserva un nuevo nodo t_texture y copia en él las cadenas
+ *          de clave y ruta.
+ *
+ * @param key The texture identifier. / El identificador de textura.
+ * @param value The file path string. / La cadena de ruta de archivo.
+ *
+ * @return Pointer to the new texture, or NULL on allocation failure. /
+ *         Puntero a la nueva textura, o NULL si falla la reserva.
  */
 t_texture	*create_texture(char *key, char *value)
 {
@@ -89,10 +117,18 @@ t_texture	*create_texture(char *key, char *value)
 }
 
 /**
- * ENGLISH: Process texture data: create, assign or add to sprite list.
+ * ENGLISH: Returns 1 if the given key is already registered as a wall,
+ *          entity, or sprite texture in the game structure.
  *
- * SPANISH: Procesa datos de textura: crear,
-		asignar o añadir a lista de sprites.
+ * SPANISH: Retorna 1 si la clave dada ya está registrada como textura
+ *          de pared, entidad o sprite en la estructura del juego.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param key Texture key string to check. /
+ *            Cadena de clave de textura a comprobar.
+ *
+ * @return 1 if duplicate, 0 if new. / 1 si es duplicado, 0 si es nuevo.
  */
 static int	is_text_duplicate(t_game *game, char *key)
 {
@@ -115,6 +151,22 @@ static int	is_text_duplicate(t_game *game, char *key)
 	return (0);
 }
 
+/**
+ * ENGLISH: Creates a new texture from the key/value pair, checks for
+ *          duplicates, assigns it to a wall field or pushes it to the
+ *          sprites list, and updates allowed characters if needed.
+ *
+ * SPANISH: Crea una nueva textura a partir del par clave/valor, comprueba
+ *          duplicados, la asigna a un campo de pared o la añade a la lista
+ *          de sprites, y actualiza los caracteres permitidos si es necesario.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param key Texture identifier. / Identificador de textura.
+ * @param value File path. / Ruta de archivo.
+ *
+ * @return 0 on success, -1 on error. / 0 en éxito, -1 en error.
+ */
 int	process_texture(t_game *game, char *key, char *value)
 {
 	t_texture	*new_texture;

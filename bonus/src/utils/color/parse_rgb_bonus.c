@@ -3,16 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rgb_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:05:47 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parse_bonus.h"
 
+/**
+ * ENGLISH: Parses a comma-separated "R,G,B" string, validates the format
+ *          and range, and returns the packed hex colour.
+ *
+ * SPANISH: Parsea una cadena "R,G,B" separada por comas, valida el
+ *          formato y el rango, y retorna el color hexadecimal empaquetado.
+ *
+ * @param line The RGB string to parse. / La cadena RGB a parsear.
+ *
+ * @return Packed hex colour on success, or -2 on invalid input. /
+ *         Color hex empaquetado en éxito, o -2 en entrada inválida.
+ */
 int	parse_rgb(char *line)
 {
 	int		red;

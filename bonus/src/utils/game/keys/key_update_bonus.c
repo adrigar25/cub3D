@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_update_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 #include "player_bonus.h"
 
 /**
- * ENGLISH: Update player movement based on current key states.
+ * ENGLISH: Updates player movement each frame based on current key states.
  *
- * SPANISH: Actualiza el movimiento del jugador basado en los
-		estados actuales de las teclas.
+ * SPANISH: Actualiza el movimiento del jugador cada frame según los
+ *          estados actuales de las teclas.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
  */
 void	update_movement(t_game *game)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 01:03:21 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 20:19:12 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,19 @@
 #include "mlx.h"
 #include "render_bonus.h"
 
+/**
+ * ENGLISH: Loads a single texture from disk via MLX and retrieves its
+ *          pixel data address.
+ *
+ * SPANISH: Carga una única textura desde disco mediante MLX y recupera
+ *          la dirección de datos de píxeles.
+ *
+ * @param mlx MLX instance pointer. / Puntero a la instancia MLX.
+ * @param texture Pointer to the texture to load. /
+ *                Puntero a la textura a cargar.
+ *
+ * @return 0 on success, -1 on failure. / 0 en éxito, -1 en fallo.
+ */
 static int	load_texture(void *mlx, t_texture *texture)
 {
 	char	*path;
@@ -39,6 +52,20 @@ static int	load_texture(void *mlx, t_texture *texture)
 	return (0);
 }
 
+/**
+ * ENGLISH: Iterates over the sprite linked list and loads each texture
+ *          from disk.
+ *
+ * SPANISH: Itera sobre la lista enlazada de sprites y carga cada textura
+ *          desde disco.
+ *
+ * @param mlx MLX instance pointer. / Puntero a la instancia MLX.
+ * @param sprites Head of the sprite texture list. /
+ *                Cabeza de la lista de texturas de sprite.
+ *
+ * @return 0 on success, -1 if any texture fails to load. /
+ *         0 en éxito, -1 si alguna textura falla al cargarse.
+ */
 static int	load_sprites(void *mlx, t_texture *sprites)
 {
 	t_texture	*current;
@@ -55,6 +82,19 @@ static int	load_sprites(void *mlx, t_texture *sprites)
 	return (0);
 }
 
+/**
+ * ENGLISH: Loads all game textures (walls, door, enemy, exit, sprites)
+ *          into MLX image objects.
+ *
+ * SPANISH: Carga todas las texturas del juego (paredes, puerta, enemigo,
+ *          salida, sprites) en objetos de imagen MLX.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ *
+ * @return 0 on success, -1 if any texture fails. /
+ *         0 en éxito, -1 si alguna textura falla.
+ */
 int	load_images(t_game *game)
 {
 	void	*mlx;
@@ -83,6 +123,19 @@ int	load_images(t_game *game)
 	return (0);
 }
 
+/**
+ * ENGLISH: Initialises MLX, creates the game window and allocates both
+ *          the main frame buffer and the minimap image buffer.
+ *
+ * SPANISH: Inicializa MLX, crea la ventana del juego y reserva tanto el
+ *          buffer de fotograma principal como el buffer de imagen del
+ *          minimapa.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ *
+ * @return 0 on success, -1 on error. / 0 en éxito, -1 en error.
+ */
 int	init_mlx(t_game *game)
 {
 	game->mlx_ptr = mlx_init();

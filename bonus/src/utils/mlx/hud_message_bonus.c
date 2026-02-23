@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hud_message_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 20:19:16 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,17 @@
 #define HUD_PAD_X 24
 #define HUD_PAD_Y 16
 
-/*
-** Draw a semi-transparent dark rectangle in the image buffer.
-** Pixel colour is blended to 50 % black: (src >> 1) & 0x7F7F7F.
-*/
+/**
+ * ENGLISH: Renders a semi-transparent dark backdrop rectangle in the
+ *          image buffer; each pixel is blended to 50% black.
+ *
+ * SPANISH: Renderiza un rectángulo de fondo semitransparente oscuro en
+ *          el buffer de imagen; cada píxel se mezcla al 50% negro.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param r HUD rectangle bounds. / Límites del rectángulo del HUD.
+ */
 static void	draw_backdrop(t_game *game, t_hud_rect r)
 {
 	int	x;
@@ -47,10 +54,20 @@ static void	draw_backdrop(t_game *game, t_hud_rect r)
 	}
 }
 
-/*
-** Draw one line of @msg centred horizontally at screen row @row using
-** mlx_string_put (called AFTER the image is pushed to the window).
-*/
+/**
+ * ENGLISH: Draws one centred text line on the game window using the
+ *          MLX built-in font. Must be called after the image is pushed.
+ *
+ * SPANISH: Dibuja una línea de texto centrada en la ventana del juego
+ *          usando la fuente integrada de MLX. Debe llamarse tras volcar
+ *          la imagen.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param msg Text string to draw. / Cadena de texto a dibujar.
+ * @param row Screen row Y position. / Posición Y de fila en pantalla.
+ * @param color Text colour (hex). / Color del texto (hexadecimal).
+ */
 static void	put_line(t_game *game, const char *msg, int row, int color)
 {
 	int	len;
@@ -64,11 +81,18 @@ static void	put_line(t_game *game, const char *msg, int row, int color)
 		(char *)msg);
 }
 
-/*
-** compute_rect  – calculate the bounding box for the HUD overlay.
-** draw_hud_lines – render title / sub / sub2 over the pushed window.
-** draw_hud_message – public entry point; msg.sub / msg.sub2 may be NULL.
-*/
+/**
+ * ENGLISH: Calculates the bounding box for the HUD overlay based on the
+ *          title and optional sub-line string lengths.
+ *
+ * SPANISH: Calcula el bounding box del overlay del HUD en función de las
+ *          longitudes de la cadena del título y las sublíneas opcionales.
+ *
+ * @param msg HUD message structure. / Estructura del mensaje HUD.
+ *
+ * @return t_hud_rect with the computed screen bounds. /
+ *         t_hud_rect con los límites de pantalla calculados.
+ */
 static t_hud_rect	compute_rect(t_hud msg)
 {
 	t_hud_rect	r;
@@ -93,6 +117,18 @@ static t_hud_rect	compute_rect(t_hud msg)
 	return (r);
 }
 
+/**
+ * ENGLISH: Renders the title, sub and sub2 text lines over the HUD
+ *          backdrop using the computed row positions.
+ *
+ * SPANISH: Renderiza las líneas de texto del título, sub y sub2 sobre
+ *          el fondo del HUD usando las posiciones de fila calculadas.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param msg HUD message structure. / Estructura del mensaje HUD.
+ * @param r HUD rectangle bounds. / Límites del rectángulo del HUD.
+ */
 static void	draw_hud_lines(t_game *game, t_hud msg, t_hud_rect r)
 {
 	int	title_row;
@@ -113,6 +149,20 @@ static void	draw_hud_lines(t_game *game, t_hud msg, t_hud_rect r)
 	}
 }
 
+/**
+ * ENGLISH: Public entry point: computes the overlay rect, draws the
+ *          dimmed backdrop, pushes the image, then renders the text lines.
+ *          msg.sub and msg.sub2 may be NULL.
+ *
+ * SPANISH: Punto de entrada público: calcula el rect del overlay, dibuja
+ *          el fondo oscurecido, vuelca la imagen y renderiza las líneas.
+ *          msg.sub y msg.sub2 pueden ser NULL.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param msg HUD message data (title, sub, sub2, color). /
+ *            Datos del mensaje HUD (título, sub, sub2, color).
+ */
 void	draw_hud_message(t_game *game, t_hud msg)
 {
 	t_hud_rect	r;

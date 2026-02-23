@@ -3,16 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   perpendicular_wall_distance.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:48:21 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/18 17:10:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:54 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 #include "raycast.h"
 
+/**
+ * ENGLISH: Calculates the perpendicular distance from the player to the
+ * 			wall hit by the ray, avoiding fisheye distortion.
+ *
+ * SPANISH: Calcula la distancia perpendicular del jugador a la pared
+ * 			impactada por el rayo, evitando la distorsión ojo de pez.
+ *
+ * @param ray Pointer to the raycast structure. / Puntero al rayo.
+ * @param game Pointer to the game structure. / Puntero al juego.
+ */
 void	perpendicular_wall_distance(t_raycast *ray, t_game *game)
 {
 	if (ray->side == 0)

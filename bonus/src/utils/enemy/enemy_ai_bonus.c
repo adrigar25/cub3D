@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enemy_ai_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:30:30 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 20:20:17 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@
 #include "player_bonus.h"
 #include <math.h>
 
+/**
+ * ENGLISH: Moves the enemy towards the player if it has line-of-sight
+ *          and is within aggro range. Triggers game-over on contact.
+ *
+ * SPANISH: Mueve al enemigo hacia el jugador si tiene línea de visión
+ *          y está dentro del rango de agro. Activa game-over al contacto.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param e Pointer to the enemy to move. /
+ *           Puntero al enemigo a mover.
+ */
 static void	enemy_try_move(t_game *game, t_enemy *e)
 {
 	double	dx;
@@ -45,6 +57,17 @@ static void	enemy_try_move(t_game *game, t_enemy *e)
 	}
 }
 
+/**
+ * ENGLISH: Updates the enemy animation state based on whether it moved
+ *          since the last frame.
+ *
+ * SPANISH: Actualiza el estado de animación del enemigo en función de si
+ *          se movió desde el último frame.
+ *
+ * @param e Pointer to the enemy. / Puntero al enemigo.
+ * @param prev_x Previous X position. / Posición X anterior.
+ * @param prev_y Previous Y position. / Posición Y anterior.
+ */
 static void	enemy_update_anim(t_enemy *e, double prev_x, double prev_y)
 {
 	if (fabs(e->x - prev_x) + fabs(e->y - prev_y) > 1e-5)
@@ -67,6 +90,16 @@ static void	enemy_update_anim(t_enemy *e, double prev_x, double prev_y)
 	e->last_y = e->y;
 }
 
+/**
+ * ENGLISH: Iterates over all enemies, moves each one towards the player
+ *          and updates their animation state.
+ *
+ * SPANISH: Itera sobre todos los enemigos, mueve cada uno hacia el jugador
+ *          y actualiza su estado de animación.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ */
 void	enemy_update_ai(t_game *game)
 {
 	t_enemy	*e;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_release_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 18:16:23 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,17 @@
 #include "player_bonus.h"
 
 /**
- * ENGLISH: Handle key release events - set key state to 0.
+ * ENGLISH: Handle key release events - sets the corresponding key state to 0.
  *
- * SPANISH: Maneja eventos de teclas liberadas
-		- establece el estado de la tecla a 0.
+ * SPANISH: Maneja eventos de teclas liberadas - establece el estado de la
+ *          tecla correspondiente a 0.
+ *
+ * @param keycode X11 keycode of the released key. /
+ *                Código X11 de la tecla liberada.
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ *
+ * @return Always 0. / Siempre 0.
  */
 int	handle_keyrelease(int keycode, t_game *game)
 {

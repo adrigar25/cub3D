@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:41:35 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 20:17:01 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:54 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@
 #include "player.h"
 #include "render.h"
 
+/**
+ * ENGLISH: Checks if a filename ends with the given extension.
+ *
+ * SPANISH: Comprueba si un nombre de archivo termina con la extensión dada.
+ *
+ * @param filename The name of the file to check. / El nombre del archivo.
+ * @param extension The extension to check. / La extensión a comprobar.
+ *
+ * @return 1 if the extension matches, 0 otherwise. /
+ * 		1 si la extensión coincide, 0 en caso contrario.
+ */
 int	valid_extension(const char *filename, const char *extension)
 {
 	size_t	filename_len;
@@ -31,6 +42,19 @@ int	valid_extension(const char *filename, const char *extension)
 			extension_len) == 0);
 }
 
+/**
+ * ENGLISH: Initializes game data, reads the configuration file, validates
+ * 			the map, sets up MLX and starts the game loop.
+ *
+ * SPANISH: Inicializa los datos del juego, lee el archivo de configuración,
+ * 			valida el mapa, configura MLX e inicia el bucle del juego.
+ *
+ * @param file The path to the .cub configuration file. /
+ * 		La ruta al archivo de configuración .cub.
+ *
+ * @return 0 on success, or 1 if an error occurred. /
+ * 		0 en éxito, o 1 si ocurrió un error.
+ */
 int	cub3d(char *file)
 {
 	t_game	*game_data;
@@ -53,6 +77,19 @@ int	cub3d(char *file)
 	return (0);
 }
 
+/**
+ * ENGLISH: Entry point of the program. Validates arguments and launches
+ * 			the game.
+ *
+ * SPANISH: Punto de entrada del programa. Valida los argumentos e inicia
+ * 			el juego.
+ *
+ * @param argc Number of command line arguments. / Número de argumentos.
+ * @param argv Array of argument strings. / Array de cadenas de argumentos.
+ *
+ * @return 0 on success, or -1 if there was an error. /
+ * 		0 en éxito, o -1 si hubo un error.
+ */
 int	main(int argc, char **argv)
 {
 	if (argc != 2)

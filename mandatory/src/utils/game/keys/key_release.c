@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_release.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 16:52:13 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:54 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 #include "game.h"
 
 /**
- * ENGLISH: Handle key release events - set key state to 0.
+ * ENGLISH: Handles key release events, setting the corresponding key
+ * 			state back to 0.
  *
- * SPANISH: Maneja eventos de teclas liberadas
-	- establece el estado de la tecla a 0.
+ * SPANISH: Maneja eventos de teclas liberadas, estableciendo el estado
+ * 			correspondiente de vuelta a 0.
+ *
+ * @param keycode The key code of the released key. / Código de la tecla.
+ * @param game Pointer to the game structure. / Puntero al juego.
+ *
+ * @return Always 0. / Siempre 0.
  */
 int	handle_keyrelease(int keycode, t_game *game)
 {

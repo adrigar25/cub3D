@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   position_validation_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,20 @@
 #include "player_bonus.h"
 
 /**
- * ENGLISH: Check if a position (x, y) is valid (not a wall).
+ * ENGLISH: Checks if the position (x, y) is walkable, i.e. none of the
+ *          four hitbox corners collide with a wall, door or exit tile.
  *
- * SPANISH: Comprueba si una posición (x, y) es válida (no es una pared).
+ * SPANISH: Comprueba si la posición (x, y) es transitable, es decir que
+ *          ninguna de las cuatro esquinas del hitbox colisiona con pared,
+ *          puerta o casilla de salida.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param x X position to validate. / Posición X a validar.
+ * @param y Y position to validate. / Posición Y a validar.
+ *
+ * @return 1 if the position is valid, 0 otherwise. /
+ *         1 si la posición es válida, 0 en caso contrario.
  */
 int	is_valid_position(t_game *game, double x, double y)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_clear_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 17:30:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/22 17:44:43 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,20 @@
 #include "render_bonus.h"
 #include <math.h>
 
+/**
+ * ENGLISH: Sets the colour of a single minimap pixel: transparent outside
+ *          the circle, border colour in the ring, wall colour inside.
+ *
+ * SPANISH: Establece el color de un píxel del minimapa: transparente fuera
+ *          del círculo, color de borde en el anillo, color de muro dentro.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param x Pixel column. / Columna del píxel.
+ * @param y Pixel row. / Fila del píxel.
+ * @param c Array [cx, cy] with the circle centre. /
+ *          Array [cx, cy] con el centro del círculo.
+ */
 static void	clear_pixel(t_game *game, int x, int y, double *c)
 {
 	double	dist;
@@ -28,6 +42,16 @@ static void	clear_pixel(t_game *game, int x, int y, double *c)
 		img_pixel_put(&game->minimap, x, y, MINIMAP_WALL_COLOR);
 }
 
+/**
+ * ENGLISH: Resets every pixel of the minimap image buffer to its default
+ *          background state (border ring + wall fill).
+ *
+ * SPANISH: Restablece cada píxel del buffer de imagen del minimapa a su
+ *          estado de fondo por defecto (anillo de borde + relleno de muro).
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ */
 void	clear_map(t_game *game)
 {
 	int		x;

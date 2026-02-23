@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:31:46 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 #include "render_bonus.h"
 #include <math.h>
 
+/**
+ * ENGLISH: Initialises the DDA step direction and initial side distances
+ *          for x and y based on the ray direction.
+ *
+ * SPANISH: Inicializa la dirección de paso del DDA y las distancias de
+ *          lado iniciales para x e y según la dirección del rayo.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ */
 void	init_step_and_side_dist(t_game *game)
 {
 	if (game->raycast.ray_dir_x < 0)
@@ -43,6 +53,16 @@ void	init_step_and_side_dist(t_game *game)
 	}
 }
 
+/**
+ * ENGLISH: Precomputes the delta distance (distance between consecutive
+ *          x/y grid crossings) for both axes of the ray.
+ *
+ * SPANISH: Precalcula la distancia delta (distancia entre cruces
+ *          consecutivos de la cuadrícula x/y) para ambos ejes del rayo.
+ *
+ * @param ray Pointer to the raycast structure. /
+ *            Puntero a la estructura del rayo.
+ */
 static void	init_delta_dist(t_raycast *ray)
 {
 	if (ray->ray_dir_x == 0)
@@ -55,6 +75,16 @@ static void	init_delta_dist(t_raycast *ray)
 		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 }
 
+/**
+ * ENGLISH: Steps the ray through the map grid one cell at a time until
+ *          it hits a wall, door or exit tile.
+ *
+ * SPANISH: Avanza el rayo por la cuadrícula del mapa celda a celda hasta
+ *          que impacta con una pared, puerta o casilla de salida.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ */
 static void	perform_dda(t_game *game)
 {
 	t_raycast	*ray;
@@ -82,6 +112,16 @@ static void	perform_dda(t_game *game)
 	}
 }
 
+/**
+ * ENGLISH: Computes the wall stripe height and the vertical draw range
+ *          from the perpendicular wall distance.
+ *
+ * SPANISH: Calcula la altura de la franja de pared y el rango de dibujo
+ *          vertical a partir de la distancia perpendicular a la pared.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ */
 static void	calc_wall_height(t_game *game)
 {
 	t_raycast	*ray;

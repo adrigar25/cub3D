@@ -3,15 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   utils_basic.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 22:39:09 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:10:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:54 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycast.h"
 
+/**
+ * ENGLISH: Divides num by denom, returning def if denom is zero.
+ *
+ * SPANISH: Divide num entre denom, devolviendo def si denom es cero.
+ *
+ * @param num Numerator. / Numerador.
+ * @param denom Denominator. / Denominador.
+ * @param def Default value if denom is zero. / Valor por defecto.
+ *
+ * @return num / denom, or def if denom == 0. /
+ * 		num / denom, o def si denom == 0.
+ */
 double	safe_div(double num, double denom, double def)
 {
 	if (denom == 0.0)
@@ -19,6 +31,17 @@ double	safe_div(double num, double denom, double def)
 	return (num / denom);
 }
 
+/**
+ * ENGLISH: Clamps a value between min and max (inclusive).
+ *
+ * SPANISH: Limita un valor entre min y max (ambos incluidos).
+ *
+ * @param val The value to clamp. / El valor a limitar.
+ * @param min The minimum boundary. / El límite mínimo.
+ * @param max The maximum boundary. / El límite máximo.
+ *
+ * @return The clamped value. / El valor limitado.
+ */
 double	clamp(double val, double min, double max)
 {
 	if (val < min)
@@ -28,6 +51,15 @@ double	clamp(double val, double min, double max)
 	return (val);
 }
 
+/**
+ * ENGLISH: Returns the absolute value of a double.
+ *
+ * SPANISH: Devuelve el valor absoluto de un double.
+ *
+ * @param x The value to compute the absolute of. / El valor.
+ *
+ * @return The absolute value of x. / El valor absoluto de x.
+ */
 double	fabs_custom(double x)
 {
 	if (x < 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_draw_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 23:58:21 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 20:20:37 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,19 @@
 #include "sprite_bonus.h"
 #include <math.h>
 
+/**
+ * ENGLISH: Checks if the given colour is the transparent (key) colour
+ *          stored at the very first byte of the texture image buffer.
+ *
+ * SPANISH: Comprueba si el color dado es el color transparente (clave)
+ *          almacenado en el primer byte del buffer de imagen de la textura.
+ *
+ * @param texture Pointer to the texture. / Puntero a la textura.
+ * @param color Colour value to test. / Valor de color a probar.
+ *
+ * @return 1 if transparent, 0 otherwise. /
+ *         1 si es transparente, 0 en caso contrario.
+ */
 static int	spr_is_transparent(t_img *texture, int color)
 {
 	if (!texture || !texture->addr)
@@ -22,6 +35,20 @@ static int	spr_is_transparent(t_img *texture, int color)
 	return ((unsigned int)color == (*(unsigned int *)texture->addr));
 }
 
+/**
+ * ENGLISH: Draws a vertical pixel column of a sprite at horizontal screen
+ *          stripe, sampling the texture at the given tx coordinate.
+ *
+ * SPANISH: Dibuja una columna vertical de píxeles de un sprite en la
+ *          franja horizontal de pantalla, muestreando la textura en la
+ *          coordenada tx dada.
+ *
+ * @param ctx Sprite draw context. / Contexto de dibujo del sprite.
+ * @param stripe Screen column X. / Columna X de pantalla.
+ * @param tx Texture X coordinate. / Coordenada X de textura.
+ * @param ys Texture Y step per screen pixel. /
+ *           Paso de textura Y por píxel de pantalla.
+ */
 static void	spr_draw_pixel(t_sprite_ctx *ctx, int stripe, double tx, double ys)
 {
 	int	y;
@@ -44,6 +71,16 @@ static void	spr_draw_pixel(t_sprite_ctx *ctx, int stripe, double tx, double ys)
 	}
 }
 
+/**
+ * ENGLISH: Iterates over all horizontal stripes of the sprite, skipping
+ *          those behind a wall (z-buffer check), and draws each column.
+ *
+ * SPANISH: Itera sobre todas las franjas horizontales del sprite,
+ *          omitiendo las que están detrás de una pared (comprobación
+ *          z-buffer), y dibuja cada columna.
+ *
+ * @param ctx Sprite draw context. / Contexto de dibujo del sprite.
+ */
 static void	spr_draw_columns(t_sprite_ctx *ctx)
 {
 	int		stripe;
@@ -64,6 +101,23 @@ static void	spr_draw_columns(t_sprite_ctx *ctx)
 	}
 }
 
+/**
+ * ENGLISH: Projects and draws a sprite at the given world position,
+ *          computing screen size and bounds before rendering each column.
+ *
+ * SPANISH: Proyecta y dibuja un sprite en la posición del mundo dada,
+ *          calculando el tamaño y límites en pantalla antes de renderizar
+ *          cada columna.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param texture Pointer to the sprite texture image. /
+ *                Puntero a la imagen de textura del sprite.
+ * @param world_x World X position of the sprite. /
+ *                Posición X del sprite en el mundo.
+ * @param world_y World Y position of the sprite. /
+ *                Posición Y del sprite en el mundo.
+ */
 void	sprite_draw_at(t_game *game, t_img *texture, double world_x,
 		double world_y)
 {

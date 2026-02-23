@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_raycast_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:29:01 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 #include "raycast_bonus.h"
 #include "render_bonus.h"
 
+/**
+ * ENGLISH: Initialises the ray direction and starting map cell for screen
+ *          column x using the player position and camera plane.
+ *
+ * SPANISH: Inicializa la dirección del rayo y la celda de inicio en el
+ *          mapa para la columna de pantalla x usando la posición del
+ *          jugador y el plano de cámara.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ * @param x Screen column index. / Índice de columna de pantalla.
+ */
 void	init_ray(t_game *game, int x)
 {
 	t_raycast	*ray;

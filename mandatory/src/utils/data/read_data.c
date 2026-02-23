@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:04:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/22 19:15:38 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:04:04 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,31 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+/**
+ * ENGLISH: Reads the game configuration data from a specified file, including
+ * 			texture paths and color values. It processes each line of the file
+ * 			to store the relevant information in the game data structure. After
+ * 			reading the configuration, it also reads the map data from the same
+ * 			file.
+ *
+ * SPANISH: Lee los datos de configuración del juego desde un archivo
+ * 			especificado, incluyendo las rutas de las texturas y los valores de
+ * 			color. Procesa cada línea del archivo para almacenar la información
+ * 			relevante en la estructura de datos del juego. Después de leer la
+ * 			configuración, también lee los datos del mapa desde el mismo
+ * 			archivo.
+ *
+ * @param game_data A pointer to the game structure where the configuration data
+ * 		will be stored. / Un puntero a la estructura del juego donde se
+ * 		almacenarán los datos de configuración.
+ * @param path The file path of the configuration file to read. / La ruta del
+ * 		archivo de configuración a leer.
+ * @param dir The direction associated with the texture
+ * 		(e.g., "NO", "SO", "WE", "EA"). / La dirección asociada con la textura
+ * 		(por ejemplo, "NO", "SO", "WE", "EA").
+ *
+ * @return 0 if the data was read successfully, or -1 if there was an error. /
+ */
 static int	store_path(t_game *game_data, char *path, char *dir)
 {
 	char	**dest;
@@ -47,6 +72,27 @@ static int	store_path(t_game *game_data, char *path, char *dir)
 	return (free(trimmed), 0);
 }
 
+/**
+ * ENGLISH: Processes a single line of the configuration file to extract and
+ * 			storenthe relevant data, such as texture paths or color values. It
+ * 			determines the type of data based on the key and calls the
+ * 			appropriate function to handle it.
+ *
+ * SPANISH: Procesa una sola línea del archivo de configuración para extraer y
+ * 			almacenar los datos relevantes, como las rutas de las texturas o los
+ * 			valores de color. Determina el tipo de dato basado en la clave y
+ * 			llama a la función apropiada para manejarlo.
+ *
+ * @param game_data A pointer to the game structure where the extracted data
+ * 		will be stored. / Un puntero a la estructura del juego donde se
+ * 		almacenarán los datos extraídos.
+ * @param line A string containing the line from the configuration file to be
+ * 		processed. / Una cadena que contiene la línea del archivo de
+ * 		configuración que se va a procesar.
+ *
+ * @return 0 if the line was processed successfully, or -1 if there was an
+ * 		error. / 0 si la línea se procesó correctamente, o -1 si hubo un error.
+ */
 int	process_color(t_game *game, char *key, char *value)
 {
 	int	*color;
@@ -65,6 +111,26 @@ int	process_color(t_game *game, char *key, char *value)
 	return (*color);
 }
 
+/**
+ * ENGLISH: Reads the configuration data from the specified file descriptor,
+ * 			line by line, and processes each line to extract texture paths and
+ * 			color values. It continues until it encounters an error or reaches
+ * 			the end of the file.
+ *
+ * SPANISH: Lee los datos de configuración desde el descriptor de archivo
+ * 			especificado, línea por línea, y procesa cada línea para extraer las
+ * 			rutas de las texturas y los valores de color. Continúa hasta que
+ * 			encuentra un error o llega al final del archivo.
+ *
+ * @param game_data A pointer to the game structure where the extracted data
+ * 		will be stored. / Un puntero a la estructura del juego donde se
+ * 		almacenarán los datos extraídos.
+ * @param line The line of the configuration file to process. / La línea del
+ * 		archivo de configuración a procesar.
+ *
+ * @return 0 if the line was processed successfully, or -1 if there was an
+ * 		error. / 0 si la línea se procesó correctamente, o -1 si hubo un error.
+ */
 static int	process_config_line(t_game *game_data, char *line)
 {
 	char	*temp;
@@ -91,6 +157,26 @@ static int	process_config_line(t_game *game_data, char *line)
 	return (free(temp), free(raw_key), free(key), free(value), result);
 }
 
+/**
+ * ENGLISH: Reads the game configuration data from the specified file
+ * 			descriptor, line by line, and processes each line to extract texture
+ * 			paths and color values. It continues until it encounters an error or
+ * 			reaches the end of the file.
+ *
+ * SPANISH: Lee los datos de configuración desde el descriptor de archivo
+ * 			especificado, línea por línea, y procesa cada línea para extraer las
+ * 			rutas de las texturas y los valores de color. Continúa hasta que
+ * 			encuentra un error o llega al final del archivo.
+ *
+ * @param game_data A pointer to the game structure where the extracted data
+ * 		will be stored. / Un puntero a la estructura del juego donde se
+ * 		almacenarán los datos extraídos.
+ * @param fd The file descriptor of the configuration file to read. / El
+ * 		descriptor de archivo del archivo de configuración a leer.
+ *
+ * @return 0 if the data was read successfully, or -1 if there was an error. /
+ * 		0 si los datos se leyeron correctamente, o -1 si hubo un error.
+ */
 static int	get_data(t_game *game_data, int fd)
 {
 	char	*line;
@@ -112,6 +198,31 @@ static int	get_data(t_game *game_data, int fd)
 	return (result);
 }
 
+/**
+ * ENGLISH: Reads the game configuration data and map data from the specified
+ * 			file. It first reads the configuration data to extract texture paths
+ * 			and color values, and then reads the map data to populate the game
+ * 			map structure.
+ *
+ * SPANISH: Lee los datos de configuración del juego y los datos del mapa desde
+ * 			el archivo especificado. Primero lee los datos de configuración para
+ * 			extraer las rutas de las texturas y los valores de color, y luego
+ * 			lee los datos del mapa para llenar la estructura del mapa del juego.
+ *
+ * @param game_data
+ * 		ENGLISH: A pointer to the game structure where the extracted data will
+ * 		be stored. \
+ * 		SPANISH: Un puntero a la estructura del juego donde se
+ * 		almacenarán los datos extraídos.
+ * @param file
+ * 		ENGLISH: The file path of the configuration file to read. /
+ * 		SPANISH: La ruta del archivo de configuración a leer.
+ *
+ * @return
+ * 		ENGLISH: 0 if the data was read successfully, or -1 if there was an
+ * 		error. /
+ * 		SPANISH: 0 si los datos se leyeron correctamente, o -1 si hubo un error.
+ */
 int	read_data(t_game **game_data, char *file)
 {
 	int	fd;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_handler_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 20:19:21 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,22 @@
 #include "player_bonus.h"
 #include "render_bonus.h"
 
-// ...existing code...
+/**
+ * ENGLISH: Handles mouse button press events. On left-click inside the
+ *          window, captures the mouse and hides the cursor.
+ *
+ * SPANISH: Maneja los eventos de pulsación del ratón. Al hacer clic
+ *          izquierdo dentro de la ventana, captura el ratón y oculta
+ *          el cursor.
+ *
+ * @param button Mouse button code. / Código del botón del ratón.
+ * @param x Cursor X position. / Posición X del cursor.
+ * @param y Cursor Y position. / Posición Y del cursor.
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ *
+ * @return Always 0. / Siempre 0.
+ */
 int	handle_mouse_press(int button, int x, int y, t_game *game)
 {
 	if (button != 1 || game->mouse_captured)
@@ -28,6 +43,21 @@ int	handle_mouse_press(int button, int x, int y, t_game *game)
 	return (0);
 }
 
+/**
+ * ENGLISH: Handles mouse movement events. When the mouse is captured,
+ *          rotates the player and adjusts pitch based on cursor delta.
+ *
+ * SPANISH: Maneja los eventos de movimiento del ratón. Cuando el ratón
+ *          está capturado, rota al jugador y ajusta el ángulo vertical
+ *          según el desplazamiento del cursor.
+ *
+ * @param x Current cursor X position. / Posición X actual del cursor.
+ * @param y Current cursor Y position. / Posición Y actual del cursor.
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ *
+ * @return Always 0. / Siempre 0.
+ */
 int	handle_mouse_move(int x, int y, t_game *game)
 {
 	int	center_x;

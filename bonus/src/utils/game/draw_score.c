@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_score.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 22:54:59 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 20:20:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 #include "mlx.h"
 #include "render_bonus.h"
 
+/**
+ * ENGLISH: Renders the current score on the game window using MLX string
+ *          output.
+ *
+ * SPANISH: Renderiza la puntuación actual en la ventana del juego mediante
+ *          la salida de cadenas de MLX.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ */
 void	draw_score(t_game *game)
 {
 	char	*score_str;

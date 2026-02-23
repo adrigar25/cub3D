@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:40:42 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/21 17:11:06 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/22 19:48:31 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,18 @@
 #include "render.h"
 #include <stdlib.h>
 
+/**
+ * ENGLISH: Initializes the game data structure by allocating memory and setting
+ * 			default values for textures and colors. It also allocates memory
+ * 			for the zbuffer used in rendering.
+ *
+ * SPANISH: Inicializa la estructura de datos del juego asignando memoria y
+ * 			estableciendo valores predeterminados para las texturas y colores.
+ * 			También asigna memoria para el zbuffer utilizado en el renderizado.
+ *
+ * @return A pointer to the initialized game structure. / Un puntero a la
+ * 			estructura del juego inicializada.
+ */
 t_game	*init_data(void)
 {
 	t_game	*game;

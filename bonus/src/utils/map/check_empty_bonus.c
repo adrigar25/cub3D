@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_empty_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 #include "console_bonus.h"
 #include "map_bonus.h"
 
+/**
+ * ENGLISH: Computes the maximum non-whitespace column index across all
+ *          map rows.
+ *
+ * SPANISH: Calcula el índice de columna no-espacio máximo en todas las
+ *          filas del mapa.
+ *
+ * @param map NULL-terminated map grid. / Cuadrícula del mapa terminada en NULL.
+ *
+ * @return Maximum content width, or 0 if map is NULL. /
+ *         Ancho de contenido máximo, o 0 si el mapa es NULL.
+ */
 static int	get_max_len(char **map)
 {
 	int	max_len;
@@ -42,6 +54,18 @@ static int	get_max_len(char **map)
 	return (max_len);
 }
 
+/**
+ * ENGLISH: Finds the first column index that contains a '1' wall tile
+ *          in the first row of the map.
+ *
+ * SPANISH: Encuentra el primer índice de columna que contiene una casilla
+ *          de pared '1' en la primera fila del mapa.
+ *
+ * @param map NULL-terminated map grid. / Cuadrícula del mapa terminada en NULL.
+ * @param max_len Maximum column width. / Ancho de columna máximo.
+ *
+ * @return Starting column index. / Índice de columna de inicio.
+ */
 static int	get_starting_column(char **map, int max_len)
 {
 	int	start;
@@ -52,6 +76,18 @@ static int	get_starting_column(char **map, int max_len)
 	return (start);
 }
 
+/**
+ * ENGLISH: Checks that no row in the map consists entirely of whitespace
+ *          characters.
+ *
+ * SPANISH: Comprueba que ninguna fila del mapa esté compuesta íntegramente
+ *          de caracteres de espacio en blanco.
+ *
+ * @param map NULL-terminated map grid. / Cuadrícula del mapa terminada en NULL.
+ *
+ * @return 0 if all rows are non-empty, -1 if an empty row is found. /
+ *         0 si todas las filas son no vacías, -1 si se encuentra una vacía.
+ */
 int	check_empty_rows(char **map)
 {
 	int	i;
@@ -71,6 +107,19 @@ int	check_empty_rows(char **map)
 	return (0);
 }
 
+/**
+ * ENGLISH: Checks that no column within the content area is entirely
+ *          made of whitespace across all map rows.
+ *
+ * SPANISH: Comprueba que ninguna columna dentro del área de contenido
+ *          esté formada íntegramente por espacios en blanco en todas las
+ *          filas del mapa.
+ *
+ * @param map NULL-terminated map grid. / Cuadrícula del mapa terminada en NULL.
+ *
+ * @return 0 if all columns are valid, -1 if an empty column is found. /
+ *         0 si todas las columnas son válidas, -1 si se encuentra una vacía.
+ */
 int	check_empty_columns(char **map)
 {
 	int	i;

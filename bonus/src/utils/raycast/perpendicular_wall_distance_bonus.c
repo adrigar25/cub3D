@@ -3,16 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   perpendicular_wall_distance_bonus.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:48:21 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game_bonus.h"
 #include "raycast_bonus.h"
 
+/**
+ * ENGLISH: Calculates the perpendicular distance from the player to the
+ *          wall hit, avoiding fisheye effect by using the perpendicular
+ *          projection rather than the Euclidean distance.
+ *
+ * SPANISH: Calcula la distancia perpendicular desde el jugador hasta la
+ *          pared impactada, evitando el efecto ojo de pez usando la
+ *          proyección perpendicular en lugar de la distancia euclidiana.
+ *
+ * @param ray Pointer to the raycast data structure. /
+ *            Puntero a la estructura de datos del rayo.
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ */
 void	perpendicular_wall_distance(t_raycast *ray, t_game *game)
 {
 	if (ray->side == 0)

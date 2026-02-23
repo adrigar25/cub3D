@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 18:30:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:44:15 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/22 19:41:16 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,19 @@
 #include "parse.h"
 
 /**
- * @brief Converts RGB color values to hexadecimal format
+ * ENGLISH: Converts RGB color values to a hexadecimal color code.
  *
- * @param r Red component (0-255)
- * @param g Green component (0-255)
- * @param b Blue component (0-255)
- * @return int Color in hexadecimal format (0xRRGGBB)
+ * SPANISH: Convierte los valores de color RGB a un código de color hexadecimal.
+ *
+ * @param r The red component of the color (0-255). / El componente rojo del
+ * 			color (0-255).
+ * @param g The green component of the color (0-255). / El componente verde del
+ * 			color (0-255).
+ * @param b The blue component of the color (0-255). / El componente azul del
+ * 			color (0-255).
+ * @return The hexadecimal color code, or -1 if any of the RGB values are out
+ * 			of range. / El código de color hexadecimal, o -1 si alguno de los
+ * 			valores RGB está fuera de rango.
  */
 int	rgb_to_hex(int r, int g, int b)
 {
@@ -28,6 +35,21 @@ int	rgb_to_hex(int r, int g, int b)
 	return ((r << 16) | (g << 8) | b);
 }
 
+/**
+ * ENGLISH: Checks if the RGB color values are in the correct format, which
+ * 			 should be three integers separated by commas, with optional
+ * 			 whitespace.
+ *
+ * SPANISH: Verifica si los valores de color RGB están en el formato correcto,
+ * 			 que debe ser tres enteros separados por comas, con espacios
+ * 			 opcionales.
+ *
+ * @param values A string containing the RGB values to be checked. / Una cadena
+ * 				que contiene los valores RGB a verificar.
+ *
+ * @return 0 if the format is correct, or -1 if it is incorrect. / 0 si el
+ * 			formato es correcto, o -1 si es incorrecto.
+ */
 int	check_rgb_format(char *values)
 {
 	int	i;

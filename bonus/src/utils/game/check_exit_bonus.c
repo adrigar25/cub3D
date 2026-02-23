@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_exit_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/22 19:31:50 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@
 #include "mlx.h"
 #include <math.h>
 
+/**
+ * ENGLISH: Checks if the player is colliding with an exit tile ('A') and,
+ *          if close enough, sets the game as finished and shows the cursor.
+ *
+ * SPANISH: Comprueba si el jugador colisiona con la casilla de salida
+ *          ('A') y, si está suficientemente cerca, marca la partida como
+ *          terminada y muestra el cursor.
+ *
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
+ */
 void	check_exit_collision(t_game *game)
 {
 	int		next_x;

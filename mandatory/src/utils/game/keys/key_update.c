@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_update.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:10:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:54 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 #include "player.h"
 
 /**
- * ENGLISH: Update player movement based on current key states.
+ * ENGLISH: Reads the current key states and applies the corresponding
+ * 			player movements and rotations.
  *
- * SPANISH: Actualiza el movimiento del jugador basado en los
-	estados actuales de las teclas.
+ * SPANISH: Lee los estados actuales de las teclas y aplica los movimientos
+ * 			y rotaciones correspondientes del jugador.
+ *
+ * @param game Pointer to the game structure. / Puntero al juego.
  */
 void	update_movement(t_game *game)
 {

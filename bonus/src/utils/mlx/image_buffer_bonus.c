@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image_buffer_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:30:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/21 20:19:14 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,21 @@
 #include "render_bonus.h"
 
 /**
- * ENGLISH: Initialize the image buffer for efficient pixel manipulation.
- *          Creates an image in memory instead of drawing directly to window.
+ * ENGLISH: Initialises the image buffer for efficient pixel manipulation.
+ *          Creates an MLX image in memory instead of drawing directly to
+ *          the window.
  *
-
-	* SPANISH: Inicializa el buffer de imagen para
-	manipulación eficiente de píxeles.
-
-	*          Crea una imagen en memoria en lugar
-				de dibujar directamente a la ventana.
+ * SPANISH: Inicializa el buffer de imagen para manipulación eficiente de
+ *          píxeles. Crea una imagen MLX en memoria en lugar de dibujar
+ *          directamente a la ventana.
  *
- * @param game Pointer to the game structure
- * @return 1 on success, 0 on failure
+ * @param mlx_ptr MLX instance pointer. / Puntero a la instancia MLX.
+ * @param img Pointer to the image structure to fill. /
+ *            Puntero a la estructura de imagen a rellenar.
+ * @param width Image width in pixels. / Ancho de la imagen en píxeles.
+ * @param height Image height in pixels. / Alto de la imagen en píxeles.
+ *
+ * @return 1 on success, 0 on failure. / 1 en éxito, 0 en fallo.
  */
 int	init_image_buffer(void *mlx_ptr, t_img *img, int width, int height)
 {
@@ -43,20 +46,19 @@ int	init_image_buffer(void *mlx_ptr, t_img *img, int width, int height)
 }
 
 /**
- * ENGLISH: Put a pixel in the image buffer at coordinates (x,
-	y) with given color.
- *          Much faster than mlx_pixel_put as it writes directly to memory.
+ * ENGLISH: Puts a pixel in the image buffer at (x, y) with the given
+ *          colour. Much faster than mlx_pixel_put as it writes directly
+ *          to memory.
  *
- * SPANISH: Coloca un píxel en el buffer de imagen en coordenadas (x,
-	y) con el color dado.
-
-	*          Mucho más rápido que mlx_pixel_put ya que escribe
-				directamente en memoria.
+ * SPANISH: Coloca un píxel en el buffer de imagen en (x, y) con el
+ *          color dado. Mucho más rápido que mlx_pixel_put al escribir
+ *          directamente en memoria.
  *
- * @param img Pointer to the image structure
- * @param x X coordinate
- * @param y Y coordinate
- * @param color Color in RGB format
+ * @param img Pointer to the image structure. /
+ *            Puntero a la estructura de imagen.
+ * @param x X coordinate. / Coordenada X.
+ * @param y Y coordinate. / Coordenada Y.
+ * @param color Colour value in ARGB format. / Valor de color en ARGB.
  */
 void	img_pixel_put(t_img *img, int x, int y, int color)
 {
@@ -69,15 +71,14 @@ void	img_pixel_put(t_img *img, int x, int y, int color)
 }
 
 /**
- * ENGLISH: Render the complete frame from image buffer to the window.
- *          Call this once per frame after all pixel manipulations are done.
+ * ENGLISH: Renders the complete frame from the image buffer to the window.
+ *          Call once per frame after all pixel manipulations are done.
  *
- * SPANISH: Renderiza el frame completo desde el buffer de imagen a la ventana.
-
-	*          Llama a esto una vez por frame después de todas l
-				as manipulaciones de píxeles.
+ * SPANISH: Renderiza el fotograma completo desde el buffer de imagen a la
+ *          ventana. Llamar una vez por frame tras todas las manipulaciones.
  *
- * @param game Pointer to the game structure
+ * @param game Pointer to the game structure. /
+ *             Puntero a la estructura del juego.
  */
 void	render_frame(t_game *game)
 {
@@ -85,18 +86,19 @@ void	render_frame(t_game *game)
 }
 
 /**
- * ENGLISH: Get color from texture at specific coordinates.
- *          Safely extracts pixel color from texture image data.
+ * ENGLISH: Returns the colour stored at (x, y) in a texture image.
+ *          Safely clamps coordinates before reading from the data buffer.
  *
- * SPANISH: Obtiene color de la textura en coordenadas específicas.
-
-	*          Extrae de forma segura el color del píxel de los
-				datos de la imagen de textura.
+ * SPANISH: Retorna el color almacenado en (x, y) de una imagen de textura.
+ *          Limita de forma segura las coordenadas antes de leer el buffer.
  *
- * @param texture Pointer to texture image structure
- * @param x X coordinate in texture (0 to TEX_WIDTH-1)
- * @param y Y coordinate in texture (0 to TEX_HEIGHT-1)
- * @return Color value at specified coordinates
+ * @param texture Pointer to the texture image structure. /
+ *                Puntero a la estructura de imagen de textura.
+ * @param x X coordinate in the texture. / Coordenada X en la textura.
+ * @param y Y coordinate in the texture. / Coordenada Y en la textura.
+ *
+ * @return Colour value at the given coordinates. /
+ *         Valor de color en las coordenadas dadas.
  */
 int	get_texture_color(t_img *texture, int x, int y)
 {
