@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_data_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adriescr <adriescr@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 13:08:58 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/23 16:01:55 by adriescr         ###   ########.fr       */
+/*   Updated: 2026/02/23 17:37:38 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ static int	check_enemy_text(t_enemy *enemies, t_texture *e_txt_s,
 int	check_data(t_game *game)
 {
 	if (!game->txt_no || !game->txt_so || !game->txt_we || !game->txt_ea)
-		return (ft_fprintf(2, RED "Error: Missing textures\n" RESET), -1);
+		return (ft_fprintf(2, RED "Error: Missing wall textures\n" RESET), -1);
 	if (!check_texture_file(game->txt_no, "North"))
 		return (-1);
 	if (!check_texture_file(game->txt_so, "South"))
