@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/18 17:10:05 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 20:16:49 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@
  *
  * SPANISH: Inicializa todos los estados de las teclas a 0 (no presionadas).
  */
-void	init_keys(t_game *game) {
-  game->keys.w = 0;
-  game->keys.a = 0;
-  game->keys.s = 0;
-  game->keys.d = 0;
-  game->keys.left = 0;
-  game->keys.right = 0;
-  game->keys.up = 0;
-  game->keys.down = 0;
+void	init_keys(t_game *game)
+{
+	game->keys.w = 0;
+	game->keys.a = 0;
+	game->keys.s = 0;
+	game->keys.d = 0;
+	game->keys.left = 0;
+	game->keys.right = 0;
+	game->keys.up = 0;
+	game->keys.down = 0;
 }

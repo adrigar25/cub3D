@@ -6,7 +6,7 @@
 #    By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 13:45:00 by agarcia           #+#    #+#              #
-#    Updated: 2026/02/18 00:14:05 by agarcia          ###   ########.fr        #
+#    Updated: 2026/02/21 16:46:28 by agarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,9 +102,9 @@ SRCS_BONUS_UTILS :=	${UTILS_BONUS_DIR}/game/clear_game_bonus.c \
 					$(UTILS_BONUS_DIR)/data/line_parser_bonus.c \
 					$(UTILS_BONUS_DIR)/data/check_data_bonus.c \
 					$(UTILS_BONUS_DIR)/mlx/init_mlx_bonus.c \
-				$(UTILS_BONUS_DIR)/mlx/image_buffer_bonus.c \
-				$(UTILS_BONUS_DIR)/mlx/hud_message_bonus.c \
-				$(UTILS_BONUS_DIR)/color/color_utils_bonus.c \
+					$(UTILS_BONUS_DIR)/mlx/image_buffer_bonus.c \
+					$(UTILS_BONUS_DIR)/mlx/hud_message_bonus.c \
+					$(UTILS_BONUS_DIR)/color/color_utils_bonus.c \
 					$(UTILS_BONUS_DIR)/color/parse_rgb_bonus.c \
 					$(UTILS_BONUS_DIR)/player/player_utils_bonus.c \
 					$(UTILS_BONUS_DIR)/raycast/dda_bonus.c \
@@ -137,10 +137,10 @@ OBJS_BONUS		:= $(SRCS_BONUS:$(SRC_BONUS_DIR)/%.c=$(OBJS_BONUS_DIR)/%.o)
 LIBS_DIR	:= ./libs
 LIBFT_DIR	:= $(LIBS_DIR)/libft
 LIBFT_LIB	:= $(LIBFT_DIR)/libft.a
-MLX_DIR		:= $(LIBS_DIR)/mlx
+MLX_DIR		:= $(LIBS_DIR)/mlx_linux
 MLX_LIB		:= $(MLX_DIR)/libmlx.a
-MLX_FLAGS	:= -framework OpenGL -framework AppKit
-# LINUX -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+# MLX_FLAGS	:= -framework OpenGL -framework AppKit
+MLX_FLAGS	:= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm 
 
 # MAC -framework OpenGL -framework AppKit
 # LINUX -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
@@ -149,7 +149,7 @@ MLX_FLAGS	:= -framework OpenGL -framework AppKit
 # ============== LIBFT ============ #
 
 CC			:= cc
-CFLAGS		:= -Wall -Wextra -Werror -I$(INCLUDES_MANDATORY) -I$(INCLUDES_BONUS) -I $(LIBFT_DIR)
+CFLAGS		:= -Wall -Wextra -Werror -I$(INCLUDES_MANDATORY) -I$(INCLUDES_BONUS) -I$(MLX_DIR) -I $(LIBFT_DIR)
 
 # ============ RULES ============ #
 

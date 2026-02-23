@@ -2,12 +2,13 @@ NO ./textures/north.xpm
 SO ./textures/south.xpm
 WE ./textures/west.xpm
 EA ./textures/east.xpm
+A ./textures/exit.xpm
 
 F 22,15,12
-C 42,27,15234243
+C 42,27,15
 
-1111111
-1000001
-10N0001
-1000001
-1111111
+11111111111
+10000N00001
+10000X00001
+100000000A1
+11111111111

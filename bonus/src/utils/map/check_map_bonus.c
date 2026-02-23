@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/20 10:17:09 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 21:11:08 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libft.h"
 #include "map_bonus.h"
 
-static int	has_exit(char **map)
+int	has_exit(char **map)
 {
 	int	i;
 	int	j;

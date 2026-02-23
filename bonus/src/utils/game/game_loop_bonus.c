@@ -6,19 +6,19 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 22:45:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 21:11:06 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "game_bonus.h"
-#include "render_bonus.h"
-#include "raycast_bonus.h"
-#include "player_bonus.h"
 #include "enemy_bonus.h"
-#include "sprite_bonus.h"
+#include "game_bonus.h"
+#include "libft.h"
 #include "minimap_bonus.h"
-#include "../../libs/mlx/mlx.h"
+#include "mlx.h"
+#include "player_bonus.h"
+#include "raycast_bonus.h"
+#include "render_bonus.h"
+#include "sprite_bonus.h"
 
 static void	draw_end_hud(t_game *game, const char *title, int color)
 {
@@ -88,7 +88,7 @@ static void	draw_crosshair(t_game *game)
 static int	render_loop(t_game *game)
 {
 	if (!game->mouse_captured)
-		mlx_mouse_show();
+		mlx_mouse_show(game->mlx_ptr, game->win_ptr);
 	update_movement(game);
 	check_collectibles(game);
 	check_exit_collision(game);
@@ -97,11 +97,11 @@ static int	render_loop(t_game *game)
 	raycast(game);
 	sprite_render(game);
 	draw_crosshair(game);
-	render_frame(game);
 	render_minimap(game);
+	render_frame(game);
 	draw_score(game);
 	if (game->finished == 1)
-		draw_end_hud(game, "\xc2\xa1Victory!", 0x00FF55);
+		draw_end_hud(game, "Victory!", 0x00FF55);
 	else if (game->finished == 2)
 		draw_end_hud(game, "GAME OVER", 0xFF4444);
 	return (0);
@@ -114,7 +114,7 @@ static int	render_loop(t_game *game)
  */
 static int	handle_close(t_game *game)
 {
-	mlx_mouse_show();
+	mlx_mouse_show(game->mlx_ptr, game->win_ptr);
 	clear_game(game, -1);
 	exit(0);
 }

@@ -6,15 +6,15 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/22 18:56:34 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "game_bonus.h"
-#include "map_bonus.h"
-#include "enemy_bonus.h"
 #include "console_bonus.h"
+#include "enemy_bonus.h"
+#include "game_bonus.h"
+#include "libft.h"
+#include "map_bonus.h"
 #include <stdlib.h>
 
 static int	find_bad_col(t_game *game, char *line)
@@ -51,9 +51,18 @@ static int	report_invalid_line(t_game *game, char *line, int index)
 	col = -1;
 	if (line)
 		col = find_bad_col(game, line);
-	if (col >= 0)
-		ft_fprintf(2, RED "Error: invalid character '%c' at row %d, col %d"
-			RESET "\n", line[col], index + 1, col + 1);
+	if (col >= 0 && line[col] == 'X')
+	{
+		ft_fprintf(2, RED "Error: Enemy 'X' at row %d, col %d", index + 1, col
+			+ 1);
+		ft_fprintf(2, " requires X1/X2/X3 textures\n" RESET);
+	}
+	else if (col >= 0)
+	{
+		ft_fprintf(2, RED "Error: invalid character ");
+		ft_fprintf(2, "'%c' at row %d, col %d" RESET "\n", line[col], index + 1,
+			col + 1);
+	}
 	else
 		ft_fprintf(2, RED "Error: invalid map line" RESET "\n");
 	return (-1);
@@ -85,7 +94,7 @@ int	read_map(t_game *game, int fd, char *first_line)
 	int		i;
 	size_t	max_width;
 
-	i = 0;
+	i = -1;
 	max_width = 0;
 	if (!first_line)
 		return (-1);
@@ -93,14 +102,13 @@ int	read_map(t_game *game, int fd, char *first_line)
 	free(first_line);
 	while (1)
 	{
-		if (i > 0)
+		if (++i > 0)
 			line = ft_get_next_line(fd);
 		if (!line)
 			break ;
 		if (add_line(game, i, line, &max_width) == -1)
-			return (free(line), -1);
+			return (free(line), ft_get_next_line(-1), -1);
 		free(line);
-		i++;
 	}
 	game->map.height = i;
 	game->map.width = (int)max_width;

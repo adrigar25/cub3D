@@ -6,16 +6,16 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 15:41:35 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 18:34:07 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "console_bonus.h"
 #include "game_bonus.h"
+#include "libft.h"
 #include "parse_bonus.h"
 #include "player_bonus.h"
 #include "render_bonus.h"
-#include "console_bonus.h"
 
 int	valid_extension(const char *filename, const char *extension)
 {
@@ -48,6 +48,7 @@ int	cub3d(char *file)
 	if (get_player_position(game_data))
 		return (clear_game(game_data, -1), 1);
 	start_game_loop(game_data);
+	clear_game(game_data, 0);
 	return (0);
 }
 

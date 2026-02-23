@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:10:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 17:53:17 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ static int	process_line(char ***map, int *i, char *line, int *started)
 {
 	if (!*started && !is_map_line(line))
 		return (0);
-	if (!is_map_line(line))
-		return (-1);
 	*started = 1;
 	if (add_line(map, (*i)++, line) == -1)
 		return (-1);
@@ -86,7 +84,10 @@ int	read_map(char ***map, int fd)
 		result = process_line(map, &i, line, &started);
 		free(line);
 		if (result == -1)
+		{
+			ft_get_next_line(-1);
 			break ;
+		}
 	}
 	return (validate_map_size(map, i));
 }

@@ -6,14 +6,14 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 17:30:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 20:19:20 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "game_bonus.h"
-#include "render_bonus.h"
+#include "libft.h"
 #include "minimap_bonus.h"
+#include "render_bonus.h"
 
 int	has_floor_nearby(t_game *game, int x, int y)
 {
@@ -45,7 +45,8 @@ void	put_minimap_tile(t_game *game, int px, int py, t_fcoord world)
 
 	map_x = (int)world.x;
 	map_y = (int)world.y;
-	if (map_y >= 0 && map_y < game->map.height && map_x >= 0 && game->map.grid[map_y]
+	if (map_y >= 0 && map_y < game->map.height && map_x >= 0
+		&& game->map.grid[map_y]
 		&& map_x < (int)ft_strlen(game->map.grid[map_y]))
 	{
 		if (game->map.grid[map_y][map_x] == '1' && has_floor_nearby(game, map_x,

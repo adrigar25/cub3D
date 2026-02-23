@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 00:00:00 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 18:18:53 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ void	move_backward(t_game *game)
 }
 
 /**
- * ENGLISH: Strafe left (move perpendicular to facing direction, to the left).
+ * ENGLISH: Strafe right (move perpendicular to facing direction, to the right).
  *
- * SPANISH: Moverse hacia la izquierda (perpendicular a la dirección).
+ * SPANISH: Moverse hacia la derecha (perpendicular a la dirección).
  */
-void	move_left(t_game *game)
+void	move_right(t_game *game)
 {
 	double	speed;
 
@@ -82,11 +82,11 @@ void	move_left(t_game *game)
 }
 
 /**
- * ENGLISH: Strafe right (move perpendicular to facing direction, to the right).
+ * ENGLISH: Strafe left (move perpendicular to facing direction, to the left).
  *
- * SPANISH: Moverse hacia la derecha (perpendicular a la dirección).
+ * SPANISH: Moverse hacia la izquierda (perpendicular a la dirección).
  */
-void	move_right(t_game *game)
+void	move_left(t_game *game)
 {
 	double	speed;
 

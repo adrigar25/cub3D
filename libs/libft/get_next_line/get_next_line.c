@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:20:55 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/17 01:02:16 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 17:53:16 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,12 @@ char	*ft_get_next_line(int fd)
 	static char	*reminder;
 	int			bytes_read;
 
+	if (fd == -1)
+	{
+		free(reminder);
+		reminder = NULL;
+		return (NULL);
+	}
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!reminder)

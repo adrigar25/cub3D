@@ -1,26 +1,2 @@
 [0;32mExiting game. Goodbye!
-[0mProcess:         cub3d_bonus [45211]
-Path:            /Users/*/Desktop/*/cub3D_bonus
-Load Address:    0x104bac000
-Identifier:      cub3D_bonus
-Version:         0
-Code Type:       ARM64
-Platform:        macOS
-Parent Process:  leaks [45210]
-Target Type:     live task
-
-Date/Time:       2026-02-20 10:25:04.201 +0100
-Launch Time:     2026-02-20 10:25:04.067 +0100
-OS Version:      macOS 26.0.1 (25A362)
-Report Version:  7
-Analysis Tool:   /usr/bin/leaks
-
-Physical footprint:         4000K
-Physical footprint (peak):  4000K
-Idle exit:                  untracked
-----
-
-leaks Report Version: 4.0, multi-line stacks
-Process 45211: 970 nodes malloced for 101 KB
-Process 45211: 0 leaks for 0 total leaked bytes.
-
+[0mKey pressed: 65307

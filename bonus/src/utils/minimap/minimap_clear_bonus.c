@@ -6,14 +6,14 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 17:30:00 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/22 17:44:43 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
 #include "game_bonus.h"
-#include "render_bonus.h"
 #include "minimap_bonus.h"
+#include "render_bonus.h"
+#include <math.h>
 
 static void	clear_pixel(t_game *game, int x, int y, double *c)
 {
@@ -23,7 +23,7 @@ static void	clear_pixel(t_game *game, int x, int y, double *c)
 	if (dist > c[0])
 		img_pixel_put(&game->minimap, x, y, 0xFF000000);
 	else if (dist > c[0] - MINIMAP_BORDER)
-		img_pixel_put(&game->minimap, x, y, 0x00000000);
+		img_pixel_put(&game->minimap, x, y, MINIMAP_BORDER_COLOR);
 	else
 		img_pixel_put(&game->minimap, x, y, MINIMAP_WALL_COLOR);
 }

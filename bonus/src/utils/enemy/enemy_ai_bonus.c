@@ -6,13 +6,13 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:30:30 by agarcia           #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 20:20:17 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libs/mlx/mlx.h"
-#include "game_bonus.h"
 #include "enemy_bonus.h"
+#include "game_bonus.h"
+#include "mlx.h"
 #include "player_bonus.h"
 #include <math.h>
 
@@ -39,7 +39,7 @@ static void	enemy_try_move(t_game *game, t_enemy *e)
 		if (dist < 0.5)
 		{
 			game->finished = 2;
-			mlx_mouse_show();
+			mlx_mouse_show(game->mlx_ptr, game->win_ptr);
 			return ;
 		}
 	}

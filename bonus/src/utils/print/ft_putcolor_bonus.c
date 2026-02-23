@@ -6,7 +6,7 @@
 /*   By: agarcia <agarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:22:35 by adriescr          #+#    #+#             */
-/*   Updated: 2026/02/19 17:45:40 by agarcia          ###   ########.fr       */
+/*   Updated: 2026/02/21 20:19:10 by agarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,31 @@
  * @returns The number of characters printed. / El número de caracteres
  * impresos.
  */
-long	ft_putcolor(int fd, int color) {
-  const char *s;
-  long len;
+long	ft_putcolor(int fd, int color)
+{
+	const char	*s;
+	long		len;
 
-  if (color == 1)
-    s = RED;
-  else if (color == 2)
-    s = GREEN;
-  else if (color == 3)
-    s = YELLOW;
-  else if (color == 4)
-    s = ORANGE;
-  else if (color == 5)
-    s = BLUE;
-  else if (color == 6)
-    s = MAGENTA;
-  else if (color == 7)
-    s = CYAN;
-  else if (color == 8)
-    s = WHITE;
-  else if (color == 9)
-    s = RESET;
-  len = ft_strlen(s);
-  if (len > 0)
-    return ((long)write(fd, s, (size_t)len));
-  return (0);
+	if (color == 1)
+		s = RED;
+	else if (color == 2)
+		s = GREEN;
+	else if (color == 3)
+		s = YELLOW;
+	else if (color == 4)
+		s = ORANGE;
+	else if (color == 5)
+		s = BLUE;
+	else if (color == 6)
+		s = MAGENTA;
+	else if (color == 7)
+		s = CYAN;
+	else if (color == 8)
+		s = WHITE;
+	else if (color == 9)
+		s = RESET;
+	len = ft_strlen(s);
+	if (len > 0)
+		return ((long)write(fd, s, (size_t)len));
+	return (0);
 }
